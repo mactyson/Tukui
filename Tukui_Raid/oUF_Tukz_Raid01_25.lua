@@ -3,6 +3,7 @@ if not C["unitframes"].enable == true then return end
 
 local font2 = C["media"].uffont
 local font1 = C["media"].font
+local pixelfont = C["media"].pixelfont
 
 local function Shared(self, unit)
 	self.colors = T.oUF_colors
@@ -21,6 +22,16 @@ local function Shared(self, unit)
 	health:SetPoint("TOPRIGHT")
 	health:SetStatusBarTexture(C["media"].normTex)
 	self.Health = health
+	
+	-- border
+	local Healthbg = CreateFrame("Frame", nil, self)
+	Healthbg:SetPoint("TOPLEFT", self, "TOPLEFT", T.Scale(-2), T.Scale(2))
+	Healthbg:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
+	T.SetTemplate(Healthbg)
+	T.CreateShadow(Healthbg)
+	Healthbg:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
+    Healthbg:SetFrameLevel(2)
+	self.Healthbg = Healthbg
 
 	health.bg = self.Health:CreateTexture(nil, 'BORDER')
 	health.bg:SetAllPoints(self.Health)
@@ -68,7 +79,7 @@ local function Shared(self, unit)
 	end
 		
 	local name = health:CreateFontString(nil, 'OVERLAY')
-	name:SetFont(font2, 13*T.raidscale, "THINOUTLINE")
+	name:SetFont(pixelfont, 8*T.raidscale, "OUTLINEMONOCHROME")
 	name:Point("LEFT", self, "RIGHT", 5, 0)
 	self:Tag(name, '[Tukui:namemedium] [Tukui:dead][Tukui:afk]')
 	self.Name = name
@@ -137,7 +148,7 @@ oUF:Factory(function(self)
 		]],
 		'initial-width', T.Scale(120*T.raidscale),
 		'initial-height', T.Scale(16*T.raidscale),	
-		"showParty", true, "showPlayer", C["unitframes"].showplayerinparty, "showRaid", true, "groupFilter", "1,2,3,4,5,6,7,8", "groupingOrder", "1,2,3,4,5,6,7,8", "groupBy", "GROUP", "yOffset", T.Scale(-3)
+		"showParty", true, "showPlayer", C["unitframes"].showplayerinparty, "showRaid", true, "groupFilter", "1,2,3,4,5,6,7,8", "groupingOrder", "1,2,3,4,5,6,7,8", "groupBy", "GROUP", "yOffset", T.Scale(-7)
 	)
 	raid:SetPoint('TOPLEFT', UIParent, 15, -350*T.raidscale)
 	

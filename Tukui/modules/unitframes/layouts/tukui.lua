@@ -249,12 +249,12 @@ local function Shared(self, unit)
 			FlashInfo:SetScript("OnUpdate", T.UpdateManaLevel)
 			FlashInfo.parent = self
 			FlashInfo:SetAllPoints(panel)
-			FlashInfo.ManaLevel = T.SetFontString(FlashInfo, font1, 12)
+			FlashInfo.ManaLevel = T.SetFontString(FlashInfo, pixelfont, 8, "OUTLINEMONOCHROME")
 			FlashInfo.ManaLevel:SetPoint("CENTER", panel, "CENTER", 0, 0)
 			self.FlashInfo = FlashInfo
 			
 			-- pvp status text
-			local status = T.SetFontString(panel, font1, 12)
+			local status = T.SetFontString(panel, pixelfont, 8, "OUTLINEMONOCHROME")
 			status:SetPoint("CENTER", panel, "CENTER", 0, 0)
 			status:SetTextColor(0.69, 0.31, 0.31, 0)
 			self.Status = status
@@ -278,7 +278,7 @@ local function Shared(self, unit)
 			-- show druid mana when shapeshifted in bear, cat or whatever
 			if T.myclass == "DRUID" then
 				CreateFrame("Frame"):SetScript("OnUpdate", function() T.UpdateDruidMana(self) end)
-				local DruidMana = T.SetFontString(health, font1, 12)
+				local DruidMana = T.SetFontString(health, pixelfont, 8, "OUTLINEMONOCHROME")
 				DruidMana:SetTextColor(1, 0.49, 0.04)
 				self.DruidMana = DruidMana
 			end
@@ -957,12 +957,12 @@ local function Shared(self, unit)
 				castbar.PostChannelStart = T.CheckChannel
 
 				castbar.time = T.SetFontString(castbar, pixelfont, 8, "MONOCHROMEOUTLINE")
-				castbar.time:SetPoint("CENTER", power, "CENTER", T.Scale(-0), T.Scale(-0))
+				castbar.time:SetPoint("RIGHT", power, "RIGHT", T.Scale(-0), T.Scale(-0))
 				castbar.time:SetTextColor(0.84, 0.75, 0.65)
 				castbar.time:SetJustifyH("RIGHT")
 
 				castbar.Text = T.SetFontString(castbar, pixelfont, 8, "MONOCHROMEOUTLINE")
-				castbar.Text:Point("LEFT", health, "LEFT", 4, 0)
+				castbar.Text:Point("LEFT", power, "LEFT", 4, 0)
 				castbar.Text:SetTextColor(0.84, 0.75, 0.65)
 				
 				self.Castbar.Time = castbar.time
@@ -1308,7 +1308,7 @@ local function Shared(self, unit)
 		
 		-- health 
 		local health = CreateFrame('StatusBar', nil, self)
-		health:Height(22)
+		health:Height(30)
 		health:SetPoint("TOPLEFT")
 		health:SetPoint("TOPRIGHT")
 		health:SetStatusBarTexture(normTex)
@@ -1335,7 +1335,7 @@ local function Shared(self, unit)
 		healthBG:SetTexture(.1, .1, .1)
 
 		health.value = T.SetFontString(health, pixelfont, 8, "OUTLINEMONOCHROME")
-		health.value:Point("LEFT", 2, 0)
+		health.value:Point("RIGHT", -2, 0)
 		health.PostUpdate = T.PostUpdateHealth
 				
 		self.Health = health
@@ -1360,8 +1360,8 @@ local function Shared(self, unit)
 		-- power
 		local power = CreateFrame('StatusBar', nil, self)
 		power:Height(6)
-		power:Point("TOPLEFT", health, "BOTTOMLEFT", 0, -1)
-		power:Point("TOPRIGHT", health, "BOTTOMRIGHT", 0, -1)
+		power:Point("TOPLEFT", health, "BOTTOMLEFT", 0, -6)
+		power:Point("TOPRIGHT", health, "BOTTOMRIGHT", 0, -6)
 		power:SetStatusBarTexture(normTex)
 		
 		-- power border 
@@ -1384,8 +1384,8 @@ local function Shared(self, unit)
 		powerBG:SetTexture(normTex)
 		powerBG.multiplier = 0.3
 		
-		power.value = T.SetFontString(health, font1, 12, "OUTLINE")
-		power.value:Point("RIGHT", -2, 0)
+		power.value = T.SetFontString(health, pixelfont, 8, "OUTLINEMONOCHROME")
+		power.value:Point("LEFT", 2, 0)
 		power.PreUpdate = T.PreUpdatePower
 		power.PostUpdate = T.PostUpdatePower
 				
@@ -1401,7 +1401,7 @@ local function Shared(self, unit)
 		Name:SetShadowOffset(1.25, -1.25)
 		Name.frequentUpdates = 0.2
 		
-		self:Tag(Name, '[Tukui:getnamecolor][Tukui:namelong]')
+		self:Tag(Name, '[Tukui:getnamecolor][Tukui:namemedium]')
 		self.Name = Name
 		
 		if (unit and unit:find("boss%d")) then
@@ -1619,7 +1619,7 @@ tot:SetPoint("BOTTOM", InvTukuiActionBarBackground, "TOP", 0,61)
 
 -- pet
 local pet = oUF:Spawn('pet', "oUF_Tukz_pet")
-pet:SetPoint("BOTTOM", InvTukuiActionBarBackground, "TOP", 0,92)
+pet:SetPoint("BOTTOM", InvTukuiActionBarBackground, "TOP", 0,105)
 	pet:SetSize(T.Scale(130), T.Scale(20))
 
 -- focus target	
