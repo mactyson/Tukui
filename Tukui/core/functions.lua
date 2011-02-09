@@ -52,7 +52,7 @@ T.PP = function(p, obj)
 		obj:SetPoint('TOP', right)
 		obj:SetPoint('BOTTOM', right)
 	end
-	
+	--[[
 	if TukuiMinimap then
 		if p == 7 then
 			obj:SetParent(mapleft)
@@ -65,7 +65,7 @@ T.PP = function(p, obj)
 			obj:SetPoint('TOP', mapright)
 			obj:SetPoint('BOTTOM', mapright)
 		end
-	end
+	end ]]
 end
 
 T.DataTextTooltipAnchor = function(self)
@@ -79,7 +79,7 @@ T.DataTextTooltipAnchor = function(self)
 	elseif panel == TukuiInfoRight then
 		anchor = "ANCHOR_TOPRIGHT"
 	elseif panel == TukuiMinimapStatsLeft or panel == TukuiMinimapStatsRight then
-		local position = TukuiMinimap:GetPoint()
+	local position = TukuiMinimap:GetPoint()
 		if position:match("LEFT") then
 			anchor = "ANCHOR_BOTTOMRIGHT"
 			yoff = T.Scale(-6)
@@ -218,6 +218,17 @@ T.buttonsize = T.Scale(C.actionbar.buttonsize)
 T.buttonspacing = T.Scale(C.actionbar.buttonspacing)
 T.petbuttonsize = T.Scale(C.actionbar.petbuttonsize)
 T.petbuttonspacing = T.Scale(C.actionbar.buttonspacing)
+
+T.TotemBarOrientation = function(revert)
+	local position = TukuiShiftBar:GetPoint()
+	if position:match("TOP") then
+		revert = true
+	else
+		revert = false
+	end
+	
+	return revert
+end
 
 T.Round = function(number, decimals)
 	if not decimals then decimals = 0 end
@@ -580,7 +591,7 @@ end
 T.PostCreateAura = function(element, button)
 	T.SetTemplate(button)
 	
-	button.remaining = T.SetFontString(button, C["media"].font, C["unitframes"].auratextscale, "THINOUTLINE")
+	button.remaining = T.SetFontString(button, C["media"].pixelfont, C["unitframes"].auratextscale, "OUTLINEMONOCHROME")
 	button.remaining:Point("CENTER", 1, 0)
 	
 	button.cd.noOCC = true		 	-- hide OmniCC CDs

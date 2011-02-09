@@ -154,6 +154,8 @@ local function Kill(object)
 	object:Hide()
 end
 
+local color = RAID_CLASS_COLORS[select(2, UnitClass("player"))] -- did this for button hover, pushed
+
 -- styleButton function authors are Chiril & Karudon.
 local function StyleButton(b, c) 
     local name = b:GetName()
@@ -170,7 +172,7 @@ local function StyleButton(b, c)
 	local icontexture     = _G[name.."IconTexture"]
 	
 	local hover = b:CreateTexture("frame", nil, self) -- hover
-	hover:SetTexture(1,1,1,0.3)
+	hover:SetTexture(color.r, color.g, color.b,0.3)
 	hover:SetHeight(button:GetHeight())
 	hover:SetWidth(button:GetWidth())
 	hover:Point("TOPLEFT",button,2,-2)
@@ -178,7 +180,7 @@ local function StyleButton(b, c)
 	button:SetHighlightTexture(hover)
 
 	local pushed = b:CreateTexture("frame", nil, self) -- pushed
-	pushed:SetTexture(0.9,0.8,0.1,0.3)
+	pushed:SetTexture(.075,.075,.075,.9)
 	pushed:SetHeight(button:GetHeight())
 	pushed:SetWidth(button:GetWidth())
 	pushed:Point("TOPLEFT",button,2,-2)
@@ -187,7 +189,7 @@ local function StyleButton(b, c)
  
 	if c then
 		local checked = b:CreateTexture("frame", nil, self) -- checked
-		checked:SetTexture(0,1,0,0.3)
+		checked:SetTexture(color.r, color.g, color.b,.5)
 		checked:SetHeight(button:GetHeight())
 		checked:SetWidth(button:GetWidth())
 		checked:Point("TOPLEFT",button,2,-2)

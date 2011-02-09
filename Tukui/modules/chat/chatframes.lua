@@ -43,6 +43,18 @@ _G.CHAT_FLAG_GM = "|cff4154F5"..L.chat_FLAG_GM.."|r "
 _G.ERR_FRIEND_ONLINE_SS = "|Hplayer:%s|h[%s]|h "..L.chat_ERR_FRIEND_ONLINE_SS.."!"
 _G.ERR_FRIEND_OFFLINE_S = "%s "..L.chat_ERR_FRIEND_OFFLINE_S.."!"
 
+----------------------------------------------------------------------------------
+-- Thank you elv for this script, it keep noobs away
+----------------------------------------------------------------------------------
+if TukuiDB.myname == "Jasje" then
+	local function NOOB_FILTER(self, event, arg1, arg2)
+		if strfind(arg1,"portal") or strfind(arg1,"Portal") or strfind(arg1,"Port") or strfind(arg1,"port") then
+			SendChatMessage("Sorry im busy atm.", "WHISPER", nil, arg2)
+		end
+	end
+	ChatFrame_AddMessageEventFilter("CHAT_MSG_WHISPER", NOOB_FILTER)
+end
+
 -- Hide friends micro button (added in 3.3.5)
 FriendsMicroButton:Kill()
 
@@ -58,6 +70,31 @@ local function SetChatStyle(frame)
 	-- always set alpha to 1, don't fade it anymore
 	tab:SetAlpha(1)
 	tab.SetAlpha = UIFrameFadeRemoveFrame
+	
+	-- here we set the tab font,size and outline
+	_G[chat.."TabText"]:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+	
+	-- color chat tabs, original by Elv, edited by Hydra
+	local classcolortab = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[select(2,UnitClass("player"))]
+	Ctabcolor = C.chat.tabcolor
+	if C.chat.classcolortab == true then
+		Ctabcolor = {classcolortab.r,classcolortab.g,classcolortab.b,1}
+	end
+	hooksecurefunc("FCFTab_UpdateColors", function(chatTab, isSelected) 
+		chatTab:GetFontString():SetTextColor(unpack(Ctabcolor))
+		if ( chatTab.conversationIcon ) then
+			chatTab.conversationIcon:SetVertexColor(1, 1, 1)
+		end
+		if isSelected then 
+			FCFTab_UpdateColors(chatTab, false) 
+		end
+	end)
+	
+	for i = 1, NUM_CHAT_WINDOWS do
+		if i == 4 then
+			tab:GetFontString():SetTextColor(unpack(Ctabcolor))
+		end
+	end
 	
 	if not C.chat.background then
 		-- hide text when setting chat
@@ -206,19 +243,33 @@ local function SetupChatPosAndFont(self)
 		-- also set original width and height of chatframes 1 and 4 if first time we run tukui.
 		-- doing resize of chat also here for users that hit "cancel" when default installation is show.
 		if i == 1 then
-			chat:Point("BOTTOMLEFT", TukuiInfoLeft, "TOPLEFT", 0, 6)
-			chat:Point("BOTTOMRIGHT", TukuiInfoLeft, "TOPRIGHT", 0, 6)
+			chat:ClearAllPoints()
+			chat:SetParent(TukuiChatBackgroundLeft)
+			chat:SetFrameStrata("MEDIUM")
+			chat:SetSize(TukuiChatBackgroundLeft:GetWidth() - 6, TukuiChatBackgroundLeft:GetHeight() - 6)
+			chat:SetPoint("CENTER", TukuiChatBackgroundLeft, "CENTER", 0, 0)
 			FCF_SavePositionAndDimensions(chat)
-		elseif i == 4 and name == LOOT then
+			tab:SetParent(TukuiChatBackgroundLeft)
+		-- setting parent -- ty hydra
+		elseif i == 2 then
+			CombatLogQuickButtonFrame_Custom:SetParent(ChatLeft)
+			chat:SetParent(TukuiChatBackgroundLeft)
+			tab:SetParent(Chat)
+		elseif i == 3 then
+			chat:SetParent(TukuiChatBackgroundLeft)
+			tab:SetParent(TukuiChatBackgroundLeft)
+		elseif i == 4 then
 			if not chat.isDocked then
 				chat:ClearAllPoints()
-				chat:Point("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", 0, 6)
-				chat:Point("BOTTOMLEFT", TukuiInfoRight, "TOPLEFT", 0, 6)
-				chat:SetJustifyH("RIGHT") 
+				chat:SetParent(TukuiChatBackgroundRight)
+				chat:SetFrameStrata("MEDIUM")
+				chat:SetSize(TukuiChatBackgroundRight:GetWidth() - 6, TukuiChatBackgroundRight:GetHeight() - 6)
+				chat:SetPoint("CENTER", TukuiChatBackgroundRight, "CENTER", 0, 0)
 				FCF_SavePositionAndDimensions(chat)
+				tab:SetParent(TukuiChatBackgroundRight)
 			end
 		end
-		
+
 		--Check if chat exists in the bottomright corner
 		if C.chat.background == true and point == "BOTTOMRIGHT" and chat:IsShown() then
 			TukuiChatBackgroundRight:Show()

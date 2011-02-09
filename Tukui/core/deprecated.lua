@@ -41,7 +41,7 @@ T.CreatePanel = function(f, w, h, a1, p, a2, x, y)
 	  insets = { left = -mult, right = -mult, top = -mult, bottom = -mult}
 	})
 	f:SetBackdropColor(unpack(C["media"].backdropcolor))
-	f:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+	f:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
 end
 
 T.CreateTransparentPanel = function(f, w, h, a1, p, a2, x, y)
@@ -63,19 +63,32 @@ T.CreateTransparentPanel = function(f, w, h, a1, p, a2, x, y)
 		f:SetBackdropBorderColor(unpack(C["media"].bordercolor))
 
 		local border = CreateFrame("Frame", nil, f)
-		border:SetFrameLevel(0)
-		border:SetPoint("TOPLEFT", f, "TOPLEFT", T.Scale(-1), T.Scale(1))
+	    border:SetPoint("TOPLEFT", f, "TOPLEFT", -1, 1)
+	    border:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", 1, -1)
 		border:SetFrameStrata("BACKGROUND")
-		border:SetBackdrop {
-			edgeFile = C["media"].blank, edgeSize = T.Scale(3),
-			insets = {left = 0, right = 0, top = 0, bottom = 0}
-		}
+		border:SetFrameLevel(1)
+		border:SetBackdrop { edgeFile = C["media"].blank, edgeSize = T.Scale(3),insets = {left = 0, right = 0, top = 0, bottom = 0} }
 		border:SetBackdropColor(unpack(C["media"].backdropcolor))
-		border:SetBackdropBorderColor(unpack(C["media"].backdropcolor))
-		border:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", T.Scale(1), T.Scale(-1))
+		border:SetBackdropBorderColor(unpack(C["media"].altbackdropcolor))
+	    border:SetPoint("TOPLEFT", f, "TOPLEFT", -1, 1)
+	    border:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", 1, -1)
 	end
 end
-
+--[[
+T.CreateHydra = function(f)
+	f:SetBackdropColor(unpack(C["media"].altbackdropcolor))
+	f:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+	border = CreateFrame("Frame", nil, f)
+	border:SetPoint("TOPLEFT", f, "TOPLEFT", -1, 1)
+	border:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", 1, -1)
+	border:SetFrameStrata("BACKGROUND")
+	border:SetFrameLevel(1)
+	border:SetBackdrop { edgeFile = C["media"].blank, edgeSize = 3, insets = {left = 0, right = 0, top = 0, bottom = 0} }
+	border:SetBackdropColor(unpack(C["media"].backdropcolor))
+	border:SetBackdropBorderColor(unpack(C["media"].backdropcolor))
+	f.border = border
+end
+]]--
 T.SetTemplate = function(f)
 	f:SetBackdrop({
 	  bgFile = C["media"].blank, 
@@ -113,6 +126,8 @@ T.Kill = function(object)
 	object:Hide()
 end
 
+local color = RAID_CLASS_COLORS[select(2, UnitClass("player"))] -- did this for button hover, pushed
+
 -- styleButton function authors are Chiril & Karudon.
 T.StyleButton = function(b, checked) 
     local name = b:GetName()
@@ -129,7 +144,7 @@ T.StyleButton = function(b, checked)
 	local icontexture     = _G[name.."IconTexture"]
 
 	local hover = b:CreateTexture("frame", nil, self) -- hover
-	hover:SetTexture(1,1,1,0.3)
+	hover:SetTexture(color.r, color.g, color.b,0.3)
 	hover:SetHeight(button:GetHeight())
 	hover:SetWidth(button:GetWidth())
 	hover:Point("TOPLEFT",button,2,-2)
@@ -137,7 +152,7 @@ T.StyleButton = function(b, checked)
 	button:SetHighlightTexture(hover)
 
 	local pushed = b:CreateTexture("frame", nil, self) -- pushed
-	pushed:SetTexture(0.9,0.8,0.1,0.3)
+	pushed:SetTexture(.075,.075,.075,.9)
 	pushed:SetHeight(button:GetHeight())
 	pushed:SetWidth(button:GetWidth())
 	pushed:Point("TOPLEFT",button,2,-2)
@@ -146,7 +161,7 @@ T.StyleButton = function(b, checked)
  
 	if checked then
 		local checked = b:CreateTexture("frame", nil, self) -- checked
-		checked:SetTexture(0,1,0,0.3)
+		checked:SetTexture(color.r, color.g, color.b,.5)
 		checked:SetHeight(button:GetHeight())
 		checked:SetWidth(button:GetWidth())
 		checked:Point("TOPLEFT",button,2,-2)

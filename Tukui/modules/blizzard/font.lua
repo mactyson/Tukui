@@ -19,6 +19,7 @@ TukuiFonts:RegisterEvent("ADDON_LOADED")
 TukuiFonts:SetScript("OnEvent", function(self, event, addon)
 	if addon ~= "Tukui" then return end
 	
+	local NORMALPIXEL = C.media.pixelfont
 	local NORMAL     = C.media.font
 	local COMBAT     = C.media.dmgfont
 	local NUMBER     = C.media.font
@@ -50,7 +51,7 @@ TukuiFonts:SetScript("OnEvent", function(self, event, addon)
 	-- Base fonts
 	SetFont(GameTooltipHeader,                  NORMAL, 12)
 	SetFont(NumberFont_OutlineThick_Mono_Small, NUMBER, 12, "OUTLINE")
-	SetFont(NumberFont_Outline_Huge,            NUMBER, 28, "THICKOUTLINE", 28)
+	SetFont(NumberFont_Outline_Huge,            NUMBER, 28, "OUTLINE", 28)
 	SetFont(NumberFont_Outline_Large,           NUMBER, 15, "OUTLINE")
 	SetFont(NumberFont_Outline_Med,             NUMBER, 13, "OUTLINE")
 	SetFont(NumberFont_Shadow_Med,              NORMAL, 12)
@@ -60,7 +61,7 @@ TukuiFonts:SetScript("OnEvent", function(self, event, addon)
 	SetFont(SystemFont_Large,                   NORMAL, 15)
 	SetFont(SystemFont_Med1,                    NORMAL, 12)
 	SetFont(SystemFont_Med3,                    NORMAL, 13)
-	SetFont(SystemFont_OutlineThick_Huge2,      NORMAL, 20, "THICKOUTLINE")
+	SetFont(SystemFont_OutlineThick_Huge2,      NORMAL, 20, "OUTLINE")
 	SetFont(SystemFont_Outline_Small,           NUMBER, 12, "OUTLINE")
 	SetFont(SystemFont_Shadow_Large,            NORMAL, 15)
 	SetFont(SystemFont_Shadow_Med1,             NORMAL, 12)
@@ -71,12 +72,12 @@ TukuiFonts:SetScript("OnEvent", function(self, event, addon)
 	SetFont(SystemFont_Tiny,                    NORMAL, 12)
 	SetFont(Tooltip_Med,                        NORMAL, 12)
 	SetFont(Tooltip_Small,                      NORMAL, 12)
-	SetFont(CombatTextFont,                     COMBAT, 100, "OUTLINE") -- number here just increase the font quality.
+	SetFont(CombatTextFont,                     COMBAT, 32) -- number here just increase the font quality.
 	SetFont(SystemFont_Shadow_Huge1,            NORMAL, 20, "THINOUTLINE")
-	SetFont(ZoneTextString,                     NORMAL, 32, "OUTLINE")
-	SetFont(SubZoneTextString,                  NORMAL, 25, "OUTLINE")
-	SetFont(PVPInfoTextString,                  NORMAL, 22, "THINOUTLINE")
-	SetFont(PVPArenaTextString,                 NORMAL, 22, "THINOUTLINE")
+	SetFont(ZoneTextString,                     NORMALPIXEL, 15, "MONOCHROMEOUTLINE")
+	SetFont(SubZoneTextString,                  NORMALPIXEL, 12, "MONOCHROMEOUTLINE")
+	SetFont(PVPInfoTextString,                  NORMALPIXEL, 10, "MONOCHROMETHINOUTLINE")
+	SetFont(PVPArenaTextString,                NORMALPIXEL, 10, "MONOCHROMEOUTLINE")
 
 	hooksecurefunc("PlayerTitleFrame_UpdateTitles", FixTitleFont)
 	FixTitleFont()

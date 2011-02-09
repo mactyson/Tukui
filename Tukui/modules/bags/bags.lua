@@ -13,7 +13,7 @@ if not C["bags"].enable == true then return end
 
 local bags_BACKPACK = {0, 1, 2, 3, 4}
 local bags_BANK = {-1, 5, 6, 7, 8, 9, 10, 11}
-local BAGSFONT = C["media"].font
+local BAGSFONT = C["media"].pixelfont
 local ST_NORMAL = 1
 local ST_FISHBAG = 2
 local ST_SPECIAL = 3
@@ -592,9 +592,9 @@ function Stuffing:Layout(lb)
 		f = self.frame
 
 		f.gold:SetText(GetMoneyString(GetMoney(), 12))
-		f.editbox:SetFont(BAGSFONT, 12)
-		f.detail:SetFont(BAGSFONT, 12)
-		f.gold:SetFont(BAGSFONT, 12)
+		f.editbox:SetFont(BAGSFONT, 8)
+		f.detail:SetFont(BAGSFONT, 8)
+		f.gold:SetFont(BAGSFONT, 8)
 
 		f.detail:ClearAllPoints()
 		f.detail:Point("TOPLEFT", f, 12, -10)

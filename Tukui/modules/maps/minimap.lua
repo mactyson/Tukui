@@ -10,7 +10,7 @@ TukuiMinimap:SetPoint("TOPRIGHT", UIParent, "TOPRIGHT", T.Scale(-24), T.Scale(-2
 TukuiMinimap:SetSize(T.Scale(144), T.Scale(144))
 TukuiMinimap:SetClampedToScreen(true)
 TukuiMinimap:SetMovable(true)
-TukuiMinimap.text = T.SetFontString(TukuiMinimap, C.media.uffont, 12)
+TukuiMinimap.text = T.SetFontString(TukuiMinimap, C.media.pixelfont2, 14, "MONOCHROMEOUTLINE")
 TukuiMinimap.text:SetPoint("CENTER")
 TukuiMinimap.text:SetText(L.move_minimap)
 
@@ -187,7 +187,7 @@ m_zone:Point("TOPRIGHT",Minimap,-2,-2)
 m_zone:SetAlpha(0)
 
 local m_zone_text = m_zone:CreateFontString(nil,"Overlay")
-m_zone_text:SetFont(C["media"].font,12)
+m_zone_text:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 m_zone_text:Point("TOP", 0, -1)
 m_zone_text:SetPoint("BOTTOM")
 m_zone_text:Height(12)
@@ -200,8 +200,8 @@ m_coord:SetFrameStrata("LOW")
 m_coord:SetAlpha(0)
 
 local m_coord_text = m_coord:CreateFontString(nil,"Overlay")
-m_coord_text:SetFont(C["media"].font,12)
-m_coord_text:Point("Center",-1,0)
+m_coord_text:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+m_coord_text:Point("Center",0,0)
 m_coord_text:SetAlpha(0)
 m_coord_text:SetText("00,00")
 

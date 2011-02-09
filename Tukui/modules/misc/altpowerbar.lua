@@ -25,7 +25,7 @@ AltPowerBarStatus:Point("BOTTOMRIGHT", TukuiInfoLeft, "BOTTOMRIGHT", -2, 2)
 AltPowerBarStatus:SetStatusBarColor(75/255,  175/255, 76/255)
 
 local AltPowerText = AltPowerBarStatus:CreateFontString(nil, "OVERLAY")
-AltPowerText:SetFont(C.media.font, 12)
+AltPowerText:SetFont(C.media.pixelfont2, 14, "MONOCHROMEOUTLINE")
 AltPowerText:Point("CENTER", AltPowerBar, "CENTER", 0, 0)
 
 --Event handling

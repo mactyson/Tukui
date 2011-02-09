@@ -12,35 +12,35 @@ C["unitframes"] = {
 	["enable"] = true,                                  -- do i really need to explain this?
 	["enemyhcolor"] = false,                            -- enemy target (players) color by hostility, very useful for healer.
 	["unitcastbar"] = true,                             -- enable tukui castbar
-	["cblatency"] = false,                              -- enable castbar latency
+	["cblatency"] = true,                              -- enable castbar latency
 	["cbicons"] = true,                                 -- enable icons on castbar
 	["auratimer"] = true,                               -- enable timers on buffs/debuffs
-	["auratextscale"] = 11,                             -- the font size of buffs/debuffs timers on unitframes
+	["auratextscale"] = 8,                             -- the font size of buffs/debuffs timers on unitframes
 	["playerauras"] = false,                            -- enable auras
 	["targetauras"] = true,                             -- enable auras on target unit frame
 	["lowThreshold"] = 20,                              -- global low threshold, for low mana warning.
-	["targetpowerpvponly"] = true,                      -- enable power text on pvp target only
+	["targetpowerpvponly"] = false,                      -- enable power text on pvp target only
 	["totdebuffs"] = false,                             -- enable tot debuffs (high reso only)
 	["showtotalhpmp"] = false,                          -- change the display of info text on player and target with XXXX/Total.
 	["showsmooth"] = true,                              -- enable smooth bar
 	["charportrait"] = false,                           -- do i really need to explain this?
 	["maintank"] = false,                               -- enable maintank
 	["mainassist"] = false,                             -- enable mainassist
-	["unicolor"] = false,                               -- enable unicolor theme
-	["combatfeedback"] = true,                          -- enable combattext on player and target.
+	["unicolor"] = true,                               -- enable unicolor theme
+	["combatfeedback"] = false,                          -- enable combattext on player and target.
 	["playeraggro"] = true,                             -- color player border to red if you have aggro on current target.
 	["healcomm"] = false,                               -- enable healprediction support.
-	["onlyselfdebuffs"] = false,                        -- display only our own debuffs applied on target
+	["onlyselfdebuffs"] = true,                        -- display only our own debuffs applied on target
 
 	-- raid layout (if one of them is enabled)
 	["showrange"] = true,                               -- show range opacity on raidframes
 	["raidalphaoor"] = 0.3,                             -- alpha of unitframes when unit is out of range
-	["gridonly"] = false,                               -- enable grid only mode for all healer mode raid layout.
+	["gridonly"] = true,                               -- enable grid only mode for all healer mode raid layout.
 	["showsymbols"] = true,	                            -- show symbol.
 	["aggro"] = true,                                   -- show aggro on all raids layouts
 	["raidunitdebuffwatch"] = true,                     -- track important spell to watch in pve for grid mode.
 	["gridhealthvertical"] = true,                      -- enable vertical grow on health bar for grid mode.
-	["showplayerinparty"] = false,                      -- show my player frame in party
+	["showplayerinparty"] = true,                      -- show my player frame in party
 	["gridscale"] = 1,                                  -- set the healing grid scaling
 	
 	-- boss frames
@@ -57,13 +57,9 @@ C["arena"] = {
 	["unitframes"] = true,                              -- enable tukz arena unitframes (requirement : tukui unitframes enabled)
 }
 
-C["auras"] = {
-	["player"] = true,                                  -- enable tukui buffs/debuffs
-}
-
 C["actionbar"] = {
 	["enable"] = true,                                  -- enable tukui action bars
-	["hotkey"] = false,                                 -- enable hotkey display because it was a lot requested
+	["hotkey"] = true,                                 -- enable hotkey display because it was a lot requested
 	["hideshapeshift"] = false,                         -- hide shapeshift or totembar because it was a lot requested.
 	["showgrid"] = true,                                -- show grid on empty button
 	["buttonsize"] = 27,                                -- normal buttons size
@@ -87,23 +83,23 @@ C["loot"] = {
 
 C["cooldown"] = {
 	["enable"] = true,                                  -- do i really need to explain this?
-	["treshold"] = 8,                                   -- show decimal under X seconds and text turn red
+	["treshold"] = 2,                                   -- show decimal under X seconds and text turn red
 }
 
 C["datatext"] = {
-	["fps_ms"] = 4,                                     -- show fps and ms on panels
-	["system"] = 5,                                     -- show total memory and others systems infos on panels
+	["fps_ms"] = 0,                                     -- show fps and ms on panels
+	["system"] = 0,                                     -- show total memory and others systems infos on panels
 	["bags"] = 0,                                       -- show space used in bags on panels
 	["gold"] = 6,                                       -- show your current gold on panels
-	["wowtime"] = 8,                                    -- show time on panels
-	["guild"] = 1,                                      -- show number on guildmate connected on panels
-	["dur"] = 2,                                        -- show your equipment durability on panels.
-	["friends"] = 3,                                    -- show number of friends connected.
+	["wowtime"] = 1,                                    -- show time on panels
+	["guild"] = 3,                                      -- show number on guildmate connected on panels
+	["dur"] = 0,                                        -- show your equipment durability on panels.
+	["friends"] = 2,                                    -- show number of friends connected.
 	["dps_text"] = 0,                                   -- show a dps meter on panels
 	["hps_text"] = 0,                                   -- show a heal meter on panels
-	["power"] = 7,                                      -- show your attackpower/spellpower/healpower/rangedattackpower whatever stat is higher gets displayed
+	["power"] = 4,                                      -- show your attackpower/spellpower/healpower/rangedattackpower whatever stat is higher gets displayed
 	["haste"] = 0,                                      -- show your haste rating on panels.
-	["crit"] = 0,                                       -- show your crit rating on panels.
+	["crit"] = 5,                                       -- show your crit rating on panels.
 	["avd"] = 0,                                        -- show your current avoidance against the level of the mob your targeting
 	["armor"] = 0,                                      -- show your armor value against the level mob you are currently targeting
 	["currency"] = 0,                                   -- show your tracked currency on panels
@@ -114,13 +110,22 @@ C["datatext"] = {
 	["battleground"] = true,                            -- enable 3 stats in battleground only that replace stat1,stat2,stat3.
 	["time24"] = true,                                  -- set time to 24h format.
 	["localtime"] = false,                              -- set time to local time instead of server time.
-	["fontsize"] = 12,                                  -- font size for panels.
+	
+	-- Color Datatext
+	["classcolor"] = true,                -- classcolored datatexts (these control databars too)
+	["color"] = "|cff808080",              -- datatext color if classcolor = false (|cffFFFFFF = white)
+
+	["fontsize"] = 14,                     -- font size for panels.
+	["fontflag"] = "OUTLINEMONOCHROME",             -- font ouline   
 }
 
 C["chat"] = {
 	["enable"] = true,                                  -- blah
 	["whispersound"] = true,                            -- play a sound when receiving whisper
-	["background"] = false,
+	["background"] = true,                             -- chat backdrop
+	["tabcolor"] = {105,105,105},              -- color of chat tabs, disabled if classcolor is true
+	["tabmouseover"] = {1,1,1,1},          -- color of tabs on mouse-over
+	["classcolortab"] = true,             -- color chat tabs based on class
 }
 
 C["nameplate"] = {

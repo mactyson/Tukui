@@ -1,5 +1,4 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
-if not C.auras.player then return end
 
 local FormatTime = function(s)
 	local day, hour, minute = 86400, 3600, 60
@@ -42,7 +41,7 @@ local function UpdateWeapons(button, slot, active, expiration)
 		
 		button.time = button:CreateFontString(nil, "ARTWORK")
 		button.time:SetPoint("BOTTOM", 0, -17)
-		button.time:SetFont(C.media.font, 12, "OUTLINE")
+		button.time:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 				
 		button.bg = CreateFrame("Frame", nil, button)
 		button.bg:CreatePanel("Default", 30, 30, "CENTER", button, "CENTER", 0, 0)
@@ -74,11 +73,11 @@ local function UpdateAuras(header, button, weapon)
 
 		button.count = button:CreateFontString(nil, "ARTWORK")
 		button.count:SetPoint("BOTTOMRIGHT", -1, 1)
-		button.count:SetFont(C.media.font, 12, "OUTLINE")
+		button.count:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 
 		button.time = button:CreateFontString(nil, "ARTWORK")
 		button.time:SetPoint("BOTTOM", 0, -17)
-		button.time:SetFont(C.media.font, 12, "OUTLINE")
+		button.time:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 
 		button:SetScript("OnUpdate", UpdateTime)
 		
@@ -172,7 +171,7 @@ local function CreateAuraHeader(filter, ...)
 	header:SetBackdropBorderColor(0,0,0,0)
 	header:Show()
 	
-	header.text = T.SetFontString(header, C.media.uffont, 12)
+	header.text = T.SetFontString(header, C.media.pixelfont2, 14, "MONOCHROMEOUTLINE")
 	header.text:SetPoint("CENTER")
 	if filter == "HELPFUL" then
 		header.text:SetText(L.move_buffs)
@@ -184,8 +183,8 @@ local function CreateAuraHeader(filter, ...)
 	return header
 end
 
-ScanAuras(CreateAuraHeader("HELPFUL", "TOPRIGHT", -184, -24))
-ScanAuras(CreateAuraHeader("HARMFUL", "TOPRIGHT", -184, -160))
+ScanAuras(CreateAuraHeader("HELPFUL", "TOPRIGHT", -174, -24))
+ScanAuras(CreateAuraHeader("HARMFUL", "TOPRIGHT", -174, -160))
 
 -- create our aura
 local start = CreateFrame("Frame")

@@ -6,64 +6,60 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 -- this install Tukui with default settings.
 local function install()
 	SetCVar("buffDurations", 1)
+	SetCVar("consolidateBuffs", 0)
+	SetCVar("lootUnderMouse", 1)
+	SetCVar("autoSelfCast", 1)
 	SetCVar("mapQuestDifficulty", 1)
 	SetCVar("scriptErrors", 1)
+	SetCVar("nameplateShowFriends", 0)
+	SetCVar("nameplateShowFriendlyPets", 0)
+	SetCVar("nameplateShowFriendlyGuardians", 0)
+	SetCVar("nameplateShowFriendlyTotems", 0)
+	SetCVar("nameplateShowEnemies", 1)
+	SetCVar("nameplateShowEnemyPets", 0)
+	SetCVar("nameplateShowEnemyGuardians", 0)
+	SetCVar("nameplateShowEnemyTotems", 0)
 	SetCVar("ShowClassColorInNameplate", 1)
 	SetCVar("screenshotQuality", 8)
+	SetCVar("cameraDistanceMax", 50)
+	SetCVar("cameraDistanceMaxFactor", 3.4)
 	SetCVar("chatMouseScroll", 1)
 	SetCVar("chatStyle", "im")
 	SetCVar("WholeChatWindowClickable", 0)
 	SetCVar("ConversationMode", "inline")
+	SetCVar("CombatDamage", 1)
+	SetCVar("CombatHealing", 1) 
 	SetCVar("showTutorials", 0)
 	SetCVar("showNewbieTips", 0)
 	SetCVar("Maxfps", 120)
 	SetCVar("autoDismountFlying", 1)
 	SetCVar("autoQuestWatch", 1)
 	SetCVar("autoQuestProgress", 1)
+	SetCVar("showLootSpam", 1)
+	SetCVar("guildMemberNotify", 1)
+	SetCVar("chatBubblesParty", 1)
+	SetCVar("chatBubbles", 1)	
+	SetCVar("UnitNameOwn", 1)
+	SetCVar("UnitNameNPC", 0)
+	SetCVar("UnitNameNonCombatCreatureName", 0)
+	SetCVar("UnitNamePlayerGuild", 1)
+	SetCVar("UnitNamePlayerPVPTitle", 1)
+	SetCVar("UnitNameFriendlyPlayerName", 1)
+	SetCVar("UnitNameFriendlyPetName", 0)
+	SetCVar("UnitNameFriendlyGuardianName", 0)
+	SetCVar("UnitNameFriendlyTotemName", 0)
+	SetCVar("UnitNameEnemyPlayerName", 1)
+	SetCVar("UnitNameEnemyPetName", 0)
+	SetCVar("UnitNameEnemyGuardianName", 0)
+	SetCVar("UnitNameEnemyTotemName", 0)
 	SetCVar("UberTooltips", 1)
 	SetCVar("removeChatDelay", 1)
 	SetCVar("showVKeyCastbar", 1)
+	SetCVar("colorblindMode", 0)
 	SetCVar("bloatthreat", 0)
 	SetCVar("bloattest", 0)
 	SetCVar("showArenaEnemyFrames", 0)
-	
-	-- setting this the creator or tukui only, because a lot of people don't like this.		
-	if T.myname == "Tukz" then	
-		SetCVar("secureAbilityToggle", 0)
-		SetCVar("colorblindMode", 0)
-		SetCVar("showLootSpam", 1)
-		SetCVar("guildMemberNotify", 1)
-		SetCVar("chatBubblesParty", 0)
-		SetCVar("chatBubbles", 0)	
-		SetCVar("UnitNameOwn", 0)
-		SetCVar("UnitNameNPC", 0)
-		SetCVar("UnitNameNonCombatCreatureName", 0)
-		SetCVar("UnitNamePlayerGuild", 1)
-		SetCVar("UnitNamePlayerPVPTitle", 1)
-		SetCVar("UnitNameFriendlyPlayerName", 0)
-		SetCVar("UnitNameFriendlyPetName", 0)
-		SetCVar("UnitNameFriendlyGuardianName", 0)
-		SetCVar("UnitNameFriendlyTotemName", 0)
-		SetCVar("UnitNameEnemyPlayerName", 1)
-		SetCVar("UnitNameEnemyPetName", 1)
-		SetCVar("UnitNameEnemyGuardianName", 1)
-		SetCVar("UnitNameEnemyTotemName", 1)
-		SetCVar("CombatDamage", 1)
-		SetCVar("CombatHealing", 1)
-		SetCVar("nameplateShowFriends", 0)
-		SetCVar("nameplateShowFriendlyPets", 0)
-		SetCVar("nameplateShowFriendlyGuardians", 0)
-		SetCVar("nameplateShowFriendlyTotems", 0)
-		SetCVar("nameplateShowEnemies", 1)
-		SetCVar("nameplateShowEnemyPets", 1)
-		SetCVar("nameplateShowEnemyGuardians", 1)
-		SetCVar("nameplateShowEnemyTotems", 1)	
-		SetCVar("consolidateBuffs", 0)
-		SetCVar("lootUnderMouse", 1)
-		SetCVar("autoSelfCast", 1)
-		SetCVar("cameraDistanceMax", 50)
-		SetCVar("cameraDistanceMaxFactor", 3.4)
-	end
+	SetCVar("autoLootDefault", 1) -- turning on autoloot by default
 	
 	-- Var ok, now setting chat frames if using Tukui chats.	
 	if (C.chat.enable == true) and (not IsAddOnLoaded("Prat") or not IsAddOnLoaded("Chatter")) then					
@@ -151,19 +147,24 @@ local function install()
 					
 		-- Setup the spam chat frame
 		ChatFrame_RemoveAllMessageGroups(ChatFrame3)
-		ChatFrame_AddChannel(ChatFrame3, L.chat_trade) -- erf, it seem we need to localize this now
-		ChatFrame_AddChannel(ChatFrame3, L.chat_general) -- erf, it seem we need to localize this now
-		ChatFrame_AddChannel(ChatFrame3, L.chat_defense) -- erf, it seem we need to localize this now
-		ChatFrame_AddChannel(ChatFrame3, L.chat_recrutment) -- erf, it seem we need to localize this now
-		ChatFrame_AddChannel(ChatFrame3, L.chat_lfg) -- erf, it seem we need to localize this now
-				
+		ChatFrame_AddMessageGroup(ChatFrame3, "COMBAT_XP_GAIN")
+		ChatFrame_AddMessageGroup(ChatFrame3, "COMBAT_HONOR_GAIN")
+		ChatFrame_AddMessageGroup(ChatFrame3, "COMBAT_FACTION_CHANGE")
+		ChatFrame_AddMessageGroup(ChatFrame3, "LOOT")
+		ChatFrame_AddMessageGroup(ChatFrame3, "MONEY")
+		
 		-- Setup the right chat
 		ChatFrame_RemoveAllMessageGroups(ChatFrame4)
+		ChatFrame_AddChannel(ChatFrame4, L.chat_trade) -- erf, it seem we need to localize this now
+		ChatFrame_AddChannel(ChatFrame4, L.chat_general) -- erf, it seem we need to localize this now
+		ChatFrame_AddChannel(ChatFrame4, L.chat_defense) -- erf, it seem we need to localize this now
+		ChatFrame_AddChannel(ChatFrame4, L.chat_recrutment) -- erf, it seem we need to localize this now
+		ChatFrame_AddChannel(ChatFrame4, L.chat_lfg) -- erf, it seem we need to localize this now
+		ChatFrame_AddMessageGroup(ChatFrame4, "LOOT")
+		ChatFrame_AddMessageGroup(ChatFrame4, "SKILL")
 		ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_XP_GAIN")
 		ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_HONOR_GAIN")
 		ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_FACTION_CHANGE")
-		ChatFrame_AddMessageGroup(ChatFrame4, "LOOT")
-		ChatFrame_AddMessageGroup(ChatFrame4, "MONEY")
 				
 		-- enable classcolor automatically on login and on each character without doing /configure each time.
 		ToggleChatColorNamesByClassGroup(true, "SAY")

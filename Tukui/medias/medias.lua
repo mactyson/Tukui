@@ -5,6 +5,10 @@ C["media"] = {
 	["font"] = [=[Interface\Addons\Tukui\medias\fonts\normal_font.ttf]=], -- general font of tukui
 	["uffont"] = [[Interface\AddOns\Tukui\medias\fonts\uf_font.ttf]], -- general font of unitframes
 	["dmgfont"] = [[Interface\AddOns\Tukui\medias\fonts\combat_font.ttf]], -- general font of dmg / sct
+		["pixelfont"] = [[Interface\AddOns\Tukui\medias\fonts\HOOG0555.ttf]], -- extra pixelfont
+		["pixelfont2"] = [[Interface\AddOns\Tukui\medias\fonts\visitor2.ttf]], -- another pixelfont
+		["pixelfont3"] = [[Interface\AddOns\Tukui\medias\fonts\visitor1.ttf]], -- another pixelfont
+		["pixelfont4"] =  [[Interface\AddOns\Tukui\medias\fonts\Pixelway_Baseline.TTF]], -- another pixelfont
 	
 	-- fonts (DEUTSCH)
 	["de_font"] = [=[Interface\Addons\Tukui\medias\fonts\normal_font.ttf]=], -- general font of tukui
@@ -37,9 +41,11 @@ C["media"] = {
 	["bubbleTex"] = [[Interface\AddOns\Tukui\medias\textures\bubbleTex]], -- unitframes combo points
 	["copyicon"] = [[Interface\AddOns\Tukui\medias\textures\copy]], -- copy icon
 	["blank"] = [[Interface\AddOns\Tukui\medias\textures\blank]], -- the main texture for all borders/panels
-	["bordercolor"] = { .6,.6,.6 }, -- border color of tukui panels
-	["altbordercolor"] = { .4,.4,.4 }, -- alternative border color, mainly for unitframes text panels.
-	["backdropcolor"] = { .1,.1,.1 }, -- background color of tukui panels
+	["bordercolor"] = { .2,.2,.2,1 }, -- border color of tukui panels
+	["altbordercolor"] = { .2,.2,.2,1 }, -- alternative border color, mainly for unitframes text panels.
+	["modbordercolor"] = { 0,.8,1,1 }, -- integrate this later
+	["backdropcolor"] = { .075,.075,.075,1 }, -- background color of tukui panels
+	["altbackdropcolor"] = { .075,.075,.075,.7 }, -- this is the color to be used in HydraDB.SetBorder()
 	["buttonhover"] = [[Interface\AddOns\Tukui\medias\textures\button_hover]],
 	
 	-- sound

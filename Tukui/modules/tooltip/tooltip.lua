@@ -32,7 +32,7 @@ anchor:SetFrameLevel(20)
 anchor:SetClampedToScreen(true)
 anchor:SetAlpha(0)
 if C.chat.background and TukuiChatBackgroundRight then
-	anchor:SetPoint("BOTTOMRIGHT", TukuiChatBackgroundRight, "TOPRIGHT", 0, -TukuiInfoRight:GetHeight())
+	anchor:SetPoint("BOTTOMRIGHT", TukuiChatBackgroundRight, "TOPRIGHT", 0, 0)
 else
 	anchor:SetPoint("BOTTOMRIGHT", TukuiInfoRight)
 end
@@ -184,7 +184,7 @@ GameTooltipStatusBar:SetScript("OnValueChanged", function(self, value)
 			self.text:Point("CENTER", GameTooltipStatusBar, 0, 6)
 		end
 		
-		self.text:SetFont(C["media"].font, 12, "THINOUTLINE")
+		self.text:SetFont(C["media"].pixelfont2, 14, "MONOCHROMEOUTLINE")
 		self.text:Show()
 		if unit then
 			min, max = UnitHealth(unit), UnitHealthMax(unit)

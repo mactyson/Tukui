@@ -3,6 +3,7 @@ if not C["unitframes"].enable == true then return end
 
 local font2 = C["media"].uffont
 local font1 = C["media"].font
+local pixelfont = C["media"].pixelfont
 local normTex = C["media"].normTex
 
 local function Shared(self, unit)
@@ -19,7 +20,7 @@ local function Shared(self, unit)
 	local health = CreateFrame('StatusBar', nil, self)
 	health:SetPoint("TOPLEFT")
 	health:SetPoint("TOPRIGHT")
-	health:Height(28*C["unitframes"].gridscale*T.raidscale)
+	health:Height(21*C["unitframes"].gridscale*T.raidscale)
 	health:SetStatusBarTexture(normTex)
 	self.Health = health
 	
@@ -36,7 +37,7 @@ local function Shared(self, unit)
 		
 	health.value = health:CreateFontString(nil, "OVERLAY")
 	health.value:Point("CENTER", health, 1, 0)
-	health.value:SetFont(font2, 11*C["unitframes"].gridscale*T.raidscale, "THINOUTLINE")
+	health.value:SetFont(pixelfont, 8, "MONOCHROMEOUTLINE")
 	health.value:SetTextColor(1,1,1)
 	health.value:SetShadowOffset(1, -1)
 	self.Health.value = health.value
@@ -55,13 +56,51 @@ local function Shared(self, unit)
 		health.colorClass = true
 		health.colorReaction = true			
 	end
+	
+	-- border
+	local Healthbg = CreateFrame("Frame", nil, self)
+	Healthbg:SetPoint("TOPLEFT", self, "TOPLEFT", T.Scale(-2), T.Scale(2))
+	Healthbg:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", T.Scale(2), T.Scale(-3))
+	T.SetTemplate(Healthbg)
+	T.CreateShadow(Healthbg)
+	Healthbg:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
+	Healthbg:SetFrameLevel(2)
+	self.Healthbg = Healthbg
+	-- end border	
+	
+	-- hydra glow
+	T.CreateShadow(Healthbg)
+	Healthbg.shadow:Hide()
+	
+	self:HookScript("OnEnter", function(self)
+		local unit = self.unit
+		local class = select(2, UnitClass(unit))
+		local color = RAID_CLASS_COLORS[class]
+		Healthbg.shadow:SetBackdropBorderColor(color.r,color.g,color.b,0.7)
+		Healthbg.shadow:Show()
+	end)
+	
+	self:SetScript("OnLeave", function(self) Healthbg.shadow:Hide() end)
+	-- end hydra glow
 		
 	local power = CreateFrame("StatusBar", nil, self)
 	power:SetHeight(3*C["unitframes"].gridscale*T.raidscale)
-	power:Point("TOPLEFT", self.Health, "BOTTOMLEFT", 0, -1)
-	power:Point("TOPRIGHT", self.Health, "BOTTOMRIGHT", 0, -1)
+	power:Point("TOPLEFT", self.Health, "BOTTOMLEFT", 0, -6)
+	power:Point("TOPRIGHT", self.Health, "BOTTOMRIGHT", 0, -6)
 	power:SetStatusBarTexture(normTex)
 	self.Power = power
+	
+	-- power border
+	local powerborder = CreateFrame("Frame", nil, self)
+	T.CreatePanel(powerborder, 1, 1, "CENTER", health, "CENTER", 0, 0)
+	powerborder:ClearAllPoints()
+	powerborder:SetPoint("TOPLEFT", power, T.Scale(-2), T.Scale(2))
+	powerborder:SetPoint("BOTTOMRIGHT", power, T.Scale(2), T.Scale(-2))
+	powerborder:SetFrameStrata("MEDIUM")
+	T.SetTemplate(powerborder)
+	T.CreateShadow(powerborder)
+	self.powerborder = powerborder
+	-- end border
 
 	power.frequentUpdates = true
 	power.colorDisconnected = true
@@ -78,27 +117,10 @@ local function Shared(self, unit)
 	else
 		power.colorPower = true
 	end
-	
-	local panel = CreateFrame("Frame", nil, self)
-	panel:Point("TOPLEFT", power, "BOTTOMLEFT", 0, -1)
-	panel:Point("TOPRIGHT", power, "BOTTOMRIGHT", 0, -1)
-    panel:SetPoint("BOTTOM", 0,0)
-	panel:SetBackdrop( {
-        bgFile = C["media"].blank,
-        edgeFile = C["media"].blank,
-        tile = false, tileSize = 0, edgeSize = T.mult,
-        insets = { left = 0, right = 0, top = 0, bottom = 0 }
-    })
-    panel:SetBackdropColor(unpack(C["media"].backdropcolor))
-    panel:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
-	self.panel = panel
-	
-	local name = panel:CreateFontString(nil, "OVERLAY")
-    name:SetPoint("TOP") 
-	name:SetPoint("BOTTOM") 
-	name:SetPoint("LEFT") 
-	name:SetPoint("RIGHT")
-	name:SetFont(font2, 12*C["unitframes"].gridscale*T.raidscale)
+
+	local name = health:CreateFontString(nil, "OVERLAY")
+    name:SetPoint("CENTER", health, "CENTER", 0, 1)
+	name:SetFont(C["media"].pixelfont, 8, "MONOCHROMEOUTLINE")
 	self:Tag(name, "[Tukui:getnamecolor][Tukui:nameshort]")
 	self.Name = name
 	
@@ -183,6 +205,19 @@ local function Shared(self, unit)
 		}
 	end
 	
+	------------------------------------------------------------------------
+	--      Debuff Highlight
+	------------------------------------------------------------------------
+		local dbh = self.Health:CreateTexture(nil, "OVERLAY", Healthbg)
+		dbh:SetAllPoints(self)
+		dbh:SetTexture(TukuiCF["media"].normTex)
+		dbh:SetBlendMode("ADD")
+		dbh:SetVertexColor(0,0,0,0)
+		self.DebuffHighlight = dbh
+		self.DebuffHighlightFilter = true
+		self.DebuffHighlightAlpha = 0.6
+	-- end	
+	
 	if C["unitframes"].raidunitdebuffwatch == true then
 		-- AuraWatch (corner icon)
 		T.createAuraWatch(self,unit)
@@ -233,21 +268,21 @@ oUF:Factory(function(self)
 				self:SetWidth(header:GetAttribute('initial-width'))
 				self:SetHeight(header:GetAttribute('initial-height'))
 			]],
-			'initial-width', T.Scale(66*C["unitframes"].gridscale*T.raidscale),
-			'initial-height', T.Scale(50*C["unitframes"].gridscale*T.raidscale),	
+			'initial-width', T.Scale(76*C["unitframes"].gridscale*T.raidscale),
+			'initial-height', T.Scale(20*C["unitframes"].gridscale*T.raidscale),	
 			"showRaid", true,
-			"xoffset", T.Scale(3),
-			"yOffset", T.Scale(-3),
+			"xoffset", T.Scale(7),
+			"yOffset", T.Scale(-7),
 			"point", "LEFT",
 			"groupFilter", "1,2,3,4,5,6,7,8",
 			"groupingOrder", "1,2,3,4,5,6,7,8",
 			"groupBy", "GROUP",
-			"maxColumns", 8,
+			"maxColumns", 5,
 			"unitsPerColumn", 5,
-			"columnSpacing", T.Scale(3),
+			"columnSpacing", T.Scale(10.5),
 			"columnAnchorPoint", "TOP"		
 		)
-		raid:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 18, -250*T.raidscale)
+		raid:SetPoint("BOTTOMLEFT", TukuiTabsLeftBackground, "TOPLEFT", 1, 15*T.raidscale)
 	else
 		local raid = self:SpawnHeader("TukuiGrid", nil, "raid,party",
 			'oUF-initialConfigFunction', [[
@@ -255,32 +290,32 @@ oUF:Factory(function(self)
 				self:SetWidth(header:GetAttribute('initial-width'))
 				self:SetHeight(header:GetAttribute('initial-height'))
 			]],
-			'initial-width', T.Scale(66*C["unitframes"].gridscale*T.raidscale),
-			'initial-height', T.Scale(50*C["unitframes"].gridscale*T.raidscale),
+			'initial-width', T.Scale(76*C["unitframes"].gridscale*T.raidscale),
+			'initial-height', T.Scale(20*C["unitframes"].gridscale*T.raidscale),
 			"showParty", true,
 			"showPlayer", C["unitframes"].showplayerinparty, 
 			"showRaid", true, 
-			"xoffset", T.Scale(3),
-			"yOffset", T.Scale(-3),
+			"xoffset", T.Scale(7),
+			"yOffset", T.Scale(-7),
 			"point", "LEFT",
 			"groupFilter", "1,2,3,4,5,6,7,8",
 			"groupingOrder", "1,2,3,4,5,6,7,8",
 			"groupBy", "GROUP",
-			"maxColumns", 8,
+			"maxColumns", 5,
 			"unitsPerColumn", 5,
-			"columnSpacing", T.Scale(3),
+			"columnSpacing", T.Scale(10.5),
 			"columnAnchorPoint", "TOP"		
 		)
-		raid:SetPoint("TOPLEFT", UIParent, "TOPLEFT", 18, -250*T.raidscale)
+		raid:SetPoint("BOTTOMLEFT", TukuiTabsLeftBackground, "TOPLEFT", 1, 15*T.raidscale)
 		
 		local pets = {} 
 			pets[1] = oUF:Spawn('partypet1', 'oUF_TukuiPartyPet1') 
-			pets[1]:Point('TOPLEFT', raid, 'TOPLEFT', 0, -50*C["unitframes"].gridscale*T.raidscale + -3)
-			pets[1]:Size(66*C["unitframes"].gridscale*T.raidscale, 50*C["unitframes"].gridscale*T.raidscale)
+			pets[1]:Point('TOPLEFT', raid, 'TOPLEFT', 0, 40*C["unitframes"].gridscale*T.raidscale + -10)
+			pets[1]:Size(76*C["unitframes"].gridscale*T.raidscale, 20*C["unitframes"].gridscale*T.raidscale)
 		for i =2, 4 do 
 			pets[i] = oUF:Spawn('partypet'..i, 'oUF_TukuiPartyPet'..i) 
-			pets[i]:Point('LEFT', pets[i-1], 'RIGHT', 3, 0)
-			pets[i]:Size(66*C["unitframes"].gridscale*T.raidscale, 50*C["unitframes"].gridscale*T.raidscale)
+			pets[i]:Point('LEFT', pets[i-1], 'RIGHT', 7, 0)
+			pets[i]:Size(76*C["unitframes"].gridscale*T.raidscale, 20*C["unitframes"].gridscale*T.raidscale)
 		end
 		
 		local ShowPet = CreateFrame("Frame")
