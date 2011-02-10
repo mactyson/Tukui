@@ -156,7 +156,7 @@ C["tooltip"] = {
 
 C["merchant"] = {
 	["sellgrays"] = true,                               -- automaticly sell grays?
-	["autorepair"] = true,                              -- automaticly repair?
+	["autorepair"] = false,                              -- automaticly repair?
 	["sellmisc"] = true,                                -- sell defined items automatically
 }
 

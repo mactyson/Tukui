@@ -1,8 +1,8 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 -- Very simple threat bar for T.
 
--- cannot work without Info Right DataText Panel.
-if not TukuiInfoRight then return end
+-- cannot work without Right Tab background Panel.
+if not TukuiTabsRightBackground then return end
 
 local aggroColors = {
 	[1] = {12/255, 151/255,  15/255},

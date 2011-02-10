@@ -10,7 +10,7 @@ PlayerPowerBarAlt:UnregisterEvent("PLAYER_ENTERING_WORLD")
 --Create the new bar
 local AltPowerBar = CreateFrame("Frame", "TukuiAltPowerBar", TukuiTabsLeftBackground)
 AltPowerBar:SetAllPoints()
-AltPowerBar:SetFrameStrata("LOW")
+AltPowerBar:SetFrameStrata("BACKGROUND")
 AltPowerBar:SetFrameLevel(0)
 AltPowerBar:EnableMouse(true)
 AltPowerBar:SetTemplate("Default")
