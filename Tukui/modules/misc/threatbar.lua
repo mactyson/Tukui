@@ -11,7 +11,7 @@ local aggroColors = {
 }
 
 -- create the bar
-local TukuiThreatBar = CreateFrame("StatusBar", "TukuiThreatBar", TukuiInfoRight)
+local TukuiThreatBar = CreateFrame("StatusBar", "TukuiThreatBar", TukuiTabsRightBackground)
 TukuiThreatBar:Point("TOPLEFT", 2, -2)
 TukuiThreatBar:Point("BOTTOMRIGHT", -2, 2)
 
@@ -22,11 +22,11 @@ TukuiThreatBar:SetBackdropColor(0, 0, 0, 0)
 TukuiThreatBar:SetMinMaxValues(0, 100)
 
 TukuiThreatBar.text = T.SetFontString(TukuiThreatBar, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
-TukuiThreatBar.text:Point("RIGHT", TukuiThreatBar, "RIGHT", -30, 0)
+TukuiThreatBar.text:Point("RIGHT", TukuiThreatBar, "RIGHT", -20, 0)
 
 TukuiThreatBar.Title = T.SetFontString(TukuiThreatBar, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 TukuiThreatBar.Title:SetText(L.unitframes_ouf_threattext)
-TukuiThreatBar.Title:SetPoint("LEFT", TukuiThreatBar, "LEFT", T.Scale(30), 0)
+TukuiThreatBar.Title:SetPoint("LEFT", TukuiThreatBar, "LEFT", T.Scale(20), 0)
 	  
 TukuiThreatBar.bg = TukuiThreatBar:CreateTexture(nil, 'BORDER')
 TukuiThreatBar.bg:SetAllPoints(TukuiThreatBar)
