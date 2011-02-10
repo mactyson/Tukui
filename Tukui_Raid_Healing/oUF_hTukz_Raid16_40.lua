@@ -34,17 +34,6 @@ local function Shared(self, unit)
 	health.bg:SetTexture(0.3, 0.3, 0.3)
 	health.bg.multiplier = (0.3)
 	self.Health.bg = health.bg
-		
-	health.value = health:CreateFontString(nil, "OVERLAY")
-	health.value:Point("CENTER", health, 1, 0)
-	health.value:SetFont(pixelfont, 8, "MONOCHROMEOUTLINE")
-	health.value:SetTextColor(1,1,1)
-	health.value:SetShadowOffset(1, -1)
-	self.Health.value = health.value
-	
-	health.PostUpdate = T.PostUpdateHealthRaid
-	
-	health.frequentUpdates = true
 	
 	if C.unitframes.unicolor == true then
 		health.colorDisconnected = false
@@ -279,7 +268,7 @@ oUF:Factory(function(self)
 			"groupBy", "GROUP",
 			"maxColumns", 5,
 			"unitsPerColumn", 5,
-			"columnSpacing", T.Scale(10.5),
+			"columnSpacing", T.Scale(15),
 			"columnAnchorPoint", "TOP"		
 		)
 		raid:SetPoint("BOTTOMLEFT", TukuiTabsLeftBackground, "TOPLEFT", 1, 15*T.raidscale)
@@ -303,7 +292,7 @@ oUF:Factory(function(self)
 			"groupBy", "GROUP",
 			"maxColumns", 5,
 			"unitsPerColumn", 5,
-			"columnSpacing", T.Scale(10.5),
+			"columnSpacing", T.Scale(15),
 			"columnAnchorPoint", "TOP"		
 		)
 		raid:SetPoint("BOTTOMLEFT", TukuiTabsLeftBackground, "TOPLEFT", 1, 15*T.raidscale)
