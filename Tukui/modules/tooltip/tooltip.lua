@@ -39,7 +39,7 @@ end
 anchor:SetTemplate("Default")
 anchor:SetBackdropBorderColor(1, 0, 0, 1)
 anchor:SetMovable(true)
-anchor.text = T.SetFontString(anchor, C.media.uffont, 12)
+anchor.text = T.SetFontString(anchor, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 anchor.text:SetPoint("CENTER")
 anchor.text:SetText(L.move_tooltip)
 

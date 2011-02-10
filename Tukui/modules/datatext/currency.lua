@@ -27,7 +27,7 @@ if C["datatext"].currency and C["datatext"].currency > 0 then
 			end
 		end
 		
-		Text:SetText(_text)
+		Text:SetText(hexa.._text..hexb)
 	end
 	
 	local function OnEvent(self, event, ...)

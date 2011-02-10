@@ -118,6 +118,19 @@ local function CreatePanel(f, t, w, h, a1, p, a2, x, y)
 	f:SetBackdropBorderColor(borderr, borderg, borderb)
 end
 
+local function SetBorder(f)
+	f:SetBackdropColor(.075, .075, .075, 0.7)
+	f:SetBackdropBorderColor(unpack(C["media"].bordercolor))
+	border = CreateFrame("Frame", nil, f)
+	border:SetPoint("TOPLEFT", f, "TOPLEFT", T.Scale(-1), T.Scale(1))
+	border:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", T.Scale(1), T.Scale(-1))
+	border:SetFrameStrata("BACKGROUND")
+	border:SetFrameLevel(1)
+	border:SetBackdrop { edgeFile = TukuiCF["media"].blank, edgeSize = T.Scale(3), insets = {left = 0, right = 0, top = 0, bottom = 0} }
+	border:SetBackdropColor(unpack(C["media"].backdropcolor))
+	border:SetBackdropBorderColor(unpack(C["media"].backdropcolor))
+end
+
 local function CreateShadow(f, t)
 	if f.shadow then return end -- we seriously don't want to create shadow 2 times in a row on the same frame.
 	
@@ -220,6 +233,7 @@ local function addapi(object)
 	mt.Point = Point
 	mt.SetTemplate = SetTemplate
 	mt.CreatePanel = CreatePanel
+	mt.SetBorder = SetBorder -- hydra border
 	mt.CreateShadow = CreateShadow
 	mt.Kill = Kill
 	mt.CreateTransparentPanel = CreateTransparentPanel

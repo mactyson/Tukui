@@ -667,23 +667,28 @@ T.HidePortrait = function(self, unit)
 	end
 end
 
-local CheckInterrupt = function(self, unit)
+T.PostCastStart = function(self, unit, name, rank, castid)
 	if unit == "vehicle" then unit = "player" end
-
-	if self.interrupt and UnitCanAttack("player", unit) then
-		self:SetStatusBarColor(1, 0, 0, 0.5)	
+	--Fix blank castbar with opening text
+	if name == "Opening" then
+		self.Text:SetText("Opening")
+	end
+	
+	if self.interrupt and unit ~= "player" then
+		if UnitCanAttack("player", unit) then
+			self:SetStatusBarColor(unpack(C["castbar"].nointerruptcolor))
+		else
+			self:SetStatusBarColor(unpack(C["castbar"].castbarcolor))	
+		end
 	else
-		self:SetStatusBarColor(0.31, 0.45, 0.63, 0.5)		
+		if C["castbar"].classcolor ~= true or unit ~= "player" then
+			self:SetStatusBarColor(unpack(C["castbar"].castbarcolor))
+		else
+			self:SetStatusBarColor(unpack(oUF.colors.class[select(2, UnitClass(unit))]))
+		end	
 	end
 end
 
-T.CheckCast = function(self, unit, name, rank, castid)
-	CheckInterrupt(self, unit)
-end
-
-T.CheckChannel = function(self, unit, name, rank)
-	CheckInterrupt(self, unit)
-end
 
 T.UpdateShards = function(self, event, unit, powerType)
 	if(self.unit ~= unit or (powerType and powerType ~= 'SOUL_SHARDS')) then return end

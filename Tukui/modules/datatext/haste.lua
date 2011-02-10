@@ -29,7 +29,7 @@ if C["datatext"].haste and C["datatext"].haste > 0 then
 		
 		int = int - t
 		if int < 0 then
-			Text:SetText(haste.." "..L.datatext_playerhaste)
+			Text:SetText(haste.." "..hexa..L.datatext_playerhaste..hexb)
 			int = 1
 		end     
 	end

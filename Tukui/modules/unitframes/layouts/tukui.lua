@@ -317,7 +317,7 @@ local function Shared(self, unit)
 					local eclipseBarText = eclipseBar:CreateFontString(nil, 'OVERLAY')
 					eclipseBarText:SetPoint('TOP', panel)
 					eclipseBarText:SetPoint('BOTTOM', panel)
-					eclipseBarText:SetFont(font1, 12)
+					eclipseBarText:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 					eclipseBar.PostUpdatePower = T.EclipseDirection
 					
 					-- hide "low mana" text on load if eclipseBar is show
@@ -570,7 +570,12 @@ local function Shared(self, unit)
 				castbar:SetPoint("BOTTOM", TukuiTarget, "TOP", 0, 70)
 				castbar:SetHeight(T.Scale(18))
 				castbar:SetWidth(T.Scale(250))
-			end
+			end	
+			if (C["unitframes"].trikz == true) then
+				castbar:SetPoint("BOTTOM", InvTukuiActionBarBackground, "CENTER", 14,38)
+				castbar:SetHeight(TukuiDB.Scale(22))
+				castbar:SetWidth(TukuiDB.Scale(344))
+            end				
 			
 			castbar.bg = CreateFrame("Frame", nil, castbar)
 			T.SetTemplate(castbar.bg)
@@ -618,8 +623,14 @@ local function Shared(self, unit)
 				castbar.button:SetWidth(T.Scale(26))
 				T.SetTemplate(castbar.button)
 				T.CreateShadow(castbar.button)
-			end
-			
+			end	
+			if (C["unitframes"].trikz == true) then
+				castbar.button:SetPoint("LEFT", -30, TukuiDB.Scale(0))
+				castbar.button:SetHeight(TukuiDB.Scale(25))
+				castbar.button:SetWidth(TukuiDB.Scale(25))
+				T.SetTemplate(castbar.button)
+				T.CreateShadow(castbar.button)
+            end	
 				castbar.icon = castbar.button:CreateTexture(nil, "ARTWORK")
 				castbar.icon:SetPoint("TOPLEFT", castbar.button, T.Scale(2), T.Scale(-2))
 				castbar.icon:SetPoint("BOTTOMRIGHT", castbar.button, T.Scale(-2), T.Scale(2))
@@ -655,9 +666,9 @@ local function Shared(self, unit)
 		if C["unitframes"].combatfeedback == true then
 			local CombatFeedbackText 
 			if T.lowversion then
-				CombatFeedbackText = T.SetFontString(health, font1, 12, "OUTLINE")
+				CombatFeedbackText = T.SetFontString(health, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 			else
-				CombatFeedbackText = T.SetFontString(health, font1, 14, "OUTLINE")
+				CombatFeedbackText = T.SetFontString(health, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 			end
 			CombatFeedbackText:SetPoint("CENTER", 0, 1)
 			CombatFeedbackText.colors = {

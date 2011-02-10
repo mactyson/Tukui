@@ -12,6 +12,7 @@ C["unitframes"] = {
 	["enable"] = true,                                  -- do i really need to explain this?
 	["enemyhcolor"] = false,                            -- enemy target (players) color by hostility, very useful for healer.
 	["unitcastbar"] = true,                             -- enable tukui castbar
+		["trikz"] = false,                             -- replace castbar on top of actionbars made for a friend hence the name
 	["cblatency"] = true,                              -- enable castbar latency
 	["cbicons"] = true,                                 -- enable icons on castbar
 	["auratimer"] = true,                               -- enable timers on buffs/debuffs
@@ -65,6 +66,12 @@ C["actionbar"] = {
 	["buttonsize"] = 27,                                -- normal buttons size
 	["petbuttonsize"] = 29,                             -- pet & stance buttons size
 	["buttonspacing"] = 4,                              -- buttons spacing
+}
+
+C["castbar"] = { --Thank you elv
+	["classcolor"] = true, -- classcolor
+	["castbarcolor"] = { 0.3, 0.3, 0.3, 1 }, -- Color of player castbar
+	["nointerruptcolor"] = { 1, 0.1, 0.1, 0.5 }, -- Color of target castbar
 }
 
 C["bags"] = {
