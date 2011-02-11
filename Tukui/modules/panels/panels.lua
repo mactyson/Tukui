@@ -177,7 +177,7 @@ if C.chat.background then
 	-- LEFT TAB PANEL
 	local tabsbgleft = CreateFrame("Frame", "TukuiTabsLeftBackground", TukuiBar1)
 	tabsbgleft:CreatePanel("Transparent", T.InfoLeftRightWidth, 16, "BOTTOMLEFT", chatleftbg, "TOPLEFT", 0, T.Scale(2))
-	tabsbgleft:SetFrameLevel(2)
+	tabsbgleft:SetFrameLevel(1)
 	tabsbgleft:SetFrameStrata("LOW")
 	tabsbgleft:CreateShadow("")
 	tabsbgleft:SetBorder()
