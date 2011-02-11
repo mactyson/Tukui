@@ -304,7 +304,7 @@ end
 --	unitframes Functions
 ------------------------------------------------------------------------
 local ADDON_NAME, ns = ...
-local oUF = oUFTukui or oUF	
+local oUF = ns.oUF or oUF	
 assert(oUF, "Tukui was unable to locate oUF install.")
 
 T.updateAllElements = function(frame)
