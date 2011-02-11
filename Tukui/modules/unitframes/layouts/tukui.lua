@@ -614,8 +614,6 @@ local function Shared(self, unit)
 			
 			if C["unitframes"].cbicons == true then
 				castbar.button = CreateFrame("Frame", nil, castbar)
-				castbar.button:SetHeight(T.Scale(22))
-				castbar.button:SetWidth(T.Scale(22))
 
 				castbar.icon = castbar.button:CreateTexture(nil, "ARTWORK")
 				castbar.icon:SetPoint("TOPLEFT", castbar.button, T.Scale(2), T.Scale(-2))
@@ -625,32 +623,35 @@ local function Shared(self, unit)
 			if unit == "target" or unit == "player" then
 				castbar.button = CreateFrame("Frame", nil, castbar)
 				
-			if (unit == "player") then
+			if C["unitframes"].trikz then
+			    if unit == "player" then -- sloppy but it works
+				    castbar.button:SetPoint("LEFT", -30, T.Scale(0))
+				    castbar.button:SetHeight(T.Scale(25))
+				    castbar.button:SetWidth(T.Scale(25))
+				    T.SetTemplate(castbar.button)
+				    T.CreateShadow(castbar.button)
+			elseif unit == "target" then
+				    castbar.button:SetPoint("CENTER", castbar, 0, T.Scale(40))
+				    castbar.button:SetHeight(T.Scale(40))
+				    castbar.button:SetWidth(T.Scale(40))
+				    T.SetTemplate(castbar.button)
+				    T.CreateShadow(castbar.button)
+              end	
+		else		
+			if unit == "player" then
 				castbar.button:SetPoint("LEFT", -52, T.Scale(11.2))
 				castbar.button:SetHeight(T.Scale(46))
 				castbar.button:SetWidth(T.Scale(46))
 				T.SetTemplate(castbar.button)
 				T.CreateShadow(castbar.button)
-			elseif (unit == "target") then
+			elseif unit == "target" then
 				castbar.button:SetPoint("CENTER", 0, T.Scale(28))
 				castbar.button:SetHeight(T.Scale(26))
 				castbar.button:SetWidth(T.Scale(26))
 				T.SetTemplate(castbar.button)
 				T.CreateShadow(castbar.button)
 			end	
-			if (C["unitframes"].trikz == true) and (unit == "player") then -- sloppy but it works
-				castbar.button:SetPoint("LEFT", -30, T.Scale(0))
-				castbar.button:SetHeight(T.Scale(25))
-				castbar.button:SetWidth(T.Scale(25))
-				T.SetTemplate(castbar.button)
-				T.CreateShadow(castbar.button)
-			elseif (unit == "target") then
-				castbar.button:SetPoint("CENTER", castbar, 0, T.Scale(40))
-				castbar.button:SetHeight(T.Scale(40))
-				castbar.button:SetWidth(T.Scale(40))
-				T.SetTemplate(castbar.button)
-				T.CreateShadow(castbar.button)
-            end	
+		end	
 				castbar.icon = castbar.button:CreateTexture(nil, "ARTWORK")
 				castbar.icon:SetPoint("TOPLEFT", castbar.button, T.Scale(2), T.Scale(-2))
 				castbar.icon:SetPoint("BOTTOMRIGHT", castbar.button, T.Scale(-2), T.Scale(2))
