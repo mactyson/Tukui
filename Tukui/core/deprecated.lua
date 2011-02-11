@@ -74,21 +74,7 @@ T.CreateTransparentPanel = function(f, w, h, a1, p, a2, x, y)
 	    border:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", 1, -1)
 	end
 end
---[[
-T.CreateHydra = function(f)
-	f:SetBackdropColor(unpack(C["media"].altbackdropcolor))
-	f:SetBackdropBorderColor(unpack(C["media"].bordercolor))
-	border = CreateFrame("Frame", nil, f)
-	border:SetPoint("TOPLEFT", f, "TOPLEFT", -1, 1)
-	border:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", 1, -1)
-	border:SetFrameStrata("BACKGROUND")
-	border:SetFrameLevel(1)
-	border:SetBackdrop { edgeFile = C["media"].blank, edgeSize = 3, insets = {left = 0, right = 0, top = 0, bottom = 0} }
-	border:SetBackdropColor(unpack(C["media"].backdropcolor))
-	border:SetBackdropBorderColor(unpack(C["media"].backdropcolor))
-	f.border = border
-end
-]]--
+
 T.SetTemplate = function(f)
 	f:SetBackdrop({
 	  bgFile = C["media"].blank, 
