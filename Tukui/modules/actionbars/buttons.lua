@@ -98,12 +98,12 @@ local function MoveButtonBar(button, bar)
 			db.hidebar2 = false
 			button:ClearAllPoints()
 			button:Point("BOTTOMRIGHT", TukuiBar2, "BOTTOMLEFT", -2, 0)
-			button.text:SetText("|cff4BAF4C>|r")
+			button.text:SetText(hexa..">"..hexb)
 		else
 			db.hidebar2 = true
 			button:ClearAllPoints()
 			button:Point("BOTTOMRIGHT", TukuiBar1, "BOTTOMLEFT", -2, 0)
-			button.text:SetText("|cff4BAF4C<|r")
+			button.text:SetText(hexa.."<"..hexb)
 		end
 	end
 
@@ -112,22 +112,22 @@ local function MoveButtonBar(button, bar)
 			db.hidebar3 = false
 			button:ClearAllPoints()
 			button:Point("BOTTOMLEFT", TukuiBar3, "BOTTOMRIGHT", 2, 0)
-			button.text:SetText("|cff4BAF4C<|r")
+			button.text:SetText(hexa.."<"..hexb)
 		else
 			db.hidebar3 = true
 			button:ClearAllPoints()
 			button:Point("BOTTOMLEFT", TukuiBar1, "BOTTOMRIGHT", 2, 0)
-			button.text:SetText("|cff4BAF4C>|r")
+			button.text:SetText(hexa..">"..hexb)
 		end
 	end
 
 	if button == TukuiBar4Button then
 		if bar:IsShown() then
 			db.hidebar4 = false
-			button.text:SetText("|cff4BAF4C- - - - - -|r")
+			button.text:SetText(hexa.."- - - - - -"..hexb)
 		else
 			db.hidebar4 = true
-			button.text:SetText("|cff4BAF4C+ + + + + +|r")
+			button.text:SetText(hexa.."+ + + + + +"..hexb)
 		end
 	end
 
@@ -139,11 +139,11 @@ local function MoveButtonBar(button, bar)
 			buttontop:ClearAllPoints()
 			buttontop:Size(bar:GetWidth(), 17)
 			buttontop:Point("BOTTOM", bar, "TOP", 0, 2)
-			if not T.lowversion then buttontop.text:SetText("|cff4BAF4C>|r") end
+			if not T.lowversion then buttontop.text:SetText(hexa..">"..hexb) end
 			buttonbot:ClearAllPoints()
 			buttonbot:Size(bar:GetWidth(), 17)
 			buttonbot:Point("TOP", bar, "BOTTOM", 0, -2)
-			if not T.lowversion then buttonbot.text:SetText("|cff4BAF4C>|r") end
+			if not T.lowversion then buttonbot.text:SetText(hexa..">"..hexb) end
 
 			-- move the pet
 			TukuiPetBar:ClearAllPoints()
@@ -153,11 +153,11 @@ local function MoveButtonBar(button, bar)
 			buttonbot:ClearAllPoints()
 			buttonbot:SetSize(TukuiLineToPetActionBarBackground:GetWidth(), TukuiLineToPetActionBarBackground:GetHeight())
 			buttonbot:Point("LEFT", TukuiPetBar, "RIGHT", 2, 0)
-			if not T.lowversion then buttonbot.text:SetText("|cff4BAF4C<|r") end
+			if not T.lowversion then buttonbot.text:SetText(hexa.."<"..hexb) end
 			buttontop:ClearAllPoints()
 			buttontop:SetSize(TukuiLineToPetActionBarBackground:GetWidth(), TukuiLineToPetActionBarBackground:GetHeight())
 			buttontop:Point("LEFT", TukuiPetBar, "RIGHT", 2, 0)
-			if not T.lowversion then buttontop.text:SetText("|cff4BAF4C<|r") end
+			if not T.lowversion then buttontop.text:SetText(hexa.."<"..hexb) end
 
 			-- move the pet
 			TukuiPetBar:ClearAllPoints()
@@ -192,7 +192,7 @@ TukuiBar2Button:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
 TukuiBar2Button:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
 TukuiBar2Button.text = T.SetFontString(TukuiBar2Button, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 TukuiBar2Button.text:Point("CENTER", 1, 1)
-TukuiBar2Button.text:SetText("|cff4BAF4C>|r")
+TukuiBar2Button.text:SetText(hexa..">"..hexb)
 
 local TukuiBar3Button = CreateFrame("Button", "TukuiBar3Button", UIParent)
 TukuiBar3Button:Width(17)
@@ -210,7 +210,7 @@ TukuiBar3Button:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
 TukuiBar3Button:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
 TukuiBar3Button.text = T.SetFontString(TukuiBar3Button, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 TukuiBar3Button.text:Point("CENTER", 1, 1)
-TukuiBar3Button.text:SetText("|cff4BAF4C<|r")
+TukuiBar3Button.text:SetText(hexa.."<"..hexb)
 
 local TukuiBar4Button = CreateFrame("Button", "TukuiBar4Button", UIParent)
 TukuiBar4Button:SetWidth(TukuiBar1:GetWidth())
@@ -224,7 +224,7 @@ TukuiBar4Button:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
 TukuiBar4Button:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
 TukuiBar4Button.text = T.SetFontString(TukuiBar4Button, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 TukuiBar4Button.text:SetPoint("CENTER", 0, 0)
-TukuiBar4Button.text:SetText("|cff4BAF4C- - - - - -|r")
+TukuiBar4Button.text:SetText(hexa.."- - - - - -"..hexb)
 
 local TukuiBar5ButtonTop = CreateFrame("Button", "TukuiBar5ButtonTop", UIParent)
 TukuiBar5ButtonTop:SetWidth(TukuiBar5:GetWidth())
@@ -238,7 +238,7 @@ TukuiBar5ButtonTop:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
 TukuiBar5ButtonTop:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
 TukuiBar5ButtonTop.text = T.SetFontString(TukuiBar5ButtonTop, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 TukuiBar5ButtonTop.text:Point("CENTER", 1, 1)
-TukuiBar5ButtonTop.text:SetText("|cff4BAF4C>|r")
+TukuiBar5ButtonTop.text:SetText(hexa..">"..hexb)
 
 local TukuiBar5ButtonBottom = CreateFrame("Button", "TukuiBar5ButtonBottom", UIParent)
 TukuiBar5ButtonBottom:SetFrameLevel(TukuiBar5ButtonTop:GetFrameLevel() + 1)
@@ -253,7 +253,7 @@ TukuiBar5ButtonBottom:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
 TukuiBar5ButtonBottom:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
 TukuiBar5ButtonBottom.text = T.SetFontString(TukuiBar5ButtonBottom, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 TukuiBar5ButtonBottom.text:Point("CENTER", 1, 1)
-if T.lowversion then TukuiBar5ButtonBottom.text:SetText("|cff4BAF4C<|r") else TukuiBar5ButtonBottom.text:SetText("|cff4BAF4C>|r") end
+if T.lowversion then TukuiBar5ButtonBottom.text:SetText(hexa.."<"..hexb) else TukuiBar5ButtonBottom.text:SetText(hexa..">"..hexb) end
 
 -- exit vehicle button on left side of bottom action bar
 local vehicleleft = CreateFrame("Button", "TukuiExitVehicleButtonLeft", UIParent, "SecureHandlerClickTemplate")
@@ -266,7 +266,7 @@ vehicleleft:RegisterForClicks("AnyUp")
 vehicleleft:SetScript("OnClick", function() VehicleExit() end)
 vehicleleft.text = T.SetFontString(vehicleleft, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 vehicleleft.text:SetPoint("CENTER", T.Scale(1), T.Scale(1))
-vehicleleft.text:SetText("|cff4BAF4CV|r")
+vehicleleft.text:SetText(hexa.."V"..hexb)
 RegisterStateDriver(vehicleleft, "visibility", "[target=vehicle,exists] show;hide")
 
 -- exit vehicle button on right side of bottom action bar
@@ -280,7 +280,7 @@ vehicleright:RegisterForClicks("AnyUp")
 vehicleright:SetScript("OnClick", function() VehicleExit() end)
 vehicleright.text = T.SetFontString(vehicleright, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 vehicleright.text:SetPoint("CENTER", T.Scale(1), T.Scale(1))
-vehicleright.text:SetText("|cff4BAF4CV|r")
+vehicleright.text:SetText(hexa.."V"..hexb)
 RegisterStateDriver(vehicleright, "visibility", "[target=vehicle,exists] show;hide")
 
 --------------------------------------------------------------
