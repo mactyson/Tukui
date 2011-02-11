@@ -90,8 +90,8 @@ local function Shared(self, unit)
 		local Healthbg = CreateFrame("Frame", nil, self)
 	    Healthbg:SetPoint("TOPLEFT", self, "TOPLEFT", T.Scale(-2), T.Scale(2))
 	    Healthbg:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", T.Scale(2), T.Scale(-8))
-	    TukuiDB.SetTemplate(Healthbg)
-		TukuiDB.CreateShadow(Healthbg)
+	    T.SetTemplate(Healthbg)
+		T.CreateShadow(Healthbg)
 	    Healthbg:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
 	    Healthbg:SetFrameLevel(2)
 	    self.Healthbg = Healthbg
@@ -204,9 +204,9 @@ local function Shared(self, unit)
 			
 			-- Portrait Border
 			portrait.bg = CreateFrame("Frame",nil,portrait)
-			portrait.bg:SetPoint("BOTTOMLEFT",portrait,"BOTTOMLEFT",TukuiDB.Scale(-2),TukuiDB.Scale(-2))
-			portrait.bg:SetPoint("TOPRIGHT",portrait,"TOPRIGHT",TukuiDB.Scale(2),TukuiDB.Scale(2))
-			TukuiDB.SetTemplate(portrait.bg)
+			portrait.bg:SetPoint("BOTTOMLEFT",portrait,"BOTTOMLEFT",T.Scale(-2),T.Scale(-2))
+			portrait.bg:SetPoint("TOPRIGHT",portrait,"TOPRIGHT",T.Scale(2),T.Scale(2))
+			T.SetTemplate(portrait.bg)
 			portrait.bg:SetFrameStrata("BACKGROUND")
 		end
 		
@@ -363,8 +363,8 @@ local function Shared(self, unit)
 						end
 						
 					    bars[i].border = CreateFrame("Frame", nil, bars)
-					    bars[i].border:SetPoint("TOPLEFT", bars[i], "TOPLEFT", TukuiDB.Scale(-2), TukuiDB.Scale(2))
-					    bars[i].border:SetPoint("BOTTOMRIGHT", bars[i], "BOTTOMRIGHT", TukuiDB.Scale(2), TukuiDB.Scale(-2))
+					    bars[i].border:SetPoint("TOPLEFT", bars[i], "TOPLEFT", T.Scale(-2), T.Scale(2))
+					    bars[i].border:SetPoint("BOTTOMRIGHT", bars[i], "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
 					    bars[i].border:SetFrameStrata("BACKGROUND")
 					    T.SetTemplate(bars[i].border)
 					    T.CreateShadow(bars[i].border)
@@ -563,26 +563,33 @@ local function Shared(self, unit)
 			self.Debuffs = debuffs
 		end
 		
-		-- cast bar for player and target
-		if (C["unitframes"].unitcastbar == true) then
+		if C["unitframes"].unitcastbar then
 			-- castbar of player and target
 			local castbar = CreateFrame("StatusBar", self:GetName().."_Castbar", self)
 			castbar:SetStatusBarTexture(normTex)
 			castbar:SetFrameLevel(6)
-			if (unit == "player") then
-				castbar:SetPoint("BOTTOM", InvTukuiActionBarBackground, "CENTER", 0,240)
-				castbar:SetHeight(T.Scale(20))
-				castbar:SetWidth(T.Scale(230))
-			elseif (unit == "target") then
-				castbar:SetPoint("BOTTOM", TukuiTarget, "TOP", 0, 70)
-				castbar:SetHeight(T.Scale(18))
-				castbar:SetWidth(T.Scale(250))
+			T.CreateShadow(castbar)
+			if C["unitframes"].trikz then
+				if unit == "player" then
+					castbar:SetPoint("BOTTOM", InvTukuiActionBarBackground, "CENTER", 14,38)
+					castbar:SetHeight(T.Scale(22))
+					castbar:SetWidth(T.Scale(344))
+				elseif unit == "target" then
+					castbar:SetPoint("CENTER", UIParent,"CENTER", 0, 250)
+					castbar:SetHeight(T.Scale(20))
+					castbar:SetWidth(T.Scale(250))
+				end
+			else
+				if unit == "player" then
+					castbar:SetPoint("BOTTOM", InvTukuiActionBarBackground, "CENTER", 0,240)
+					castbar:SetHeight(T.Scale(20))
+					castbar:SetWidth(T.Scale(230))
+				elseif unit == "target" then
+					castbar:SetPoint("BOTTOM", TukuiTarget, "TOP", 0, 70)
+					castbar:SetHeight(T.Scale(18))
+					castbar:SetWidth(T.Scale(250))
+				end
 			end	
-			if (C["unitframes"].trikz == true) then
-				castbar:SetPoint("BOTTOM", InvTukuiActionBarBackground, "CENTER", 14,38)
-				castbar:SetHeight(TukuiDB.Scale(22))
-				castbar:SetWidth(TukuiDB.Scale(344))
-            end				
 			
 			castbar.bg = CreateFrame("Frame", nil, castbar)
 			T.SetTemplate(castbar.bg)
@@ -607,8 +614,8 @@ local function Shared(self, unit)
 			
 			if C["unitframes"].cbicons == true then
 				castbar.button = CreateFrame("Frame", nil, castbar)
-				castbar.button:SetHeight(TukuiDB.Scale(22))
-				castbar.button:SetWidth(TukuiDB.Scale(22))
+				castbar.button:SetHeight(T.Scale(22))
+				castbar.button:SetWidth(T.Scale(22))
 
 				castbar.icon = castbar.button:CreateTexture(nil, "ARTWORK")
 				castbar.icon:SetPoint("TOPLEFT", castbar.button, T.Scale(2), T.Scale(-2))
@@ -631,10 +638,16 @@ local function Shared(self, unit)
 				T.SetTemplate(castbar.button)
 				T.CreateShadow(castbar.button)
 			end	
-			if (C["unitframes"].trikz == true) then
-				castbar.button:SetPoint("LEFT", -30, TukuiDB.Scale(0))
-				castbar.button:SetHeight(TukuiDB.Scale(25))
-				castbar.button:SetWidth(TukuiDB.Scale(25))
+			if (C["unitframes"].trikz == true) and (unit == "player") then -- sloppy but it works
+				castbar.button:SetPoint("LEFT", -30, T.Scale(0))
+				castbar.button:SetHeight(T.Scale(25))
+				castbar.button:SetWidth(T.Scale(25))
+				T.SetTemplate(castbar.button)
+				T.CreateShadow(castbar.button)
+			elseif (unit == "target") then
+				castbar.button:SetPoint("CENTER", castbar, 0, T.Scale(40))
+				castbar.button:SetHeight(T.Scale(40))
+				castbar.button:SetWidth(T.Scale(40))
 				T.SetTemplate(castbar.button)
 				T.CreateShadow(castbar.button)
             end	
@@ -753,8 +766,8 @@ local function Shared(self, unit)
 	    local Healthbg = CreateFrame("Frame", nil, self)
 	    Healthbg:SetPoint("TOPLEFT", self, "TOPLEFT", T.Scale(-2), T.Scale(2))
 	    Healthbg:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
-	    TukuiDB.SetTemplate(Healthbg)
-		TukuiDB.CreateShadow(Healthbg)
+	    T.SetTemplate(Healthbg)
+		T.CreateShadow(Healthbg)
 	    Healthbg:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
 	    Healthbg:SetFrameLevel(2)
 	    self.Healthbg = Healthbg
@@ -1655,7 +1668,7 @@ if C.arena.unitframes then
 		else
 			arena[i]:SetPoint("BOTTOM", arena[i-1], "TOP", 0, 45)
 		end
-		arena[i]:SetSize(TukuiDB.Scale(200), TukuiDB.Scale(30))
+		arena[i]:SetSize(T.Scale(200), T.Scale(30))
 	end
 end
 
@@ -1677,7 +1690,7 @@ if C["unitframes"].showboss then
 		else
 			boss[i]:SetPoint('BOTTOM', boss[i-1], 'TOP', 0, 45)             
 		end
-		boss[i]:SetSize(TukuiDB.Scale(200), TukuiDB.Scale(30))
+		boss[i]:SetSize(T.Scale(200), T.Scale(30))
 	end
 end
 
