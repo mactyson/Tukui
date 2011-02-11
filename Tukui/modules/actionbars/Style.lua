@@ -220,7 +220,7 @@ local function styleflyout(self)
 
     if self:GetAttribute("flyoutDirection") ~= nil then
 
-        local point, _, _, _, _ = self:GetParent():GetParent():GetParent():GetPoint()
+        local point, _, _, _, _ = self:GetParent():GetParent():GetPoint()
 		if strfind(point, "BOTTOM") then
 			self.FlyoutArrow:ClearAllPoints()
 			self.FlyoutArrow:SetPoint("TOP", self, "TOP", 0, arrowDistance)
