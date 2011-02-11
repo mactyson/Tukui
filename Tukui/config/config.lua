@@ -74,6 +74,18 @@ C["castbar"] = { --Thank you elv
 	["nointerruptcolor"] = { 1, 0.1, 0.1, 0.5 }, -- Color of target castbar
 }
 
+C["saftExperienceBar"] = {
+    ["enable"] = true,                       -- enable Safturento's XP/REP bar
+}	
+
+C["Interrupted"] = {
+    ["enable"] = true,                     -- enable Interrupt announce by Sideshow
+}	
+
+C["markbar"] = {
+    ["enable"] = true,                   -- enable Smelly's MarkBar for tanks
+}
+
 C["bags"] = {
 	["enable"] = true,                                  -- enable an all in one bag mod that fit tukui perfectly
 }
@@ -113,6 +125,7 @@ C["datatext"] = {
 	["hit"] = 0,
 	["mastery"] = 0,
 	["micromenu"] = 0,
+	["raidmarks"] = 0,                          -- show the toggle button for the mark bar
 
 	["battleground"] = true,                            -- enable 3 stats in battleground only that replace stat1,stat2,stat3.
 	["time24"] = true,                                  -- set time to 24h format.
