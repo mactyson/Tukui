@@ -844,22 +844,32 @@ T.UpdateDruidMana = function(self)
 end
 
 T.UpdateThreat = function(self, event, unit)
-	if (self.unit ~= unit) or (unit == "target" or unit == "pet" or unit == "focus" or unit == "focustarget" or unit == "targettarget") then return end
-	local threat = UnitThreatSituation(self.unit)
-	if (threat == 3) then
-		if self.panel then
-			self.panel:SetBackdropBorderColor(.69,.31,.31,1)
+		if (self.unit ~= unit) or (unit == "target" or unit == "pet" or unit == "focus" or unit == "focustarget" or unit == "targettarget") then return end
+		local threat = UnitThreatSituation(self.unit)
+		if (threat == 3) then
+			if self.powerborder and self.Healthbg then
+				self.powerborder:SetBackdropBorderColor(255,0,0,1)
+				self.Healthbg:SetBackdropBorderColor(255,0,0,1)
+			elseif self.powerborder then
+				self.powerborder:SetBackdropBorderColor(255,0,0,1)
+			elseif self.Healthbg then
+				self.Healthbg:SetBackdropBorderColor(255,0,0,1)
+			else
+				self.Name:SetTextColor(1,0.1,0.1)
+			end
 		else
-			self.Name:SetTextColor(1,0.1,0.1)
+			if self.powerborder and self.Healthbg then
+				self.powerborder:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
+				self.Healthbg:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
+			elseif self.powerborder then
+				self.powerborder:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
+			elseif self.Healthbg then
+				self.Healthbg:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
+			else
+				self.Name:SetTextColor(1,1,1)
+			end
 		end
-	else
-		if self.panel then
-			self.panel:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
-		else
-			self.Name:SetTextColor(1,1,1)
-		end
-	end 
-end
+	end
 
 --------------------------------------------------------------------------------------------
 -- THE AURAWATCH FUNCTION ITSELF. HERE BE DRAGONS!
