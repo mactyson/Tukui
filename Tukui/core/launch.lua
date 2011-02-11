@@ -311,9 +311,11 @@ TukuiOnLogon:SetScript("OnEvent", function(self, event)
 	if (IsAddOnLoaded("Tukui_Raid") and IsAddOnLoaded("Tukui_Raid_Healing")) then
 		StaticPopup_Show("TUKUIDISABLE_RAID")
 	end
-	
-	print(L.core_welcome1..T.version)
-	print(L.core_welcome2)
+    -- nice inlog text yo	
+	local name = UnitName("player")
+    local color = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
+	ChatFrame1:AddMessage(L.core_welcome1..name.."!", color.r,color.g,color.b)
+	ChatFrame1:AddMessage(L.core_welcome2, color.r,color.g,color.b)
 end)
 
 ------------------------------------------------------------------------
