@@ -191,7 +191,7 @@ end
 SpellFlyout:HookScript("OnShow", SetupFlyoutButton)
 
 --Hide the Mouseover texture and attempt to find the ammount of buttons to be skinned
-local function styleFlyout(self)
+local function styleflyout(self)
 	self.FlyoutBorder:SetAlpha(0)
 	self.FlyoutBorderShadow:SetAlpha(0)
 	
@@ -218,9 +218,9 @@ local function styleFlyout(self)
 	
 	if self:GetParent():GetParent():GetName() == "SpellBookSpellIconsFrame" then return end
 
-	local point, _, _, _, _ = self:GetParent():GetParent():GetParent():GetPoint()
+    if self:GetAttribute("flyoutDirection") ~= nil then\
 
-	if self:GetAttribute("flyoutDirection") ~= nil then
+        local point, _, _, _, _ = self:GetParent():GetParent():GetParent():GetPoint()
 		if strfind(point, "BOTTOM") then
 			self.FlyoutArrow:ClearAllPoints()
 			self.FlyoutArrow:SetPoint("TOP", self, "TOP", 0, arrowDistance)
