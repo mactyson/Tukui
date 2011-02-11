@@ -16,6 +16,7 @@ T.PP = function(p, obj)
 	local right = TukuiInfoRight
 	local mapleft = TukuiMinimapStatsLeft
 	local mapright = TukuiMinimapStatsRight
+	local tabright = TukuiTabsRightBackground
 	
 	if p == 1 then
 		obj:SetParent(left)
@@ -51,6 +52,12 @@ T.PP = function(p, obj)
 		obj:SetPoint("RIGHT", right, -30, 0)
 		obj:SetPoint('TOP', right)
 		obj:SetPoint('BOTTOM', right)
+	elseif p == 7 then
+		obj:SetParent(tabright)
+		obj:SetHeight(tabright:GetHeight())
+		obj:SetPoint("RIGHT", tabright, -10, 0)
+		obj:SetPoint('TOP', tabright, 0, 4)
+		obj:SetPoint('BOTTOM', tabright)
 	end
 	--[[
 	if TukuiMinimap then
@@ -76,6 +83,8 @@ T.DataTextTooltipAnchor = function(self)
 	
 	if panel == TukuiInfoLeft then
 		anchor = "ANCHOR_TOPLEFT"
+	elseif panel == TukuiTabsRightBackground then
+	    anchor = "ANCHOR_TOPRIGHT"
 	elseif panel == TukuiInfoRight then
 		anchor = "ANCHOR_TOPRIGHT"
 	elseif panel == TukuiMinimapStatsLeft or panel == TukuiMinimapStatsRight then
