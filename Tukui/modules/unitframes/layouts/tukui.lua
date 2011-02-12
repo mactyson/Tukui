@@ -1013,7 +1013,7 @@ local function Shared(self, unit)
 	if (unit == "focus") then
 		-- health 
 		local health = CreateFrame('StatusBar', nil, self)
-		health:Height(22)
+		health:Height(12)
 		health:SetPoint("TOPLEFT")
 		health:SetPoint("TOPRIGHT")
 		health:SetStatusBarTexture(normTex)
@@ -1061,22 +1061,12 @@ local function Shared(self, unit)
 			health.colorClass = true
 			health.colorReaction = true	
 		end
-	
 		-- power
 		local power = CreateFrame('StatusBar', nil, self)
-		power:Height(6)
+		power:Height(2)
 		power:Point("TOPLEFT", health, "BOTTOMLEFT", 0, -1)
 		power:Point("TOPRIGHT", health, "BOTTOMRIGHT", 0, -1)
 		power:SetStatusBarTexture(normTex)
-		
-		-- power border 
-		local powerborder = CreateFrame("Frame", nil, self)
-		T.CreatePanel(powerborder, 1, 1, "CENTER", health, "CENTER", 0, 0)
-		powerborder:ClearAllPoints()
-		powerborder:SetPoint("TOPLEFT", power, T.Scale(-2), T.Scale(2))
-		powerborder:SetPoint("BOTTOMRIGHT", power, T.Scale(2), T.Scale(-2))
-		powerborder:SetFrameStrata("MEDIUM")
-		T.CreateShadow(powerborder)
 		
 		power.frequentUpdates = true
 		power.colorPower = true
@@ -1088,7 +1078,7 @@ local function Shared(self, unit)
 		powerBG:SetAllPoints(power)
 		powerBG:SetTexture(normTex)
 		powerBG.multiplier = 0.3
-		
+	
 		power.value = T.SetFontString(health, pixelfont, 8, "MONOCHROMEOUTLINE")
 		power.value:Point("LEFT", 2, 0)
 		power.PreUpdate = T.PreUpdatePower
@@ -1096,7 +1086,7 @@ local function Shared(self, unit)
 				
 		self.Power = power
 		self.Power.bg = powerBG
-		
+			
 		-- names
 		local Name = health:CreateFontString(nil, "OVERLAY")
 		Name:SetPoint("CENTER", health, "CENTER", 0, 0)
@@ -1110,11 +1100,11 @@ local function Shared(self, unit)
 
 		-- create debuff for arena units
 		local debuffs = CreateFrame("Frame", nil, self)
-		debuffs:SetHeight(34)
+		debuffs:SetHeight(18)
 		debuffs:SetWidth(200)
-		debuffs:Point('LEFT', self, 'RIGHT', -4, 0)
-		debuffs.size = 34
-		debuffs.num = 5
+		debuffs:Point('RIGHT', self, 'LEFT', -4, 0)
+		debuffs.size = 18
+		debuffs.num = 1
 		debuffs.spacing = 2
 		debuffs.initialAnchor = 'RIGHT'
 		debuffs["growth-x"] = "LEFT"
@@ -1123,16 +1113,18 @@ local function Shared(self, unit)
 		self.Debuffs = debuffs
 		
 		local castbar = CreateFrame("StatusBar", self:GetName().."CastBar", self)
-		castbar:SetPoint("LEFT", 2, 0)
-		castbar:SetPoint("RIGHT", -24, 0)
-		castbar:SetPoint("BOTTOM", 0, -22)
+		castbar:SetPoint("LEFT", -0, 0)
+		castbar:SetPoint("RIGHT", -14, 0)
+		castbar:SetPoint("BOTTOM", 0, -14)
 		
-		castbar:SetHeight(16)
+		castbar:SetHeight(8)
 		castbar:SetStatusBarTexture(normTex)
 		castbar:SetFrameLevel(6)
 		
 		castbar.bg = CreateFrame("Frame", nil, castbar)
-		castbar.bg:SetTemplate("Default")
+		T.SetTemplate(castbar.bg)
+		T.CreateShadow(castbar.bg)
+		castbar.bg:SetTemplate("Hydra")
 		castbar.bg:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
 		castbar.bg:Point("TOPLEFT", -2, 2)
 		castbar.bg:Point("BOTTOMRIGHT", 2, -2)
@@ -1156,7 +1148,9 @@ local function Shared(self, unit)
 		castbar.button:Height(castbar:GetHeight()+4)
 		castbar.button:Width(castbar:GetHeight()+4)
 		castbar.button:Point("LEFT", castbar, "RIGHT", 4, 0)
-		castbar.button:SetTemplate("Default")
+		T.SetTemplate(castbar.button)
+		T.CreateShadow(castbar.button)
+		castbar.button:SetTemplate("Hydra")
 		castbar.button:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
 		castbar.icon = castbar.button:CreateTexture(nil, "ARTWORK")
 		castbar.icon:Point("TOPLEFT", castbar.button, 2, -2)
@@ -1175,7 +1169,7 @@ local function Shared(self, unit)
 	if (unit == "focustarget") then
 		-- health 
 		local health = CreateFrame('StatusBar', nil, self)
-		health:Height(22)
+		health:Height(12)
 		health:SetPoint("TOPLEFT")
 		health:SetPoint("TOPRIGHT")
 		health:SetStatusBarTexture(normTex)
@@ -1226,19 +1220,10 @@ local function Shared(self, unit)
 	
 		-- power
 		local power = CreateFrame('StatusBar', nil, self)
-		power:Height(6)
+		power:Height(2)
 		power:Point("TOPLEFT", health, "BOTTOMLEFT", 0, -1)
 		power:Point("TOPRIGHT", health, "BOTTOMRIGHT", 0, -1)
 		power:SetStatusBarTexture(normTex)
-		
-		 -- power border 
-		local powerborder = CreateFrame("Frame", nil, self)
-		T.CreatePanel(powerborder, 1, 1, "CENTER", health, "CENTER", 0, 0)
-		powerborder:ClearAllPoints()
-		powerborder:SetPoint("TOPLEFT", power, T.Scale(-2), T.Scale(2))
-		powerborder:SetPoint("BOTTOMRIGHT", power, T.Scale(2), T.Scale(-2))
-		powerborder:SetFrameStrata("MEDIUM")
-		T.CreateShadow(powerborder)
 		
 		power.frequentUpdates = true
 		power.colorPower = true
@@ -1272,11 +1257,11 @@ local function Shared(self, unit)
 
 		-- create debuff for arena units
 		local debuffs = CreateFrame("Frame", nil, self)
-		debuffs:SetHeight(34)
+		debuffs:SetHeight(18)
 		debuffs:SetWidth(200)
 		debuffs:Point('LEFT', self, 'RIGHT', 4, 0)
-		debuffs.size = 34
-		debuffs.num = 2
+		debuffs.size = 18
+		debuffs.num = 1
 		debuffs.spacing = 2
 		debuffs.initialAnchor = 'LEFT'
 		debuffs["growth-x"] = "RIGHT"
@@ -1285,16 +1270,16 @@ local function Shared(self, unit)
 		self.Debuffs = debuffs
 		
 		local castbar = CreateFrame("StatusBar", self:GetName().."CastBar", self)
-		castbar:SetPoint("LEFT", 2, 0)
-		castbar:SetPoint("RIGHT", -24, 0)
-		castbar:SetPoint("BOTTOM", 0, -22)
+		castbar:SetPoint("LEFT", -0, 0)
+		castbar:SetPoint("RIGHT", -14, 0)
+		castbar:SetPoint("BOTTOM", 0, -14)
 		
-		castbar:SetHeight(16)
+		castbar:SetHeight(8)
 		castbar:SetStatusBarTexture(normTex)
 		castbar:SetFrameLevel(6)
 		
 		castbar.bg = CreateFrame("Frame", nil, castbar)
-		castbar.bg:SetTemplate("Default")
+		castbar.bg:SetTemplate("Hydra")
 		castbar.bg:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
 		castbar.bg:Point("TOPLEFT", -2, 2)
 		castbar.bg:Point("BOTTOMRIGHT", 2, -2)
@@ -1318,7 +1303,7 @@ local function Shared(self, unit)
 		castbar.button:Height(castbar:GetHeight()+4)
 		castbar.button:Width(castbar:GetHeight()+4)
 		castbar.button:Point("LEFT", castbar, "RIGHT", 4, 0)
-		castbar.button:SetTemplate("Default")
+		castbar.button:SetTemplate("Hydra")
 		castbar.button:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
 		castbar.icon = castbar.button:CreateTexture(nil, "ARTWORK")
 		castbar.icon:Point("TOPLEFT", castbar.button, 2, -2)
@@ -1636,8 +1621,8 @@ player:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", 2, 61)
 
 -- focus
 local focus = oUF:Spawn('focus', "TukuiFocus")
-focus:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", 0, 246)
-    focus:Size(200, 29)
+focus:SetPoint("BOTTOMLEFT", TukuiPlayer, "TOPLEFT", 0, -62)
+    focus:Size(185, 15)
 
 -- target
 local target = oUF:Spawn('target', "TukuiTarget")
@@ -1656,8 +1641,8 @@ pet:SetPoint("BOTTOM", InvTukuiActionBarBackground, "TOP", 0,105)
 
 -- focus target	
 local focustarget = oUF:Spawn("focustarget", "TukuiFocusTarget")
-focustarget:SetPoint("BOTTOM", focus, "TOP", 0, 35)
-    focustarget:Size(200, 29)
+focustarget:SetPoint("BOTTOMRIGHT", TukuiTarget, "TOPRIGHT", 0, -62)
+    focustarget:Size(185, 15)
 
 
 if C.arena.unitframes then
