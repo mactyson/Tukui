@@ -74,6 +74,10 @@ C["castbar"] = { --Thank you elv
 	["nointerruptcolor"] = { 1, 0.1, 0.1, 0.5 }, -- Color of target castbar
 }
 
+C["combopointbar"] = {
+    ["enable"] = true,       -- enable/disable combopoint bar (credit jasje)
+}
+
 C["saftExperienceBar"] = {
     ["enable"] = true,                       -- enable Safturento's XP/REP bar
 }	
