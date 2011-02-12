@@ -10,10 +10,10 @@ PlayerPowerBarAlt:UnregisterEvent("PLAYER_ENTERING_WORLD")
 --Create the new bar
 local AltPowerBar = CreateFrame("Frame", "TukuiAltPowerBar", TukuiTabsLeftBackground)
 AltPowerBar:SetAllPoints()
-AltPowerBar:SetFrameStrata("BACKGROUND")
-AltPowerBar:SetFrameLevel(0)
+AltPowerBar:SetFrameStrata("HIGH")
+AltPowerBar:SetFrameLevel(1)
 AltPowerBar:EnableMouse(true)
-AltPowerBar:SetTemplate("Default")
+AltPowerBar:SetTemplate("Hydra")
 
 -- Create Status Bar and Text
 local AltPowerBarStatus = CreateFrame("StatusBar", "TukuiAltPowerBarStatus", AltPowerBar)
@@ -53,7 +53,7 @@ AltPowerBarStatus:SetScript("OnUpdate", function(self, elapsed)
 		local power = UnitPower("player", ALTERNATE_POWER_INDEX)
 		local mpower = UnitPowerMax("player", ALTERNATE_POWER_INDEX)
 		self:SetValue(power)
-		AltPowerText:SetText(power.."/"..mpower)
+		AltPowerText:SetText(power.."|"..mpower)
 		self.TimeSinceLastUpdate = 0
 	end
 end)
