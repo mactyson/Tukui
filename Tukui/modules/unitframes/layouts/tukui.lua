@@ -291,48 +291,53 @@ local function Shared(self, unit)
 			end
 			
 			if C["unitframes"].classbar then
-				if T.myclass == "DRUID" then			
-					local eclipseBar = CreateFrame('Frame', nil, self)
-					eclipseBar:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
-					if T.lowversion then
-						eclipseBar:Size(186, 8)
-					else
-						eclipseBar:Size(250, 8)
-					end
-					eclipseBar:SetFrameStrata("MEDIUM")
-					eclipseBar:SetFrameLevel(8)
-					eclipseBar:SetTemplate("Default")
-					eclipseBar:SetBackdropBorderColor(0,0,0,0)
-					eclipseBar:SetScript("OnShow", function() T.EclipseDisplay(self, false) end)
-					eclipseBar:SetScript("OnUpdate", function() T.EclipseDisplay(self, true) end) -- just forcing 1 update on login for buffs/shadow/etc.
-					eclipseBar:SetScript("OnHide", function() T.EclipseDisplay(self, false) end)
-					
-					local lunarBar = CreateFrame('StatusBar', nil, eclipseBar)
-					lunarBar:SetPoint('LEFT', eclipseBar, 'LEFT', 0, 0)
-					lunarBar:SetSize(eclipseBar:GetWidth(), eclipseBar:GetHeight())
-					lunarBar:SetStatusBarTexture(normTex)
-					lunarBar:SetStatusBarColor(.30, .52, .90)
-					eclipseBar.LunarBar = lunarBar
+				if T.myclass == "DRUID" then							
+				local eclipseBar = CreateFrame('Frame', nil, self)
+				eclipseBar:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, T.Scale(1))
+				eclipseBar:SetSize(T.Scale(250), T.Scale(8))
+				eclipseBar:SetFrameStrata("MEDIUM")
+				eclipseBar:SetFrameLevel(8)
+				T.SetTemplate(eclipseBar)
+				eclipseBar:SetBackdropBorderColor(0,0,0,0)
+				eclipseBar:SetBackdropColor(0,0,0,1)
+				eclipseBar:SetScript("OnShow", function() T.EclipseDisplay(self, false) end)
+				eclipseBar:SetScript("OnUpdate", function() T.EclipseDisplay(self, true) end) -- just forcing 1 update on login for buffs/shadow/etc.
+				eclipseBar:SetScript("OnHide", function() T.EclipseDisplay(self, false) end)
+				
+				local lunarBar = CreateFrame('StatusBar', nil, eclipseBar)
+				lunarBar:SetPoint('LEFT', eclipseBar, 'LEFT', 0, 0)
+				lunarBar:SetSize(eclipseBar:GetWidth(), eclipseBar:GetHeight())
+				lunarBar:SetStatusBarTexture(normTex)
+				lunarBar:SetStatusBarColor(.30, .52, .90)
+				eclipseBar.LunarBar = lunarBar
 
-					local solarBar = CreateFrame('StatusBar', nil, eclipseBar)
-					solarBar:SetPoint('LEFT', lunarBar:GetStatusBarTexture(), 'RIGHT', 0, 0)
-					solarBar:SetSize(eclipseBar:GetWidth(), eclipseBar:GetHeight())
-					solarBar:SetStatusBarTexture(normTex)
-					solarBar:SetStatusBarColor(.80, .82,  .60)
-					eclipseBar.SolarBar = solarBar
+				local solarBar = CreateFrame('StatusBar', nil, eclipseBar)
+				solarBar:SetPoint('LEFT', lunarBar:GetStatusBarTexture(), 'RIGHT', 0, 0)
+				solarBar:SetSize(eclipseBar:GetWidth(), eclipseBar:GetHeight())
+				solarBar:SetStatusBarTexture(normTex)
+				solarBar:SetStatusBarColor(.80, .82,  .60)
+				eclipseBar.SolarBar = solarBar
 
-					local eclipseBarText = eclipseBar:CreateFontString(nil, 'OVERLAY')
-					eclipseBarText:SetPoint('TOP', panel)
-					eclipseBarText:SetPoint('BOTTOM', panel)
-					eclipseBarText:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
-					eclipseBar.PostUpdatePower = T.EclipseDirection
-					
-					-- hide "low mana" text on load if eclipseBar is show
-					if eclipseBar and eclipseBar:IsShown() then FlashInfo.ManaLevel:SetAlpha(0) end
+				local eclipseBarText = solarBar:CreateFontString(nil, 'OVERLAY')
+				eclipseBarText:SetPoint('TOP', panel)
+				eclipseBarText:SetPoint('BOTTOM', panel)
+				eclipseBarText:SetFont(pixelfont, 8, "OUTLINEMONOCHROME")
+				eclipseBar.Text = eclipseBarText
+				
+				-- border 
+				eclipseBar.border = CreateFrame("Frame", nil,eclipseBar)
+				eclipseBar.border:SetPoint("TOPLEFT", eclipseBar, "TOPLEFT", T.Scale(-2), T.Scale(2))
+				eclipseBar.border:SetPoint("BOTTOMRIGHT", eclipseBar, "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
+				eclipseBar.border:SetFrameStrata("BACKGROUND")
+				T.SetTemplate(eclipseBar.border)
 
-					self.EclipseBar = eclipseBar
-					self.EclipseBar.Text = eclipseBarText
+				-- hide "low mana" text on load if eclipseBar is show
+				if eclipseBar and eclipseBar:IsShown() then FlashInfo.ManaLevel:SetAlpha(0) end
+				
+				self.EclipseBar = eclipseBar
 				end
+			
+
 
 				-- set holy power bar or shard bar
 				if (T.myclass == "WARLOCK" or T.myclass == "PALADIN") then
@@ -382,90 +387,84 @@ local function Shared(self, unit)
 
 				-- deathknight runes
 				if T.myclass == "DEATHKNIGHT" then
-					-- rescale top shadow border
-					self.shadow:Point("TOPLEFT", -4, 12)
+			
+				local Runes = CreateFrame("Frame", nil, self)
+                Runes:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, T.Scale(6))
+                Runes:SetWidth(T.Scale(210))
+                Runes:SetHeight(T.Scale(8))
+
+                for i = 1, 6 do
+                    Runes[i] = CreateFrame("StatusBar", self:GetName().."_Runes"..i, self)
+                    Runes[i]:SetHeight(T.Scale(8))
+
 					
-					local Runes = CreateFrame("Frame", nil, self)
-					Runes:Point("BOTTOMLEFT", self, "TOPLEFT", 0,1)
-					Runes:Height(8)
-					if T.lowversion then
-						Runes:SetWidth(186)
-					else
-						Runes:SetWidth(250)
-					end
-					Runes:SetBackdrop(backdrop)
-					Runes:SetBackdropColor(0, 0, 0)
+                    if i == 1 then
+                        Runes[i]:SetPoint("LEFT", Runes, "LEFT", 0, 0)
+						Runes[i]:SetWidth(T.Scale(210 /6))
+                    else
+                        Runes[i]:SetPoint("LEFT", Runes[i-1], "RIGHT", T.Scale(8), 0)
+						Runes[i]:SetWidth(T.Scale(210 /6))
+                    end
+                    Runes[i]:SetStatusBarTexture(normTex)
+                    Runes[i]:GetStatusBarTexture():SetHorizTile(false)
+					Runes[i]:SetBackdrop(backdrop)
+                    Runes[i]:SetBackdropColor(0,0,0)
+                    Runes[i]:SetFrameLevel(20)
+                    
+                    Runes[i].bg = Runes[i]:CreateTexture(nil, "BORDER")
+                    Runes[i].bg:SetAllPoints(Runes[i])
+                    Runes[i].bg:SetTexture(normTex)
+                    Runes[i].bg.multiplier = 0.3
+					
+					
+					Runes[i].border = CreateFrame("Frame", nil, Runes[i])
+					Runes[i].border:SetPoint("TOPLEFT", Runes[i], "TOPLEFT", T.Scale(-2), T.Scale(2))
+					Runes[i].border:SetPoint("BOTTOMRIGHT", Runes[i], "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
+					Runes[i].border:SetFrameStrata("BACKGROUND")
+					T.SetTemplate(Runes[i].border)
+					Runes[i].border:SetBackdropColor( 0,0,0,1 )
+					TukuiDB.CreateShadow(Runes[i].border)
+					
+                end
 
-					for i = 1, 6 do
-						Runes[i] = CreateFrame("StatusBar", self:GetName().."_Runes"..i, health)
-						Runes[i]:SetHeight(8)
-						if T.lowversion then
-							if i == 1 then
-								Runes[i]:SetWidth(31)
-							else
-								Runes[i]:SetWidth(30)
-							end
-						else
-							if i == 1 then
-								Runes[i]:SetWidth(40)
-							else
-								Runes[i]:SetWidth(41)
-							end
-						end
-						if (i == 1) then
-							Runes[i]:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
-						else
-							Runes[i]:Point("TOPLEFT", Runes[i-1], "TOPRIGHT", 1, 0)
-						end
-						Runes[i]:SetStatusBarTexture(normTex)
-						Runes[i]:GetStatusBarTexture():SetHorizTile(false)
-					end
-
-					self.Runes = Runes
-				end
+                    self.Runes = Runes
+                end
 				
 				-- shaman totem bar
-				if T.myclass == "SHAMAN" then
-					-- rescale top shadow border
-					self.shadow:Point("TOPLEFT", -4, 12)
-					
-					local TotemBar = {}
-					TotemBar.Destroy = true
-					for i = 1, 4 do
-						TotemBar[i] = CreateFrame("StatusBar", self:GetName().."_TotemBar"..i, self)
-						if (i == 1) then
-						   TotemBar[i]:Point("BOTTOMLEFT", self, "TOPLEFT", 0, 1)
-						else
-						   TotemBar[i]:Point("TOPLEFT", TotemBar[i-1], "TOPRIGHT", 1, 0)
-						end
-						TotemBar[i]:SetStatusBarTexture(normTex)
-						TotemBar[i]:Height(8)
-						if T.lowversion then
-							if i == 1 then
-								TotemBar[i]:SetWidth(45)
-							else
-								TotemBar[i]:SetWidth(46)
-							end
-						else
-							if i == 4 then
-								TotemBar[i]:SetWidth(61)
-							else
-								TotemBar[i]:SetWidth(62)
-							end
-						end
-						TotemBar[i]:SetBackdrop(backdrop)
-						TotemBar[i]:SetBackdropColor(0, 0, 0)
-						TotemBar[i]:SetMinMaxValues(0, 1)
-
-						TotemBar[i].bg = TotemBar[i]:CreateTexture(nil, "BORDER")
-						TotemBar[i].bg:SetAllPoints(TotemBar[i])
-						TotemBar[i].bg:SetTexture(normTex)
-						TotemBar[i].bg.multiplier = 0.3
+		    if T.myclass == "SHAMAN" then
+			local TotemBar = {}
+				TotemBar.Destroy = true
+				for i = 1, 4 do
+					TotemBar[i] = CreateFrame("StatusBar", self:GetName().."_TotemBar"..i, self)
+					if (i == 1) then
+						TotemBar[i]:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, TukuiDB.Scale(6))
+					else
+					   TotemBar[i]:SetPoint("TOPLEFT", TotemBar[i-1], "TOPRIGHT", TukuiDB.Scale(7), 0)
 					end
-					self.TotemBar = TotemBar
+					TotemBar[i]:SetStatusBarTexture(normTex)
+					TotemBar[i]:SetHeight(T.Scale(5))
+					TotemBar[i]:SetWidth(T.Scale(229) / 4)
+				
+					TotemBar[i]:SetBackdrop(backdrop)
+					TotemBar[i]:SetBackdropColor(0, 0, 0, 1)
+					TotemBar[i]:SetMinMaxValues(0, 1)
+
+					TotemBar[i].bg = TotemBar[i]:CreateTexture(nil, "BORDER")
+					TotemBar[i].bg:SetAllPoints(TotemBar[i])
+					TotemBar[i].bg:SetTexture(normTex)
+					TotemBar[i].bg.multiplier = 0.2
+					
+					TotemBar[i].border = CreateFrame("Frame", nil, TotemBar[i])
+					TotemBar[i].border:SetPoint("TOPLEFT", TotemBar[i], "TOPLEFT", T.Scale(-2), T.Scale(2))
+					TotemBar[i].border:SetPoint("BOTTOMRIGHT", TotemBar[i], "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
+					TotemBar[i].border:SetFrameStrata("BACKGROUND")
+					T.SetTemplate(TotemBar[i].border)
+					TotemBar[i].border:SetBackdropColor( 0,0,0,1 )
+					T.CreateShadow(TotemBar[i].border)
 				end
+				self.TotemBar = TotemBar
 			end
-			
+		end	
 			-- script for pvp status and low mana
 			self:SetScript("OnEnter", function(self)
 				if self.EclipseBar and self.EclipseBar:IsShown() then 
@@ -495,31 +494,41 @@ local function Shared(self, unit)
 			self:Tag(Name, '[Tukui:getnamecolor][Tukui:namelong] [Tukui:diffcolor][level] [shortclassification]')
 			self.Name = Name
 			
-			-- combo points on target
+			-- combobar edit by jasje
+        if C["combopointbar"].enable == true then
 			local CPoints = {}
 			CPoints.unit = PlayerFrame.unit
 			for i = 1, 5 do
-				CPoints[i] = self:CreateTexture(nil, "OVERLAY")
-				CPoints[i]:Height(12)
-				CPoints[i]:Width(12)
-				CPoints[i]:SetTexture(bubbleTex)
+				CPoints[i] = CreateFrame('StatusBar', "ComboPoint"..i, self)
+				CPoints[i]:SetHeight(13)
+				CPoints[i]:SetWidth(230/ 5)
+				CPoints[i]:SetStatusBarTexture(C["media"].normTex)
+				CPoints[i]:GetStatusBarTexture():SetHorizTile(false)
+				CPoints[i]:SetFrameLevel(20)
 				if i == 1 then
-					if T.lowversion then
-						CPoints[i]:Point("TOPRIGHT", 15, 1.5)
-					else
-						CPoints[i]:Point("TOPLEFT", -15, 1.5)
-					end
-					CPoints[i]:SetVertexColor(0.69, 0.31, 0.31)
+					CPoints[i]:SetPoint("BOTTOMLEFT", TukuiPlayer, "TOPLEFT", 0, 6)
 				else
-					CPoints[i]:Point("TOP", CPoints[i-1], "BOTTOM", 1)
+					CPoints[i]:SetPoint("LEFT", CPoints[i-1], "RIGHT", T.Scale(5), 0)
 				end
+					
+				local border = CreateFrame("Frame", "ComboPoint"..i.."Border", CPoints[i])
+				T.CreatePanel(border,1,1, "CENTER", panel, "CENTER" ,0,0)
+				border:SetPoint("TOPLEFT", T.Scale(-2), T.Scale(2))
+				border:SetPoint("BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
+				border:SetBackdropColor(0,0,0)
+				border:SetFrameStrata("MEDIUM")
+				border:SetFrameLevel(19)
 			end
-			CPoints[2]:SetVertexColor(0.69, 0.31, 0.31)
-			CPoints[3]:SetVertexColor(0.65, 0.63, 0.35)
-			CPoints[4]:SetVertexColor(0.65, 0.63, 0.35)
-			CPoints[5]:SetVertexColor(0.33, 0.59, 0.33)
+			
+			CPoints[1]:SetStatusBarColor(225, 0, 0)    -- red
+			CPoints[2]:SetStatusBarColor(225, 0, 0)   -- red
+			CPoints[3]:SetStatusBarColor(225, 225, 0)   -- yellow
+			CPoints[4]:SetStatusBarColor(225, 225, 0)   -- yellow
+			CPoints[5]:SetStatusBarColor(0, 225, 0)   -- green
+			
 			self.CPoints = CPoints
 		end
+    end
 
 		if (unit == "target" and C["unitframes"].targetauras) or (unit == "player" and C["unitframes"].playerauras) then
 			local buffs = CreateFrame("Frame", nil, self)
