@@ -50,7 +50,7 @@ GameTimeFrame:Hide()
 MiniMapMailFrame:ClearAllPoints()
 MiniMapMailFrame:Point("TOPRIGHT", Minimap, 3, 3)
 MiniMapMailBorder:Hide()
-MiniMapMailIcon:SetTexture("Interface\\AddOns\\Tukui\\medias\\textures\\mail")
+MiniMapMailIcon:SetTexture("Interface\\AddOns\\Tukui\\medias\\textures\\Jmail") -- made my own mail icon 
 
 -- Move battleground icon
 MiniMapBattlefieldFrame:ClearAllPoints()
