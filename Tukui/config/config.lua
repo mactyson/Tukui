@@ -32,6 +32,7 @@ C["unitframes"] = {
 	["playeraggro"] = true,                             -- color player border to red if you have aggro on current target.
 	["healcomm"] = false,                               -- enable healprediction support.
 	["onlyselfdebuffs"] = true,                        -- display only our own debuffs applied on target
+	["showfocustarget"] = false,                         -- show focus target
 
 	-- raid layout (if one of them is enabled)
 	["showrange"] = true,                               -- show range opacity on raidframes

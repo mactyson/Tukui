@@ -1648,11 +1648,12 @@ local pet = oUF:Spawn('pet', "oUF_Tukz_pet")
 pet:SetPoint("BOTTOM", InvTukuiActionBarBackground, "TOP", 0,105)
 	pet:SetSize(T.Scale(130), T.Scale(20))
 
--- focus target	
+-- focus target
+if C.unitframes.showfocustarget then	
 local focustarget = oUF:Spawn("focustarget", "TukuiFocusTarget")
 focustarget:SetPoint("BOTTOMRIGHT", TukuiTarget, "TOPRIGHT", 0, -62)
     focustarget:Size(185, 15)
-
+end
 
 if C.arena.unitframes then
 	local arena = {}
