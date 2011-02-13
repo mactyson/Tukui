@@ -185,7 +185,7 @@ if C.chat.background then
 	-- RIGHT TAB PANEL
 	local tabsbgright = CreateFrame("Frame", "TukuiTabsRightBackground", TukuiBar1)
 	tabsbgright:CreatePanel("Transparent", T.InfoLeftRightWidth, 16, "BOTTOMLEFT", chatrightbg, "TOPLEFT", 0, T.Scale(2))
-	tabsbgright:SetFrameLevel(2)
+	tabsbgright:SetFrameLevel(1)
 	tabsbgright:SetFrameStrata("LOW")
 	tabsbgright:Hide() --This will get shown if a chat exists in the bottomright corner
 	tabsbgright:CreateShadow("")

@@ -110,7 +110,7 @@ C["cooldown"] = {
 	["treshold"] = 2,                                   -- show decimal under X seconds and text turn red
 }
 
-C["datatext"] = {
+C["datatext"] = { -- number 7 can only be used when chat.background is enabled
 	["fps_ms"] = 0,                                     -- show fps and ms on panels
 	["system"] = 0,                                     -- show total memory and others systems infos on panels
 	["bags"] = 0,                                       -- show space used in bags on panels

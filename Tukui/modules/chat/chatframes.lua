@@ -238,35 +238,24 @@ local function SetupChatPosAndFont(self)
 		else
 			FCF_SetChatWindowFontSize(nil, chat, fontSize)
 		end
-		
 		-- force chat position on #1 and #4, needed if we change ui scale or resolution
 		-- also set original width and height of chatframes 1 and 4 if first time we run tukui.
 		-- doing resize of chat also here for users that hit "cancel" when default installation is show.
 		if i == 1 then
 			chat:ClearAllPoints()
-			chat:SetParent(TukuiChatBackgroundLeft)
 			chat:SetFrameStrata("MEDIUM")
-			chat:SetSize(TukuiChatBackgroundLeft:GetWidth() - 6, TukuiChatBackgroundLeft:GetHeight() - 6)
-			chat:SetPoint("CENTER", TukuiChatBackgroundLeft, "CENTER", 0, 0)
+			chat:SetSize(TukuiInfoLeft:GetWidth() - 10, 100)
+			chat:Point("BOTTOMLEFT", TukuiInfoLeft, "TOPLEFT", 4, 5)
+			chat:Point("BOTTOMRIGHT", TukuiInfoLeft, "TOPRIGHT", 4, 5)
 			FCF_SavePositionAndDimensions(chat)
-			tab:SetParent(TukuiChatBackgroundLeft)
-		-- setting parent -- ty hydra
-		elseif i == 2 then
-			CombatLogQuickButtonFrame_Custom:SetParent(ChatLeft)
-			chat:SetParent(TukuiChatBackgroundLeft)
-			tab:SetParent(Chat)
-		elseif i == 3 then
-			chat:SetParent(TukuiChatBackgroundLeft)
-			tab:SetParent(TukuiChatBackgroundLeft)
 		elseif i == 4 then
 			if not chat.isDocked then
 				chat:ClearAllPoints()
-				chat:SetParent(TukuiChatBackgroundRight)
 				chat:SetFrameStrata("MEDIUM")
-				chat:SetSize(TukuiChatBackgroundRight:GetWidth() - 6, TukuiChatBackgroundRight:GetHeight() - 6)
-				chat:SetPoint("CENTER", TukuiChatBackgroundRight, "CENTER", 0, 0)
+				chat:SetSize(TukuiInfoRight:GetWidth() - 10, 100)
+				chat:Point("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", 4, 5)
+				chat:Point("BOTTOMLEFT", TukuiInfoRight, "TOPLEFT", 4, 5)
 				FCF_SavePositionAndDimensions(chat)
-				tab:SetParent(TukuiChatBackgroundRight)
 			end
 		end
 
