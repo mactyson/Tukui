@@ -1,8 +1,8 @@
-local T, C, L = unpack(select(2, ...)) -- Import Functions/Constants, Config, Locales
 
 --------------------------------------------------------------------
 -- GUILD ROSTER
 --------------------------------------------------------------------
+local T, C, L = unpack(select(2, ...)) -- Import Functions/Constants, Config, Locales
 
 if not C["datatext"].guild or C["datatext"].guild == 0 then return end
 
@@ -31,11 +31,11 @@ local Text  = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
 Text:SetFont(C.media.pixelfont2, C["datatext"].fontsize,C["datatext"].fontflag)
 T.PP(C["datatext"].guild, Text)
 
-local function BuildGuildTable(total)
+local function BuildGuildTable()
 	totalOnline = 0
 	wipe(guildTable)
 	local name, rank, level, zone, note, officernote, connected, status, class
-	for i = 1, total do
+	for i = 1, GetNumGuildMembers() do
 		name, rank, _, level, _, zone, note, officernote, connected, status, class = GetGuildRosterInfo(i)
 		guildTable[i] = { name, rank, level, zone, note, officernote, connected, status, class }
 		if connected then totalOnline = totalOnline + 1 end
@@ -47,47 +47,12 @@ local function BuildGuildTable(total)
 	end)
 end
 
-local function GetGuildMemberIndex(name)
-	for k,v in ipairs(guildTable) do
-		if v[1] == name then return k end
-	end
-	return -1
-end
-
-local function UpdateGuildTable(total)
-	totalOnline = 0
-	local index, name, rank, level, zone, note, officernote, connected, status
-	for i = 1, #guildTable do
-		-- get guild roster information
-		name, rank, _, level, _, zone, note, officernote, connected, status = GetGuildRosterInfo(i)
-		-- get the correct index in our table		
-		index = GetGuildMemberIndex(name)
-		-- we cannot find a guild member in our table, so rebuild it
-		if index == -1 then
-			BuildGuildTable(total)
-			break
-		end
-		-- update on-line status for all members
-		guildTable[index][7] = connected
-		-- update information only for on-line members
-		if connected then
-			guildTable[index][2] = rank
-			guildTable[index][3] = level
-			guildTable[index][4] = zone
-			guildTable[index][5] = note
-			guildTable[index][6] = officernote
-			guildTable[index][8] = status
-			totalOnline = totalOnline + 1
-		end
-	end
-end
-
 local function UpdateGuildXP()
 	local currentXP, remainingXP, dailyXP, maxDailyXP = UnitGetGuildXP("player")
 	local nextLevelXP = currentXP + remainingXP
 	local percentTotal = tostring(math.ceil((currentXP / nextLevelXP) * 100))
 	local percentDaily = tostring(math.ceil((dailyXP / maxDailyXP) * 100))
-	
+
 	guildXP[0] = { currentXP, nextLevelXP, percentTotal }
 	guildXP[1] = { dailyXP, maxDailyXP, percentDaily }
 end
@@ -104,24 +69,18 @@ local function Update(self, event, ...)
 	if event == "GUILD_MOTD" or event == "PLAYER_ENTERING_WORLD" then UpdateGuildMessage() end
 	-- an event occured that could change the guild roster, so request update
 	if event ~= "GUILD_ROSTER_UPDATE" then GuildRoster() end
-		
+
 	-- received an updated event, but we are already updating the table
 	if self.update == true then return end
 
 	-- lock to prevent multiple updates simultaniously
 	self.update = true
 	if IsInGuild() then
-		local total = (GetNumGuildMembers())
-		
-		if total == #guildTable then
-			UpdateGuildTable(total)
-		else
-			BuildGuildTable(total)
-		end
-		
+		BuildGuildTable()
+
 		self:SetAllPoints(Text)
 		Text:SetFormattedText(displayString, hexa..L.datatext_guild..hexb, totalOnline)
-		
+
 		if not Stat:GetScript("OnMouseDown") then
 			Stat:SetScript("OnMouseDown", function(self, btn)
 				if btn ~= "LeftButton" then return end
@@ -134,7 +93,7 @@ local function Update(self, event, ...)
 	end
 	self.update = false
 end
-	
+
 local menuFrame = CreateFrame("Frame", "TukuiGuildRightClickMenu", UIParent, "UIDropDownMenuTemplate")
 local menuList = {
 	{ text = "Select an Option", isTitle = true,notCheckable=true},
@@ -160,7 +119,7 @@ end
 
 Stat:SetScript("OnMouseUp", function(self, btn)
 	if btn ~= "RightButton" then return end
-	
+
 	GameTooltip:Hide()
 
 	local classc, levelc, grouped
@@ -191,36 +150,36 @@ end)
 
 Stat:SetScript("OnEnter", function(self)
 	if InCombatLockdown() or not IsInGuild() then return end
-		
+
 	local name, rank, level, zone, note, officernote, connected, status, class
 	local zonec, classc, levelc
 	local online = totalOnline
-		
+
 	local anchor, panel, xoff, yoff = T.DataTextTooltipAnchor(Text)
 	GameTooltip:SetOwner(panel, anchor, xoff, yoff)
 	GameTooltip:ClearLines()
 	GameTooltip:AddDoubleLine(string.format(guildInfoString, GetGuildInfo('player'), GetGuildLevel()), string.format(guildInfoString2, L.datatext_guild, online, #guildTable),tthead.r,tthead.g,tthead.b,tthead.r,tthead.g,tthead.b)
 	GameTooltip:AddLine(' ')
-	
-	if guildMotD ~= "" then GameTooltip:AddLine(string.format(guildMotDString, GUILD_MOTD, guildMotD), ttsubh.r, ttsubh.g, ttsubh.b, 1) end
-	
+
+	if guildMotD ~= "" then GameTooltip:AddLine(string.format(guildMotDString, hexa..GUILD_MOTD..hexb, guildMotD), ttsubh.r, ttsubh.g, ttsubh.b, 1) end
+
 	local col = T.RGBToHex(ttsubh.r, ttsubh.g, ttsubh.b)
 	GameTooltip:AddLine' '
 	if GetGuildLevel() ~= 25 then
 		local currentXP, nextLevelXP, percentTotal = unpack(guildXP[0])
 		local dailyXP, maxDailyXP, percentDaily = unpack(guildXP[1])
-		GameTooltip:AddLine(string.format(col..GUILD_EXPERIENCE_CURRENT, "|r |cFFFFFFFF"..T.ShortValue(currentXP), T.ShortValue(nextLevelXP), percentTotal))
-		GameTooltip:AddLine(string.format(col..GUILD_EXPERIENCE_DAILY, "|r |cFFFFFFFF"..T.ShortValue(dailyXP), T.ShortValue(maxDailyXP), percentDaily))
+		GameTooltip:AddLine(string.format(col..hexa..GUILD_EXPERIENCE_CURRENT..hexb, "|r |cFFFFFFFF"..T.ShortValue(currentXP), T.ShortValue(nextLevelXP), percentTotal))
+		GameTooltip:AddLine(string.format(col..hexa..GUILD_EXPERIENCE_DAILY..hexb, "|r |cFFFFFFFF"..T.ShortValue(dailyXP), T.ShortValue(maxDailyXP), percentDaily))
 	end
-	
+
 	local _, _, standingID, barMin, barMax, barValue = GetGuildFactionInfo()
 	if standingID ~= 4 then -- Not Max Rep
 		barMax = barMax - barMin
 		barValue = barValue - barMin
 		barMin = 0
-		GameTooltip:AddLine(string.format("%s:|r |cFFFFFFFF%s/%s (%s%%)",col..COMBAT_FACTION_CHANGE, T.ShortValue(barValue), T.ShortValue(barMax), math.ceil((barValue / barMax) * 100)))
+		GameTooltip:AddLine(string.format("%s:|r |cFFFFFFFF%s/%s (%s%%)",col..hexa..COMBAT_FACTION_CHANGE..hexb, T.ShortValue(barValue), T.ShortValue(barMax), math.ceil((barValue / barMax) * 100)))
 	end
-	
+
 	if online > 1 then
 		GameTooltip:AddLine(' ')
 		for i = 1, #guildTable do
@@ -233,7 +192,7 @@ Stat:SetScript("OnEnter", function(self)
 			if connected and name ~= T.myname then
 				if GetRealZoneText() == zone then zonec = activezone else zonec = inactivezone end
 				classc, levelc = (CUSTOM_CLASS_COLORS or RAID_CLASS_COLORS)[class], GetQuestDifficultyColor(level)
-				
+
 				if IsShiftKeyDown() then
 					GameTooltip:AddDoubleLine(string.format(nameRankString, name, rank), zone, classc.r, classc.g, classc.b, zonec.r, zonec.g, zonec.b)
 					if note ~= "" then GameTooltip:AddLine(string.format(noteString, note), ttsubh.r, ttsubh.g, ttsubh.b, 1) end
