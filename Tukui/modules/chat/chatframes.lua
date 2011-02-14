@@ -244,16 +244,14 @@ local function SetupChatPosAndFont(self)
 		if i == 1 then
 			chat:ClearAllPoints()
 			chat:SetFrameStrata("MEDIUM")
-			chat:SetSize(TukuiInfoLeft:GetWidth() - 10, 100)
 			chat:Point("BOTTOMLEFT", TukuiInfoLeft, "TOPLEFT", 4, 5)
-			chat:Point("BOTTOMRIGHT", TukuiInfoLeft, "TOPRIGHT", 4, 5)
+			chat:Point("BOTTOMRIGHT", TukuiInfoLeft, "TOPRIGHT", -4, 5)
 			FCF_SavePositionAndDimensions(chat)
 		elseif i == 4 then
 			if not chat.isDocked then
 				chat:ClearAllPoints()
 				chat:SetFrameStrata("MEDIUM")
-				chat:SetSize(TukuiInfoRight:GetWidth() - 10, 100)
-				chat:Point("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", 4, 5)
+				chat:Point("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", -4, 5)
 				chat:Point("BOTTOMLEFT", TukuiInfoRight, "TOPLEFT", 4, 5)
 				FCF_SavePositionAndDimensions(chat)
 			end

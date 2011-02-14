@@ -82,10 +82,10 @@ local function install()
 			local chatName = FCF_GetChatWindowInfo(chatFrameId)
 			
 			-- set the size of chat frames
-			frame:Size(T.InfoLeftRightWidth + 1, 111)
+			frame:Size(T.InfoLeftRightWidth + 1, 100)
 			
 			-- tell wow that we are using new size
-			SetChatWindowSavedDimensions(chatFrameId, T.Scale(T.InfoLeftRightWidth + 1), T.Scale(111))
+			SetChatWindowSavedDimensions(chatFrameId, T.Scale(T.InfoLeftRightWidth + 1), T.Scale(100))
 			
 			-- move general bottom left or Loot (if found) on right
 			if i == 1 then
