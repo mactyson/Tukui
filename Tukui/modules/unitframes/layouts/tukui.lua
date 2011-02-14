@@ -1,12 +1,12 @@
+local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+if not C["unitframes"].enable == true then return end
+
 local ADDON_NAME, ns = ...
 local oUF = ns.oUF or oUF
 assert(oUF, "Tukui was unable to locate oUF install.")
 
 ns._Objects = {}
 ns._Headers = {}
-
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
-if not C["unitframes"].enable == true then return end
 
 ------------------------------------------------------------------------
 --	local variables
@@ -128,7 +128,7 @@ local function Shared(self, unit)
 
 		-- power
 		local power = CreateFrame('StatusBar', nil, self)
-		power:Height(8)
+		power:Height(5)
 		power:Point("TOPLEFT", health, "BOTTOMLEFT", 0, -6)
 		power:Point("TOPRIGHT", health, "BOTTOMRIGHT", 0, -6)
 		power:SetStatusBarTexture(normTex)
@@ -1070,32 +1070,7 @@ local function Shared(self, unit)
 			health.colorClass = true
 			health.colorReaction = true	
 		end
-		-- power
-		local power = CreateFrame('StatusBar', nil, self)
-		power:Height(2)
-		power:Point("TOPLEFT", health, "BOTTOMLEFT", 0, -1)
-		power:Point("TOPRIGHT", health, "BOTTOMRIGHT", 0, -1)
-		power:SetStatusBarTexture(normTex)
 		
-		power.frequentUpdates = true
-		power.colorPower = true
-		if C["unitframes"].showsmooth == true then
-			power.Smooth = true
-		end
-
-		local powerBG = power:CreateTexture(nil, 'BORDER')
-		powerBG:SetAllPoints(power)
-		powerBG:SetTexture(normTex)
-		powerBG.multiplier = 0.3
-	
-		power.value = T.SetFontString(health, pixelfont, 8, "MONOCHROMEOUTLINE")
-		power.value:Point("LEFT", 2, 0)
-		power.PreUpdate = T.PreUpdatePower
-		power.PostUpdate = T.PostUpdatePower
-				
-		self.Power = power
-		self.Power.bg = powerBG
-			
 		-- names
 		local Name = health:CreateFontString(nil, "OVERLAY")
 		Name:SetPoint("CENTER", health, "CENTER", 0, 0)
@@ -1123,8 +1098,8 @@ local function Shared(self, unit)
 		
 		local castbar = CreateFrame("StatusBar", self:GetName().."CastBar", self)
 		castbar:SetPoint("LEFT", -0, 0)
-		castbar:SetPoint("RIGHT", -14, 0)
-		castbar:SetPoint("BOTTOM", 0, -14)
+		castbar:SetPoint("RIGHT", 0, 0)
+		castbar:SetPoint("BOTTOM", 0, -16)
 		
 		castbar:SetHeight(8)
 		castbar:SetStatusBarTexture(normTex)
@@ -1152,23 +1127,9 @@ local function Shared(self, unit)
 		castbar.CustomDelayText = T.CustomCastDelayText
 		castbar.PostCastStart = T.CheckCast
 		castbar.PostChannelStart = T.CheckChannel
-								
-		castbar.button = CreateFrame("Frame", nil, castbar)
-		castbar.button:Height(castbar:GetHeight()+4)
-		castbar.button:Width(castbar:GetHeight()+4)
-		castbar.button:Point("LEFT", castbar, "RIGHT", 4, 0)
-		T.SetTemplate(castbar.button)
-		T.CreateShadow(castbar.button)
-		castbar.button:SetTemplate("Hydra")
-		castbar.button:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
-		castbar.icon = castbar.button:CreateTexture(nil, "ARTWORK")
-		castbar.icon:Point("TOPLEFT", castbar.button, 2, -2)
-		castbar.icon:Point("BOTTOMRIGHT", castbar.button, -2, 2)
-		castbar.icon:SetTexCoord(0.08, 0.92, 0.08, .92)
 
 		self.Castbar = castbar
 		self.Castbar.Time = castbar.time
-		self.Castbar.Icon = castbar.icon
 	end
 	
 	------------------------------------------------------------------------
@@ -1226,33 +1187,7 @@ local function Shared(self, unit)
 			health.colorClass = true
 			health.colorReaction = true	
 		end
-	
-		-- power
-		local power = CreateFrame('StatusBar', nil, self)
-		power:Height(2)
-		power:Point("TOPLEFT", health, "BOTTOMLEFT", 0, -1)
-		power:Point("TOPRIGHT", health, "BOTTOMRIGHT", 0, -1)
-		power:SetStatusBarTexture(normTex)
-		
-		power.frequentUpdates = true
-		power.colorPower = true
-		if C["unitframes"].showsmooth == true then
-			power.Smooth = true
-		end
 
-		local powerBG = power:CreateTexture(nil, 'BORDER')
-		powerBG:SetAllPoints(power)
-		powerBG:SetTexture(normTex)
-		powerBG.multiplier = 0.3
-		
-		power.value = T.SetFontString(health, pixelfont, 8, "OUTLINEMONOCHROME")
-		power.value:Point("LEFT", 2, 0)
-		power.PreUpdate = T.PreUpdatePower
-		power.PostUpdate = T.PostUpdatePower
-				
-		self.Power = power
-		self.Power.bg = powerBG
-		
 		-- names
 		local Name = health:CreateFontString(nil, "OVERLAY")
 		Name:SetPoint("CENTER", health, "CENTER", 0, 0)
@@ -1280,8 +1215,8 @@ local function Shared(self, unit)
 		
 		local castbar = CreateFrame("StatusBar", self:GetName().."CastBar", self)
 		castbar:SetPoint("LEFT", -0, 0)
-		castbar:SetPoint("RIGHT", -14, 0)
-		castbar:SetPoint("BOTTOM", 0, -14)
+		castbar:SetPoint("RIGHT", 0, 0)
+		castbar:SetPoint("BOTTOM", 0, -16)
 		
 		castbar:SetHeight(8)
 		castbar:SetStatusBarTexture(normTex)
@@ -1307,21 +1242,9 @@ local function Shared(self, unit)
 		castbar.CustomDelayText = T.CustomCastDelayText
 		castbar.PostCastStart = T.CheckCast
 		castbar.PostChannelStart = T.CheckChannel
-								
-		castbar.button = CreateFrame("Frame", nil, castbar)
-		castbar.button:Height(castbar:GetHeight()+4)
-		castbar.button:Width(castbar:GetHeight()+4)
-		castbar.button:Point("LEFT", castbar, "RIGHT", 4, 0)
-		castbar.button:SetTemplate("Hydra")
-		castbar.button:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
-		castbar.icon = castbar.button:CreateTexture(nil, "ARTWORK")
-		castbar.icon:Point("TOPLEFT", castbar.button, 2, -2)
-		castbar.icon:Point("BOTTOMRIGHT", castbar.button, -2, 2)
-		castbar.icon:SetTexCoord(0.08, 0.92, 0.08, .92)
 
 		self.Castbar = castbar
 		self.Castbar.Time = castbar.time
-		self.Castbar.Icon = castbar.icon
 	end
 
 	------------------------------------------------------------------------
@@ -1630,8 +1553,8 @@ player:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", 2, 61)
 
 -- focus
 local focus = oUF:Spawn('focus', "TukuiFocus")
-focus:SetPoint("BOTTOMLEFT", TukuiPlayer, "TOPLEFT", 0, -62)
-    focus:Size(185, 15)
+focus:SetPoint("BOTTOMLEFT", TukuiPlayer, "TOPLEFT", 0, -58)
+    focus:Size(185, 12)
 
 -- target
 local target = oUF:Spawn('target', "TukuiTarget")
@@ -1651,8 +1574,8 @@ pet:SetPoint("BOTTOM", InvTukuiActionBarBackground, "TOP", 0,105)
 -- focus target
 if C.unitframes.showfocustarget then	
 local focustarget = oUF:Spawn("focustarget", "TukuiFocusTarget")
-focustarget:SetPoint("BOTTOMRIGHT", TukuiTarget, "TOPRIGHT", 0, -62)
-    focustarget:Size(185, 15)
+focustarget:SetPoint("BOTTOMRIGHT", TukuiTarget, "TOPRIGHT", 0, -58)
+    focustarget:Size(185, 12)
 end
 
 if C.arena.unitframes then

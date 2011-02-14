@@ -1,7 +1,7 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 
 local TukuiBar1 = CreateFrame("Frame", "TukuiBar1", UIParent, "SecureHandlerStateTemplate")
-TukuiBar1:CreatePanel("Default", 1, 1, "BOTTOM", UIParent, "BOTTOM", 0, 10)
+TukuiBar1:CreatePanel("Default", 1, 1, "BOTTOM", UIParent, "BOTTOM", 0, 7)
 TukuiBar1:SetWidth((T.buttonsize * 12) + (T.buttonspacing * 13))
 TukuiBar1:SetHeight((T.buttonsize * 2) + (T.buttonspacing * 3))
 TukuiBar1:SetFrameStrata("BACKGROUND")
@@ -9,7 +9,7 @@ TukuiBar1:SetFrameLevel(1)
 T.CreateShadow(TukuiBar1)
 
 local TukuiBar2 = CreateFrame("Frame", "TukuiBar2", UIParent)
-TukuiBar2:CreatePanel("Default", 1, 1, "BOTTOMRIGHT", TukuiBar1, "BOTTOMLEFT", -6, 0)
+TukuiBar2:CreatePanel("Default", 1, 1, "BOTTOMRIGHT", TukuiBar1, "BOTTOMLEFT", -10, 0)
 TukuiBar2:SetWidth((T.buttonsize * 6) + (T.buttonspacing * 7))
 TukuiBar2:SetHeight((T.buttonsize * 2) + (T.buttonspacing * 3))
 TukuiBar2:SetFrameStrata("BACKGROUND")
@@ -17,7 +17,7 @@ TukuiBar2:SetFrameLevel(2)
 T.CreateShadow(TukuiBar2)
 
 local TukuiBar3 = CreateFrame("Frame", "TukuiBar3", UIParent)
-TukuiBar3:CreatePanel("Default", 1, 1, "BOTTOMLEFT", TukuiBar1, "BOTTOMRIGHT", 6, 0)
+TukuiBar3:CreatePanel("Default", 1, 1, "BOTTOMLEFT", TukuiBar1, "BOTTOMRIGHT", 10, 0)
 TukuiBar3:SetWidth((T.buttonsize * 6) + (T.buttonspacing * 7))
 TukuiBar3:SetHeight((T.buttonsize * 2) + (T.buttonspacing * 3))
 TukuiBar3:SetFrameStrata("BACKGROUND")
@@ -25,7 +25,7 @@ TukuiBar3:SetFrameLevel(2)
 T.CreateShadow(TukuiBar3)
 
 local TukuiBar4 = CreateFrame("Frame", "TukuiBar4", UIParent)
-TukuiBar4:CreatePanel("Default", 1, 1, "BOTTOM", UIParent, "BOTTOM", 0, 10)
+TukuiBar4:CreatePanel("Default", 1, 1, "BOTTOM", UIParent, "BOTTOM", 0, 7)
 TukuiBar4:SetWidth((T.buttonsize * 12) + (T.buttonspacing * 13))
 TukuiBar4:SetHeight((T.buttonsize * 2) + (T.buttonspacing * 3))
 TukuiBar4:SetFrameStrata("BACKGROUND")
@@ -142,14 +142,14 @@ if C.chat.background then movechat = 10 ileftlv:SetAlpha(0) irightlv:SetAlpha(0)
 
 -- INFO LEFT (FOR STATS)
 local ileft = CreateFrame("Frame", "TukuiInfoLeft", TukuiBar1)
-ileft:CreatePanel("Default", T.InfoLeftRightWidth, 20, "BOTTOMLEFT", UIParent, "BOTTOMLEFT", T.Scale(10), T.Scale(10))
+ileft:CreatePanel("Default", T.InfoLeftRightWidth, 20, "BOTTOMLEFT", UIParent, "BOTTOMLEFT", T.Scale(10), T.Scale(7))
 ileft:SetFrameLevel(2)
 ileft:SetFrameStrata("BACKGROUND")
 T.CreateShadow(ileft)
 
 -- INFO RIGHT (FOR STATS)
 local iright = CreateFrame("Frame", "TukuiInfoRight", TukuiBar1)
-iright:CreatePanel("Default", T.InfoLeftRightWidth, 20, "BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", T.Scale(-10), T.Scale(10))
+iright:CreatePanel("Default", T.InfoLeftRightWidth, 20, "BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", T.Scale(-10), T.Scale(7))
 iright:SetFrameLevel(2)
 iright:SetFrameStrata("BACKGROUND")
 T.CreateShadow(iright)
@@ -208,6 +208,19 @@ if C.chat.background then
 	ltoabr2:Point("BOTTOMRIGHT", chatrightbg, "BOTTOMLEFT", 15, 16)
 	ltoabr2:Hide()
 end
+
+-- connects left and right bars to bar1
+local connectbarl = CreateFrame("Frame", "TukuiConnectBarl", TukuiBar2)
+	connectbarl:CreatePanel("Transparent", 15, 30, "RIGHT", TukuiBar2, "RIGHT", 12, 0)
+	connectbarl:SetFrameStrata("BACKGROUND")
+    connectbarl:SetFrameLevel(1)
+	connectbarl:SetBorder()
+	
+local connectbar2= CreateFrame("Frame", "TukuiConnectBar2", TukuiBar3)
+	connectbar2:CreatePanel("Transparent", 15, 30, "LEFT", TukuiBar3, "LEFT", -12, 0)
+	connectbar2:SetFrameStrata("BACKGROUND")
+    connectbar2:SetFrameLevel(1)
+	connectbar2:SetBorder()
 
 -- BOTTOM BAR
 local tbottombar = CreateFrame("Frame", "TukuiBottomBar", UIParent)

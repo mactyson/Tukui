@@ -97,11 +97,13 @@ local function MoveButtonBar(button, bar)
 		if bar:IsShown() then
 			db.hidebar2 = false
 			button:ClearAllPoints()
+			button:SetBorder()
 			button:Point("BOTTOMRIGHT", TukuiBar2, "BOTTOMLEFT", -2, 0)
 			button.text:SetText(hexa..">"..hexb)
 		else
 			db.hidebar2 = true
 			button:ClearAllPoints()
+			button:SetBorder()
 			button:Point("BOTTOMRIGHT", TukuiBar1, "BOTTOMLEFT", -2, 0)
 			button.text:SetText(hexa.."<"..hexb)
 		end
@@ -111,11 +113,13 @@ local function MoveButtonBar(button, bar)
 		if bar:IsShown() then
 			db.hidebar3 = false
 			button:ClearAllPoints()
+			button:SetBorder()
 			button:Point("BOTTOMLEFT", TukuiBar3, "BOTTOMRIGHT", 2, 0)
 			button.text:SetText(hexa.."<"..hexb)
 		else
 			db.hidebar3 = true
 			button:ClearAllPoints()
+			button:SetBorder()
 			button:Point("BOTTOMLEFT", TukuiBar1, "BOTTOMRIGHT", 2, 0)
 			button.text:SetText(hexa..">"..hexb)
 		end
@@ -124,10 +128,10 @@ local function MoveButtonBar(button, bar)
 	if button == TukuiBar4Button then
 		if bar:IsShown() then
 			db.hidebar4 = false
-			button.text:SetText(hexa.."- - - - - -"..hexb)
+			button.text:SetText(hexa.."- - - - - - - - - - "..hexb)
 		else
 			db.hidebar4 = true
-			button.text:SetText(hexa.."+ + + + + +"..hexb)
+			button.text:SetText(hexa.."+ + + + + + + + + +"..hexb)
 		end
 	end
 
@@ -137,10 +141,12 @@ local function MoveButtonBar(button, bar)
 		if bar:IsShown() then
 			db.hidebar5 = false
 			buttontop:ClearAllPoints()
+			buttontop:SetBorder()
 			buttontop:Size(bar:GetWidth(), 17)
 			buttontop:Point("BOTTOM", bar, "TOP", 0, 2)
 			if not T.lowversion then buttontop.text:SetText(hexa..">"..hexb) end
 			buttonbot:ClearAllPoints()
+			buttontop:SetBorder()
 			buttonbot:Size(bar:GetWidth(), 17)
 			buttonbot:Point("TOP", bar, "BOTTOM", 0, -2)
 			if not T.lowversion then buttonbot.text:SetText(hexa..">"..hexb) end
@@ -151,10 +157,12 @@ local function MoveButtonBar(button, bar)
 		else
 			db.hidebar5 = true
 			buttonbot:ClearAllPoints()
+			buttonbot:SetBorder()
 			buttonbot:SetSize(TukuiLineToPetActionBarBackground:GetWidth(), TukuiLineToPetActionBarBackground:GetHeight())
 			buttonbot:Point("LEFT", TukuiPetBar, "RIGHT", 2, 0)
 			if not T.lowversion then buttonbot.text:SetText(hexa.."<"..hexb) end
 			buttontop:ClearAllPoints()
+			buttontop:SetBorder()
 			buttontop:SetSize(TukuiLineToPetActionBarBackground:GetWidth(), TukuiLineToPetActionBarBackground:GetHeight())
 			buttontop:Point("LEFT", TukuiPetBar, "RIGHT", 2, 0)
 			if not T.lowversion then buttontop.text:SetText(hexa.."<"..hexb) end
@@ -178,6 +186,7 @@ end
 
 local TukuiBar2Button = CreateFrame("Button", "TukuiBar2Button", UIParent)
 TukuiBar2Button:Width(17)
+TukuiBar2Button:SetBorder()
 TukuiBar2Button:SetHeight(TukuiBar2:GetHeight())
 if T.lowversion then
 	TukuiBar2Button:Point("BOTTOMRIGHT", TukuiBar1, "BOTTOMLEFT", 2, 0)
@@ -196,6 +205,7 @@ TukuiBar2Button.text:SetText(hexa..">"..hexb)
 
 local TukuiBar3Button = CreateFrame("Button", "TukuiBar3Button", UIParent)
 TukuiBar3Button:Width(17)
+TukuiBar3Button:SetBorder()
 TukuiBar3Button:SetHeight(TukuiBar3:GetHeight())
 if T.lowversion then
 	TukuiBar3Button:Point("BOTTOMLEFT", TukuiBar1, "BOTTOMRIGHT", 2, 0)
@@ -215,22 +225,24 @@ TukuiBar3Button.text:SetText(hexa.."<"..hexb)
 local TukuiBar4Button = CreateFrame("Button", "TukuiBar4Button", UIParent)
 TukuiBar4Button:SetWidth(TukuiBar1:GetWidth())
 TukuiBar4Button:Height(10)
-TukuiBar4Button:Point("TOP", TukuiBar1, "BOTTOM", 0, -2)
+TukuiBar4Button:SetBorder()
+TukuiBar4Button:Point("TOP", TukuiBar1, "BOTTOM", 0, -1)
 TukuiBar4Button:SetTemplate("Default")
 TukuiBar4Button:RegisterForClicks("AnyUp")
 TukuiBar4Button:SetAlpha(0)
 TukuiBar4Button:SetScript("OnClick", function(self) DrPepper(self, TukuiBar4) end)
 TukuiBar4Button:SetScript("OnEnter", function(self) self:SetAlpha(1) end)
 TukuiBar4Button:SetScript("OnLeave", function(self) self:SetAlpha(0) end)
-TukuiBar4Button.text = T.SetFontString(TukuiBar4Button, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
-TukuiBar4Button.text:SetPoint("CENTER", 0, 0)
-TukuiBar4Button.text:SetText(hexa.."- - - - - -"..hexb)
+TukuiBar4Button.text = T.SetFontString(TukuiBar4Button, C.media.pixelfont2, 14, "MONOCHROMEOUTLINE")
+TukuiBar4Button.text:SetPoint("CENTER", 0, 4)
+TukuiBar4Button.text:SetText(hexa.."- - - - - - - - - - "..hexb)
 
 local TukuiBar5ButtonTop = CreateFrame("Button", "TukuiBar5ButtonTop", UIParent)
 TukuiBar5ButtonTop:SetWidth(TukuiBar5:GetWidth())
 TukuiBar5ButtonTop:Height(17)
 TukuiBar5ButtonTop:Point("BOTTOM", TukuiBar5, "TOP", 0, 2)
 TukuiBar5ButtonTop:SetTemplate("Default")
+TukuiBar5ButtonTop:SetBorder()
 TukuiBar5ButtonTop:RegisterForClicks("AnyUp")
 TukuiBar5ButtonTop:SetAlpha(0)
 TukuiBar5ButtonTop:SetScript("OnClick", function(self) DrPepper(self, TukuiBar5) end)
@@ -246,6 +258,7 @@ TukuiBar5ButtonBottom:SetWidth(TukuiBar5:GetWidth())
 TukuiBar5ButtonBottom:Height(17)
 TukuiBar5ButtonBottom:Point("TOP", TukuiBar5, "BOTTOM", 0, -2)
 TukuiBar5ButtonBottom:SetTemplate("Default")
+TukuiBar5ButtonBottom:SetBorder()
 TukuiBar5ButtonBottom:RegisterForClicks("AnyUp")
 TukuiBar5ButtonBottom:SetAlpha(0)
 TukuiBar5ButtonBottom:SetScript("OnClick", function(self) DrPepper(self, TukuiBar5) end)
@@ -261,6 +274,7 @@ vehicleleft:SetAllPoints(TukuiBar2Button)
 vehicleleft:SetFrameStrata(TukuiBar2Button:GetFrameStrata())
 vehicleleft:SetFrameLevel(TukuiBar2Button:GetFrameLevel() + 1)
 vehicleleft:SetTemplate("Default")
+vehicleleft:SetBorder()
 vehicleleft:SetBackdropBorderColor(75/255,  175/255, 76/255)
 vehicleleft:RegisterForClicks("AnyUp")
 vehicleleft:SetScript("OnClick", function() VehicleExit() end)
@@ -273,6 +287,7 @@ RegisterStateDriver(vehicleleft, "visibility", "[target=vehicle,exists] show;hid
 local vehicleright = CreateFrame("Button", "TukuiExitVehicleButtonRight", UIParent, "SecureHandlerClickTemplate")
 vehicleright:SetAllPoints(TukuiBar3Button)
 vehicleright:SetTemplate("Default")
+vehicleleft:SetBorder()
 vehicleright:SetFrameStrata(TukuiBar3Button:GetFrameStrata())
 vehicleright:SetFrameLevel(TukuiBar3Button:GetFrameLevel() + 1)
 vehicleright:SetBackdropBorderColor(75/255,  175/255, 76/255)
