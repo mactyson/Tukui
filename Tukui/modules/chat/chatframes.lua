@@ -46,7 +46,7 @@ _G.ERR_FRIEND_OFFLINE_S = "%s "..L.chat_ERR_FRIEND_OFFLINE_S.."!"
 ----------------------------------------------------------------------------------
 -- Thank you elv for this script, it keep noobs away
 ----------------------------------------------------------------------------------
-if TukuiDB.myname == "Jasje" then
+if T.myname == "Jasje" then
 	local function NOOB_FILTER(self, event, arg1, arg2)
 		if strfind(arg1,"portal") or strfind(arg1,"Portal") or strfind(arg1,"Port") or strfind(arg1,"port") then
 			SendChatMessage("Sorry im busy atm.", "WHISPER", nil, arg2)

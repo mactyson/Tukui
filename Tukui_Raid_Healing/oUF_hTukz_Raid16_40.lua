@@ -306,7 +306,7 @@ oUF:Factory(function(self)
 		
 		local pets = {} 
 			pets[1] = oUF:Spawn('partypet1', 'oUF_TukuiPartyPet1') 
-			pets[1]:Point('TOPLEFT', raid, 'TOPLEFT', 0, 40*C["unitframes"].gridscale*T.raidscale + -10)
+			pets[1]:Point('TOPLEFT', raid, 'TOPLEFT', 0, 40*C["unitframes"].gridscale*T.raidscale + -4)
 			pets[1]:Size(76*C["unitframes"].gridscale*T.raidscale, 20*C["unitframes"].gridscale*T.raidscale)
 		for i =2, 4 do 
 			pets[i] = oUF:Spawn('partypet'..i, 'oUF_TukuiPartyPet'..i) 
