@@ -1,16 +1,17 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 if not C["actionbar"].enable == true then return end
+if C["interface"].style ~= "Jasje" then return end
 
 ---------------------------------------------------------------------------
--- setup MultiBarBottomLeft as bar #2
+-- setup MultiBarLeft as bar #3 
 ---------------------------------------------------------------------------
-local bar = TukuiBar2
-MultiBarLeft:SetParent(bar)
 
--- setup the bar
-for i=1, 12 do
-	local b = _G["MultiBarLeftButton"..i]
-	local b2 = _G["MultiBarLeftButton"..i-1]
+local bar = TukuiBar3
+MultiBarBottomRight:SetParent(bar)
+
+for i= 1, 12 do
+	local b = _G["MultiBarBottomRightButton"..i]
+	local b2 = _G["MultiBarBottomRightButton"..i-2]
 	b:SetSize(T.buttonsize, T.buttonsize)
 	b:ClearAllPoints()
 	b:SetFrameStrata("BACKGROUND")
@@ -25,3 +26,8 @@ for i=1, 12 do
 	end
 end
 
+for i=7, 12 do
+	local b = _G["MultiBarBottomRightButton"..i]
+	local b2 = _G["MultiBarBottomRightButton1"]
+	b:SetFrameLevel(b2:GetFrameLevel() - 2)
+end

@@ -3,11 +3,11 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 local FormatTime = function(s)
 	local day, hour, minute = 86400, 3600, 60
 	if s >= day then
-		return format("|cffeeeeee%d d|r", ceil(s / day))
+		return format("%d"..hexa.." d|r", ceil(s / day))
 	elseif s >= hour then
-		return format("|cffeeeeee%d h|r", ceil(s / hour))
+		return format("%d"..hexa.." h|r", ceil(s / hour))
 	elseif s >= minute then
-		return format("|cffeeeeee%d m|r", ceil(s / minute))
+		return format("%d"..hexa.." m|r", ceil(s / minute))
 	elseif s >= minute / 12 then
 		return floor(s)
 	end

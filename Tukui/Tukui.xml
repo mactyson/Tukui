@@ -56,7 +56,8 @@
 	<Include file="modules\buffs\template.xml"/>
 	<Script file="modules\buffs\buffs.lua"/>
 	<Script file="modules\maps\minimap.lua"/>
-	<Script file="modules\panels\panels.lua"/>
+	<Script file="modules\panels\panelsT.lua"/>
+	<Script file="modules\panels\panelsJ.lua"/>
 	<Script file="modules\datatext\colors.lua"/>
 	<Script file="modules\datatext\armor.lua"/>
 	<Script file="modules\datatext\avoidance.lua"/>
@@ -81,8 +82,10 @@
 	<Script file="modules\actionbars\Bind.lua"/>
 	<Script file="modules\actionbars\Hide.lua"/>
 	<Script file="modules\actionbars\Bar1.lua"/>
-	<Script file="modules\actionbars\Bar2.lua"/>
-	<Script file="modules\actionbars\Bar3.lua"/>
+	<Script file="modules\actionbars\Bar2T.lua"/>
+	<Script file="modules\actionbars\Bar2J.lua"/>
+	<Script file="modules\actionbars\Bar3T.lua"/>
+	<Script file="modules\actionbars\Bar3J.lua"/>
 	<Script file="modules\actionbars\Bar4.lua"/>
 	<Script file="modules\actionbars\Bar5.lua"/>
 	<Script file="modules\actionbars\Bar6.lua"/>
@@ -95,7 +98,8 @@
 	<Script file="modules\actionbars\Range.lua"/>
 	<Script file="modules\actionbars\Others.lua"/>
 	<Script file="modules\actionbars\Cooldowns.lua"/>	
-	<Script file="modules\chat\chatframes.lua"/>
+	<Script file="modules\chat\chatframesT.lua"/>
+	<Script file="modules\chat\chatframesJ.lua"/>
 	<Script file="modules\chat\telltarget.lua"/>
 	<Script file="modules\chat\copychat.lua"/>
 	<Script file="modules\chat\mousescroll.lua"/>
@@ -114,9 +118,12 @@
 	<Include file="modules\unitframes\templates\tankassist.xml"/>
 	<Script file="modules\unitframes\tags\tags.lua"/>
 	<Script file="modules\unitframes\layouts\tukui.lua"/>
+	<Script file="modules\unitframes\layouts\jasje.lua"/>
 	<Script file="modules\notifications\hunterpethappiness.lua"/>	
-	<Script file="modules\misc\altpowerbar.lua"/>
-	<Script file="modules\misc\threatbar.lua"/>
+	<Script file="modules\misc\altpowerbarT.lua"/>
+	<Script file="modules\misc\altpowerbarJ.lua"/>
+	<Script file="modules\misc\threatbarT.lua"/>
+	<Script file="modules\misc\threatbarJ.lua"/>
 	<Script file="modules\blizzard\achievements.lua"/>
 	<Script file="modules\extra\extra.lua"/>
 	<Script file="core\movers.lua"/>

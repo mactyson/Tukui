@@ -55,6 +55,10 @@ C["unitframes"] = {
 	["classbar"] = true,                                -- enable tukui classbar over player unit
 }
 
+C["interface"] = {                               -- changes heal raid layout, chatbackground and much more
+    ["style"]  = "Jasje",                        -- interface style, Jasje is very minimal, Tukui is much more
+}	
+
 C["arena"] = {
 	["unitframes"] = true,                              -- enable tukz arena unitframes (requirement : tukui unitframes enabled)
 }
@@ -117,7 +121,7 @@ C["datatext"] = { -- number 7 can only be used when chat.background is enabled
 	["gold"] = 6,                                       -- show your current gold on panels
 	["wowtime"] = 1,                                    -- show time on panels
 	["guild"] = 3,                                      -- show number on guildmate connected on panels
-	["dur"] = 7,                                        -- show your equipment durability on panels.
+	["dur"] = 0,                                        -- show your equipment durability on panels.
 	["friends"] = 2,                                    -- show number of friends connected.
 	["dps_text"] = 0,                                   -- show a dps meter on panels
 	["hps_text"] = 0,                                   -- show a heal meter on panels
@@ -137,8 +141,8 @@ C["datatext"] = { -- number 7 can only be used when chat.background is enabled
 	["localtime"] = false,                              -- set time to local time instead of server time.
 	
 	-- Color Datatext
-	["classcolor"] = true,                -- classcolored datatexts (these control databars too)
-	["color"] = "|cff808080",              -- datatext color if classcolor = false (|cffFFFFFF = white)
+	["classcolor"] = false,                -- classcolored datatexts 
+	["color"] = "|cff808080",              -- datatext color if classcolor = false
 
 	["fontsize"] = 14,                     -- font size for panels.
 	["fontflag"] = "OUTLINEMONOCHROME",             -- font ouline   
@@ -148,9 +152,9 @@ C["chat"] = {
 	["enable"] = true,                                  -- blah
 	["whispersound"] = true,                            -- play a sound when receiving whisper
 	["background"] = true,                             -- chat backdrop
-	["tabcolor"] = {105,105,105},              -- color of chat tabs, disabled if classcolor is true
+	["tabcolor"] = {150/255, 150/255, 150/255},              -- color of chat tabs, disabled if classcolor is true
 	["tabmouseover"] = {1,1,1,1},          -- color of tabs on mouse-over
-	["classcolortab"] = true,             -- color chat tabs based on class
+	["classcolortab"] = false,             -- color chat tabs based on class
 }
 
 C["nameplate"] = {

@@ -1,6 +1,6 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 if not C["unitframes"].enable == true then return end
-if C["interface"].style ~= "Tukui" then return end
+if C["interface"].style ~= "Jasje" then return end
 
 local ADDON_NAME, ns = ...
 local oUF = ns.oUF or oUF
@@ -74,7 +74,7 @@ local function Shared(self, unit)
 	if (unit == "player" or unit == "target") then
 		-- create a panel
 		local panel = CreateFrame("Frame", nil, self)
-		panel:CreatePanel("Default", 250, 15, "BOTTOM", self, "BOTTOM", 0, -3)
+		panel:CreatePanel("Default", 250, 15, "BOTTOM", self, "BOTTOM", 0, 0)
 		panel:SetFrameLevel(2)
 		panel:SetFrameStrata("MEDIUM")
 		panel:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
@@ -83,7 +83,7 @@ local function Shared(self, unit)
 	
 		-- health bar
 		local health = CreateFrame('StatusBar', nil, self)
-		health:Height(26)
+		health:Height(32)
 		health:SetPoint("TOPLEFT")
 		health:SetPoint("TOPRIGHT")
 		health:SetStatusBarTexture(normTex)
@@ -130,18 +130,23 @@ local function Shared(self, unit)
 
 		-- power
 		local power = CreateFrame('StatusBar', nil, self)
-		power:Height(5)
-		power:Point("TOPLEFT", health, "BOTTOMLEFT", 0, -6)
-		power:Point("TOPRIGHT", health, "BOTTOMRIGHT", 0, -6)
+		power:Size(100, 5)
+		if unit == "player" then
+			power:Point("RIGHT", health, "BOTTOMRIGHT", -10, -2)
+		elseif unit == "target" then
+			power:Point("LEFT", health, "BOTTOMLEFT", 10, -2)
+		end
+		power:SetFrameLevel(4)
 		power:SetStatusBarTexture(normTex)
 		
 		-- power border
 		local powerborder = CreateFrame("Frame", nil, self)
-		T.CreatePanel(powerborder, 1, 1, "CENTER", health, "CENTER", 0, 0)
+		powerborder:CreatePanel("Hydra", 1, 1, "CENTER", power, "CENTER", 0, 0)
 		powerborder:ClearAllPoints()
 		powerborder:SetPoint("TOPLEFT", power, T.Scale(-2), T.Scale(2))
 		powerborder:SetPoint("BOTTOMRIGHT", power, T.Scale(2), T.Scale(-2))
 		powerborder:SetFrameStrata("MEDIUM")
+		powerborder:SetFrameLevel(4)
 		T.CreateShadow(powerborder)
 		self.powerborder = powerborder
 		
@@ -201,7 +206,7 @@ local function Shared(self, unit)
 				portrait:SetPoint("TOPLEFT", health, "TOPRIGHT", 7,0)
 				portrait:SetPoint("BOTTOMLEFT", power, "BOTTOMRIGHT", 7,0)
 			end
-			-- table.insert(self.__elements, TukuiDB.HidePortrait)
+			-- table.insert(self.__elements, T.HidePortrait)
 			self.Portrait = portrait
 			
 			-- Portrait Border
@@ -223,34 +228,7 @@ local function Shared(self, unit)
 			
 			self.WeakenedSoul = ws
 		end
-		
-		--[[ leaving here just in case someone want to use it, we now use our own Alt Power Bar.
-		-- alt power bar
-		local AltPowerBar = CreateFrame("StatusBar", self:GetName().."_AltPowerBar", self.Health)
-		AltPowerBar:SetFrameLevel(0)
-		AltPowerBar:SetFrameStrata("LOW")
-		AltPowerBar:SetHeight(5)
-		AltPowerBar:SetStatusBarTexture(C.media.normTex)
-		AltPowerBar:GetStatusBarTexture():SetHorizTile(false)
-		AltPowerBar:SetStatusBarColor(163/255,  24/255,  24/255)
-		AltPowerBar:EnableMouse(true)
 
-		AltPowerBar:Point("LEFT", TukuiInfoLeft, 2, -2)
-		AltPowerBar:Point("RIGHT", TukuiInfoLeft, -2, 2)
-		AltPowerBar:Point("TOP", TukuiInfoLeft, 2, -2)
-		AltPowerBar:Point("BOTTOM", TukuiInfoLeft, -2, 2)
-		
-		AltPowerBar:SetBackdrop({
-			bgFile = C["media"].blank, 
-			edgeFile = C["media"].blank, 
-			tile = false, tileSize = 0, edgeSize = 1, 
-			insets = { left = 0, right = 0, top = 0, bottom = T.Scale(-1)}
-		})
-		AltPowerBar:SetBackdropColor(0, 0, 0)
-
-		self.AltPowerBar = AltPowerBar
-		--]]
-			
 		if (unit == "player") then
 
 			-- custom info (low mana warning)
@@ -425,7 +403,7 @@ local function Shared(self, unit)
 					Runes[i].border:SetFrameStrata("BACKGROUND")
 					T.SetTemplate(Runes[i].border)
 					Runes[i].border:SetBackdropColor( 0,0,0,1 )
-					TukuiDB.CreateShadow(Runes[i].border)
+					T.CreateShadow(Runes[i].border)
 					
                 end
 
@@ -439,9 +417,9 @@ local function Shared(self, unit)
 				for i = 1, 4 do
 					TotemBar[i] = CreateFrame("StatusBar", self:GetName().."_TotemBar"..i, self)
 					if (i == 1) then
-						TotemBar[i]:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, TukuiDB.Scale(6))
+						TotemBar[i]:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, T.Scale(6))
 					else
-					   TotemBar[i]:SetPoint("TOPLEFT", TotemBar[i-1], "TOPRIGHT", TukuiDB.Scale(7), 0)
+					   TotemBar[i]:SetPoint("TOPLEFT", TotemBar[i-1], "TOPRIGHT", T.Scale(7), 0)
 					end
 					TotemBar[i]:SetStatusBarTexture(normTex)
 					TotemBar[i]:SetHeight(T.Scale(5))
@@ -763,17 +741,15 @@ local function Shared(self, unit)
 	------------------------------------------------------------------------
 	
 	if (unit == "targettarget") then
-		-- create panel if higher version
-		local panel = CreateFrame("Frame", nil, self)
-		if not T.lowversion then
-			panel:CreatePanel("Default", 129, 17, "BOTTOM", self, "BOTTOM", 0, T.Scale(0))
-			panel:SetFrameLevel(2)
-			panel:SetFrameStrata("MEDIUM")
-			panel:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
-			self.panel = panel
-			self.panel:Hide()
-		end
-		
+	    -- health bar
+		local health = CreateFrame('StatusBar', nil, self)
+		health:Height(26)
+		health:SetPoint("TOPLEFT")
+		health:SetPoint("TOPRIGHT")
+		health:SetStatusBarTexture(normTex)
+		health:SetFrameLevel(4)
+		health:SetFrameStrata("MEDIUM")
+
 		-- border 
 	    local Healthbg = CreateFrame("Frame", nil, self)
 	    Healthbg:SetPoint("TOPLEFT", self, "TOPLEFT", T.Scale(-2), T.Scale(2))
@@ -781,15 +757,8 @@ local function Shared(self, unit)
 	    T.SetTemplate(Healthbg)
 		T.CreateShadow(Healthbg)
 	    Healthbg:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
-	    Healthbg:SetFrameLevel(2)
+	    Healthbg:SetFrameLevel(4)
 	    self.Healthbg = Healthbg
-		
-		-- health bar
-		local health = CreateFrame('StatusBar', nil, self)
-		health:Height(20)
-		health:SetPoint("TOPLEFT")
-		health:SetPoint("TOPRIGHT")
-		health:SetStatusBarTexture(normTex)
 		
 		local healthBG = health:CreateTexture(nil, 'BORDER')
 		healthBG:SetAllPoints()
@@ -816,18 +785,20 @@ local function Shared(self, unit)
 		
 		-- power
 		local power = CreateFrame('StatusBar', nil, self)
-		power:SetHeight(T.Scale(5))
-		power:SetPoint("TOPLEFT", health, "BOTTOMLEFT", 0, -6)
-		power:SetPoint("TOPRIGHT", health, "BOTTOMRIGHT", 0, -6)
+		power:Size(110, 25)
+        power:Point("CENTER", health, "BOTTOM", -0, 4)
+		power:SetFrameLevel(4)
+		power:SetFrameStrata("BACKGROUND")
 		power:SetStatusBarTexture(normTex)
 		
 		-- power border 
 		local powerborder = CreateFrame("Frame", nil, self)
-		T.CreatePanel(powerborder, 1, 1, "CENTER", health, "CENTER", 0, 0)
+		powerborder:CreatePanel("Default", 1, 1, "CENTER", power, "CENTER", 0, 0)
 		powerborder:ClearAllPoints()
-		powerborder:SetPoint("TOPLEFT", power, T.Scale(-2), T.Scale(2))
-		powerborder:SetPoint("BOTTOMRIGHT", power, T.Scale(2), T.Scale(-2))
-		powerborder:SetFrameStrata("MEDIUM")
+		powerborder:Point("TOPLEFT", power, -2, 2)
+		powerborder:Point("BOTTOMRIGHT", power, 2, -2)
+		powerborder:SetFrameStrata("BACKGROUND")
+		power:SetFrameLevel(4)
 		T.CreateShadow(powerborder)
 		
 		local powerBG = power:CreateTexture(nil, 'BORDER')
@@ -1550,7 +1521,7 @@ oUF:RegisterStyle('Tukui', Shared)
 -- player
 local player = oUF:Spawn('player', "TukuiPlayer")
 player:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", 2, 61)
-	player:Size(250, 20)
+	player:Size(220, 26)
 
 
 -- focus
@@ -1561,12 +1532,12 @@ focus:SetPoint("BOTTOMLEFT", TukuiPlayer, "TOPLEFT", 0, -58)
 -- target
 local target = oUF:Spawn('target', "TukuiTarget")
 target:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", -2 ,61)
-	target:Size(250, 20)
+	target:Size(220, 26)
 
 -- tot
 local tot = oUF:Spawn('targettarget', "TukuiTargetTarget")
-tot:SetPoint("TOP", TukuiTarget, "BOTTOM", -65,40)
-	tot:Size(130, 20)
+tot:SetPoint("BOTTOM", InvTukuiActionBarBackground, "TOP", -0,60)
+	tot:Size(100, 26)
 
 -- pet
 local pet = oUF:Spawn('pet', "oUF_Tukz_pet")

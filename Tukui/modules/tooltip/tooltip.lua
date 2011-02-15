@@ -36,7 +36,7 @@ if C.chat.background and TukuiChatBackgroundRight then
 else
 	anchor:SetPoint("BOTTOMRIGHT", TukuiInfoRight)
 end
-anchor:SetTemplate("Default")
+anchor:SetTemplate("Hydra")
 anchor:SetBackdropBorderColor(1, 0, 0, 1)
 anchor:SetMovable(true)
 anchor.text = T.SetFontString(anchor, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")

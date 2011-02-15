@@ -7,3 +7,4 @@
 ## RequiredDeps: Tukui
 
 oUF_hTukz_Raid16_40.lua
+oUF_hTukz_Raid16_40J.lua

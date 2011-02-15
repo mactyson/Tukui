@@ -1,5 +1,6 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 if C["chat"].enable ~= true then return end
+if C["interface"].style ~= "Jasje" then return end
 
 -----------------------------------------------------------------------
 -- SETUP TUKUI CHATS
@@ -96,14 +97,12 @@ local function SetChatStyle(frame)
 		end
 	end
 	
-	if not C.chat.background then
-		-- hide text when setting chat
-		_G[chat.."TabText"]:Hide()
-		
-		-- now show text if mouse is found over tab.
-		tab:HookScript("OnEnter", function() _G[chat.."TabText"]:Show() end)
-		tab:HookScript("OnLeave", function() _G[chat.."TabText"]:Hide() end)
-	end
+	-- hide text when setting chat
+	_G[chat.."TabText"]:Hide()
+	
+	-- now show text if mouse is found over tab.
+	tab:HookScript("OnEnter", function() _G[chat.."TabText"]:Show() end)
+	tab:HookScript("OnLeave", function() _G[chat.."TabText"]:Hide() end)
 	
 	-- yeah baby
 	_G[chat]:SetClampRectInsets(0,0,0,0)
@@ -255,15 +254,6 @@ local function SetupChatPosAndFont(self)
 				chat:Point("BOTTOMLEFT", TukuiInfoRight, "TOPLEFT", 4, 5)
 				FCF_SavePositionAndDimensions(chat)
 			end
-		end
-
-		--Check if chat exists in the bottomright corner
-		if C.chat.background == true and point == "BOTTOMRIGHT" and chat:IsShown() then
-			TukuiChatBackgroundRight:Show()
-			TukuiTabsRightBackground:Show()
-			TukuiLineToABRightAlt:ClearAllPoints()
-			TukuiLineToABRightAlt:Point("LEFT", TukuiBar1, "RIGHT", 0, 16)
-			TukuiLineToABRightAlt:Point("BOTTOMRIGHT", TukuiChatBackgroundRight, "BOTTOMLEFT", 0, 16)			
 		end
 	end
 			

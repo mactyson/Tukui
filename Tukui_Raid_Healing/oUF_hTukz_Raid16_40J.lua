@@ -7,7 +7,7 @@ ns._Headers = {}
 
 local T, C, L = unpack(Tukui) -- Import: T - functions, constants, variables; C - config; L - locales
 if not C["unitframes"].enable == true then return end
-if C["interface"].style ~= "Tukui" then return end
+if C["interface"].style ~= "Jasje" then return end
 
 local font2 = C["media"].uffont
 local font1 = C["media"].font
@@ -28,7 +28,7 @@ local function Shared(self, unit)
 	local health = CreateFrame('StatusBar', nil, self)
 	health:SetPoint("TOPLEFT")
 	health:SetPoint("TOPRIGHT")
-	health:Height(21*C["unitframes"].gridscale*T.raidscale)
+	health:Height(30*C["unitframes"].gridscale*T.raidscale)
 	health:SetStatusBarTexture(normTex)
 	self.Health = health
 	
@@ -56,10 +56,10 @@ local function Shared(self, unit)
 	
 	-- border
 	local Healthbg = CreateFrame("Frame", nil, self)
-	Healthbg:SetPoint("TOPLEFT", self, "TOPLEFT", T.Scale(-2), T.Scale(2))
-	Healthbg:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", T.Scale(2), T.Scale(-3))
-	T.SetTemplate(Healthbg)
-	T.CreateShadow(Healthbg)
+	Healthbg:Point("TOPLEFT", self, "TOPLEFT", T.Scale(-2), T.Scale(2))
+	Healthbg:Point("BOTTOMRIGHT", self, "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
+	Healthbg:SetTemplate("Hydra")
+	Healthbg:CreateShadow("Hydra")
 	Healthbg:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
 	Healthbg:SetFrameLevel(2)
 	self.Healthbg = Healthbg
@@ -79,41 +79,6 @@ local function Shared(self, unit)
 	
 	self:SetScript("OnLeave", function(self) Healthbg.shadow:Hide() end)
 	-- end hydra glow
-		
-	local power = CreateFrame("StatusBar", nil, self)
-	power:SetHeight(3*C["unitframes"].gridscale*T.raidscale)
-	power:Point("TOPLEFT", self.Health, "BOTTOMLEFT", 0, -6)
-	power:Point("TOPRIGHT", self.Health, "BOTTOMRIGHT", 0, -6)
-	power:SetStatusBarTexture(normTex)
-	self.Power = power
-	
-	-- power border
-	local powerborder = CreateFrame("Frame", nil, self)
-	T.CreatePanel(powerborder, 1, 1, "CENTER", health, "CENTER", 0, 0)
-	powerborder:ClearAllPoints()
-	powerborder:SetPoint("TOPLEFT", power, T.Scale(-2), T.Scale(2))
-	powerborder:SetPoint("BOTTOMRIGHT", power, T.Scale(2), T.Scale(-2))
-	powerborder:SetFrameStrata("MEDIUM")
-	T.SetTemplate(powerborder)
-	T.CreateShadow(powerborder)
-	self.powerborder = powerborder
-	-- end border
-
-	power.frequentUpdates = true
-	power.colorDisconnected = true
-
-	power.bg = power:CreateTexture(nil, "BORDER")
-	power.bg:SetAllPoints(power)
-	power.bg:SetTexture(normTex)
-	power.bg:SetAlpha(1)
-	power.bg.multiplier = 0.4
-	
-	if C.unitframes.unicolor == true then
-		power.colorClass = true
-		power.bg.multiplier = 0.1				
-	else
-		power.colorPower = true
-	end
 
 	local name = health:CreateFontString(nil, "OVERLAY")
     name:SetPoint("CENTER", health, "CENTER", 0, 1)
@@ -137,7 +102,7 @@ local function Shared(self, unit)
 		self.RaidIcon = RaidIcon
 	end
 	
-	local ReadyCheck = power:CreateTexture(nil, "OVERLAY")
+	local ReadyCheck = health:CreateTexture(nil, "OVERLAY")
 	ReadyCheck:Height(12*C["unitframes"].gridscale*T.raidscale)
 	ReadyCheck:Width(12*C["unitframes"].gridscale*T.raidscale)
 	ReadyCheck:SetPoint('CENTER') 	
@@ -163,45 +128,11 @@ local function Shared(self, unit)
 	
 	if C["unitframes"].showsmooth == true then
 		health.Smooth = true
-		power.Smooth = true
 	end
-	
-	if C["unitframes"].healcomm then
-		local mhpb = CreateFrame('StatusBar', nil, self.Health)
-		if C["unitframes"].gridhealthvertical then
-			mhpb:SetOrientation("VERTICAL")
-			mhpb:SetPoint('BOTTOM', self.Health:GetStatusBarTexture(), 'TOP', 0, 0)
-			mhpb:Width(66*C["unitframes"].gridscale*T.raidscale)
-			mhpb:Height(50*C["unitframes"].gridscale*T.raidscale)		
-		else
-			mhpb:SetPoint('TOPLEFT', self.Health:GetStatusBarTexture(), 'TOPRIGHT', 0, 0)
-			mhpb:SetPoint('BOTTOMLEFT', self.Health:GetStatusBarTexture(), 'BOTTOMRIGHT', 0, 0)
-			mhpb:Width(66*C["unitframes"].gridscale*T.raidscale)
-		end				
-		mhpb:SetStatusBarTexture(normTex)
-		mhpb:SetStatusBarColor(0, 1, 0.5, 0.25)
 
-		local ohpb = CreateFrame('StatusBar', nil, self.Health)
-		if C["unitframes"].gridhealthvertical then
-			ohpb:SetOrientation("VERTICAL")
-			ohpb:SetPoint('BOTTOM', mhpb:GetStatusBarTexture(), 'TOP', 0, 0)
-			ohpb:Width(66*C["unitframes"].gridscale*T.raidscale)
-			ohpb:Height(50*C["unitframes"].gridscale*T.raidscale)
-		else
-			ohpb:SetPoint('TOPLEFT', mhpb:GetStatusBarTexture(), 'TOPRIGHT', 0, 0)
-			ohpb:SetPoint('BOTTOMLEFT', mhpb:GetStatusBarTexture(), 'BOTTOMRIGHT', 0, 0)
-			ohpb:Width(6*C["unitframes"].gridscale*T.raidscale)
-		end
-		ohpb:SetStatusBarTexture(normTex)
-		ohpb:SetStatusBarColor(0, 1, 0, 0.25)
-
-		self.HealPrediction = {
-			myBar = mhpb,
-			otherBar = ohpb,
-			maxOverflow = 1,
-		}
-	end
-	
+	if C["unitframes"].gridhealthvertical then
+		ohpb:SetOrientation("VERTICAL")
+    end
 	------------------------------------------------------------------------
 	--      Debuff Highlight
 	------------------------------------------------------------------------
@@ -265,8 +196,8 @@ oUF:Factory(function(self)
 				self:SetWidth(header:GetAttribute('initial-width'))
 				self:SetHeight(header:GetAttribute('initial-height'))
 			]],
-			'initial-width', T.Scale(76*C["unitframes"].gridscale*T.raidscale),
-			'initial-height', T.Scale(20*C["unitframes"].gridscale*T.raidscale),	
+			'initial-width', T.Scale(50*C["unitframes"].gridscale*T.raidscale),
+			'initial-height', T.Scale(30*C["unitframes"].gridscale*T.raidscale),	
 			"showRaid", true,
 			"xoffset", T.Scale(7),
 			"yOffset", T.Scale(-7),
@@ -277,9 +208,9 @@ oUF:Factory(function(self)
 			"maxColumns", 5,
 			"unitsPerColumn", 5,
 			"columnSpacing", T.Scale(15),
-			"columnAnchorPoint", "TOP"		
+			"columnAnchorPoint", "BOTTOM"		
 		)
-		raid:SetPoint("BOTTOMLEFT", TukuiTabsLeftBackground, "TOPLEFT", 1, 15*T.raidscale)
+		raid:SetPoint("TOPLEFT", UIParent, 15, -10*T.raidscale)
 	else
 		local raid = self:SpawnHeader("TukuiGrid", nil, "raid,party",
 			'oUF-initialConfigFunction', [[
@@ -287,8 +218,8 @@ oUF:Factory(function(self)
 				self:SetWidth(header:GetAttribute('initial-width'))
 				self:SetHeight(header:GetAttribute('initial-height'))
 			]],
-			'initial-width', T.Scale(76*C["unitframes"].gridscale*T.raidscale),
-			'initial-height', T.Scale(20*C["unitframes"].gridscale*T.raidscale),
+			'initial-width', T.Scale(50*C["unitframes"].gridscale*T.raidscale),
+			'initial-height', T.Scale(30*C["unitframes"].gridscale*T.raidscale),
 			"showParty", true,
 			"showPlayer", C["unitframes"].showplayerinparty, 
 			"showRaid", true, 
@@ -301,42 +232,11 @@ oUF:Factory(function(self)
 			"maxColumns", 5,
 			"unitsPerColumn", 5,
 			"columnSpacing", T.Scale(15),
-			"columnAnchorPoint", "TOP"		
+			"columnAnchorPoint", "BOTTOM"		
 		)
-		raid:SetPoint("BOTTOMLEFT", TukuiTabsLeftBackground, "TOPLEFT", 1, 15*T.raidscale)
-		
-		local pets = {} 
-			pets[1] = oUF:Spawn('partypet1', 'oUF_TukuiPartyPet1') 
-			pets[1]:Point('TOPLEFT', raid, 'TOPLEFT', 0, 40*C["unitframes"].gridscale*T.raidscale + -4)
-			pets[1]:Size(76*C["unitframes"].gridscale*T.raidscale, 20*C["unitframes"].gridscale*T.raidscale)
-		for i =2, 4 do 
-			pets[i] = oUF:Spawn('partypet'..i, 'oUF_TukuiPartyPet'..i) 
-			pets[i]:Point('LEFT', pets[i-1], 'RIGHT', 7, 0)
-			pets[i]:Size(76*C["unitframes"].gridscale*T.raidscale, 20*C["unitframes"].gridscale*T.raidscale)
-		end
-		
-		local ShowPet = CreateFrame("Frame")
-		ShowPet:RegisterEvent("PLAYER_ENTERING_WORLD")
-		ShowPet:RegisterEvent("RAID_ROSTER_UPDATE")
-		ShowPet:RegisterEvent("PARTY_LEADER_CHANGED")
-		ShowPet:RegisterEvent("PARTY_MEMBERS_CHANGED")
-		ShowPet:SetScript("OnEvent", function(self)
-			if InCombatLockdown() then
-				self:RegisterEvent("PLAYER_REGEN_ENABLED")
-			else
-				self:UnregisterEvent("PLAYER_REGEN_ENABLED")
-				local numraid = GetNumRaidMembers()
-				local numparty = GetNumPartyMembers()
-				if numparty > 0 and numraid == 0 or numraid > 0 and numraid <= 5 then
-					for i,v in ipairs(pets) do v:Enable() end
-				else
-					for i,v in ipairs(pets) do v:Disable() end
-				end
-			end
-		end)		
-	end
+		raid:SetPoint("TOPLEFT", UIParent, 15, -10*T.raidscale)
+    end
 end)
-
 -- only show 5 groups in raid (25 mans raid)
 local MaxGroup = CreateFrame("Frame")
 MaxGroup:RegisterEvent("PLAYER_ENTERING_WORLD")

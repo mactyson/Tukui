@@ -1,6 +1,7 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 
 if IsAddOnLoaded("SmellyPowerBar") then return end
+if C["interface"].style ~= "Jasje" then return end
 
 -- Get rid of old Alt Power Bar
 PlayerPowerBarAlt:UnregisterEvent("UNIT_POWER_BAR_SHOW")
@@ -8,7 +9,7 @@ PlayerPowerBarAlt:UnregisterEvent("UNIT_POWER_BAR_HIDE")
 PlayerPowerBarAlt:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	
 --Create the new bar
-local AltPowerBar = CreateFrame("Frame", "TukuiAltPowerBar", TukuiTabsLeftBackground)
+local AltPowerBar = CreateFrame("Frame", "TukuiAltPowerBar", TukuiInfoLeft)
 AltPowerBar:SetAllPoints()
 AltPowerBar:SetFrameStrata("HIGH")
 AltPowerBar:SetFrameLevel(1)
@@ -20,8 +21,8 @@ local AltPowerBarStatus = CreateFrame("StatusBar", "TukuiAltPowerBarStatus", Alt
 AltPowerBarStatus:SetFrameLevel(AltPowerBar:GetFrameLevel() + 1)
 AltPowerBarStatus:SetStatusBarTexture(C.media.normTex)
 AltPowerBarStatus:SetMinMaxValues(0, 100)
-AltPowerBarStatus:Point("TOPLEFT", TukuiTabsLeftBackground, "TOPLEFT", 2, -2)
-AltPowerBarStatus:Point("BOTTOMRIGHT", TukuiTabsLeftBackground, "BOTTOMRIGHT", -2, 2)
+AltPowerBarStatus:Point("TOPLEFT", TukuiInfoLeft, "TOPLEFT", 2, -2)
+AltPowerBarStatus:Point("BOTTOMRIGHT", TukuiInfoLeft, "BOTTOMRIGHT", -2, 2)
 AltPowerBarStatus:SetStatusBarColor(75/255,  175/255, 76/255)
 
 local AltPowerText = AltPowerBarStatus:CreateFontString(nil, "OVERLAY")
