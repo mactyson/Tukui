@@ -1565,7 +1565,7 @@ target:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", -2 ,61)
 
 -- tot
 local tot = oUF:Spawn('targettarget', "TukuiTargetTarget")
-tot:SetPoint("TOP", TukuiTarget, "BOTTOM", -65,40)
+tot:SetPoint("BOTTOM", InvTukuiActionBarBackground, "TOP", 0,61)
 	tot:Size(130, 20)
 
 -- pet

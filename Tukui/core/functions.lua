@@ -485,7 +485,7 @@ T.PostNamePosition = function(self)
 		self.Name:SetPoint("CENTER", self.panel, "CENTER", 0, 0)
 	else
 		self.Power.value:SetAlpha(0)
-		self.Name:SetPoint("LEFT", self.panel, "LEFT", 4, 0)
+		self.Name:SetPoint("LEFT", self.panel, "LEFT", 20, 0)
 	end
 end
 

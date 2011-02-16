@@ -273,10 +273,10 @@ local function Shared(self, unit)
 			if C["unitframes"].classbar then
 				if T.myclass == "DRUID" then							
 				local eclipseBar = CreateFrame('Frame', nil, self)
-				eclipseBar:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, T.Scale(1))
-				eclipseBar:SetSize(T.Scale(250), T.Scale(8))
+				eclipseBar:Point("LEFT", health, "TOPLEFT", 10, 2)
+				eclipseBar:Size(100, 5)
 				eclipseBar:SetFrameStrata("MEDIUM")
-				eclipseBar:SetFrameLevel(8)
+				eclipseBar:SetFrameLevel(4)
 				T.SetTemplate(eclipseBar)
 				eclipseBar:SetBackdropBorderColor(0,0,0,0)
 				eclipseBar:SetBackdropColor(0,0,0,1)
@@ -317,19 +317,19 @@ local function Shared(self, unit)
 				self.EclipseBar = eclipseBar
 				end
 			
-
-
 				-- set holy power bar or shard bar
 				if (T.myclass == "WARLOCK" or T.myclass == "PALADIN") then
 
 					local bars = CreateFrame("Frame", nil, self)
-					bars:SetPoint("BOTTOMLEFT", self, "TOPLEFT", T.Scale(0), T.Scale(5))
-					bars:Width(T.Scale(234))
-					bars:Height(T.Scale(8))
+                    bars:Size(100, 5)
+					bars:Point("LEFT", health, "TOPLEFT", 10, 2)
+					bars:SetFrameLevel(4)
+					bars:SetFrameStrata("MEDIUM")
 					
 					for i = 1, 3 do					
 						bars[i]=CreateFrame("StatusBar", self:GetName().."_Shard"..i, self)
-						bars[i]:Height(6)					
+						bars[i]:Height(5)			
+                        bars[i]:SetFrameLevel(4)						
 						bars[i]:SetStatusBarTexture(normTex)
 						bars[i]:GetStatusBarTexture():SetHorizTile(false)
 
@@ -341,16 +341,17 @@ local function Shared(self, unit)
 						
 						if i == 1 then
 							bars[i]:SetPoint("LEFT", bars)
-							bars[i]:SetWidth(T.Scale(234 /3)) 
+							bars[i]:SetWidth(T.Scale(100 /3)) 
 						else
 							bars[i]:Point("LEFT", bars[i-1], "RIGHT", T.Scale(8), 0)
-							bars[i]:SetWidth(T.Scale(234 /3))
+							bars[i]:SetWidth(T.Scale(100/3))
 						end
 						
 					    bars[i].border = CreateFrame("Frame", nil, bars)
 					    bars[i].border:SetPoint("TOPLEFT", bars[i], "TOPLEFT", T.Scale(-2), T.Scale(2))
 					    bars[i].border:SetPoint("BOTTOMRIGHT", bars[i], "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
-					    bars[i].border:SetFrameStrata("BACKGROUND")
+					    bars[i].border:SetFrameStrata("MEDIUM")
+						bars[i].border:SetFrameLevel(4)
 					    T.SetTemplate(bars[i].border)
 					    T.CreateShadow(bars[i].border)
 					    bars[i].border:SetBackdropColor( 0,0,0)
@@ -369,42 +370,41 @@ local function Shared(self, unit)
 				if T.myclass == "DEATHKNIGHT" then
 			
 				local Runes = CreateFrame("Frame", nil, self)
-                Runes:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, T.Scale(6))
-                Runes:SetWidth(T.Scale(210))
-                Runes:SetHeight(T.Scale(8))
+                Runes:Point("LEFT", health, "TOPLEFT", 10, 2)
+                Runes:Size(100, 5)
+				Runes:SetFrameLevel(4)
+				Runes:SetFrameStrata("MEDIUM")
 
                 for i = 1, 6 do
                     Runes[i] = CreateFrame("StatusBar", self:GetName().."_Runes"..i, self)
-                    Runes[i]:SetHeight(T.Scale(8))
+                    Runes[i]:SetHeight(T.Scale(5))
 
-					
-                    if i == 1 then
+                if i == 1 then
                         Runes[i]:SetPoint("LEFT", Runes, "LEFT", 0, 0)
-						Runes[i]:SetWidth(T.Scale(210 /6))
+						Runes[i]:SetWidth(T.Scale(100 /6))
                     else
                         Runes[i]:SetPoint("LEFT", Runes[i-1], "RIGHT", T.Scale(8), 0)
-						Runes[i]:SetWidth(T.Scale(210 /6))
+						Runes[i]:SetWidth(T.Scale(100 /6))
                     end
                     Runes[i]:SetStatusBarTexture(normTex)
                     Runes[i]:GetStatusBarTexture():SetHorizTile(false)
 					Runes[i]:SetBackdrop(backdrop)
                     Runes[i]:SetBackdropColor(0,0,0)
-                    Runes[i]:SetFrameLevel(20)
+                    Runes[i]:SetFrameLevel(4)
                     
                     Runes[i].bg = Runes[i]:CreateTexture(nil, "BORDER")
                     Runes[i].bg:SetAllPoints(Runes[i])
                     Runes[i].bg:SetTexture(normTex)
                     Runes[i].bg.multiplier = 0.3
 					
-					
 					Runes[i].border = CreateFrame("Frame", nil, Runes[i])
 					Runes[i].border:SetPoint("TOPLEFT", Runes[i], "TOPLEFT", T.Scale(-2), T.Scale(2))
 					Runes[i].border:SetPoint("BOTTOMRIGHT", Runes[i], "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
-					Runes[i].border:SetFrameStrata("BACKGROUND")
-					T.SetTemplate(Runes[i].border)
+					Runes[i].border:SetFrameStrata("MEDIUM")
+                    Runes[i].border:SetFrameLevel(4)					
 					Runes[i].border:SetBackdropColor( 0,0,0,1 )
-					T.CreateShadow(Runes[i].border)
-					
+					T.SetTemplate(Runes[i].border)
+					T.CreateShadow(Runes[i].border)		
                 end
 
                     self.Runes = Runes
@@ -417,13 +417,13 @@ local function Shared(self, unit)
 				for i = 1, 4 do
 					TotemBar[i] = CreateFrame("StatusBar", self:GetName().."_TotemBar"..i, self)
 					if (i == 1) then
-						TotemBar[i]:SetPoint("BOTTOMLEFT", self, "TOPLEFT", 0, T.Scale(6))
-					else
-					   TotemBar[i]:SetPoint("TOPLEFT", TotemBar[i-1], "TOPRIGHT", T.Scale(7), 0)
+					    TotemBar[i]:Point("LEFT", health, "TOPLEFT", 10, 2)					else
+					    TotemBar[i]:SetPoint("TOPLEFT", TotemBar[i-1], "TOPRIGHT", T.Scale(7), 0)
 					end
 					TotemBar[i]:SetStatusBarTexture(normTex)
 					TotemBar[i]:SetHeight(T.Scale(5))
-					TotemBar[i]:SetWidth(T.Scale(229) / 4)
+					TotemBar[i]:SetWidth(T.Scale(100) / 4)
+					TotemBar[i]:SetFrameLevel(4)
 				
 					TotemBar[i]:SetBackdrop(backdrop)
 					TotemBar[i]:SetBackdropColor(0, 0, 0, 1)
@@ -437,10 +437,11 @@ local function Shared(self, unit)
 					TotemBar[i].border = CreateFrame("Frame", nil, TotemBar[i])
 					TotemBar[i].border:SetPoint("TOPLEFT", TotemBar[i], "TOPLEFT", T.Scale(-2), T.Scale(2))
 					TotemBar[i].border:SetPoint("BOTTOMRIGHT", TotemBar[i], "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
-					TotemBar[i].border:SetFrameStrata("BACKGROUND")
-					T.SetTemplate(TotemBar[i].border)
+					TotemBar[i].border:SetFrameStrata("MEDIUM")
+					TotemBar[i].border:SetFrameLevel(4)
 					TotemBar[i].border:SetBackdropColor( 0,0,0,1 )
 					T.CreateShadow(TotemBar[i].border)
+					T.SetTemplate(TotemBar[i].border)
 				end
 				self.TotemBar = TotemBar
 			end
@@ -480,13 +481,14 @@ local function Shared(self, unit)
 			CPoints.unit = PlayerFrame.unit
 			for i = 1, 5 do
 				CPoints[i] = CreateFrame('StatusBar', "ComboPoint"..i, self)
-				CPoints[i]:SetHeight(13)
-				CPoints[i]:SetWidth(230/ 5)
+				CPoints[i]:SetHeight(5)
+				CPoints[i]:SetWidth(100/ 5)
 				CPoints[i]:SetStatusBarTexture(C["media"].normTex)
 				CPoints[i]:GetStatusBarTexture():SetHorizTile(false)
-				CPoints[i]:SetFrameLevel(20)
+				CPoints[i]:SetFrameLevel(4)
+				CPoints[i]:SetFrameStrata("MEDIUM")
 				if i == 1 then
-					CPoints[i]:SetPoint("BOTTOMLEFT", TukuiPlayer, "TOPLEFT", 0, 6)
+					CPoints[i]:Point("LEFT", TukuiPlayer, "TOPLEFT", 10, 2)
 				else
 					CPoints[i]:SetPoint("LEFT", CPoints[i-1], "RIGHT", T.Scale(5), 0)
 				end
@@ -497,7 +499,7 @@ local function Shared(self, unit)
 				border:SetPoint("BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
 				border:SetBackdropColor(0,0,0)
 				border:SetFrameStrata("MEDIUM")
-				border:SetFrameLevel(19)
+				border:SetFrameLevel(4)
 			end
 			
 			CPoints[1]:SetStatusBarColor(225, 0, 0)    -- red
@@ -521,13 +523,13 @@ local function Shared(self, unit)
 			end
 			
 			buffs:SetHeight(26)
-			buffs:SetWidth(252)
+			buffs:SetWidth(220)
 			buffs.size = 26
 			buffs.num = 9
 				
 			debuffs:SetHeight(26)
-			debuffs:SetWidth(252)
-			debuffs:SetPoint("BOTTOMLEFT", buffs, "TOPLEFT", 2, 2)
+			debuffs:SetWidth(220)
+			debuffs:SetPoint("BOTTOMLEFT", buffs, "TOPLEFT", 0, 2)
 			debuffs.size = 26
 			debuffs.num = 9
 						
@@ -566,7 +568,7 @@ local function Shared(self, unit)
 				elseif unit == "target" then
 					castbar:SetPoint("CENTER", UIParent,"CENTER", 0, 250)
 					castbar:SetHeight(T.Scale(20))
-					castbar:SetWidth(T.Scale(250))
+					castbar:SetWidth(T.Scale(220))
 				end
 			else
 				if unit == "player" then
@@ -576,7 +578,7 @@ local function Shared(self, unit)
 				elseif unit == "target" then
 					castbar:SetPoint("BOTTOM", TukuiTarget, "TOP", 0, 70)
 					castbar:SetHeight(T.Scale(18))
-					castbar:SetWidth(T.Scale(250))
+					castbar:SetWidth(T.Scale(220))
 				end
 			end	
 			
@@ -828,7 +830,7 @@ local function Shared(self, unit)
 		local Name = health:CreateFontString(nil, "OVERLAY")
 		Name:SetPoint("CENTER", health, "CENTER", 0, 0)
 		Name:SetFont(pixelfont, 8, "OUTLINEMONOCHROME")
-		Name:SetJustifyH("CENTER")
+		Name:SetJustifyH("LEFT")
 
 		self:Tag(Name, '[Tukui:getnamecolor][Tukui:namemedium]')
 		self.Name = Name
