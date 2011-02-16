@@ -11,7 +11,7 @@ local aggroColors = {
 }
 
 -- create the bar
-local TukuiThreatBar = CreateFrame("StatusBar", "TukuiThreatBar", TukuiTabsRightBackground)
+local TukuiThreatBar = CreateFrame("StatusBar", "TukuiThreatBar", TukuiInfoRight)
 TukuiThreatBar:Point("TOPLEFT", 2, -2)
 TukuiThreatBar:Point("BOTTOMRIGHT", -2, 2)
 
