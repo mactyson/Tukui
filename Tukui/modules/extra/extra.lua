@@ -530,8 +530,7 @@ end)
 
 saftXPBar.frame = frame
 ----------------------------------------------------------------------
-
-if not C["markbar"].enable == true then return end;
+if not C.chat.background then
 -- Mark Bar created by Smelly
 -- Credits to Hydra, Elv22, Safturento, and many more!
 -- Edited by Jasje
@@ -806,8 +805,8 @@ LeadershipCheck:SetScript("OnEvent", function(self, event)
 			MarkBarBackground:Hide()
 		end
 	end
-end)
-
+   end)
+end
 ----------------------------------------------------------------------------------------------
 -- http://www.wowinterface.com/downloads/info19030-Interrupted.html#info
 ----------------------------------------------------------------------------------------------

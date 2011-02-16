@@ -91,10 +91,6 @@ C["Interrupted"] = {
     ["enable"] = true,                     -- enable Interrupt announce by Sideshow
 }	
 
-C["markbar"] = {
-    ["enable"] = true,                   -- enable Smelly's MarkBar for tanks
-}
-
 C["bags"] = {
 	["enable"] = true,                                  -- enable an all in one bag mod that fit tukui perfectly
 }

@@ -28,7 +28,7 @@ local function Shared(self, unit)
 	local health = CreateFrame('StatusBar', nil, self)
 	health:SetPoint("TOPLEFT")
 	health:SetPoint("TOPRIGHT")
-	health:Height(30*C["unitframes"].gridscale*T.raidscale)
+	health:Height(22*C["unitframes"].gridscale*T.raidscale)
 	health:SetStatusBarTexture(normTex)
 	self.Health = health
 	
@@ -81,7 +81,7 @@ local function Shared(self, unit)
 	-- end hydra glow
 
 	local name = health:CreateFontString(nil, "OVERLAY")
-    name:SetPoint("CENTER", health, "CENTER", 0, 1)
+    name:SetPoint("CENTER", health, "CENTER", 1, 1)
 	name:SetFont(C["media"].pixelfont, 8, "MONOCHROMEOUTLINE")
 	self:Tag(name, "[Tukui:getnamecolor][Tukui:nameshort]")
 	self.Name = name
@@ -197,7 +197,7 @@ oUF:Factory(function(self)
 				self:SetHeight(header:GetAttribute('initial-height'))
 			]],
 			'initial-width', T.Scale(50*C["unitframes"].gridscale*T.raidscale),
-			'initial-height', T.Scale(30*C["unitframes"].gridscale*T.raidscale),	
+			'initial-height', T.Scale(22.3*C["unitframes"].gridscale*T.raidscale),	
 			"showRaid", true,
 			"xoffset", T.Scale(7),
 			"yOffset", T.Scale(-7),
@@ -219,7 +219,7 @@ oUF:Factory(function(self)
 				self:SetHeight(header:GetAttribute('initial-height'))
 			]],
 			'initial-width', T.Scale(50*C["unitframes"].gridscale*T.raidscale),
-			'initial-height', T.Scale(30*C["unitframes"].gridscale*T.raidscale),
+			'initial-height', T.Scale(22.3*C["unitframes"].gridscale*T.raidscale),
 			"showParty", true,
 			"showPlayer", C["unitframes"].showplayerinparty, 
 			"showRaid", true, 
@@ -231,7 +231,7 @@ oUF:Factory(function(self)
 			"groupBy", "GROUP",
 			"maxColumns", 5,
 			"unitsPerColumn", 5,
-			"columnSpacing", T.Scale(15),
+			"columnSpacing", T.Scale(7),
 			"columnAnchorPoint", "BOTTOM"		
 		)
 		raid:SetPoint("TOPLEFT", UIParent, 15, -10*T.raidscale)

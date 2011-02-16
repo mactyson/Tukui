@@ -97,7 +97,7 @@ local function Shared(self, unit)
 	    Healthbg:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
 	    Healthbg:SetFrameLevel(2)
 	    self.Healthbg = Healthbg
-				
+		
 		-- health bar background
 		local healthBG = health:CreateTexture(nil, 'BORDER')
 		healthBG:SetAllPoints()
@@ -1232,7 +1232,7 @@ local function Shared(self, unit)
 		
 		-- health 
 		local health = CreateFrame('StatusBar', nil, self)
-		health:Height(30)
+		health:Height(32)
 		health:SetPoint("TOPLEFT")
 		health:SetPoint("TOPRIGHT")
 		health:SetStatusBarTexture(normTex)
@@ -1283,18 +1283,19 @@ local function Shared(self, unit)
 	
 		-- power
 		local power = CreateFrame('StatusBar', nil, self)
-		power:Height(6)
-		power:Point("TOPLEFT", health, "BOTTOMLEFT", 0, -6)
-		power:Point("TOPRIGHT", health, "BOTTOMRIGHT", 0, -6)
+		power:Size(100, 5)
+        power:Point("RIGHT", health, "BOTTOMRIGHT", -10, -2)
+		power:SetFrameLevel(4)
 		power:SetStatusBarTexture(normTex)
 		
-		-- power border 
+		-- power border
 		local powerborder = CreateFrame("Frame", nil, self)
-		T.CreatePanel(powerborder, 1, 1, "CENTER", health, "CENTER", 0, 0)
+		powerborder:CreatePanel("Hydra", 1, 1, "CENTER", power, "CENTER", 0, 0)
 		powerborder:ClearAllPoints()
 		powerborder:SetPoint("TOPLEFT", power, T.Scale(-2), T.Scale(2))
 		powerborder:SetPoint("BOTTOMRIGHT", power, T.Scale(2), T.Scale(-2))
 		powerborder:SetFrameStrata("MEDIUM")
+		powerborder:SetFrameLevel(4)
 		T.CreateShadow(powerborder)
 		
 		power.frequentUpdates = true
@@ -1353,10 +1354,10 @@ local function Shared(self, unit)
 			
 			-- create buff at left of unit if they are boss units
 			local buffs = CreateFrame("Frame", nil, self)
-			buffs:SetHeight(34)
+			buffs:SetHeight(36)
 			buffs:SetWidth(252)
 			buffs:Point("LEFT", self, "RIGHT", T.Scale(4), 0)
-			buffs.size = 34
+			buffs.size = 36
 			buffs.num = 2
 			buffs.spacing = 2
 			buffs.initialAnchor = 'LEFT'
@@ -1371,10 +1372,10 @@ local function Shared(self, unit)
 
 		-- create debuff for arena units
 		local debuffs = CreateFrame("Frame", nil, self)
-		debuffs:SetHeight(34)
+		debuffs:SetHeight(36)
 		debuffs:SetWidth(200)
 		debuffs:SetPoint('LEFT', self, 'RIGHT', T.Scale(4), 0)
-		debuffs.size = 34
+		debuffs.size = 36
 		debuffs.num = 2
 		debuffs.spacing = 2
 		debuffs.initialAnchor = 'LEFT'
@@ -1406,7 +1407,7 @@ local function Shared(self, unit)
 		local castbar = CreateFrame("StatusBar", self:GetName().."CastBar", self)
 		castbar:SetPoint("LEFT", 21, 0)
 		castbar:SetPoint("RIGHT", 0, 0)
-		castbar:SetPoint("BOTTOM", 0, -35)
+		castbar:SetPoint("BOTTOM", 0, -30)
 		
 		castbar:SetHeight(15)
 		castbar:SetStatusBarTexture(normTex)
@@ -1560,9 +1561,9 @@ if C.arena.unitframes then
 		if i == 1 then
 			arena[i]:SetPoint("RIGHT", UIParent, "RIGHT", -220, -209)
 		else
-			arena[i]:SetPoint("BOTTOM", arena[i-1], "TOP", 0, 45)
+			arena[i]:SetPoint("BOTTOM", arena[i-1], "TOP", 0, 40)
 		end
-		arena[i]:SetSize(T.Scale(200), T.Scale(30))
+		arena[i]:SetSize(T.Scale(200), T.Scale(32))
 	end
 end
 
@@ -1582,9 +1583,9 @@ if C["unitframes"].showboss then
 		if i == 1 then
 			boss[i]:SetPoint("RIGHT", UIParent, "RIGHT", -220, -209)
 		else
-			boss[i]:SetPoint('BOTTOM', boss[i-1], 'TOP', 0, 45)             
+			boss[i]:SetPoint('BOTTOM', boss[i-1], 'TOP', 0, 40)             
 		end
-		boss[i]:SetSize(T.Scale(200), T.Scale(30))
+		boss[i]:SetSize(T.Scale(200), T.Scale(32))
 	end
 end
 
