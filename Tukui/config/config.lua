@@ -31,7 +31,7 @@ C["unitframes"] = {
 	["combatfeedback"] = false,                          -- enable combattext on player and target.
 	["playeraggro"] = true,                             -- color player border to red if you have aggro on current target.
 	["healcomm"] = false,                               -- enable healprediction support.
-	["onlyselfdebuffs"] = true,                        -- display only our own debuffs applied on target
+	["onlyselfdebuffs"] = false,                        -- display only our own debuffs applied on target
 	["showfocustarget"] = false,                         -- show focus target
 
 	-- raid layout (if one of them is enabled)
@@ -111,19 +111,19 @@ C["cooldown"] = {
 }
 
 C["datatext"] = { -- number 7 can only be used when chat.background is enabled
-	["fps_ms"] = 0,                                     -- show fps and ms on panels
+	["fps_ms"] = 5,                                     -- show fps and ms on panels
 	["system"] = 0,                                     -- show total memory and others systems infos on panels
 	["bags"] = 0,                                       -- show space used in bags on panels
 	["gold"] = 6,                                       -- show your current gold on panels
 	["wowtime"] = 1,                                    -- show time on panels
 	["guild"] = 3,                                      -- show number on guildmate connected on panels
-	["dur"] = 0,                                        -- show your equipment durability on panels.
+	["dur"] = 4,                                        -- show your equipment durability on panels.
 	["friends"] = 2,                                    -- show number of friends connected.
 	["dps_text"] = 0,                                   -- show a dps meter on panels
 	["hps_text"] = 0,                                   -- show a heal meter on panels
-	["power"] = 4,                                      -- show your attackpower/spellpower/healpower/rangedattackpower whatever stat is higher gets displayed
+	["power"] = 8,                                      -- show your attackpower/spellpower/healpower/rangedattackpower whatever stat is higher gets displayed
 	["haste"] = 0,                                      -- show your haste rating on panels.
-	["crit"] = 5,                                       -- show your crit rating on panels.
+	["crit"] = 9,                                       -- show your crit rating on panels.
 	["avd"] = 0,                                        -- show your current avoidance against the level of the mob your targeting
 	["armor"] = 0,                                      -- show your armor value against the level mob you are currently targeting
 	["currency"] = 0,                                   -- show your tracked currency on panels

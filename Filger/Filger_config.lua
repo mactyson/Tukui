@@ -44,7 +44,7 @@ ns.Filger_Spells = {
 			--Brain Freeze
 			{ spellID = 44549, size = 47, unitId = "player", caster = "player", filter = "BUFF" },
 			-- Impact
-			--{ spellID = 12357, size = 47, unitId = "player", caster = "player", filter = "BUFF" },
+			{ spellID = 12357, size = 47, unitId = "player", caster = "player", filter = "BUFF" },
 			--Missle Barrage
 			{ spellID = 5143, size = 47, unitId = "player", caster = "player", filter = "BUFF" },
 			--Hot Streak(improved)
@@ -58,17 +58,7 @@ ns.Filger_Spells = {
 			--Arcane Blast
 			{ spellID = 30451, size = 47, unitId = "player", caster = "player", filter = "DEBUFF" },
 			--Fingers Of Frost
-            { spellID = 83074, size = 47, unitId = "player", caster = "player", filter = "BUFF"},
-		},
-        {		
-			Name = "Mage Procs",
-			Direction = "RIGHT",
-			Interval = 4,
-			Mode = "ICON",
-			setPoint = { "CENTER", "UIParent", 389, -35 },
-			
-			-- Impact
-			{ spellID = 12357, size = 25, unitId = "player", caster = "player", filter = "BUFF" },
+            { spellID = 83074, size = 47, unitId = "player", caster = "player", filter = "BUFF"},		
 		},
 	},
 	["WARLOCK"] = { -------------------------------------------------------------------------------------------------------- Warlock

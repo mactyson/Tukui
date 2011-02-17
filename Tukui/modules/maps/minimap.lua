@@ -79,7 +79,8 @@ end
 hooksecurefunc("MiniMapLFG_UpdateIsShown", UpdateLFG)
 
 -- reskin LFG dropdown
-LFDSearchStatus:SetTemplate("Default")
+LFDSearchStatus:SetTemplate("Transparent")
+LFDSearchStatus:SetBorder()
 
 -- for t13+, if we move map we need to point LFDSearchStatus according to our Minimap position.
 local function UpdateLFGTooltip()

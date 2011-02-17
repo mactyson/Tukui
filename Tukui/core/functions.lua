@@ -17,6 +17,8 @@ T.PP = function(p, obj)
 	local mapleft = TukuiMinimapStatsLeft
 	local mapright = TukuiMinimapStatsRight
 	local tabright = TukuiTabsRightBackground
+	local pvedl = PveDatatextl
+	local pvedr = PveDatatextr
 	
 	if p == 1 then
 		obj:SetParent(left)
@@ -58,6 +60,14 @@ T.PP = function(p, obj)
 		obj:SetPoint("RIGHT", tabright, -10, 0)
 		obj:SetPoint('TOP', tabright, 0, 4)
 		obj:SetPoint('BOTTOM', tabright)
+		elseif p == 8 then
+		obj:SetParent(pvedl)
+		obj:SetHeight(pvedl:GetHeight())
+		obj:SetPoint("CENTER", pvedl, 0, 2)
+		elseif p == 9 then
+		obj:SetParent(pvedr)
+		obj:SetHeight(pvedr:GetHeight())
+		obj:SetPoint("CENTER", pvedr, 0, 2)
 	end
 	--[[
 	if TukuiMinimap then
@@ -870,7 +880,6 @@ T.UpdateThreat = function(self, event, unit)
 			end
 		end
 	end
-
 --------------------------------------------------------------------------------------------
 -- THE AURAWATCH FUNCTION ITSELF. HERE BE DRAGONS!
 --------------------------------------------------------------------------------------------
