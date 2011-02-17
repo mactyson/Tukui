@@ -109,7 +109,7 @@ C["cooldown"] = {
 	["enable"] = true,                                  -- do i really need to explain this?
 	["treshold"] = 2,                                   -- show decimal under X seconds and text turn red
 }
-
+                          -- only use 8 and 9 in Jasje layout, not in Tukui
 C["datatext"] = { -- number 7 can only be used when chat.background is enabled
 	["fps_ms"] = 5,                                     -- show fps and ms on panels
 	["system"] = 0,                                     -- show total memory and others systems infos on panels
