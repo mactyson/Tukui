@@ -85,7 +85,7 @@ if C["datatext"].guild and C["datatext"].guild > 0 then
 				Text:SetFormattedText(displayString, numOnline)
 				self:SetAllPoints(Text)
 			else
-				Text:SetText(E.ValColor..L.datatext_noguild)
+				Text:SetText(L.datatext_noguild)
 			end
 		end
 	end
@@ -232,7 +232,7 @@ if C["datatext"].guild and C["datatext"].guild > 0 then
 
 									tabletemp.GP = tabletemp.GP + BASE_GP
 									tabletemp.PR = tabletemp.EP / tabletemp.GP
-									tabletemp.officernote = format("EP: %d GP: %d PR:%.2f",tabletemp.EP,tabletemp.GP,tabletemp.PR)
+									tabletemp.officernote = format("",tabletemp.EP,tabletemp.GP,tabletemp.PR) -- deleted "EP: %d GP: %d PR:%.2f" because i wont use this dkp system
 								else
 									tabletemp.EP = 0
 									tabletemp.GP = 0
