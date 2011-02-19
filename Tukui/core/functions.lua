@@ -495,7 +495,7 @@ T.PostNamePosition = function(self)
 		self.Name:SetPoint("CENTER", self.panel, "CENTER", 0, 2)
 	else
 		self.Power.value:SetAlpha(0)
-		self.Name:SetPoint("LEFT", self.panel, "LEFT", 20, 0)
+		self.Name:SetPoint("LEFT", self.panel, "LEFT", 20, 2)
 	end
 end
 
@@ -874,7 +874,7 @@ T.UpdateThreat = function(self, event, unit)
 			elseif self.powerborder then
 				self.powerborder:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
 			elseif self.Healthbg then
-				self.Healthbg:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
+				self.Healthbg:SetBackdropBorderColor(unpack(C["media"].altbordercolor))	
 			else
 				self.Name:SetTextColor(1,1,1)
 			end

@@ -6,6 +6,6 @@ if T.myclass == "PALADIN" then
 	C.chat.classcolortab = false
 	C.datatext.mastery = 5
 	C.datatext.avd = 4
-	C.datatext.crit = 0
-	C.datatext.power = 0
+	C.datatext.dur = 0
+	C.datatext.fps_ms = 0
 end

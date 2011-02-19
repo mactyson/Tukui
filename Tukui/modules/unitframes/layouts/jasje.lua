@@ -468,7 +468,7 @@ local function Shared(self, unit)
 		if (unit == "target") then			
 			-- Unit name on target
 			local Name = health:CreateFontString(nil, "OVERLAY")
-			Name:Point("LEFT", panel, "LEFT", 4, 0)
+			Name:Point("LEFT", panel, "LEFT", 4, 2)
 			Name:SetJustifyH("LEFT")
 			Name:SetFont(pixelfont, 8, "OUTLINEMONOCHROME")
 
@@ -525,7 +525,7 @@ local function Shared(self, unit)
 			buffs:SetHeight(26)
 			buffs:SetWidth(220)
 			buffs.size = 26
-			buffs.num = 9
+			buffs.num = 8
 				
 			debuffs:SetHeight(26)
 			debuffs:SetWidth(220)
@@ -1252,7 +1252,7 @@ local function Shared(self, unit)
 		healthBG:SetTexture(.1, .1, .1)
 
 		health.value = T.SetFontString(health, pixelfont, 8, "OUTLINEMONOCHROME")
-		health.value:Point("RIGHT", -2, 0)
+		health.value:Point("RIGHT", -2, 2)
 		health.PostUpdate = T.PostUpdateHealth
 				
 		self.Health = health
@@ -1307,7 +1307,7 @@ local function Shared(self, unit)
 		
 		-- names
 		local Name = health:CreateFontString(nil, "OVERLAY")
-		Name:SetPoint("LEFT", health, "LEFT", 2, 0)
+		Name:SetPoint("LEFT", health, "LEFT", 4, 2)
 		Name:SetJustifyH("LEFT")
 		Name:SetFont(pixelfont, 8, "OUTLINEMONOCHROME")
 		Name:SetShadowColor(0, 0, 0)
