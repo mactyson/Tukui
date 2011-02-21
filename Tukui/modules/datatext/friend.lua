@@ -137,7 +137,7 @@ if C["datatext"].friends and C["datatext"].friends > 0 then
 				for i = 1, BNtotal do if select(7, BNGetFriendInfo(i)) then BNonline = BNonline + 1 end end
 			end
 			local totalonline = online + BNonline
-			Text:SetFormattedText(displayString, L.datatext_friends, totalonline)
+			Text:SetFormattedText(displayString, hexa..L.datatext_friends..hexb, totalonline)
 			self:SetAllPoints(Text)
 	end
 

@@ -59,7 +59,7 @@ if C["datatext"].guild and C["datatext"].guild > 0 then
 		end
 	end
 
-	local displayString = string.join("", GUILD, ": ", "%d|r")
+	local displayString = string.join("", hexa..GUILD..hexb, ": ", "%d|r")
 
 	local function Update(self, event, ...)	
 
