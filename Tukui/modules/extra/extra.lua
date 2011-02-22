@@ -1280,7 +1280,7 @@ function xanAutoMail:StopMail()
 	xanAutoMail:SetScript("OnUpdate", nil)
 	--check for money output
 	if moneyCount > 0 then
-		DEFAULT_CHAT_FRAME:AddMessage("xanAutoMail: Total money from mailbox ["..colorMoneyText(moneyCount).."]")
+		DEFAULT_CHAT_FRAME:AddMessage(hexa.."xanAutoMail: Total money from mailbox"..hexb.."["..colorMoneyText(moneyCount).."]")
 	end
 end
 
@@ -1289,7 +1289,7 @@ function xanAutoMail:UI_ERROR_MESSAGE(event, arg1)
 	if arg1 == ERR_INV_FULL then
 		triggerStop = true
 		xanAutoMail:StopMail()
-		DEFAULT_CHAT_FRAME:AddMessage("xanAutoMail: Your bags are full")
+		DEFAULT_CHAT_FRAME:AddMessage(hexa.."xanAutoMail: Your bags are full"..hexb)
 	end
 end
 

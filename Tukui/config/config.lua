@@ -1,5 +1,9 @@
 ﻿local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 
+C["interface"] = {                               -- changes heal raid layout, chatbackground and much more
+    ["style"]  = "Jasje",                        -- interface style, Jasje is very minimal, Tukui is much more
+}	
+
 C["general"] = {
 	["autoscale"] = true,                               -- mainly enabled for users that don't want to mess with the config file
 	["uiscale"] = 0.71,                                 -- set your value (between 0.64 and 1) of your uiscale if autoscale is off
@@ -54,10 +58,6 @@ C["unitframes"] = {
 	-- class bar
 	["classbar"] = true,                                -- enable tukui classbar over player unit
 }
-
-C["interface"] = {                               -- changes heal raid layout, chatbackground and much more
-    ["style"]  = "Jasje",                        -- interface style, Jasje is very minimal, Tukui is much more
-}	
 
 C["arena"] = {
 	["unitframes"] = true,                              -- enable tukz arena unitframes (requirement : tukui unitframes enabled)
