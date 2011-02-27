@@ -1045,28 +1045,14 @@ local function Shared(self, unit)
 		
 		-- names
 		local Name = health:CreateFontString(nil, "OVERLAY")
-		Name:SetPoint("CENTER", health, "CENTER", 0, 0)
-		Name:SetJustifyH("CENTER")
+		Name:SetPoint("LEFT", health, "LEFT", 0, 0)
+		Name:SetJustifyH("LEFT")
 		Name:SetFont(pixelfont, 8, "OUTLINEMONOCHROME")
 		Name:SetShadowColor(0, 0, 0)
 		Name:SetShadowOffset(1.25, -1.25)
 		
 		self:Tag(Name, '[Tukui:getnamecolor][Tukui:namelong]')
 		self.Name = Name
-
-		-- create debuff for arena units
-		local debuffs = CreateFrame("Frame", nil, self)
-		debuffs:SetHeight(18)
-		debuffs:SetWidth(200)
-		debuffs:Point('RIGHT', self, 'LEFT', -4, 0)
-		debuffs.size = 18
-		debuffs.num = 1
-		debuffs.spacing = 2
-		debuffs.initialAnchor = 'RIGHT'
-		debuffs["growth-x"] = "LEFT"
-		debuffs.PostCreateIcon = T.PostCreateAura
-		debuffs.PostUpdateIcon = T.PostUpdateAura
-		self.Debuffs = debuffs
 		
 		local castbar = CreateFrame("StatusBar", self:GetName().."CastBar", self)
 		castbar:ClearAllPoints()
@@ -1168,20 +1154,6 @@ local function Shared(self, unit)
 		self:Tag(Name, '[Tukui:getnamecolor][Tukui:namelong]')
 		self.Name = Name
 
-		-- create debuff for arena units
-		local debuffs = CreateFrame("Frame", nil, self)
-		debuffs:SetHeight(18)
-		debuffs:SetWidth(200)
-		debuffs:Point('LEFT', self, 'RIGHT', 4, 0)
-		debuffs.size = 18
-		debuffs.num = 1
-		debuffs.spacing = 2
-		debuffs.initialAnchor = 'LEFT'
-		debuffs["growth-x"] = "RIGHT"
-		debuffs.PostCreateIcon = T.PostCreateAura
-		debuffs.PostUpdateIcon = T.PostUpdateAura
-		self.Debuffs = debuffs
-		
 		local castbar = CreateFrame("StatusBar", self:GetName().."CastBar", self)
 		castbar:ClearAllPoints()
 		castbar:SetPoint("TOPLEFT", health, T.Scale(0), T.Scale(0))
@@ -1339,21 +1311,7 @@ local function Shared(self, unit)
 			AltPowerBar:SetBackdropColor(0, 0, 0)
 
 			self.AltPowerBar = AltPowerBar
-			
-			-- create buff at left of unit if they are boss units
-			local buffs = CreateFrame("Frame", nil, self)
-			buffs:SetHeight(36)
-			buffs:SetWidth(252)
-			buffs:Point("LEFT", self, "RIGHT", T.Scale(4), 0)
-			buffs.size = 36
-			buffs.num = 2
-			buffs.spacing = 2
-			buffs.initialAnchor = 'LEFT'
-			buffs["growth-x"] = "RIGHT"
-			buffs.PostCreateIcon = T.PostCreateAura
-			buffs.PostUpdateIcon = T.PostUpdateAura
-			self.Buffs = buffs
-			
+
 			-- because it appear that sometime elements are not correct.
 			self:HookScript("OnShow", T.updateAllElements)
 		end

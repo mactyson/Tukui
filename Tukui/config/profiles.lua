@@ -9,3 +9,7 @@ if T.myclass == "PALADIN" then
 	C.datatext.dur = 0
 	C.datatext.fps_ms = 0
 end
+
+if T.myname== "Noshi" then
+   C.actionbar.hideshapeshift = true
+end   

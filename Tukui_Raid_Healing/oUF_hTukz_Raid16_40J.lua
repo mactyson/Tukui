@@ -239,14 +239,14 @@ oUF:Factory(function(self)
 			'initial-height', T.Scale(22.3*C["unitframes"].gridscale*T.raidscale),	
 			"showRaid", true,
 			"xoffset", T.Scale(7),
-			"yOffset", T.Scale(-10),
+			"yOffset", T.Scale(-7),
 			"point", "LEFT",
 			"groupFilter", "1,2,3,4,5,6,7,8",
 			"groupingOrder", "1,2,3,4,5,6,7,8",
 			"groupBy", "GROUP",
 			"maxColumns", 5,
 			"unitsPerColumn", 5,
-			"columnSpacing", T.Scale(17),
+			"columnSpacing", T.Scale(10),
 			"columnAnchorPoint", "BOTTOM"		
 		)
 		raid:SetPoint("TOPLEFT", UIParent, 15, -10*T.raidscale)
@@ -263,14 +263,14 @@ oUF:Factory(function(self)
 			"showPlayer", C["unitframes"].showplayerinparty, 
 			"showRaid", true, 
 			"xoffset", T.Scale(7),
-			"yOffset", T.Scale(-10),
+			"yOffset", T.Scale(-7),
 			"point", "LEFT",
 			"groupFilter", "1,2,3,4,5,6,7,8",
 			"groupingOrder", "1,2,3,4,5,6,7,8",
 			"groupBy", "GROUP",
 			"maxColumns", 5,
 			"unitsPerColumn", 5,
-			"columnSpacing", T.Scale(17),
+			"columnSpacing", T.Scale(10),
 			"columnAnchorPoint", "BOTTOM"		
 		)
 		raid:SetPoint("TOPLEFT", UIParent, 15, -10*T.raidscale)

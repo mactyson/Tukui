@@ -553,6 +553,8 @@ ns.Filger_Spells = {
 			{ spellID = 91433, size = 47, unitId = "player", caster = "all", filter = "DEBUFF" },
 			-- Incineration Security Measure
 			{ spellID = 91521, size = 47, unitId = "player", caster = "all", filter = "DEBUFF" },
+			-- Power Conversion - Arcanotron
+            { spellID = 79729, size = 47, unitId = "focus", caster = "all", filter = "BUFF" },
 		-- Maloriak	
 			-- Flash Freeze
 			{ spellID = 77699, size = 47, unitId = "player", caster = "all", filter = "DEBUFF" },
@@ -560,6 +562,8 @@ ns.Filger_Spells = {
 			{ spellID = 77760, size = 47, unitId = "player", caster = "all", filter = "DEBUFF" },
 			-- remedy -- for spellsteal 
 			{ spellID = 77912, size = 47, unitId = "target", caster = "all", filter = "BUFF" },
+			-- remedy -- for spellsteal  - focus
+			{ spellID = 77912, size = 47, unitId = "focus", caster = "all", filter = "BUFF" },
 		-- Atramedes
 			-- Searing Flame
 			{ spellID = 92423, size = 47, unitId = "player", caster = "all", filter = "DEBUFF" },
@@ -670,6 +674,22 @@ ns.Filger_Spells = {
 			{ spellID = 8178, size = 72, unitId = "target", caster = "all", filter = "BUFF" },
 			--Hamstring
 	        { spellID = 1715, size = 70, barWidth = 248, unitId = "player", caster = "all", filter = "DEBUFF" },
+		},
+		{
+			Name = "Focus",  -- i wanna see things all the time
+			Direction = "LEFT",
+			Interval = 2,
+			Mode = "ICON",
+			setPoint = { "LEFT", TukuiPlayer, -40, -3 },
+			
+			-- Power Conversion - Arcanotron
+            { spellID = 79729, size = 36, unitId = "focus", caster = "all", filter = "BUFF" },
+			-- Sheep mage
+            { spellID = 28271, size = 36, unitId = "focus", caster = "player", filter = "DEBUFF" },
+			-- remedy -- for spellsteal 
+			{ spellID = 77912, size = 36, unitId = "focus", caster = "all", filter = "BUFF" },
+			-- test mage ward
+			--{ spellID = 543, size = 36, unitId = "focus", caster = "player", filter = "BUFF" },
 		},
 	},
 }	
