@@ -252,7 +252,7 @@ GameTooltip:HookScript("OnTooltipSetUnit", function(self)
 	local race = UnitRace(unit)
 	local class = UnitClass(unit)
 	local level = UnitLevel(unit)
-	local guild = GetGuildInfo(unit)
+	local guildName, guildRankName, guildRankIndex = GetGuildInfo(unit)
 	local name, realm = UnitName(unit)
 	local crtype = UnitCreatureType(unit)
 	local classif = UnitClassification(unit)
@@ -272,8 +272,12 @@ GameTooltip:HookScript("OnTooltipSetUnit", function(self)
 		end
 
 		local offset = 2
-		if guild then
-			_G["GameTooltipTextLeft2"]:SetFormattedText("%s", IsInGuild() and GetGuildInfo("player") == guild and "|cff0090ff"..guild.."|r" or "|cff00ff10"..guild.."|r")
+		if guildName then
+		    if UnitIsInMyGuild(unit) then
+				_G["GameTooltipTextLeft2"]:SetText("<".."|cff0090ff"..guildName.."|r> [".."|cff00ff10"..guildRankName.."|r]") -- setting guildranks here
+			else
+			    _G["GameTooltipTextLeft2"]:SetText("<|cff00ff10"..guildName.."|r> [|cff00ff10"..guildRankName.."|r]")
+			end	
 			offset = offset + 1
 		end
 
@@ -356,7 +360,7 @@ local BorderColor = function(self)
 end
 
 local SetStyle = function(self)
-	self:SetTemplate("Default")
+	self:SetTemplate("Hydra", true)
 	BorderColor(self)
 end
 
@@ -368,7 +372,7 @@ TukuiTooltip:SetScript("OnEvent", function(self)
 	
 	ItemRefTooltip:HookScript("OnTooltipSetItem", SetStyle)
 	ItemRefTooltip:HookScript("OnShow", SetStyle)	
-	FriendsTooltip:SetTemplate("Default")
+	FriendsTooltip:SetTemplate("Hydra", true)
 		
 	self:UnregisterEvent("PLAYER_ENTERING_WORLD")
 	self:SetScript("OnEvent", nil)

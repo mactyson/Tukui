@@ -885,12 +885,12 @@ T.UpdateThreat = function(self, event, unit)
 --------------------------------------------------------------------------------------------
 
 T.countOffsets = {
-	TOPLEFT = {6*C["unitframes"].gridscale, 1},
-	TOPRIGHT = {-6*C["unitframes"].gridscale, 1},
-	BOTTOMLEFT = {6*C["unitframes"].gridscale, 1},
-	BOTTOMRIGHT = {-6*C["unitframes"].gridscale, 1},
-	LEFT = {6*C["unitframes"].gridscale, 1},
-	RIGHT = {-6*C["unitframes"].gridscale, 1},
+	TOPLEFT = {5*C["unitframes"].gridscale, 1},
+	TOPRIGHT = {-5*C["unitframes"].gridscale, 1},
+	BOTTOMLEFT = {5*C["unitframes"].gridscale, 1},
+	BOTTOMRIGHT = {-5*C["unitframes"].gridscale, 1},
+	LEFT = {5*C["unitframes"].gridscale, 1},
+	RIGHT = {-5*C["unitframes"].gridscale, 1},
 	TOP = {0, 0},
 	BOTTOM = {0, 0},
 }
@@ -940,8 +940,8 @@ T.createAuraWatch = function(self, unit)
 			local icon = CreateFrame("Frame", nil, auras)
 			icon.spellID = spell[1]
 			icon.anyUnit = spell[4]
-			icon:SetWidth(T.Scale(6*C["unitframes"].gridscale))
-			icon:SetHeight(T.Scale(6*C["unitframes"].gridscale))
+			icon:SetWidth(T.Scale(5*C["unitframes"].gridscale))
+			icon:SetHeight(T.Scale(5*C["unitframes"].gridscale))
 			icon:SetPoint(spell[2], 0, 0)
 
 			local tex = icon:CreateTexture(nil, "OVERLAY")
@@ -954,7 +954,7 @@ T.createAuraWatch = function(self, unit)
 			end
 
 			local count = icon:CreateFontString(nil, "OVERLAY")
-			count:SetFont(C["media"].uffont, 8*C["unitframes"].gridscale, "THINOUTLINE")
+			count:SetFont(C["media"].pixelfont, 8, "OUTLINEMONOCHROME")
 			count:SetPoint("CENTER", unpack(T.countOffsets[spell[2]]))
 			icon.count = count
 

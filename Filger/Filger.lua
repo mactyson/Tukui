@@ -96,8 +96,8 @@ function Update(self)
 					bar.count = _G[bar.count:GetName()]
 				else
 					bar.count = bar:CreateFontString("$parentCount", "OVERLAY");
-					bar.count:SetFont(C["media"].uffont, 14, "OUTLINE");
-					bar.count:SetPoint("BOTTOMRIGHT", T.Scale(1), T.Scale(-1));
+					bar.count:SetFont(C["media"].pixelfont, 16, "MONOCHROMEOUTLINE");
+					bar.count:SetPoint("TOPLEFT", T.Scale(-2), T.Scale(2));
 					bar.count:SetJustifyH("CENTER");
 				end
 			else
@@ -141,7 +141,7 @@ function Update(self)
 					bar.time = _G[bar.time:GetName()]
 				else			
 					bar.time = bar.statusbar:CreateFontString("$parentTime", "ARTWORK");
-					bar.time:SetFont(C["media"].uffont, 14, "OUTLINE");
+					bar.time:SetFont(C["media"].pixelfont, 14, "MONOCHROMEOUTLINE");
 					bar.time:SetPoint("RIGHT", bar.statusbar, T.Scale(0), 0);
 				end
 				
@@ -149,8 +149,8 @@ function Update(self)
 					bar.count = _G[bar.count:GetName()]
 				else
 					bar.count = bar:CreateFontString("$parentCount", "ARTWORK");
-					bar.count:SetFont(C["media"].uffont, 14, "OUTLINE");
-					bar.count:SetPoint("BOTTOMRIGHT", T.Scale(1), T.Scale(1));
+					bar.count:SetFont(C["media"].pixelfont, 16, "MONOCHROMEOUTLINE");
+					bar.count:SetPoint("TOPLEFT", T.Scale(-2), T.Scale(2));
 					bar.count:SetJustifyH("CENTER");
 				end
 				
@@ -158,7 +158,7 @@ function Update(self)
 					bar.spellname = _G[bar.spellname:GetName()]
 				else
 					bar.spellname = bar.statusbar:CreateFontString("$parentSpellName", "ARTWORK");
-					bar.spellname:SetFont(C["media"].uffont, 14, "OUTLINE");
+					bar.spellname:SetFont(C["media"].pixelfont, 14, "MONOCHROMEOUTLINE");
 					bar.spellname:SetPoint("LEFT", bar.statusbar, T.Scale(2), 0);
 					bar.spellname:SetPoint("RIGHT", bar.time, "LEFT");
 					bar.spellname:SetJustifyH("LEFT");

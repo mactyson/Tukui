@@ -79,9 +79,48 @@ local function Shared(self, unit)
 	
 	self:SetScript("OnLeave", function(self) Healthbg.shadow:Hide() end)
 	-- end hydra glow
+	
+	local power = CreateFrame("StatusBar", nil, self)
+	power:Size(40, 2)
+	power:Point("LEFT", health, "BOTTOMLEFT", 5, -2)
+	power:SetFrameLevel(4)
+	power:SetStatusBarTexture(normTex)
+	self.Power = power
 
+	-- power border
+	local powerborder = CreateFrame("Frame", nil, self)
+	T.CreatePanel(powerborder, 1, 1, "CENTER", health, "CENTER", 0, 0)
+	powerborder:ClearAllPoints()
+	powerborder:SetPoint("TOPLEFT", power, T.Scale(-2), T.Scale(2))
+	powerborder:SetPoint("BOTTOMRIGHT", power, T.Scale(2), T.Scale(-2))
+	powerborder:SetFrameStrata("MEDIUM")
+    powerborder:SetTemplate("Hydra")
+	powerborder:SetFrameLevel(4)
+	self.powerborder = powerborder
+	-- end border
+
+	power.frequentUpdates = true
+	power.colorDisconnected = true
+
+	power.bg = power:CreateTexture(nil, "BORDER")
+	power.bg:SetAllPoints(power)
+	power.bg:SetTexture(normTex)
+	power.bg:SetAlpha(1)
+	power.bg.multiplier = 0.4
+	
+	if C["unitframes"].showsmooth == true then
+		power.Smooth = true
+	end
+		
+	if C["unitframes"].unicolor == true then
+		power.colorTapping = true
+		power.colorClass = true
+	else
+		power.colorPower = true
+	end
+	
 	local name = health:CreateFontString(nil, "OVERLAY")
-    name:SetPoint("CENTER", health, "CENTER", 1, 1)
+    name:SetPoint("CENTER", health, "CENTER", 1, -0)
 	name:SetFont(C["media"].pixelfont, 8, "MONOCHROMEOUTLINE")
 	self:Tag(name, "[Tukui:getnamecolor][Tukui:nameshort]")
 	self.Name = name
@@ -95,8 +134,8 @@ local function Shared(self, unit)
 	
 	if C["unitframes"].showsymbols == true then
 		local RaidIcon = health:CreateTexture(nil, 'OVERLAY')
-		RaidIcon:Height(18*T.raidscale)
-		RaidIcon:Width(18*T.raidscale)
+		RaidIcon:Height(15*T.raidscale)
+		RaidIcon:Width(15*T.raidscale)
 		RaidIcon:SetPoint('CENTER', self, 'TOP')
 		RaidIcon:SetTexture("Interface\\AddOns\\Tukui\\medias\\textures\\raidicons.blp") -- thx hankthetank for texture
 		self.RaidIcon = RaidIcon
@@ -152,8 +191,8 @@ local function Shared(self, unit)
 		
 		-- Raid Debuffs (big middle icon)
 		local RaidDebuffs = CreateFrame('Frame', nil, self)
-		RaidDebuffs:Height(20*C["unitframes"].gridscale)
-		RaidDebuffs:Width(20*C["unitframes"].gridscale)
+		RaidDebuffs:Height(18*C["unitframes"].gridscale)
+		RaidDebuffs:Width(18*C["unitframes"].gridscale)
 		RaidDebuffs:Point('CENTER', health, 1,0)
 		RaidDebuffs:SetFrameStrata(health:GetFrameStrata())
 		RaidDebuffs:SetFrameLevel(health:GetFrameLevel() + 2)
@@ -176,7 +215,7 @@ local function Shared(self, unit)
 		--]]
 		
 		RaidDebuffs.count = RaidDebuffs:CreateFontString(nil, 'OVERLAY')
-		RaidDebuffs.count:SetFont(C["media"].uffont, 9*C["unitframes"].gridscale, "THINOUTLINE")
+		RaidDebuffs.count:SetFont(C["media"].pixelfont, 9, "MONOCHROMEOUTLINE")
 		RaidDebuffs.count:SetPoint('BOTTOMRIGHT', RaidDebuffs, 'BOTTOMRIGHT', 0, 2)
 		RaidDebuffs.count:SetTextColor(1, .9, 0)
 		
@@ -200,14 +239,14 @@ oUF:Factory(function(self)
 			'initial-height', T.Scale(22.3*C["unitframes"].gridscale*T.raidscale),	
 			"showRaid", true,
 			"xoffset", T.Scale(7),
-			"yOffset", T.Scale(-7),
+			"yOffset", T.Scale(-10),
 			"point", "LEFT",
 			"groupFilter", "1,2,3,4,5,6,7,8",
 			"groupingOrder", "1,2,3,4,5,6,7,8",
 			"groupBy", "GROUP",
 			"maxColumns", 5,
 			"unitsPerColumn", 5,
-			"columnSpacing", T.Scale(15),
+			"columnSpacing", T.Scale(17),
 			"columnAnchorPoint", "BOTTOM"		
 		)
 		raid:SetPoint("TOPLEFT", UIParent, 15, -10*T.raidscale)
@@ -224,14 +263,14 @@ oUF:Factory(function(self)
 			"showPlayer", C["unitframes"].showplayerinparty, 
 			"showRaid", true, 
 			"xoffset", T.Scale(7),
-			"yOffset", T.Scale(-7),
+			"yOffset", T.Scale(-10),
 			"point", "LEFT",
 			"groupFilter", "1,2,3,4,5,6,7,8",
 			"groupingOrder", "1,2,3,4,5,6,7,8",
 			"groupBy", "GROUP",
 			"maxColumns", 5,
 			"unitsPerColumn", 5,
-			"columnSpacing", T.Scale(7),
+			"columnSpacing", T.Scale(17),
 			"columnAnchorPoint", "BOTTOM"		
 		)
 		raid:SetPoint("TOPLEFT", UIParent, 15, -10*T.raidscale)
