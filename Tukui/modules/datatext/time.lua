@@ -1,4 +1,4 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L = unpack(select(2, ...)) 
 --------------------------------------------------------------------
 -- TIME
 --------------------------------------------------------------------
@@ -25,6 +25,37 @@ Text:SetFont(C.media.pixelfont2, C["datatext"].fontsize,C["datatext"].fontflag)
 T.PP(C["datatext"].wowtime, Text)
 
 local APM = { TIMEMANAGER_PM, TIMEMANAGER_AM }
+
+--------------------------------------------------------------------
+-- Blink by Hydra
+--------------------------------------------------------------------	
+	SetUpAnimGroup = function(self)
+		self.anim = self:CreateAnimationGroup("Flash")
+		self.anim.fadein = self.anim:CreateAnimation("ALPHA", "FadeIn")
+		self.anim.fadein:SetChange(1)
+		self.anim.fadein:SetOrder(2)
+
+		self.anim.fadeout = self.anim:CreateAnimation("ALPHA", "FadeOut")
+		self.anim.fadeout:SetChange(-1)
+		self.anim.fadeout:SetOrder(1)
+	end
+
+	Flash = function(self, duration)
+		if not self.anim then
+			SetUpAnimGroup(self)
+		end
+
+		self.anim.fadein:SetDuration(duration)
+		self.anim.fadeout:SetDuration(duration)
+		self.anim:Play()
+	end
+
+	StopFlash = function(self)
+		if self.anim then
+			self.anim:Finish()
+		end
+	end
+--------------------------------------------------------------------
 
 local function CalculateTimeValues(tt)
 	if tt == nil then tt = false end
@@ -88,7 +119,7 @@ local function CalculateTimeLeft(time)
 		local hour = floor(time / 3600)
 		local min = floor(time / 60 - (hour*60))
 		local sec = time - (hour * 3600) - (min * 60)
-
+		
 		return hour, min, sec
 end
 
@@ -104,25 +135,27 @@ local int = 1
 local function Update(self, t)
 	int = int - t
 	if int > 0 then return end
-
+	
 	local Hr, Min, AmPm = CalculateTimeValues()
-
-    if CalendarGetNumPendingInvites() > 0 then
-        Text:SetTextColor(1, 0, 0)
-    else
-        Text:SetTextColor(1, 1, 1)
-    end
+	
+	if CalendarGetNumPendingInvites() > 0 then
+		Text:SetTextColor(1, 0, 0)
+		Flash(Text, 0.5)
+	else
+		Text:SetTextColor(1, 1, 1)
+		StopFlash(Text)
+	end
 	
 	-- no update quick exit
 	if (Hr == curHr and Min == curMin and AmPm == curAmPm) then
 		int = 2
 		return
 	end
-
+	
 	curHr = Hr
 	curMin = Min
 	curAmPm = AmPm
-
+		
 	if AmPm == -1 then
 		Text:SetFormattedText(europeDisplayFormat, Hr, Min)
 	else
@@ -167,13 +200,13 @@ Stat:SetScript("OnEnter", function(self)
 	else
 		timeText = L.datatext_localtime
 	end
-
+	
 	if AmPm == -1 then
 		GameTooltip:AddDoubleLine(timeText, string.format(europeDisplayFormat, Hr, Min))
 	else
 		GameTooltip:AddDoubleLine(timeText, string.format(ukDisplayFormat, Hr, Min, APM[AmPm]))
 	end
-
+	
 	local oneraid, lockoutColor
 	for i = 1, GetNumSavedInstances() do
 		local name, _, reset, difficulty, locked, extended, _, isRaid, maxPlayers, _, numEncounters, encounterProgress  = GetSavedInstanceInfo(i)
