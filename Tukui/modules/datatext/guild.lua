@@ -1,10 +1,9 @@
-
+local T, C, L = unpack(select(2, ...)) 
 --------------------------------------------------------------------
 -- GUILD ROSTER
 --------------------------------------------------------------------
-local E, C, L = unpack(select(2, ...)) -- Import Functions/Constants, Config, Locales
 
-local USE_EPGP = true
+local USE_EPGP = false
 
 if C["datatext"].guild and C["datatext"].guild > 0 then	
 
@@ -43,7 +42,7 @@ if C["datatext"].guild and C["datatext"].guild > 0 then
 
 	local Text  = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
     Text:SetFont(C.media.pixelfont2, C["datatext"].fontsize,C["datatext"].fontflag)
-	E.PP(C["datatext"].guild, Text)
+	T.PP(C["datatext"].guild, Text)
 
 	local BASE_GP = 1
 	local function ParseGuildInfo(info)
@@ -206,9 +205,8 @@ if C["datatext"].guild and C["datatext"].guild > 0 then
 				local online, total, gmotd = 0, GetNumGuildMembers(true), GetGuildRosterMOTD()
 				for i = 0, total do if select(9, GetGuildRosterInfo(i)) then online = online + 1 end end
 
-				GameTooltip:SetOwner(self, "ANCHOR_TOP", 0, E.Scale(6));
-				GameTooltip:ClearAllPoints()
-				--GameTooltip:SetPoint("BOTTOM", self, "TOP", 0, E.mult)
+			    local anchor, panel, xoff, yoff = T.DataTextTooltipAnchor(Text)
+			    GameTooltip:SetOwner(panel, anchor, xoff, yoff)
 				GameTooltip:ClearLines()
 				GameTooltip:AddDoubleLine(GetGuildInfo'player',format("%s: %d/%d",GUILD,online,total),tthead.r,tthead.g,tthead.b,tthead.r,tthead.g,tthead.b)
 				GameTooltip:AddLine' '

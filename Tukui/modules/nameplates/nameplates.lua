@@ -50,6 +50,8 @@ local PlateBlacklist = {
 	--Hunter Trap
 	["Venomous Snake"] = true,
 	["Viper"] = true,
+	
+	["Lava Parasite"] = true, -- dont wanna see magmaw parasites
 
 	--Test
 	--["Unbound Seer"] = true,

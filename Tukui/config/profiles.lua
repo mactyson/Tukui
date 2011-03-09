@@ -12,4 +12,5 @@ end
 
 if T.myname== "Noshi" then
    C.actionbar.hideshapeshift = true
+   C.unitframes.trikz = false
 end   

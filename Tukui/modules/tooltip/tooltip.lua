@@ -37,7 +37,7 @@ else
 	anchor:SetPoint("BOTTOMRIGHT", TukuiInfoRight)
 end
 anchor:SetTemplate("Hydra")
-anchor:SetBackdropBorderColor(1, 0, 0, 1)
+anchor:SetBackdropBorderColor(C.media.backdropcolor)
 anchor:SetMovable(true)
 anchor.text = T.SetFontString(anchor, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 anchor.text:SetPoint("CENTER")

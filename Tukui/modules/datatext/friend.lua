@@ -1,7 +1,7 @@
+local T, C, L = unpack(select(2, ...)) 
 --------------------------------------------------------------------
 -- FRIEND
 --------------------------------------------------------------------
-local E, C, L = unpack(select(2, ...)) -- Import Functions/Constants, Config, Locales
 
 if C["datatext"].friends and C["datatext"].friends > 0 then
 
@@ -62,7 +62,7 @@ if C["datatext"].friends and C["datatext"].friends > 0 then
 
 	local Text  = TukuiInfoLeft:CreateFontString(nil, "OVERLAY")
     Text:SetFont(C.media.pixelfont2, C["datatext"].fontsize,C["datatext"].fontflag)
-	E.PP(C["datatext"].friends, Text)
+	T.PP(C["datatext"].friends, Text)
 
 	local friendMenuFrame = nil
 
@@ -183,9 +183,8 @@ if C["datatext"].friends and C["datatext"].friends > 0 then
 			local totalfriends = total + BNtotal					
 
 			if online > 0 or BNonline > 0 then
-				GameTooltip:SetOwner(self, "ANCHOR_TOP", 0, E.Scale(6));
-				GameTooltip:ClearAllPoints()
-				--GameTooltip:SetPoint("BOTTOM", self, "TOP", 0, E.mult)
+			    local anchor, panel, xoff, yoff = T.DataTextTooltipAnchor(Text)
+			    GameTooltip:SetOwner(panel, anchor, xoff, yoff)
 				GameTooltip:ClearLines()
 				GameTooltip:AddDoubleLine(L.datatext_friendlist, format("%s/%s",totalonline,totalfriends),tthead.r,tthead.g,tthead.b,tthead.r,tthead.g,tthead.b)
 
@@ -351,7 +350,7 @@ if C["datatext"].friends and C["datatext"].friends > 0 then
 							if playerRealm == realmName then
 								if playerFaction == faction then
 										if UnitInParty(toonName) or UnitInRaid(toonName) then
-											grouped = "|cffaaaaaa*|r"
+											grouped = "|cffaaaaaa<*|r"
 										else
 											grouped = ""
 											menuCountInvites = menuCountInvites + 1
