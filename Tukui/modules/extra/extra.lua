@@ -1235,7 +1235,7 @@ local function mailLoop(this, arg1)
 			elseif bagCheck() < 1 then
 				triggerStop = true
 				xanAutoMail:StopMail()
-				DEFAULT_CHAT_FRAME:AddMessage("xanAutoMail: Your bags are full")
+				DEFAULT_CHAT_FRAME:AddMessage(hexa.."xanAutoMail: Your bags are full"..hexb)
 			else
 				if money > 0 then moneyCount = moneyCount + money end
 				AutoLootMailItem(numInboxItems)

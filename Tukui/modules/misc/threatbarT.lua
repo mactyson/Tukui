@@ -1,6 +1,7 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 -- Very simple threat bar for T.
-if C["interface"].style ~= "Tukui" then return end
+--if C["interface"].style ~= "Tukui" then return end
+if C.interface.style ~= "Tukui" then return end
 
 -- cannot work without Right Tab background Panel.
 --if not TukuiTabsRightBackground then return end

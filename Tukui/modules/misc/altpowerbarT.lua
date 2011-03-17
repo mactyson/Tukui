@@ -1,7 +1,8 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 
 if IsAddOnLoaded("SmellyPowerBar") then return end
-if C["interface"].style ~= "Tukui" then return end
+--if C["interface"].style ~= "Tukui" then return end
+if C.interface.style ~= "Tukui" then return end
 
 -- Get rid of old Alt Power Bar
 PlayerPowerBarAlt:UnregisterEvent("UNIT_POWER_BAR_SHOW")

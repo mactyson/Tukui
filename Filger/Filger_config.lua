@@ -61,6 +61,90 @@ ns.Filger_Spells = {
             { spellID = 83074, size = 47, unitId = "player", caster = "player", filter = "BUFF"},		
 		},
 	},
+	["PRIEST"] = { -------------------------------------------------------------------------------------------------------- Priest
+		{
+			Name = "Buffs and Debuffs",
+			Direction = "LEFT",
+			Interval = 4,
+			Mode = "ICON",
+			setPoint = { "CENTER", UIParent, -84, -345 },
+
+
+			-- Prayer of Mending
+			{ spellID = 41637, size = 27, unitId = "player", caster = "player", filter = "BUFF" },
+			-- Guardian Spirit
+			{ spellID = 47788, size = 27, unitId = "player", caster = "player", filter = "BUFF" },
+			-- Pain Suppression
+			{ spellID = 33206, size = 27, unitId = "player", caster = "player", filter = "BUFF" },
+			-- Renew
+			{ spellID = 139, size = 27, unitId = "player", caster = "player", filter = "BUFF" },
+			-- Power Word: Shield
+			{ spellID = 17, size = 27, unitId = "player", caster = "player", filter = "BUFF" },
+			
+			-- Chakra: Serenity
+			{ spellID = 81208, size = 27, unitId = "player", caster = "player", filter = "BUFF" },
+			-- Chakra: Sanctuary
+			{ spellID = 81206, size = 27, unitId = "player", caster = "player", filter = "BUFF" },
+			-- Chakra: Chastise
+			{ spellID = 81209, size = 27, unitId = "player", caster = "player", filter = "BUFF" },
+		},
+	    {
+			Name = "Priest Procs",
+			Direction = "LEFT",
+			Interval = 4,
+			Mode = "ICON",
+			setPoint = { "CENTER", UIParent, -84, -315 },
+
+			-- Surge of Light
+			{ spellID = 33151, size = 27, unitId = "player", caster = "all", filter = "BUFF" },
+			-- Serendipity
+			{ spellID = 63730, size = 27, unitId = "player", caster = "player", filter = "BUFF" },
+			-- Shadow Orb
+			{ spellID = 77487, size = 27, unitId = "player", caster = "player", filter = "BUFF" },
+			-- Archangel
+			{ spellID = 81700, size = 27, unitId = "player", caster = "player", filter = "BUFF" },
+			-- Evangelism
+			{ spellID = 81661, size = 27, unitId = "player", caster = "player", filter = "BUFF" },
+			-- Dispersion
+			{ spellID = 47585, size = 27, unitId = "player", caster = "player", filter = "BUFF" },
+		},	
+		{
+			Name = "Buffs and Debuffs",
+			Direction = "UP",
+			Interval = 3,
+			Mode = "ICON",
+			setPoint = { "RIGHT", TukuiTarget, 42, -3 },
+
+			-- Prayer of Mending
+			{ spellID = 41637, size = 36, unitId = "target", caster = "player", filter = "BUFF" },
+			-- Guardian Spirit
+			{ spellID = 47788, size = 36, unitId = "target", caster = "player", filter = "BUFF" },
+			-- Pain Suppression
+			{ spellID = 33206, size = 36, unitId = "target", caster = "player", filter = "BUFF" },
+			-- Power Word: Shield
+			{ spellID = 17, size = 36, unitId = "target", caster = "player", filter = "BUFF" },
+			-- Renew
+			{ spellID = 139, size = 36, unitId = "target", caster = "player", filter = "BUFF" },
+		},
+		{
+			Name = "Buffs and Debuffs",
+			Direction = "UP",
+			Interval = 3,
+			Mode = "ICON",
+			setPoint = { "RIGHT", TukuiTarget, 82, -3 },
+
+			-- Shackle undead
+			{ spellID = 9484, size = 36, unitId = "target", caster = "all", filter = "DEBUFF" },
+			-- Psychic Scream
+			{ spellID = 8122, size = 36, unitId = "target", caster = "all", filter = "DEBUFF" },
+			-- Shadow Word: Pain
+			{ spellID = 589, size = 36, unitId = "target", caster = "player", filter = "DEBUFF" },
+			-- Devouring Plague
+			{ spellID = 2944, size = 36, unitId = "target", caster = "player", filter = "DEBUFF" },
+			-- Vampiric Touch
+			{ spellID = 34914, size = 36, unitId = "target", caster = "player", filter = "DEBUFF" },
+		},
+	},
 	["WARLOCK"] = { -------------------------------------------------------------------------------------------------------- Warlock
 		{
 			Name = "Warlock Procs",
@@ -680,7 +764,7 @@ ns.Filger_Spells = {
 			Direction = "LEFT",
 			Interval = 2,
 			Mode = "ICON",
-			setPoint = { "LEFT", TukuiPlayer, -40, -3 },
+			setPoint = { "LEFT", TukuiPlayer, -42, -3 },
 			
 			-- Power Conversion - Arcanotron
             { spellID = 79729, size = 36, unitId = "focus", caster = "all", filter = "BUFF" },

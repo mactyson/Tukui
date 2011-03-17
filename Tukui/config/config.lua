@@ -1,7 +1,7 @@
-﻿local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+﻿local T, C, L = unpack(select(2, ...)) 
 
 C["interface"] = {                               -- changes heal raid layout, chatbackground and much more
-    ["style"]  = "Jasje",                        -- interface style, Jasje is very minimal, Tukui is much more
+    ["style"]  = "Jasje",                        -- interface style, Jasje is very minimal, Tukui is much more so choose between Jasje of Tukz (with capitals)
 }	
 
 C["general"] = {
@@ -109,8 +109,8 @@ C["cooldown"] = {
 	["enable"] = true,                                  -- do i really need to explain this?
 	["treshold"] = 2,                                   -- show decimal under X seconds and text turn red
 }
-                          -- only use 8 and 9 in Jasje layout, not in Tukui
-C["datatext"] = { -- number 7 can only be used when chat.background is enabled
+                          -- 8 and 9 are only usable in Jasje layout, not in Tukui
+C["datatext"] = { 
 	["fps_ms"] = 5,                                     -- show fps and ms on panels
 	["system"] = 0,                                     -- show total memory and others systems infos on panels
 	["bags"] = 0,                                       -- show space used in bags on panels

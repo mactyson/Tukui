@@ -1,7 +1,6 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+local T, C, L = unpack(select(2, ...)) 
 
-if not C["actionbar"].enable == true then return end
-if C["interface"].style ~= "Jasje" then return end
+if not C.actionbar.enable or C.interface.style ~= "Jasje" then return end
 
 ---------------------------------------------------------------------------
 -- setup MultiBarBottomLeft as bar #2

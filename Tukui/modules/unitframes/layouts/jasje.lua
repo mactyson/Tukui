@@ -1,6 +1,6 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
-if not C["unitframes"].enable == true then return end
-if C["interface"].style ~= "Jasje" then return end
+local T, C, L = unpack(select(2, ...))
+
+if not C.unitframes.enable or C.interface.style ~= "Jasje" then return end
 
 local ADDON_NAME, ns = ...
 local oUF = ns.oUF or oUF

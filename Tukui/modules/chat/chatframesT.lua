@@ -1,6 +1,6 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
-if C["chat"].enable ~= true then return end
-if C["interface"].style ~= "Tukui" then return end
+local T, C, L = unpack(select(2, ...)) 
+
+if not C.chat.enable or C.interface.style ~= "Tukui" then return end
 
 -----------------------------------------------------------------------
 -- SETUP TUKUI CHATS

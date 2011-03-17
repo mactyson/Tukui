@@ -45,3 +45,20 @@ SlashCmdList["RAIDDISBAND"] = function()
 		end
 		LeaveParty()
 end
+--[[
+-- saw this in Duffed edit but doesnt work yet. gonna work on it later
+-- layout via slash command
+SLASH_JASJELAYOUT1 = "/layout"
+SlashCmdList["JASJELAYOUT"] = function(msg) 
+	if C.interface.style == nil then C.interface.style = {} end
+	if msg == "Jasje" then
+		C.interface.style = "Jasje"
+		ReloadUI()
+	elseif msg == "Tukui" then
+		C.interface.style = "Tukui"
+		ReloadUI()
+	else
+		print("|cffff0000/layout Jasje or /layout Tukui|r")
+	end
+end
+]]--

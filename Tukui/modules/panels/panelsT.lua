@@ -1,5 +1,6 @@
-local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
-if C["interface"].style ~= "Tukui" then return end
+local T, C, L = unpack(select(2, ...)) 
+
+if C.interface.style ~= "Tukui" then return end
 
 local TukuiBar1 = CreateFrame("Frame", "TukuiBar1", UIParent, "SecureHandlerStateTemplate")
 TukuiBar1:CreatePanel("Hydra", 1, 1, "BOTTOM", UIParent, "BOTTOM", 0, 7)

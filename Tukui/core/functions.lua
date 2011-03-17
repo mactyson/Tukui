@@ -54,21 +54,18 @@ T.PP = function(p, obj)
 		obj:SetPoint("RIGHT", right, -30, 0)
 		obj:SetPoint('TOP', right, 0, 2)
 		obj:SetPoint('BOTTOM', right)
-	elseif p == 7 then
-		obj:SetParent(tabright)
-		obj:SetHeight(tabright:GetHeight())
-		obj:SetPoint("RIGHT", tabright, -10, 0)
-		obj:SetPoint('TOP', tabright, 0, 4)
-		obj:SetPoint('BOTTOM', tabright)
-		elseif p == 8 then
+	end
+if C.interface.style == "Jasje" then 	
+	if p == 8 then
 		obj:SetParent(pvedl)
 		obj:SetHeight(pvedl:GetHeight())
 		obj:SetPoint("CENTER", pvedl, 0, 2)
-		elseif p == 9 then
+	elseif p == 9 then
 		obj:SetParent(pvedr)
 		obj:SetHeight(pvedr:GetHeight())
 		obj:SetPoint("CENTER", pvedr, 0, 2)
 	end
+end	
 	--[[
 	if TukuiMinimap then
 		if p == 7 then
