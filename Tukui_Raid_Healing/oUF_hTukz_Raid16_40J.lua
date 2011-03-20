@@ -5,9 +5,8 @@ assert(oUF, "Tukui was unable to locate oUF install.")
 ns._Objects = {}
 ns._Headers = {}
 
-local T, C, L = unpack(Tukui) -- Import: T - functions, constants, variables; C - config; L - locales
-if not C["unitframes"].enable == true then return end
-if C["interface"].style ~= "Jasje" then return end
+local T, C, L = unpack(Tukui) 
+if not C.unitframes.enable and C.interface.style ~= "Jasje" == true then return end
 
 local font2 = C["media"].uffont
 local font1 = C["media"].font
@@ -28,7 +27,7 @@ local function Shared(self, unit)
 	local health = CreateFrame('StatusBar', nil, self)
 	health:SetPoint("TOPLEFT")
 	health:SetPoint("TOPRIGHT")
-	health:Height(22*C["unitframes"].gridscale*T.raidscale)
+	health:Height(27*C["unitframes"].gridscale*T.raidscale)
 	health:SetStatusBarTexture(normTex)
 	self.Health = health
 	
@@ -69,14 +68,13 @@ local function Shared(self, unit)
 	T.CreateShadow(Healthbg)
 	Healthbg.shadow:Hide()
 	
-	self:HookScript("OnEnter", function(self)
-		local unit = self.unit
-		local class = select(2, UnitClass(unit))
-		local color = RAID_CLASS_COLORS[class]
+	self:HookScript("OnEnter", function(self) 
+		if not UnitIsPlayer(self.unit) then return end
+		local color = RAID_CLASS_COLORS[select(2, UnitClass(self.unit))]
 		Healthbg.shadow:SetBackdropBorderColor(color.r,color.g,color.b,0.7)
 		Healthbg.shadow:Show()
 	end)
-	
+
 	self:SetScript("OnLeave", function(self) Healthbg.shadow:Hide() end)
 	-- end hydra glow
 	
@@ -236,7 +234,7 @@ oUF:Factory(function(self)
 				self:SetHeight(header:GetAttribute('initial-height'))
 			]],
 			'initial-width', T.Scale(50*C["unitframes"].gridscale*T.raidscale),
-			'initial-height', T.Scale(22.3*C["unitframes"].gridscale*T.raidscale),	
+			'initial-height', T.Scale(27.3*C["unitframes"].gridscale*T.raidscale),	
 			"showRaid", true,
 			"xoffset", T.Scale(7),
 			"yOffset", T.Scale(-7),
@@ -258,7 +256,7 @@ oUF:Factory(function(self)
 				self:SetHeight(header:GetAttribute('initial-height'))
 			]],
 			'initial-width', T.Scale(50*C["unitframes"].gridscale*T.raidscale),
-			'initial-height', T.Scale(22.3*C["unitframes"].gridscale*T.raidscale),
+			'initial-height', T.Scale(27.3*C["unitframes"].gridscale*T.raidscale),
 			"showParty", true,
 			"showPlayer", C["unitframes"].showplayerinparty, 
 			"showRaid", true, 

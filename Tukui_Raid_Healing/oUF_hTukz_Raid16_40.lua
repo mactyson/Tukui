@@ -5,9 +5,8 @@ assert(oUF, "Tukui was unable to locate oUF install.")
 ns._Objects = {}
 ns._Headers = {}
 
-local T, C, L = unpack(Tukui) -- Import: T - functions, constants, variables; C - config; L - locales
-if not C["unitframes"].enable == true then return end
-if C["interface"].style ~= "Tukui" then return end
+local T, C, L = unpack(Tukui) 
+if not C.unitframes.enable or C.interface.style ~= "Tukui" == true then return end  
 
 local font2 = C["media"].uffont
 local font1 = C["media"].font
@@ -69,10 +68,9 @@ local function Shared(self, unit)
 	T.CreateShadow(Healthbg)
 	Healthbg.shadow:Hide()
 	
-	self:HookScript("OnEnter", function(self)
-		local unit = self.unit
-		local class = select(2, UnitClass(unit))
-		local color = RAID_CLASS_COLORS[class]
+	self:HookScript("OnEnter", function(self) 
+		if not UnitIsPlayer(self.unit) then return end
+		local color = RAID_CLASS_COLORS[select(2, UnitClass(self.unit))]
 		Healthbg.shadow:SetBackdropBorderColor(color.r,color.g,color.b,0.7)
 		Healthbg.shadow:Show()
 	end)
