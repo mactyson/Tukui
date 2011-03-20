@@ -58,7 +58,23 @@ ns.Filger_Spells = {
 			--Arcane Blast
 			{ spellID = 30451, size = 47, unitId = "player", caster = "player", filter = "DEBUFF" },
 			--Fingers Of Frost
-            { spellID = 83074, size = 47, unitId = "player", caster = "player", filter = "BUFF"},		
+            { spellID = 83074, size = 47, unitId = "player", caster = "player", filter = "BUFF"},
+		},
+		{
+			Name = "Focus",  
+			Direction = "LEFT",
+			Interval = 2,
+			Mode = "ICON",
+			setPoint = { "LEFT", TukuiPlayer, -42, -3 },
+			
+			-- Power Conversion - Arcanotron
+            { spellID = 79729, size = 36, unitId = "focus", caster = "all", filter = "BUFF" },
+			-- Sheep mage
+            { spellID = 28271, size = 36, unitId = "focus", caster = "player", filter = "DEBUFF" },
+			-- remedy -- for spellsteal 
+			{ spellID = 77912, size = 36, unitId = "focus", caster = "all", filter = "BUFF" },
+			-- test mage ward
+			--{ spellID = 543, size = 36, unitId = "focus", caster = "player", filter = "BUFF" },			
 		},
 	},
 	["PRIEST"] = { -------------------------------------------------------------------------------------------------------- Priest
@@ -437,20 +453,20 @@ ns.Filger_Spells = {
 		{
 			Name = "Buffs and Debuffs",
 			Direction = "LEFT",
-			Interval = 4,
+			Interval = 2,
 			Mode = "ICON",
-			setPoint = { "CENTER", UIParent, -60, -90 },
+			setPoint = { "LEFT", TukuiPlayer, -42, -3 },
 			-- Earth Shield
-			{ spellID = 974, size = 37, unitId = "player", caster = "player", filter = "BUFF" },
+			{ spellID = 974, size = 36, unitId = "player", caster = "player", filter = "BUFF" },
 			-- Riptide
-			{ spellID = 61295, size = 37, unitId = "player", caster = "player", filter = "BUFF" },
+			{ spellID = 61295, size = 36, unitId = "player", caster = "player", filter = "BUFF" },
 		},
 		{
 			Name = "Shaman Procs",
 			Direction = "DOWN",
 			Interval = 4,
 			Mode = "ICON",
-			setPoint = { "CENTER", "UIParent", -0, -85 },
+			setPoint = { "CENTER", "UIParent", -0, -145 },
 
 			-- Maelstorm Weapon
 			{ spellID = 53817, size = 37, unitId = "player", caster = "player", filter = "BUFF" },
@@ -466,20 +482,20 @@ ns.Filger_Spells = {
 		{
 			Name = "Buffs and Debuffs",
 			Direction = "RIGHT",
-			Interval = 3,
+			Interval = 2,
 			Mode = "ICON",
-			setPoint = { "CENTER", UIParent, 56, -90 },
+			setPoint = { "RIGHT", TukuiTarget, 42, -3 },
 
 			-- Hex
-			{ spellID = 51514, size = 37, unitId = "target", caster = "all", filter = "DEBUFF" },
+			{ spellID = 51514, size = 36, unitId = "target", caster = "all", filter = "DEBUFF" },
 			-- Storm Strike
-			{ spellID = 17364, size = 37, unitId = "target", caster = "player", filter = "DEBUFF" },
+			{ spellID = 17364, size = 36, unitId = "target", caster = "player", filter = "DEBUFF" },
 			-- Earth Shock
-			{ spellID = 8042, size = 37, unitId = "target", caster = "player", filter = "DEBUFF" },
+			{ spellID = 8042, size = 36, unitId = "target", caster = "player", filter = "DEBUFF" },
 			-- Frost Shock
-			{ spellID = 8056, size = 37, unitId = "target", caster = "player", filter = "DEBUFF" },
+			{ spellID = 8056, size = 36, unitId = "target", caster = "player", filter = "DEBUFF" },
 			-- Flame Shock
-			{ spellID = 8050, size = 37, unitId = "target", caster = "player", filter = "DEBUFF" },
+			{ spellID = 8050, size = 36, unitId = "target", caster = "player", filter = "DEBUFF" },
 		},
 	},	
 	["PALADIN"] = { -------------------------------------------------------------------------------------------------------- Paladin
@@ -758,22 +774,6 @@ ns.Filger_Spells = {
 			{ spellID = 8178, size = 72, unitId = "target", caster = "all", filter = "BUFF" },
 			--Hamstring
 	        { spellID = 1715, size = 70, barWidth = 248, unitId = "player", caster = "all", filter = "DEBUFF" },
-		},
-		{
-			Name = "Focus",  -- i wanna see things all the time
-			Direction = "LEFT",
-			Interval = 2,
-			Mode = "ICON",
-			setPoint = { "LEFT", TukuiPlayer, -42, -3 },
-			
-			-- Power Conversion - Arcanotron
-            { spellID = 79729, size = 36, unitId = "focus", caster = "all", filter = "BUFF" },
-			-- Sheep mage
-            { spellID = 28271, size = 36, unitId = "focus", caster = "player", filter = "DEBUFF" },
-			-- remedy -- for spellsteal 
-			{ spellID = 77912, size = 36, unitId = "focus", caster = "all", filter = "BUFF" },
-			-- test mage ward
-			--{ spellID = 543, size = 36, unitId = "focus", caster = "player", filter = "BUFF" },
 		},
 	},
 }	

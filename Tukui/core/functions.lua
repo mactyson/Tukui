@@ -610,7 +610,7 @@ end
 T.PostCreateAura = function(element, button)
 	T.SetTemplate(button)
 	
-	button.remaining = T.SetFontString(button, C["media"].pixelfont, C["unitframes"].auratextscale, "OUTLINEMONOCHROME")
+	button.remaining = T.SetFontString(button, C.media.pixelfont, C.unitframes.auratextscale, "OUTLINEMONOCHROME")
 	button.remaining:Point("CENTER", 1, 0)
 	
 	button.cd.noOCC = true		 	-- hide OmniCC CDs
@@ -622,9 +622,9 @@ T.PostCreateAura = function(element, button)
 	button.icon:SetTexCoord(0.08, 0.92, 0.08, 0.92)
 	button.icon:SetDrawLayer('ARTWORK')
 	
-	button.count:Point("BOTTOMRIGHT", 3, 3)
-	button.count:SetJustifyH("RIGHT")
-	button.count:SetFont(C["media"].font, 9, "THICKOUTLINE")
+	button.count:Point("TOPLEFT", 1, 18)
+	button.count:SetJustifyH("LEFT")
+	button.count:SetFont(C.media.pixelfont, 8, "OUTLINEMONOCHROME")
 	button.count:SetTextColor(0.84, 0.75, 0.65)
 	
 	button.overlayFrame = CreateFrame("frame", nil, button, nil)
@@ -884,8 +884,8 @@ T.UpdateThreat = function(self, event, unit)
 T.countOffsets = {
 	TOPLEFT = {5*C["unitframes"].gridscale, 1},
 	TOPRIGHT = {-5*C["unitframes"].gridscale, 1},
-	BOTTOMLEFT = {5*C["unitframes"].gridscale, 1},
-	BOTTOMRIGHT = {-5*C["unitframes"].gridscale, 1},
+	BOTTOMLEFT = {5*C["unitframes"].gridscale, 3},
+	BOTTOMRIGHT = {-5*C["unitframes"].gridscale, 3},
 	LEFT = {5*C["unitframes"].gridscale, 1},
 	RIGHT = {-5*C["unitframes"].gridscale, 1},
 	TOP = {0, 0},
@@ -951,8 +951,8 @@ T.createAuraWatch = function(self, unit)
 			end
 
 			local count = icon:CreateFontString(nil, "OVERLAY")
-			count:SetFont(C["media"].pixelfont, 8, "OUTLINEMONOCHROME")
-			count:SetPoint("CENTER", unpack(T.countOffsets[spell[2]]))
+			count:SetFont(C.media.pixelfont, 8, "OUTLINEMONOCHROME")
+			count:SetPoint("CENTER", unpack(T.countOffsets[spell[2]])-0,-0)
 			icon.count = count
 
 			auras.icons[spell[1]] = icon

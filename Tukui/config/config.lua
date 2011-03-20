@@ -1,7 +1,7 @@
 ﻿local T, C, L = unpack(select(2, ...)) 
 
-C["interface"] = {                               -- changes heal raid layout, chatbackground and much more
-    ["style"]  = "Jasje",                        -- interface style, Jasje is very minimal, Tukui is much more so choose between Jasje of Tukz (with capitals)
+C["interface"] = {                               -- Layouts
+    ["style"]  = "Jasje",                        --  You can choose between 2 layouts #1 Tukui #2 Jasje
 }	
 
 C["general"] = {

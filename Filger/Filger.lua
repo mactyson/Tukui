@@ -96,8 +96,8 @@ function Update(self)
 					bar.count = _G[bar.count:GetName()]
 				else
 					bar.count = bar:CreateFontString("$parentCount", "OVERLAY");
-					bar.count:SetFont(C["media"].pixelfont, 16, "MONOCHROMEOUTLINE");
-					bar.count:SetPoint("TOPLEFT", T.Scale(-2), T.Scale(2));
+					bar.count:SetFont(C.media.pixelfont, 16, "MONOCHROMEOUTLINE");
+					bar.count:Point("TOPLEFT", 1, 0);
 					bar.count:SetJustifyH("CENTER");
 				end
 			else
@@ -107,7 +107,7 @@ function Update(self)
 					bar.statusbar = CreateFrame("StatusBar", "$parentStatusBar", bar);
 					bar.statusbar:SetWidth(T.Scale(value.data.barWidth - 2));
 					bar.statusbar:SetHeight(T.Scale(value.data.size - 10));
-					bar.statusbar:SetStatusBarTexture(C["media"].normTex);
+					bar.statusbar:SetStatusBarTexture(C.media.normTex);
 					bar.statusbar:SetStatusBarColor(classcolor.r, classcolor.g, classcolor.b, 1);
 					if ( self.IconSide == "LEFT" ) then
 						bar.statusbar:SetPoint("BOTTOMLEFT", bar, "BOTTOMRIGHT", 6, 2);
@@ -133,7 +133,7 @@ function Update(self)
 				else
 					bar.background = bar.statusbar:CreateTexture(nil, "BACKGROUND");
 					bar.background:SetAllPoints();
-					bar.background:SetTexture(C["media"].normTex);
+					bar.background:SetTexture(C.media.normTex);
 					bar.background:SetVertexColor(0, 0, 0, 0.5);
 				end
 				
@@ -141,7 +141,7 @@ function Update(self)
 					bar.time = _G[bar.time:GetName()]
 				else			
 					bar.time = bar.statusbar:CreateFontString("$parentTime", "ARTWORK");
-					bar.time:SetFont(C["media"].pixelfont, 14, "MONOCHROMEOUTLINE");
+					bar.time:SetFont(C.media.pixelfont, 14, "MONOCHROMEOUTLINE");
 					bar.time:SetPoint("RIGHT", bar.statusbar, T.Scale(0), 0);
 				end
 				
@@ -158,7 +158,7 @@ function Update(self)
 					bar.spellname = _G[bar.spellname:GetName()]
 				else
 					bar.spellname = bar.statusbar:CreateFontString("$parentSpellName", "ARTWORK");
-					bar.spellname:SetFont(C["media"].pixelfont, 14, "MONOCHROMEOUTLINE");
+					bar.spellname:SetFont(C.media.pixelfont, 14, "MONOCHROMEOUTLINE");
 					bar.spellname:SetPoint("LEFT", bar.statusbar, T.Scale(2), 0);
 					bar.spellname:SetPoint("RIGHT", bar.time, "LEFT");
 					bar.spellname:SetJustifyH("LEFT");

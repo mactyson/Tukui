@@ -1,7 +1,6 @@
 local T, C, L = unpack(select(2, ...)) 
 
 if IsAddOnLoaded("SmellyPowerBar") then return end
---if C["interface"].style ~= "Jasje" then return end
 if C.interface.style ~= "Jasje" then return end
 
 -- Get rid of old Alt Power Bar
