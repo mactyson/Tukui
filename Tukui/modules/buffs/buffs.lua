@@ -40,7 +40,7 @@ local function UpdateWeapons(button, slot, active, expiration)
 		button.texture:SetAllPoints()
 		
 		button.time = button:CreateFontString(nil, "ARTWORK")
-		button.time:SetPoint("BOTTOM", 0, -10)
+		button.time:SetPoint("BOTTOM", 0, -12)
 		button.time:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 				
 		button.bg = CreateFrame("Frame", nil, button)

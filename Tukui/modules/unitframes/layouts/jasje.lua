@@ -64,7 +64,11 @@ local function Shared(self, unit)
 	RaidIcon:SetTexture("Interface\\AddOns\\Tukui\\medias\\textures\\raidicons.blp") -- thx hankthetank for texture
 	RaidIcon:SetHeight(20)
 	RaidIcon:SetWidth(20)
+if (T.myclass == "SHAMAN" or T.myclass == "DEATHKNIGHT" or T.myclass == "PALADIN" or T.myclass == "WARLOCK" or T.myclass == "DRUID") and (unit == "player") then
+	RaidIcon:SetPoint("TOP", 0, -0)
+else
 	RaidIcon:SetPoint("TOP", 0, 11)
+end	
 	self.RaidIcon = RaidIcon
 	
 	------------------------------------------------------------------------
@@ -251,7 +255,11 @@ local function Shared(self, unit)
 			local Leader = InvFrame:CreateTexture(nil, "OVERLAY")
 			Leader:Height(14)
 			Leader:Width(14)
-			Leader:Point("TOPLEFT", 2, 8)
+        if (T.myclass == "SHAMAN" or T.myclass == "DEATHKNIGHT" or T.myclass == "PALADIN" or T.myclass == "WARLOCK" or T.myclass == "DRUID") and (unit == "player") then
+			Leader:Point("TOPLEFT", -5, 9)
+		else
+            Leader:Point("TOPLEFT", 2, 8)
+        end			
 			self.Leader = Leader
 			
 			-- master looter
