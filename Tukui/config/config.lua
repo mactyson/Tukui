@@ -130,7 +130,6 @@ C["datatext"] = {
 	["hit"] = 0,
 	["mastery"] = 0,
 	["micromenu"] = 0,
-	["raidmarks"] = 0,                          -- show the toggle button for the mark bar
 
 	["battleground"] = true,                            -- enable 3 stats in battleground only that replace stat1,stat2,stat3.
 	["time24"] = true,                                  -- set time to 24h format.

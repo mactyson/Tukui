@@ -664,7 +664,6 @@ frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 frame:SetScript("OnEvent", updateStatus)
 
 ----------------------------------------------------------------------
-if not C.chat.background then
 -- Mark Bar created by Smelly
 -- Credits to Hydra, Elv22, Safturento, and many more!
 -- Edited by Jasje
@@ -672,7 +671,7 @@ if not C.chat.background then
 ----------------------------------------------------------------------
 font = C.media.pixelfont           	-- Font to be used for button text
 fontsize = 8  -- Size of font for button text
-fontflag = C["datatext"].fontflag    -- Font flag
+fontflag = C.datatext.fontflag    -- Font flag
 buttonwidth = T.Scale(30)    		-- Width of menu buttons
 buttonheight = T.Scale(30)   		-- Height of menu buttons
 toplayout = false						-- Position of the menu
@@ -688,18 +687,16 @@ end
 
 --Background Frame			
 local MarkBarBG = CreateFrame("Frame", "MarkBarBackground", UIParent)
-T.CreatePanel(MarkBarBG, buttonwidth * 4 + T.Scale(15), buttonheight * 3, "BOTTOMLEFT", TukuiTabsRightBackground, "TOPLEFT", 0, T.Scale(3))
+T.CreatePanel(MarkBarBG, buttonwidth * 4 + T.Scale(15), buttonheight * 3, "BOTTOMLEFT", TukuiInfoRight, "TOPLEFT", 0, T.Scale(3))
 MarkBarBG:SetBackdropColor(unpack(C["media"].backdropcolor))
 MarkBarBG:SetFrameLevel(0)
 T.CreateShadow(MarkBarBG)
 MarkBarBG:SetFrameStrata("HIGH")
---MarkBarBG:ClearAllPoints()
---MarkBarBG:SetPoint(unpack(anchor)) -- custom anchors
 MarkBarBG:Hide()
 
 local MarkBarBGUpdater = CreateFrame("Frame")
     local function UpdateMarkBarBG(self)
-		MarkBarBG:SetPoint("BOTTOMLEFT", TukuiTabsRightBackground, "TOPLEFT", 0, 3)
+		MarkBarBG:SetPoint("BOTTOMLEFT", ChatFrame4, "TOPLEFT", 0, 5)
 	end
         MarkBarBGUpdater:SetScript("OnUpdate", UpdateMarkBarBG)
 			
@@ -818,7 +815,7 @@ ClearFlare:SetBackdropColor(.075, .075, .075)
  
 -- Create Button for clear target
 local ClearTargetButton = CreateFrame("Button", "ClearTargetButton", MarkBarBackground)
-T.CreatePanel(ClearTargetButton, (TukuiDB.Scale(buttonwidth) * 4) + 9, 18, "TOPLEFT", mark[5], "BOTTOMLEFT", 0, T.Scale(-3))
+T.CreatePanel(ClearTargetButton, (TukuiDB.Scale(buttonwidth) * 4) + 9, 18, "TOPLEFT", mark[5], "BOTTOMLEFT", 0, T.Scale(-2))
 ClearTargetButton:SetScript("OnEnter", ButtonEnter)
 ClearTargetButton:SetScript("OnLeave", ButtonLeave)
 ClearTargetButton:SetScript("OnMouseUp", function() SetRaidTarget("target", 0) end)
@@ -848,20 +845,7 @@ if datatext == false then
 	ToggleButtonText:SetFont(font, fontsize, fontflag)
 	ToggleButtonText:SetText(hexa.."M"..hexb)
 	ToggleButtonText:SetPoint("CENTER", ToggleButton, "CENTER", 2, 1)
---[[ who needs a close button when you can close via togglebutton
-	--Create close button
-	local CloseButton = CreateFrame("Frame", "CloseButton", MarkBarBackground)
-	T.CreatePanel(CloseButton, 21, 21, "BOTTOMLEFT", MarkBarBackground, "BOTTOMRIGHT", T.Scale(2), 0)
-	CloseButton:EnableMouse(true)
-    T.CreateShadow(CloseButton)
-	CloseButton:SetScript("OnEnter", ButtonEnter)
-	CloseButton:SetScript("OnLeave", ButtonLeave)
-	
-	local CloseButtonText = CloseButton:CreateFontString(nil, "OVERLAY")
-	CloseButtonText:SetFont(font, fontsize, fontflag)
-	CloseButtonText:SetText("x")
-	CloseButtonText:SetPoint("CENTER", CloseButton, "CENTER")
-]]--
+
 	ToggleButton:SetScript("OnMouseDown", function()
 		if MarkBarBackground:IsShown() then
 			MarkBarBackground:Hide()
@@ -870,39 +854,6 @@ if datatext == false then
 		end
 	end)
 end	
---[[ who needs a close button when you can close via togglebutton
-	CloseButton:SetScript("OnMouseDown", function()
-		if MarkBarBackground:IsShown() then
-			MarkBarBackground:Hide()
-		else
-			ToggleButton:Show()
-		end
-	end)
-]]--
-
---Setup datatext position and function
-if datatext == true then
-	if C["datatext"].raidmarks and C["datatext"].raidmarks > 0 then
-		--Create toggle button
-		local ToggleButton = CreateFrame("Frame", "dToggleButton", UIParent)
-		ToggleButton:EnableMouse(true)
-		ToggleButton:SetWidth(80)
-		T.PP(C["datatext"].raidmarks, dToggleButton)
-
-		local ToggleButtonText = TukuiInfoLeft:CreateFontString(nil ,"OVERLAY")
-		ToggleButtonText:SetFont(font, fontsize, fontflag)
-		ToggleButtonText:SetText(hexa.."Mark Bar"..hexb)
-		ToggleButtonText:SetPoint("CENTER", ToggleButton, "CENTER")
-
-		dToggleButton:SetScript("OnMouseDown", function()
-			if MarkBarBackground:IsShown() then
-				MarkBarBackground:Hide()
-			else
-				MarkBarBackground:Show()
-			end
-		end)
-	end
-end
 
 --Check if we are Raid Leader or Raid Officer
 local function CheckRaidStatus()
@@ -940,7 +891,6 @@ LeadershipCheck:SetScript("OnEvent", function(self, event)
 		end
 	end
    end)
-end
 ----------------------------------------------------------------------------------------------
 -- http://www.wowinterface.com/downloads/info19030-Interrupted.html#info
 ----------------------------------------------------------------------------------------------
