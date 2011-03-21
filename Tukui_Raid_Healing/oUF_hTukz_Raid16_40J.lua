@@ -223,9 +223,9 @@ local function Shared(self, unit)
 	return self
 end
 
-oUF:RegisterStyle('TukuiHealR25R40', Shared)
+oUF:RegisterStyle('TukuiHealR25R40J', Shared)
 oUF:Factory(function(self)
-	oUF:SetActiveStyle("TukuiHealR25R40")	
+	oUF:SetActiveStyle("TukuiHealR25R40J")	
 	if C["unitframes"].gridonly ~= true then
 		local raid = self:SpawnHeader("TukuiGrid", nil, "custom [@raid16,exists] show;hide",
 			'oUF-initialConfigFunction', [[

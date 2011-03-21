@@ -1,8 +1,8 @@
 local T, C, L = unpack(select(2, ...)) 
 -- Very simple threat bar for T.
-if C.interface.style ~= "Tukui" then return end
--- cannot work without Right Tab background Panel.
---if not TukuiTabsRightBackground then return end
+
+-- cannot work without Info Right DataText Panel.
+if not TukuiInfoRight then return end
 
 local aggroColors = {
 	[1] = {12/255, 151/255,  15/255},
@@ -11,7 +11,7 @@ local aggroColors = {
 }
 
 -- create the bar
-local TukuiThreatBar = CreateFrame("StatusBar", "TukuiThreatBar", TukuiTabsRightBackground)
+local TukuiThreatBar = CreateFrame("StatusBar", "TukuiThreatBar", TukuiInfoRight)
 TukuiThreatBar:Point("TOPLEFT", 2, -2)
 TukuiThreatBar:Point("BOTTOMRIGHT", -2, 2)
 
@@ -22,11 +22,11 @@ TukuiThreatBar:SetBackdropColor(0, 0, 0, 0)
 TukuiThreatBar:SetMinMaxValues(0, 100)
 
 TukuiThreatBar.text = T.SetFontString(TukuiThreatBar, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
-TukuiThreatBar.text:Point("RIGHT", TukuiThreatBar, "RIGHT", -20, 0)
+TukuiThreatBar.text:Point("RIGHT", TukuiThreatBar, "RIGHT", -30, 0)
 
 TukuiThreatBar.Title = T.SetFontString(TukuiThreatBar, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 TukuiThreatBar.Title:SetText(L.unitframes_ouf_threattext)
-TukuiThreatBar.Title:SetPoint("LEFT", TukuiThreatBar, "LEFT", T.Scale(20), 0)
+TukuiThreatBar.Title:SetPoint("LEFT", TukuiThreatBar, "LEFT", T.Scale(30), 0)
 	  
 TukuiThreatBar.bg = TukuiThreatBar:CreateTexture(nil, 'BORDER')
 TukuiThreatBar.bg:SetAllPoints(TukuiThreatBar)

@@ -98,8 +98,7 @@
 	<Script file="modules\actionbars\Range.lua"/>
 	<Script file="modules\actionbars\Others.lua"/>
 	<Script file="modules\actionbars\Cooldowns.lua"/>	
-	<Script file="modules\chat\chatframesT.lua"/>
-	<Script file="modules\chat\chatframesJ.lua"/>
+	<Script file="modules\chat\chatframes.lua"/>
 	<Script file="modules\chat\telltarget.lua"/>
 	<Script file="modules\chat\copychat.lua"/>
 	<Script file="modules\chat\mousescroll.lua"/>
@@ -120,10 +119,8 @@
 	<Script file="modules\unitframes\layouts\tukui.lua"/>
 	<Script file="modules\unitframes\layouts\jasje.lua"/>
 	<Script file="modules\notifications\hunterpethappiness.lua"/>	
-	<Script file="modules\misc\altpowerbarT.lua"/>
-	<Script file="modules\misc\altpowerbarJ.lua"/>
-	<Script file="modules\misc\threatbarT.lua"/>
-	<Script file="modules\misc\threatbarJ.lua"/>
+	<Script file="modules\misc\altpowerbar.lua"/>
+	<Script file="modules\misc\threatbar.lua"/>
 	<Script file="modules\blizzard\achievements.lua"/>
 	<Script file="modules\extra\extra.lua"/>
 	<Script file="core\movers.lua"/>
