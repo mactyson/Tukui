@@ -1,4 +1,6 @@
-﻿--[[-----------------------------------------------------------------------------------------------------------------------------
+﻿local T, C, L = unpack(Tukui)
+
+--[[-----------------------------------------------------------------------------------------------------------------------------
 
 	TinyDPS - Lightweight Damage Meter
 
@@ -2111,8 +2113,6 @@
 	tdpsFrame:SetFrameLevel(1)
 	tdpsFrame:SetBackdrop({bgFile = [[Interface\AddOns\TinyDPS\Textures\blank.tga]], edgeFile = [[Interface\AddOns\TinyDPS\Textures\blank.tga]], tile = false, tileSize = 1, edgeSize = 1, insets = {left = 1, right = 1, top = 1, bottom = 1}})
 
-
-
 	-- main window animation
 	local tdpsAnimationGroup = tdpsFrame:CreateAnimationGroup()   
 	local tdpsAnimation = tdpsAnimationGroup:CreateAnimation('Alpha')
@@ -2120,19 +2120,14 @@
 	tdpsAnimation:SetDuration(.2)
 	tdpsAnimation:SetScript('OnFinished', function(self, requested) tdpsRefresh() end)
 
-
-
 	-- title font string
 	tdpsFrame:CreateFontString('noData', 'OVERLAY')
 	noData:SetPoint('CENTER', tdpsFrame, 'CENTER')
 	noData:SetJustifyH('CENTER')
-	noData:SetFont(tdpsFont.name, tdpsFont.size)
+	noData:SetFont(C.media.pixelfont2, C.datatext.fontsize,C.datatext.fontflag) -- setting font, size and outline
 	noData:SetShadowColor(.1, .1, .1, 1)
 	noData:SetShadowOffset(tdpsFont.shadow, tdpsFont.shadow * -1)
-	noData:SetTextColor(1, 1, 1, .07)
-	noData:SetText('TinyDPS')
-
-
+	noData:SetText(hexa..'tinydps'..hexb) -- color like datatext
 
 	-- resize frame
 	CreateFrame('Frame', 'tdpsResizeFrame', tdpsFrame)
@@ -3227,6 +3222,9 @@
 		tdpsFrame:SetBackdropBorderColor(tdps.border[1], tdps.border[2], tdps.border[3], tdps.border[4])
 		tdpsFrame:SetBackdropColor(tdps.backdrop[1], tdps.backdrop[2], tdps.backdrop[3], tdps.backdrop[4])
 
+		-- tukui match
+		tdpsFrame:SetBorder() -- Hydra border
+		
 		-- hide when necessary
 		visibilityEvent()
 
