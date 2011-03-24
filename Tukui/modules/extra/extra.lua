@@ -29,7 +29,7 @@ local updaterun = CreateFrame("Frame")
  
 local flowingframe = CreateFrame("Frame",nil,UIParent)
 	flowingframe:SetFrameStrata("HIGH")
-	flowingframe:SetPoint("CENTER",UIParent,0,-160) -- where we want the textframe
+	flowingframe:SetPoint("CENTER",UIParent,0, 200) -- where we want the textframe
 	flowingframe:SetHeight(64)
  
 local flowingtext = flowingframe:CreateFontString(nil,"OVERLAY")
@@ -244,7 +244,7 @@ fDispelAnnounce:SetScript('OnEvent', OnEvent)
 if not C["saftExperienceBar"].enable == true then return end;
 
 --Bar Height and Width
-local barHeight, barWidth = 5, 400
+local barHeight, barWidth = 5, 370
 
 --Where you want the fame to be anchored
 --------AnchorPoint, AnchorTo, RelativePoint, xOffset, yOffset
@@ -1305,4 +1305,4 @@ for i=1, NUM_CHAT_WINDOWS do
 
 	orig2[frame] = frame:GetScript("OnHyperlinkLeave")
 	frame:SetScript("OnHyperlinkLeave", OnHyperlinkLeave)
-end
+end	

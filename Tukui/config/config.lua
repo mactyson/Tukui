@@ -37,17 +37,6 @@ C["unitframes"] = {
 	["healcomm"] = false,                               -- enable healprediction support.
 	["onlyselfdebuffs"] = false,                        -- display only our own debuffs applied on target
 	["showfocustarget"] = false,                         -- show focus target
-
-	-- raid layout (if one of them is enabled)
-	["showrange"] = true,                               -- show range opacity on raidframes
-	["raidalphaoor"] = 0.3,                             -- alpha of unitframes when unit is out of range
-	["gridonly"] = true,                               -- enable grid only mode for all healer mode raid layout.
-	["showsymbols"] = true,	                            -- show symbol.
-	["aggro"] = true,                                   -- show aggro on all raids layouts
-	["raidunitdebuffwatch"] = true,                     -- track important spell to watch in pve for grid mode.
-	["gridhealthvertical"] = false,                      -- enable vertical grow on health bar for grid mode.
-	["showplayerinparty"] = true,                      -- show my player frame in party
-	["gridscale"] = 1,                                  -- set the healing grid scaling
 	
 	-- boss frames
 	["showboss"] = true,                                -- enable boss unit frames for PVELOL encounters.
@@ -57,6 +46,36 @@ C["unitframes"] = {
 	
 	-- class bar
 	["classbar"] = true,                                -- enable tukui classbar over player unit
+}
+
+	-- raid layout (if one of them is enabled)
+C["raidlayout"] = {
+	["showrange"] = true,                               -- show range opacity on raidframes
+	["raidalphaoor"] = 0.3,                             -- alpha of unitframes when unit is out of range
+	["gridonly"] = true,                               -- enable grid only mode for all healer mode raid layout.
+	["showsymbols"] = true,	                            -- show symbol.
+	["aggro"] = true,                                   -- show aggro on all raids layouts
+	["raidunitdebuffwatch"] = true,                     -- track important spell to watch in pve for grid mode.
+	["gridhealthvertical"] = false,                      -- enable vertical grow on health bar for grid mode.  -- doesnt work yet
+	["showplayerinparty"] = true,                      -- show my player frame in party
+	["gridscale"] = 1,                                  -- set the healing grid scaling
+    -- only works for Jasje style
+	["gridH"] = 27,                           -- Height of raidframes
+	["gridW"] = 50,                           -- Width of raidframes 
+	["powergridH"] = 2,                            -- Height of power 
+	["powergridW"] = 40,                            -- Width of power -- always need to be 10 less then gridW
+}
+    -- below config only works for Jasje style
+    -- unitframe posistioning, X = horizontal  Y = vertical  - = left/down + = right/up
+C["unitframeJ"] = {
+ 	["playerX"] = 2,                      
+	["playerY"] = 61,                           
+ 	["targetX"] = -2,                           
+	["targetY"] = 61,
+ 	["totX"] = -0,                           
+	["totY"] = 61, 
+	["petX"] = -0,                           
+	["petY"] = 105,
 }
 
 C["arena"] = {

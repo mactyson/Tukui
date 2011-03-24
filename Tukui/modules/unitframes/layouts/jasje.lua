@@ -1477,7 +1477,7 @@ oUF:RegisterStyle('Tukui', Shared)
 
 -- player
 local player = oUF:Spawn('player', "TukuiPlayer")
-player:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", 2, 61)
+player:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", C.unitframeJ.playerX, C.unitframeJ.playerY)
 	player:Size(220, 26)
 
 
@@ -1488,17 +1488,17 @@ focus:SetPoint("BOTTOMLEFT", TukuiPlayer, "TOPLEFT", 10, -55)
 
 -- target
 local target = oUF:Spawn('target', "TukuiTarget")
-target:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", -2 ,61)
+target:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", C.unitframeJ.targetX, C.unitframeJ.targetY)
 	target:Size(220, 26)
 
 -- tot
 local tot = oUF:Spawn('targettarget', "TukuiTargetTarget")
-tot:SetPoint("BOTTOM", InvTukuiActionBarBackground, "TOP", -0,61)
+tot:SetPoint("BOTTOM", InvTukuiActionBarBackground, "TOP", C.unitframeJ.totX, C.unitframeJ.totY)
 	tot:Size(100, 26)
 
 -- pet
 local pet = oUF:Spawn('pet', "oUF_Tukz_pet")
-pet:SetPoint("BOTTOM", InvTukuiActionBarBackground, "TOP", 0,105)
+pet:SetPoint("BOTTOM", InvTukuiActionBarBackground, "TOP", C.unitframeJ.petX, C.unitframeJ.petY)
 	pet:SetSize(T.Scale(100), T.Scale(20))
 
 -- focus target

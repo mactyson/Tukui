@@ -15,4 +15,4 @@ T.patch = GetBuildInfo()
 T.level = UnitLevel("player")
 T.myrealm = GetRealmName()
 T.TotemOrientationDown = false
-T.InfoLeftRightWidth = 400
+T.InfoLeftRightWidth = 370 

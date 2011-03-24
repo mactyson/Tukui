@@ -882,12 +882,12 @@ T.UpdateThreat = function(self, event, unit)
 --------------------------------------------------------------------------------------------
 
 T.countOffsets = {
-	TOPLEFT = {5*C["unitframes"].gridscale, 1},
-	TOPRIGHT = {-5*C["unitframes"].gridscale, 1},
-	BOTTOMLEFT = {5*C["unitframes"].gridscale, 3},
-	BOTTOMRIGHT = {-5*C["unitframes"].gridscale, 3},
-	LEFT = {5*C["unitframes"].gridscale, 1},
-	RIGHT = {-5*C["unitframes"].gridscale, 1},
+	TOPLEFT = {6*C["raidlayout"].gridscale, 1},
+	TOPRIGHT = {-6*C["raidlayout"].gridscale, 1},
+	BOTTOMLEFT = {6*C["raidlayout"].gridscale, 1},
+	BOTTOMRIGHT = {-6*C["raidlayout"].gridscale, 1},
+	LEFT = {5*C["raidlayout"].gridscale, 1},
+	RIGHT = {-5*C["raidlayout"].gridscale, 1},
 	TOP = {0, 0},
 	BOTTOM = {0, 0},
 }
@@ -906,8 +906,13 @@ end
 
 T.createAuraWatch = function(self, unit)
 	local auras = CreateFrame("Frame", nil, self)
+if C.interface.style == "Jasje" then 	
+	auras:SetPoint("TOPLEFT", self.Health, 2, -2)
+	auras:SetPoint("BOTTOMRIGHT", self.Health, -2, 4)
+else	
 	auras:SetPoint("TOPLEFT", self.Health, 2, -2)
 	auras:SetPoint("BOTTOMRIGHT", self.Health, -2, 2)
+end	
 	auras.presentAlpha = 1
 	auras.missingAlpha = 0
 	auras.icons = {}
@@ -937,8 +942,8 @@ T.createAuraWatch = function(self, unit)
 			local icon = CreateFrame("Frame", nil, auras)
 			icon.spellID = spell[1]
 			icon.anyUnit = spell[4]
-			icon:SetWidth(T.Scale(5*C["unitframes"].gridscale))
-			icon:SetHeight(T.Scale(5*C["unitframes"].gridscale))
+			icon:SetWidth(T.Scale(5*C["raidlayout"].gridscale))
+			icon:SetHeight(T.Scale(5*C["raidlayout"].gridscale))
 			icon:SetPoint(spell[2], 0, 0)
 
 			local tex = icon:CreateTexture(nil, "OVERLAY")
@@ -962,7 +967,7 @@ T.createAuraWatch = function(self, unit)
 	self.AuraWatch = auras
 end
 
-if C["unitframes"].raidunitdebuffwatch == true then
+if C["raidlayout"].raidunitdebuffwatch == true then
 	-- Classbuffs { spell ID, position [, {r,g,b,a}][, anyUnit] }
 	-- For oUF_AuraWatch
 	do

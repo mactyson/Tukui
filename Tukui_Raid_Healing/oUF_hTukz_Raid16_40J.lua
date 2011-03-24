@@ -27,11 +27,11 @@ local function Shared(self, unit)
 	local health = CreateFrame('StatusBar', nil, self)
 	health:SetPoint("TOPLEFT")
 	health:SetPoint("TOPRIGHT")
-	health:Height(27*C["unitframes"].gridscale*T.raidscale)
+	health:Height(C.raidlayout.gridH*C.raidlayout.gridscale*T.raidscale)
 	health:SetStatusBarTexture(normTex)
 	self.Health = health
 	
-	if C["unitframes"].gridhealthvertical == true then
+	if C["raidlayout"].gridhealthvertical == true then
 		health:SetOrientation('VERTICAL')
 	end
 	
@@ -41,6 +41,17 @@ local function Shared(self, unit)
 	health.bg:SetTexture(0.3, 0.3, 0.3)
 	health.bg.multiplier = (0.3)
 	self.Health.bg = health.bg
+	
+	health.value = health:CreateFontString(nil, "OVERLAY")
+	health.value:Point("CENTER", health, 1, -8)
+	health.value:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+	health.value:SetTextColor(1,1,1)
+	health.value:SetShadowOffset(1, -1)
+	self.Health.value = health.value
+
+	health.PostUpdate = T.PostUpdateHealthRaid
+
+	health.frequentUpdates = true
 	
 	if C.unitframes.unicolor == true then
 		health.colorDisconnected = false
@@ -65,7 +76,6 @@ local function Shared(self, unit)
 	-- end border	
 	
 	-- hydra glow
-	T.CreateShadow(Healthbg)
 	Healthbg.shadow:Hide()
 	
 	self:HookScript("OnEnter", function(self) 
@@ -79,7 +89,7 @@ local function Shared(self, unit)
 	-- end hydra glow
 	
 	local power = CreateFrame("StatusBar", nil, self)
-	power:Size(40, 2)
+	power:Size(C.raidlayout.powergridW, C.raidlayout.powergridH)
 	power:Point("LEFT", health, "BOTTOMLEFT", 5, -2)
 	power:SetFrameLevel(4)
 	power:SetStatusBarTexture(normTex)
@@ -118,19 +128,19 @@ local function Shared(self, unit)
 	end
 	
 	local name = health:CreateFontString(nil, "OVERLAY")
-    name:SetPoint("CENTER", health, "CENTER", 1, -0)
-	name:SetFont(C["media"].pixelfont, 8, "MONOCHROMEOUTLINE")
+    name:SetPoint("CENTER", health, "CENTER", 1, 8)
+	name:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 	self:Tag(name, "[Tukui:getnamecolor][Tukui:nameshort]")
 	self.Name = name
-	
-    if C["unitframes"].aggro == true then
+		
+    if C["raidlayout"].aggro == true then
 		table.insert(self.__elements, T.UpdateThreat)
 		self:RegisterEvent('PLAYER_TARGET_CHANGED', T.UpdateThreat)
 		self:RegisterEvent('UNIT_THREAT_LIST_UPDATE', T.UpdateThreat)
 		self:RegisterEvent('UNIT_THREAT_SITUATION_UPDATE', T.UpdateThreat)
 	end
 	
-	if C["unitframes"].showsymbols == true then
+	if C["raidlayout"].showsymbols == true then
 		local RaidIcon = health:CreateTexture(nil, 'OVERLAY')
 		RaidIcon:Height(15*T.raidscale)
 		RaidIcon:Width(15*T.raidscale)
@@ -140,8 +150,8 @@ local function Shared(self, unit)
 	end
 	
 	local ReadyCheck = health:CreateTexture(nil, "OVERLAY")
-	ReadyCheck:Height(12*C["unitframes"].gridscale*T.raidscale)
-	ReadyCheck:Width(12*C["unitframes"].gridscale*T.raidscale)
+	ReadyCheck:Height(12*C["raidlayout"].gridscale*T.raidscale)
+	ReadyCheck:Width(12*C["raidlayout"].gridscale*T.raidscale)
 	ReadyCheck:SetPoint('CENTER') 	
 	self.ReadyCheck = ReadyCheck
 	
@@ -152,14 +162,14 @@ local function Shared(self, unit)
 	--picon.Override = T.Phasing
 	--self.PhaseIcon = picon
 	
-	if not C["unitframes"].raidunitdebuffwatch == true then
+	if not C["raidlayout"].raidunitdebuffwatch == true then
 		self.DebuffHighlightAlpha = 1
 		self.DebuffHighlightBackdrop = true
 		self.DebuffHighlightFilter = true
 	end
 	
-	if C["unitframes"].showrange == true then
-		local range = {insideAlpha = 1, outsideAlpha = C["unitframes"].raidalphaoor}
+	if C["raidlayout"].showrange == true then
+		local range = {insideAlpha = 1, outsideAlpha = C["raidlayout"].raidalphaoor}
 		self.Range = range
 	end
 	
@@ -167,8 +177,42 @@ local function Shared(self, unit)
 		health.Smooth = true
 	end
 
-	if C["unitframes"].gridhealthvertical then
-		ohpb:SetOrientation("VERTICAL")
+	if C["raidlayout"].gridhealthvertical then
+	if C["unitframes"].healcomm then
+		local mhpb = CreateFrame('StatusBar', nil, self.Health)
+		if C["raidlayout"].gridhealthvertical then
+			mhpb:SetOrientation("VERTICAL")
+			mhpb:SetPoint('BOTTOM', self.Health:GetStatusBarTexture(), 'TOP', 0, 0)
+			mhpb:Width(66*C["raidlayout"].gridscale*T.raidscale)
+			mhpb:Height(50*C["raidlayout"].gridscale*T.raidscale)		
+		else
+			mhpb:SetPoint('TOPLEFT', self.Health:GetStatusBarTexture(), 'TOPRIGHT', 0, 0)
+			mhpb:SetPoint('BOTTOMLEFT', self.Health:GetStatusBarTexture(), 'BOTTOMRIGHT', 0, 0)
+			mhpb:Width(66*C["raidlayout"].gridscale*T.raidscale)
+		end				
+		mhpb:SetStatusBarTexture(normTex)
+		mhpb:SetStatusBarColor(0, 1, 0.5, 0.25)
+
+		local ohpb = CreateFrame('StatusBar', nil, self.Health)
+		if C["raidlayout"].gridhealthvertical then
+			ohpb:SetOrientation("VERTICAL")
+			ohpb:SetPoint('BOTTOM', mhpb:GetStatusBarTexture(), 'TOP', 0, 0)
+			ohpb:Width(66*C["raidlayout"].gridscale*T.raidscale)
+			ohpb:Height(50*C["raidlayout"].gridscale*T.raidscale)
+		else
+			ohpb:SetPoint('TOPLEFT', mhpb:GetStatusBarTexture(), 'TOPRIGHT', 0, 0)
+			ohpb:SetPoint('BOTTOMLEFT', mhpb:GetStatusBarTexture(), 'BOTTOMRIGHT', 0, 0)
+			ohpb:Width(6*C["raidlayout"].gridscale*T.raidscale)
+		end
+		ohpb:SetStatusBarTexture(normTex)
+		ohpb:SetStatusBarColor(0, 1, 0, 0.25)
+
+		self.HealPrediction = {
+			myBar = mhpb,
+			otherBar = ohpb,
+			maxOverflow = 1,
+		}
+	end
     end
 	------------------------------------------------------------------------
 	--      Debuff Highlight
@@ -183,14 +227,50 @@ local function Shared(self, unit)
 		self.DebuffHighlightAlpha = 0.6
 	-- end	
 	
-	if C["unitframes"].raidunitdebuffwatch == true then
+if C["unitframes"].healcomm then
+		local mhpb = CreateFrame('StatusBar', nil, self.Health)
+	if C["raidlayout"].gridhealthvertical then
+			mhpb:SetOrientation("VERTICAL")
+			mhpb:SetPoint('BOTTOM', self.Health:GetStatusBarTexture(), 'TOP', 0, 0)
+			mhpb:Width(66*C["raidlayout"].gridscale*T.raidscale)
+			mhpb:Height(50*C["raidlayout"].gridscale*T.raidscale)		
+	else
+			mhpb:SetPoint('TOPLEFT', self.Health:GetStatusBarTexture(), 'TOPRIGHT', 0, 0)
+			mhpb:SetPoint('BOTTOMLEFT', self.Health:GetStatusBarTexture(), 'BOTTOMRIGHT', 0, 0)
+			mhpb:Width(66*C["raidlayout"].gridscale*T.raidscale)
+	end				
+		mhpb:SetStatusBarTexture(normTex)
+		mhpb:SetStatusBarColor(0, 1, 0.5, 0.25)
+
+		local ohpb = CreateFrame('StatusBar', nil, self.Health)
+	if C["raidlayout"].gridhealthvertical then
+			ohpb:SetOrientation("VERTICAL")
+			ohpb:SetPoint('BOTTOM', mhpb:GetStatusBarTexture(), 'TOP', 0, 0)
+			ohpb:Width(66*C["raidlayout"].gridscale*T.raidscale)
+			ohpb:Height(50*C["raidlayout"].gridscale*T.raidscale)
+	else
+			ohpb:SetPoint('TOPLEFT', mhpb:GetStatusBarTexture(), 'TOPRIGHT', 0, 0)
+			ohpb:SetPoint('BOTTOMLEFT', mhpb:GetStatusBarTexture(), 'BOTTOMRIGHT', 0, 0)
+			ohpb:Width(6*C["raidlayout"].gridscale*T.raidscale)
+	end
+		ohpb:SetStatusBarTexture(normTex)
+		ohpb:SetStatusBarColor(0, 1, 0, 0.25)
+
+		self.HealPrediction = {
+			myBar = mhpb,
+			otherBar = ohpb,
+			maxOverflow = 1,
+		}
+end
+	
+	if C["raidlayout"].raidunitdebuffwatch == true then
 		-- AuraWatch (corner icon)
 		T.createAuraWatch(self,unit)
 		
 		-- Raid Debuffs (big middle icon)
 		local RaidDebuffs = CreateFrame('Frame', nil, self)
-		RaidDebuffs:Height(18*C["unitframes"].gridscale)
-		RaidDebuffs:Width(18*C["unitframes"].gridscale)
+		RaidDebuffs:Height(18*C["raidlayout"].gridscale)
+		RaidDebuffs:Width(18*C["raidlayout"].gridscale)
 		RaidDebuffs:Point('CENTER', health, 1,0)
 		RaidDebuffs:SetFrameStrata(health:GetFrameStrata())
 		RaidDebuffs:SetFrameLevel(health:GetFrameLevel() + 2)
@@ -226,15 +306,15 @@ end
 oUF:RegisterStyle('TukuiHealR25R40J', Shared)
 oUF:Factory(function(self)
 	oUF:SetActiveStyle("TukuiHealR25R40J")	
-	if C["unitframes"].gridonly ~= true then
+	if C["raidlayout"].gridonly ~= true then
 		local raid = self:SpawnHeader("TukuiGrid", nil, "custom [@raid16,exists] show;hide",
 			'oUF-initialConfigFunction', [[
 				local header = self:GetParent()
 				self:SetWidth(header:GetAttribute('initial-width'))
 				self:SetHeight(header:GetAttribute('initial-height'))
 			]],
-			'initial-width', T.Scale(50*C["unitframes"].gridscale*T.raidscale),
-			'initial-height', T.Scale(27.3*C["unitframes"].gridscale*T.raidscale),	
+			'initial-width', T.Scale(C.raidlayout.gridW*C["raidlayout"].gridscale*T.raidscale),
+			'initial-height', T.Scale(C.raidlayout.gridH+.3*C["raidlayout"].gridscale*T.raidscale),	
 			"showRaid", true,
 			"xoffset", T.Scale(7),
 			"yOffset", T.Scale(-7),
@@ -255,10 +335,10 @@ oUF:Factory(function(self)
 				self:SetWidth(header:GetAttribute('initial-width'))
 				self:SetHeight(header:GetAttribute('initial-height'))
 			]],
-			'initial-width', T.Scale(50*C["unitframes"].gridscale*T.raidscale),
-			'initial-height', T.Scale(27.3*C["unitframes"].gridscale*T.raidscale),
+			'initial-width', T.Scale(C.raidlayout.gridW*C["raidlayout"].gridscale*T.raidscale),
+			'initial-height', T.Scale(C.raidlayout.gridH+.3*C["raidlayout"].gridscale*T.raidscale),
 			"showParty", true,
-			"showPlayer", C["unitframes"].showplayerinparty, 
+			"showPlayer", C["raidlayout"].showplayerinparty, 
 			"showRaid", true, 
 			"xoffset", T.Scale(7),
 			"yOffset", T.Scale(-7),
