@@ -56,7 +56,7 @@ C["raidlayout"] = {
 	["showsymbols"] = true,	                            -- show symbol.
 	["aggro"] = true,                                   -- show aggro on all raids layouts
 	["raidunitdebuffwatch"] = true,                     -- track important spell to watch in pve for grid mode.
-	["gridhealthvertical"] = false,                      -- enable vertical grow on health bar for grid mode.  -- doesnt work yet
+	["gridhealthvertical"] = true,                      -- enable vertical grow on health bar for grid mode.
 	["showplayerinparty"] = true,                      -- show my player frame in party
 	["gridscale"] = 1,                                  -- set the healing grid scaling
     -- only works for Jasje style

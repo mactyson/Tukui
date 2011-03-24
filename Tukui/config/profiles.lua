@@ -17,12 +17,12 @@ if T.myname== "Jàsje" then
    C.datatext.classcolor = true
    C.datatext.crit = 0
    C.datatext.haste = 9
-   C.unitframeJ.playerX = -117
+   C.unitframeJ.playerX = -127
    C.unitframeJ.playerY = 61
-   C.unitframeJ.targetX =  117
+   C.unitframeJ.targetX =  127
    C.unitframeJ.targetY =  61
    C.raidlayout.gridH = 40
-   C.raidlayout.gridW = 60
+   C.raidlayout.gridW = 68
    C.raidlayout.powergridH = 2
    C.raidlayout.powergridW = 50
 end   
