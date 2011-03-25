@@ -14,9 +14,9 @@ C["general"] = {
 C["unitframes"] = {
 	-- general options
 	["enable"] = true,                                  -- do i really need to explain this?
-	["enemyhcolor"] = false,                            -- enemy target (players) color by hostility, very useful for healer.
+	["enemyhcolor"] = true,                            -- enemy target (players) color by hostility, very useful for healer.
 	["unitcastbar"] = true,                             -- enable tukui castbar
-		["trikz"] = false,                             -- replace castbar on top of actionbars made for a friend hence the name
+		["trikz"] = true,                             -- replace castbar on top of actionbars made for a friend hence the name
 	["cblatency"] = true,                              -- enable castbar latency
 	["cbicons"] = true,                                 -- enable icons on castbar
 	["auratimer"] = true,                               -- enable timers on buffs/debuffs
@@ -59,6 +59,13 @@ C["raidlayout"] = {
 	["gridhealthvertical"] = true,                      -- enable vertical grow on health bar for grid mode.
 	["showplayerinparty"] = true,                      -- show my player frame in party
 	["gridscale"] = 1,                                  -- set the healing grid scaling
+	-- thanks Hydra!
+	["gradienthealth"] = true,                          -- change raid health color based on health percent.
+	["gradient"] = {                                    -- health gradient color if unicolor is true.
+		1.0, 0.3, 0.3, -- R, G, B (low HP)
+		0.6, 0.3, 0.3, -- R, G, B (medium HP)
+		0.3, 0.3, 0.3, -- R, G, B (high HP)
+	},
     -- only works for Jasje style
 	["gridH"] = 27,                           -- Height of raidframes
 	["gridW"] = 50,                           -- Width of raidframes 

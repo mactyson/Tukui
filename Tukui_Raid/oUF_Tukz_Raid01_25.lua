@@ -91,7 +91,7 @@ local function Shared(self, unit)
 	self:Tag(name, '[Tukui:namemedium] [Tukui:dead][Tukui:afk]')
 	self.Name = name
 	
-	if C["unitframes"].showsymbols == true then
+	if C["raidlayout"].showsymbols == true then
 		RaidIcon = health:CreateTexture(nil, 'OVERLAY')
 		RaidIcon:Height(14*T.raidscale)
 		RaidIcon:Width(14*T.raidscale)
@@ -100,7 +100,7 @@ local function Shared(self, unit)
 		self.RaidIcon = RaidIcon
 	end
 	
-	if C["unitframes"].aggro == true then
+	if C["raidlayout"].aggro == true then
 		table.insert(self.__elements, T.UpdateThreat)
 		self:RegisterEvent('PLAYER_TARGET_CHANGED', T.UpdateThreat)
 		self:RegisterEvent('UNIT_THREAT_LIST_UPDATE', T.UpdateThreat)
@@ -135,8 +135,8 @@ local function Shared(self, unit)
 		health.Smooth = true
 	end
 	
-	if C["unitframes"].showrange == true then
-		local range = {insideAlpha = 1, outsideAlpha = C["unitframes"].raidalphaoor}
+	if C["raidlayout"].showrange == true then
+		local range = {insideAlpha = 1, outsideAlpha = C["raidlayout"].raidalphaoor}
 		self.Range = range
 	end
 
@@ -155,7 +155,7 @@ oUF:Factory(function(self)
 		]],
 		'initial-width', T.Scale(120*T.raidscale),
 		'initial-height', T.Scale(16*T.raidscale),	
-		"showParty", true, "showPlayer", C["unitframes"].showplayerinparty, "showRaid", true, "groupFilter", "1,2,3,4,5,6,7,8", "groupingOrder", "1,2,3,4,5,6,7,8", "groupBy", "GROUP", "yOffset", T.Scale(-7)
+		"showParty", true, "showPlayer", C["raidlayout"].showplayerinparty, "showRaid", true, "groupFilter", "1,2,3,4,5,6,7,8", "groupingOrder", "1,2,3,4,5,6,7,8", "groupBy", "GROUP", "yOffset", T.Scale(-7)
 	)
 	raid:SetPoint('TOPLEFT', UIParent, 15, -350*T.raidscale)
 	

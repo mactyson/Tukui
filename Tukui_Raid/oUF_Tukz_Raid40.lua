@@ -66,7 +66,7 @@ local function Shared(self, unit)
 	self:Tag(name, '[Tukui:namemedium] [Tukui:dead][Tukui:afk]')
 	self.Name = name
 	
-	if C["unitframes"].showsymbols == true then
+	if C["raidlayout"].showsymbols == true then
 		RaidIcon = health:CreateTexture(nil, 'OVERLAY')
 		RaidIcon:Height(14*T.raidscale)
 		RaidIcon:Width(14*T.raidscale)
@@ -75,7 +75,7 @@ local function Shared(self, unit)
 		self.RaidIcon = RaidIcon
 	end
 	
-	if C["unitframes"].aggro == true then
+	if C["raidlayout"].aggro == true then
 		table.insert(self.__elements, T.UpdateThreat)
 		self:RegisterEvent('PLAYER_TARGET_CHANGED', T.UpdateThreat)
 		self:RegisterEvent('UNIT_THREAT_LIST_UPDATE', T.UpdateThreat)
@@ -103,8 +103,8 @@ local function Shared(self, unit)
 		health.Smooth = true
 	end
 	
-	if C["unitframes"].showrange == true then
-		local range = {insideAlpha = 1, outsideAlpha = C["unitframes"].raidalphaoor}
+	if C["raidlayout"].showrange == true then
+		local range = {insideAlpha = 1, outsideAlpha = C["raidlayout"].raidalphaoor}
 		self.Range = range
 	end
 	

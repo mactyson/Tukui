@@ -570,9 +570,9 @@ end
 			castbar:CreateShadow("Hydra")
 			if C["unitframes"].trikz then
 				if unit == "player" then
-					castbar:SetPoint("BOTTOM", InvTukuiActionBarBackground, "TOP", 14,5)
-					castbar:SetHeight(T.Scale(20))
-					castbar:SetWidth(T.Scale(344))
+					castbar:SetPoint("BOTTOM", InvTukuiActionBarBackground, "TOP", 18,5)
+					castbar:SetHeight(T.Scale(30))
+					castbar:SetWidth(T.Scale(334))
 				elseif unit == "target" then
 					castbar:SetPoint("BOTTOM", TukuiTarget, "TOP", 0, 70)
 					castbar:SetHeight(T.Scale(18))
@@ -624,9 +624,9 @@ end
 				
 			if C["unitframes"].trikz then
 			    if unit == "player" then -- sloppy but it works
-				    castbar.button:SetPoint("LEFT", -30, T.Scale(0))
-				    castbar.button:SetHeight(T.Scale(24))
-				    castbar.button:SetWidth(T.Scale(24))
+				    castbar.button:SetPoint("LEFT", -39, T.Scale(0))
+				    castbar.button:SetHeight(T.Scale(34))
+				    castbar.button:SetWidth(T.Scale(34))
 				    castbar.button:SetTemplate("Hydra")
 				elseif unit == "target" then
 				    castbar.button:SetPoint("CENTER", 0, T.Scale(28))
@@ -1453,6 +1453,12 @@ end
 			health.colorDisconnected = true
 			health.colorClass = true
 			health.colorReaction = true	
+		end
+		
+		if C["raidlayout"].gradienthealth then
+			if not UnitIsPlayer(unit) then return end
+			local r2, g2, b2 = oUFTukui.ColorGradient(min/max, unpack(C["raidlayout"].gradient))
+			health:SetStatusBarColor(r2, g2, b2)
 		end
 		
 		-- names
