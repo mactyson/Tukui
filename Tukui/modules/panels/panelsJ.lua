@@ -84,6 +84,40 @@ iright:SetFrameLevel(2)
 iright:SetFrameStrata("BACKGROUND")
 iright:CreateShadow("Hydra")
 
+if C.chat.background then
+	-- CHAT BG LEFT
+	local chatleftbg = CreateFrame("Frame", "TukuiChatBackgroundLeft", TukuiInfoLeft)
+	chatleftbg:CreatePanel("Transparent", T.InfoLeftRightWidth, 107, "BOTTOM", TukuiInfoLeft, "BOTTOM", 0, T.Scale(22))
+	chatleftbg:SetFrameStrata("LOW")
+	chatleftbg:CreateShadow("")
+	chatleftbg:SetBorder()
+	
+	-- CHAT BG RIGHT
+	local chatrightbg = CreateFrame("Frame", "TukuiChatBackgroundRight", TukuiInfoRight)
+	chatrightbg:CreatePanel("Transparent", T.InfoLeftRightWidth, 107, "BOTTOM", TukuiInfoRight, "BOTTOM", 0, T.Scale(22))
+	chatrightbg:Hide() --This will get shown if a chat exists in the bottomright corner
+	chatrightbg:SetFrameStrata("LOW")
+	chatrightbg:CreateShadow("")
+	chatrightbg:SetBorder()
+	
+	-- LEFT TAB PANEL
+	local tabsbgleft = CreateFrame("Frame", "TukuiTabsLeftBackground", TukuiBar1)
+	tabsbgleft:CreatePanel("Transparent", T.InfoLeftRightWidth, 16, "BOTTOMLEFT", chatleftbg, "TOPLEFT", 0, T.Scale(2))
+	tabsbgleft:SetFrameLevel(1)
+	tabsbgleft:SetFrameStrata("LOW")
+	tabsbgleft:CreateShadow("")
+	tabsbgleft:SetBorder()
+
+	-- RIGHT TAB PANEL
+	local tabsbgright = CreateFrame("Frame", "TukuiTabsRightBackground", TukuiBar1)
+	tabsbgright:CreatePanel("Transparent", T.InfoLeftRightWidth, 16, "BOTTOMLEFT", chatrightbg, "TOPLEFT", 0, T.Scale(2))
+	tabsbgright:SetFrameLevel(1)
+	tabsbgright:SetFrameStrata("LOW")
+	tabsbgright:Hide() --This will get shown if a chat exists in the bottomright corner
+	tabsbgright:CreateShadow("")
+	tabsbgright:SetBorder()
+end
+
 -- BOTTOM BAR
 local tbottombar = CreateFrame("Frame", "TukuiBottomBar", UIParent)
 T.CreatePanel(tbottombar, 1, 22, "TOP", UIParent, "TOP", 0, 0)
