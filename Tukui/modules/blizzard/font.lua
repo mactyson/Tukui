@@ -72,7 +72,7 @@ TukuiFonts:SetScript("OnEvent", function(self, event, addon)
 	SetFont(SystemFont_Tiny,                    NORMAL, 12)
 	SetFont(Tooltip_Med,                        NORMAL, 12)
 	SetFont(Tooltip_Small,                      NORMAL, 12)
-	SetFont(CombatTextFont,                     COMBAT, 32, "THINOUTLINE") -- number here just increase the font quality.
+	SetFont(CombatTextFont,                     COMBAT, 32) -- number here just increase the font quality.
 	SetFont(SystemFont_Shadow_Huge1,            NORMAL, 20, "THINOUTLINE")
 	SetFont(ZoneTextString,                     NORMALPIXEL, 15, "MONOCHROMEOUTLINE")
 	SetFont(SubZoneTextString,                  NORMALPIXEL, 12, "MONOCHROMEOUTLINE")
