@@ -574,9 +574,9 @@ end
 					castbar:SetHeight(T.Scale(20))
 					castbar:SetWidth(T.Scale(344))
 				elseif unit == "target" then
-					castbar:SetPoint("CENTER", UIParent,"CENTER", 0, 250)
-					castbar:SetHeight(T.Scale(20))
-					castbar:SetWidth(T.Scale(220))
+					castbar:SetPoint("BOTTOM", TukuiTarget, "TOP", 0, 70)
+					castbar:SetHeight(T.Scale(18))
+					castbar:SetWidth(T.Scale(220))	
 				end
 			else
 				if unit == "player" then
@@ -628,11 +628,12 @@ end
 				    castbar.button:SetHeight(T.Scale(24))
 				    castbar.button:SetWidth(T.Scale(24))
 				    castbar.button:SetTemplate("Hydra")
-			elseif unit == "target" then
-				    castbar.button:SetPoint("CENTER", castbar, 0, T.Scale(40))
-				    castbar.button:SetHeight(T.Scale(40))
-				    castbar.button:SetWidth(T.Scale(40))
+				elseif unit == "target" then
+				    castbar.button:SetPoint("CENTER", 0, T.Scale(28))
+				    castbar.button:SetHeight(T.Scale(26))
+				    castbar.button:SetWidth(T.Scale(26))
 				    castbar.button:SetTemplate("Hydra")
+				    castbar.button:CreateShadow("Hydra")
               end	
 		else		
 			if unit == "player" then
