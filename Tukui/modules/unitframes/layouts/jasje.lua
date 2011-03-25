@@ -193,7 +193,7 @@ end
 		dbh:SetVertexColor(0,0,0,0)
 		self.DebuffHighlight = dbh
 		self.DebuffHighlightFilter = true
-		self.DebuffHighlightAlpha = 0.6
+		self.DebuffHighlightAlpha = 0.2
 	    end
 		
 		-- portraits
