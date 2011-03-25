@@ -46,7 +46,6 @@ local function Shared(self, unit)
 	health.value:Point("CENTER", health, 1, -8)
 	health.value:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 	health.value:SetTextColor(1,1,1)
-	health.value:SetShadowOffset(1, -1)
 	self.Health.value = health.value
 
 	health.PostUpdate = T.PostUpdateHealthRaid
