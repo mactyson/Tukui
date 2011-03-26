@@ -457,13 +457,17 @@ T.PostUpdateHealthRaid = function(health, unit, min, max)
 			health.value:SetText("|cffD7BEA5"..L.unitframes_ouf_ghost.."|r")
 		end
 	else
-		-- doing this here to force friendly unit (vehicle or pet) very far away from you to update color correcly
-		-- because if vehicle or pet is too far away, unitreaction return nil and color of health bar is white.
 		if not UnitIsPlayer(unit) and UnitIsFriend(unit, "player") and C["unitframes"].unicolor ~= true then
 			local c = T.oUF_colors.reaction[5]
 			local r, g, b = c[1], c[2], c[3]
 			health:SetStatusBarColor(r, g, b)
 			health.bg:SetTexture(.1, .1, .1)
+		end
+		
+		if C["raidlayout"].gradienthealth then
+			if not UnitIsPlayer(unit) then return end
+			local r2, g2, b2 = oUFTukui.ColorGradient(min/max, unpack(C["raidlayout"].gradient))
+			health:SetStatusBarColor(r2, g2, b2)
 		end
 		
 		if min ~= max then
@@ -944,6 +948,7 @@ end
 			icon.anyUnit = spell[4]
 			icon:SetWidth(T.Scale(5*C["raidlayout"].gridscale))
 			icon:SetHeight(T.Scale(5*C["raidlayout"].gridscale))
+			icon:SetBackdropColor(0,0,0)
 			icon:SetPoint(spell[2], 0, 0)
 
 			local tex = icon:CreateTexture(nil, "OVERLAY")
