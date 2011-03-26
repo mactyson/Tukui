@@ -43,7 +43,7 @@ local function Shared(self, unit)
 	self.Health.bg = health.bg
 	
 	health.value = health:CreateFontString(nil, "OVERLAY")
-	health.value:Point("CENTER", health, 1, -8)
+	health.value:Point("CENTER", health, "CENTER", 1, -8)
 	health.value:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 	health.value:SetTextColor(1,1,1)
 	self.Health.value = health.value
