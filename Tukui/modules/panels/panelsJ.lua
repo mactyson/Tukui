@@ -138,25 +138,25 @@ if C["datatext"].battleground == true then
 	bgframe:EnableMouse(true)
 end
 
---Pve datatext yo
+--Pve/Pvp datatext yo
 local pvedl = CreateFrame("Frame", "PveDatatextl", TukuiBar2)
 pvedl:CreatePanel("Transparent", 97, 15, "TOPRIGHT", TukuiBar2, "TOPRIGHT", T.Scale(0), T.Scale(17))
 pvedl:SetFrameLevel(2)
 pvedl:SetFrameStrata("BACKGROUND")
 pvedl:SetBorder()
 
---Pve datatext yo
+--Pve/Pvp datatext yo
 local pvedr= CreateFrame("Frame", "PveDatatextr", TukuiBar3)
 pvedr:CreatePanel("Transparent", 97, 15, "TOPRIGHT", TukuiBar3, "TOPRIGHT", T.Scale(0), T.Scale(17))
 pvedr:SetFrameLevel(2)
 pvedr:SetFrameStrata("BACKGROUND")
 pvedr:SetBorder()
 
---show hide datatext 8 and 9 on entering instance -- thanks Hydra!
+--show hide datatext 8 and 9 on entering instance/pvp -- thanks Hydra!
 local function OnEvent(self, event)
 	if event == "PLAYER_ENTERING_WORLD" then
 		local inInstance, instanceType = IsInInstance()
-		if (inInstance and instanceType == "party") or (inInstance and  instanceType == "raid") then
+		if (inInstance and instanceType == "party") or (inInstance and  instanceType == "raid") or (inInstance and  instanceType == "pvp")  then
 			PveDatatextr:Show()
 			PveDatatextl:Show()
 		else
