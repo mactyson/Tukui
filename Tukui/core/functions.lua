@@ -456,6 +456,7 @@ T.PostUpdateHealthRaid = function(health, unit, min, max)
 		elseif UnitIsGhost(unit) then
 			health.value:SetText("|cffD7BEA5"..L.unitframes_ouf_ghost.."|r")
 		end
+		health:SetStatusBarColor(.8, .3, .3) -- Make health red if offline/dead/dc
 	else
 		if not UnitIsPlayer(unit) and UnitIsFriend(unit, "player") and C["unitframes"].unicolor ~= true then
 			local c = T.oUF_colors.reaction[5]
@@ -465,9 +466,15 @@ T.PostUpdateHealthRaid = function(health, unit, min, max)
 		end
 		
 		if C["raidlayout"].gradienthealth then
-			if not UnitIsPlayer(unit) then return end
-			local r2, g2, b2 = oUFTukui.ColorGradient(min/max, unpack(C["raidlayout"].gradient))
-			health:SetStatusBarColor(r2, g2, b2)
+			if C.unitframes.unicolor then
+				if UnitName("mouseover") == UnitName(unit) then -- hack method to check mouseover w/o "OnEnter" :D
+					local hover = RAID_CLASS_COLORS[select(2, UnitClass(unit))]
+					health:SetStatusBarColor(hover.r, hover.g, hover.b)
+				else
+					local r2, g2, b2 = oUF.ColorGradient(min/max, unpack(C["raidlayout"].gradient))
+					health:SetStatusBarColor(r2, g2, b2)
+				end
+			end
 		end
 		
 		if min ~= max then
