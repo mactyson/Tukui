@@ -268,6 +268,8 @@ TukuiBar5ButtonBottom.text = T.SetFontString(TukuiBar5ButtonBottom, C.media.pixe
 TukuiBar5ButtonBottom.text:Point("CENTER", 1, 1)
 if T.lowversion then TukuiBar5ButtonBottom.text:SetText(hexa.."<"..hexb) else TukuiBar5ButtonBottom.text:SetText(hexa..">"..hexb) end
 
+local color = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
+
 -- exit vehicle button on left side of bottom action bar
 local vehicleleft = CreateFrame("Button", "TukuiExitVehicleButtonLeft", UIParent, "SecureHandlerClickTemplate")
 vehicleleft:SetAllPoints(TukuiBar2Button)
@@ -275,7 +277,7 @@ vehicleleft:SetFrameStrata(TukuiBar2Button:GetFrameStrata())
 vehicleleft:SetFrameLevel(TukuiBar2Button:GetFrameLevel() + 1)
 vehicleleft:SetTemplate("Transparent")
 vehicleleft:SetBorder()
-vehicleleft:SetBackdropBorderColor(75/255,  175/255, 76/255)
+vehicleleft:SetBackdropBorderColor(color.r,color.g,color.b)
 vehicleleft:RegisterForClicks("AnyUp")
 vehicleleft:SetScript("OnClick", function() VehicleExit() end)
 vehicleleft.text = T.SetFontString(vehicleleft, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
@@ -290,7 +292,7 @@ vehicleright:SetTemplate("Transparent")
 vehicleleft:SetBorder()
 vehicleright:SetFrameStrata(TukuiBar3Button:GetFrameStrata())
 vehicleright:SetFrameLevel(TukuiBar3Button:GetFrameLevel() + 1)
-vehicleright:SetBackdropBorderColor(75/255,  175/255, 76/255)
+vehicleright:SetBackdropBorderColor(color.r,color.g,color.b)
 vehicleright:RegisterForClicks("AnyUp")
 vehicleright:SetScript("OnClick", function() VehicleExit() end)
 vehicleright.text = T.SetFontString(vehicleright, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
@@ -343,4 +345,4 @@ init:SetScript("OnEvent", function(self, event)
 	end
 end)
 
-TukuiExitVehicleButtonLeft:SetBackdropBorderColor(75/255,  175/255, 76/255) -- left exit button doesnt lite up properly that why we do it here
+TukuiExitVehicleButtonLeft:SetBackdropBorderColor(color.r,color.g,color.b) -- left exit button doesnt lite up properly that why we do it here
