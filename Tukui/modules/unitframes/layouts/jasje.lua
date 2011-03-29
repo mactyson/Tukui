@@ -476,11 +476,11 @@ end
 		if (unit == "target") then			
 			-- Unit name on target
 			local Name = health:CreateFontString(nil, "OVERLAY")
-			Name:Point("LEFT", panel, "LEFT", 4, 2)
-			Name:SetJustifyH("LEFT")
+			Name:Point("CENTER", panel, "CENTER", 4, 2)
+			Name:SetJustifyH("CENTER")
 			Name:SetFont(pixelfont, 8, "OUTLINEMONOCHROME")
 
-			self:Tag(Name, '[Tukui:getnamecolor][Tukui:namelong] [Tukui:diffcolor][level] [shortclassification]')
+			self:Tag(Name, '[Tukui:getnamecolor][Tukui:targetname] [Tukui:diffcolor][level] [shortclassification]')
 			self.Name = Name
 			
 			-- combobar edit by jasje
@@ -570,9 +570,9 @@ end
 			castbar:CreateShadow("Hydra")
 			if C["unitframes"].trikz then
 				if unit == "player" then
-					castbar:SetPoint("BOTTOM", InvTukuiActionBarBackground, "TOP", 16,4)
+					castbar:SetPoint("BOTTOM", InvTukuiActionBarBackground, "TOP", 15.5,4)
 					castbar:SetHeight(T.Scale(25))
-					castbar:SetWidth((T.buttonsize * 11)+42)
+					castbar:Width(TukuiBar1:GetWidth() - 38)
 				elseif unit == "target" then
 					castbar:SetPoint("BOTTOM", TukuiTarget, "TOP", 0, 70)
 					castbar:SetHeight(T.Scale(18))
@@ -591,7 +591,7 @@ end
 			end	
 			
 			castbar.bg = CreateFrame("Frame", nil, castbar)
-			castbar.bg:SetTemplate("Hydra")
+			castbar.bg:SetTemplate("Transparent")
 			castbar.bg:CreateShadow("Hydra")
 			castbar.bg:SetPoint("TOPLEFT", T.Scale(-2), T.Scale(2))
 			castbar.bg:SetPoint("BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
@@ -627,12 +627,12 @@ end
 				    castbar.button:SetPoint("LEFT", -34, T.Scale(0))
 				    castbar.button:SetHeight(T.Scale(29))
 				    castbar.button:SetWidth(T.Scale(29))
-				    castbar.button:SetTemplate("Hydra")
+				    castbar.button:SetTemplate("Transparent")
 				elseif unit == "target" then
 				    castbar.button:SetPoint("CENTER", 0, T.Scale(28))
 				    castbar.button:SetHeight(T.Scale(26))
 				    castbar.button:SetWidth(T.Scale(26))
-				    castbar.button:SetTemplate("Hydra")
+				    castbar.button:SetTemplate("Transparent")
 				    castbar.button:CreateShadow("Hydra")
               end	
 		else		
@@ -640,13 +640,13 @@ end
 				castbar.button:SetPoint("LEFT", -52, T.Scale(11.2))
 				castbar.button:SetHeight(T.Scale(46))
 				castbar.button:SetWidth(T.Scale(46))
-				castbar.button:SetTemplate("Hydra")
+				castbar.button:SetTemplate("Transparent")
 				castbar.button:CreateShadow("Hydra")
 			elseif unit == "target" then
 				castbar.button:SetPoint("CENTER", 0, T.Scale(28))
 				castbar.button:SetHeight(T.Scale(26))
 				castbar.button:SetWidth(T.Scale(26))
-				castbar.button:SetTemplate("Hydra")
+				castbar.button:SetTemplate("Transparent")
 				castbar.button:CreateShadow("Hydra")
 			end	
 		end	
@@ -1500,7 +1500,7 @@ target:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", C.unitfr
 
 -- tot
 local tot = oUF:Spawn('targettarget', "TukuiTargetTarget")
-tot:SetPoint("BOTTOM", InvTukuiActionBarBackground, "TOP", C.unitframeJ.totX, C.unitframeJ.totY)
+tot:SetPoint("TOPRIGHT", TukuiTarget, "BOTTOMRIGHT", C.unitframeJ.totX, C.unitframeJ.totY)
 	tot:Size(100, 26)
 
 -- pet

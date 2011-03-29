@@ -296,8 +296,8 @@ oUF:Factory(function(self)
 			"unitsPerColumn", 5,
 			"columnSpacing", T.Scale(10),
 			"columnAnchorPoint", "BOTTOM"		
-		)
-		raid:SetPoint("TOPLEFT", UIParent, 15, -10*T.raidscale)
+		)                                                                                                                 -- default SetPoint
+		raid:SetPoint("TOP", InvTukuiActionBarBackground, 0, 81*T.raidscale) -- raid:SetPoint("TOPLEFT", UIParent, 15, -10*T.raidscale)
 	else
 		local raid = self:SpawnHeader("TukuiGrid", nil, "raid,party",
 			'oUF-initialConfigFunction', [[
@@ -320,8 +320,8 @@ oUF:Factory(function(self)
 			"unitsPerColumn", 5,
 			"columnSpacing", T.Scale(10),
 			"columnAnchorPoint", "BOTTOM"		
-		)
-		raid:SetPoint("TOPLEFT", UIParent, 15, -10*T.raidscale)
+		)                                                                                                                 -- default SetPoint
+		raid:SetPoint("TOP", InvTukuiActionBarBackground, 0, 81*T.raidscale) -- raid:SetPoint("TOPLEFT", UIParent, 15, -10*T.raidscale)
     end
 end)
 -- only show 5 groups in raid (25 mans raid)
