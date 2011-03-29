@@ -570,9 +570,9 @@ end
 			castbar:CreateShadow("Hydra")
 			if C["unitframes"].trikz then
 				if unit == "player" then
-					castbar:SetPoint("BOTTOM", InvTukuiActionBarBackground, "TOP", 18,5)
-					castbar:SetHeight(T.Scale(30))
-					castbar:SetWidth(T.Scale(334))
+					castbar:SetPoint("BOTTOM", InvTukuiActionBarBackground, "TOP", 16,4)
+					castbar:SetHeight(T.Scale(25))
+					castbar:SetWidth((T.buttonsize * 11)+42)
 				elseif unit == "target" then
 					castbar:SetPoint("BOTTOM", TukuiTarget, "TOP", 0, 70)
 					castbar:SetHeight(T.Scale(18))
@@ -624,9 +624,9 @@ end
 				
 			if C["unitframes"].trikz then
 			    if unit == "player" then -- sloppy but it works
-				    castbar.button:SetPoint("LEFT", -39, T.Scale(0))
-				    castbar.button:SetHeight(T.Scale(34))
-				    castbar.button:SetWidth(T.Scale(34))
+				    castbar.button:SetPoint("LEFT", -34, T.Scale(0))
+				    castbar.button:SetHeight(T.Scale(29))
+				    castbar.button:SetWidth(T.Scale(29))
 				    castbar.button:SetTemplate("Hydra")
 				elseif unit == "target" then
 				    castbar.button:SetPoint("CENTER", 0, T.Scale(28))
