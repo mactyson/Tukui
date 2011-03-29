@@ -1,6 +1,6 @@
 	local T, C, L = unpack(select(2, ...)) 
 	------------------------------------------------------------------------------------
-	-- Shaman Weapon Enchant reminder made by Fugg and edited bij me
+	-- Shaman Weapon Enchant reminder made by Fugg and edited by me
 	------------------------------------------------------------------------------------
 	if (T.myclass == "SHAMAN") and (unit == "player") and C.buffreminder.enable ~= true then return end
 
@@ -16,7 +16,7 @@
 
 	local function EarthlivingWeaponCheck(self, event, unit, spell)
 	local hasMainHandEnchant = GetWeaponEnchantInfo()
-		if not hasMainHandEnchant and not UnitInVehicle("player") then
+		if not hasMainHandEnchant and not UnitInVehicle("player") and InCombatLockdown() then
 			self:Show()
 		else
 		    self:Hide()
