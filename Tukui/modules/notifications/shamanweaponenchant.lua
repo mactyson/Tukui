@@ -18,6 +18,9 @@
 	local hasMainHandEnchant = GetWeaponEnchantInfo()
 		if not hasMainHandEnchant and not UnitInVehicle("player") and InCombatLockdown() then
 			self:Show()
+			if C["buffreminder"].sound == true then
+				PlaySoundFile(C["media"].warning)
+			end	
 		else
 		    self:Hide()
 		end
