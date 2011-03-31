@@ -117,6 +117,45 @@ local function CreatePanel(f, t, w, h, a1, p, a2, x, y)
 	f:SetBackdropColor(backdropr, backdropg, backdropb, backdropa)
 	f:SetBackdropBorderColor(borderr, borderg, borderb)
 end
+-- hydra slide in/out
+local function Animate(self, x, y, duration)
+	self.anim = self:CreateAnimationGroup("Move_In")
+	self.anim.in1 = self.anim:CreateAnimation("Translation")
+	self.anim.in1:SetDuration(0)
+	self.anim.in1:SetOrder(1)
+	self.anim.in2 = self.anim:CreateAnimation("Translation")
+	self.anim.in2:SetDuration(duration)
+	self.anim.in2:SetOrder(2)
+	self.anim.in2:SetSmoothing("OUT")
+	self.anim.out1 = self:CreateAnimationGroup("Move_Out")
+	self.anim.out2 = self.anim.out1:CreateAnimation("Translation")
+	self.anim.out2:SetDuration(duration)
+	self.anim.out2:SetOrder(1)
+	self.anim.out2:SetSmoothing("IN")
+	self.anim.in1:SetOffset(Scale(x), Scale(y))
+	self.anim.in2:SetOffset(Scale(-x), Scale(-y))
+	self.anim.out2:SetOffset(Scale(x), Scale(y))
+	self.anim.out1:SetScript("OnFinished", function() self:Hide() end)
+end
+
+local function SlideIn(self)
+	if not self.anim then
+		Animate(self)
+	end
+
+	self.anim.out1:Stop()
+	self:Show()
+	self.anim:Play()
+end
+
+local function SlideOut(self)
+	if self.anim then
+		self.anim:Finish()
+	end
+
+	self.anim:Stop()
+	self.anim.out1:Play()
+end
 
 local function SetBorder(f)
 	f:SetBackdropColor(.075, .075, .075, 0.7)

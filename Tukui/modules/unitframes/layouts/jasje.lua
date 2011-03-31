@@ -573,6 +573,12 @@ end
 					castbar:SetPoint("BOTTOM", InvTukuiActionBarBackground, "TOP", 15.5,4)
 					castbar:SetHeight(T.Scale(25))
 					castbar:Width(TukuiBar1:GetWidth() - 38)
+					-- spark for trikz layout only
+					castbar.Spark = castbar:CreateTexture(nil, 'OVERLAY')
+		            castbar.Spark:SetHeight(50)
+		            castbar.Spark:SetWidth(15)
+		            castbar.Spark:SetBlendMode('ADD')
+					
 				elseif unit == "target" then
 					castbar:SetPoint("BOTTOM", TukuiTarget, "TOP", 0, 70)
 					castbar:SetHeight(T.Scale(18))

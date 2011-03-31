@@ -579,16 +579,22 @@ local function Shared(self, unit)
 			local castbar = CreateFrame("StatusBar", self:GetName().."_Castbar", self)
 			castbar:SetStatusBarTexture(normTex)
 			castbar:SetFrameLevel(6)
-			T.CreateShadow(castbar)
+			castbar:CreateShadow("Hydra")
 			if C["unitframes"].trikz then
 				if unit == "player" then
-					castbar:SetPoint("BOTTOM", InvTukuiActionBarBackground, "CENTER", 14,38)
-					castbar:SetHeight(T.Scale(22))
-					castbar:SetWidth(T.Scale(344))
+					castbar:SetPoint("BOTTOM", InvTukuiActionBarBackground, "TOP", 15.5,4)
+					castbar:SetHeight(T.Scale(25))
+					castbar:Width(TukuiBar1:GetWidth() - 38)
+					-- spark for trikz layout only
+					castbar.Spark = castbar:CreateTexture(nil, 'OVERLAY')
+		            castbar.Spark:SetHeight(50)
+		            castbar.Spark:SetWidth(15)
+		            castbar.Spark:SetBlendMode('ADD')
+					
 				elseif unit == "target" then
-					castbar:SetPoint("CENTER", UIParent,"CENTER", 0, 250)
-					castbar:SetHeight(T.Scale(20))
-					castbar:SetWidth(T.Scale(250))
+					castbar:SetPoint("BOTTOM", TukuiTarget, "TOP", 0, 70)
+					castbar:SetHeight(T.Scale(18))
+					castbar:SetWidth(T.Scale(220))	
 				end
 			else
 				if unit == "player" then
@@ -598,13 +604,13 @@ local function Shared(self, unit)
 				elseif unit == "target" then
 					castbar:SetPoint("BOTTOM", TukuiTarget, "TOP", 0, 70)
 					castbar:SetHeight(T.Scale(18))
-					castbar:SetWidth(T.Scale(250))
+					castbar:SetWidth(T.Scale(220))
 				end
 			end	
 			
 			castbar.bg = CreateFrame("Frame", nil, castbar)
-			T.SetTemplate(castbar.bg)
-			T.CreateShadow(castbar.bg)
+			castbar.bg:SetTemplate("Transparent")
+			castbar.bg:CreateShadow("Hydra")
 			castbar.bg:SetPoint("TOPLEFT", T.Scale(-2), T.Scale(2))
 			castbar.bg:SetPoint("BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
 			castbar.bg:SetFrameLevel(5)
@@ -636,31 +642,30 @@ local function Shared(self, unit)
 				
 			if C["unitframes"].trikz then
 			    if unit == "player" then -- sloppy but it works
-				    castbar.button:SetPoint("LEFT", -30, T.Scale(0))
-				    castbar.button:SetHeight(T.Scale(25))
-				    castbar.button:SetWidth(T.Scale(25))
-				    T.SetTemplate(castbar.button)
-				    T.CreateShadow(castbar.button)
-			elseif unit == "target" then
-				    castbar.button:SetPoint("CENTER", castbar, 0, T.Scale(40))
-				    castbar.button:SetHeight(T.Scale(40))
-				    castbar.button:SetWidth(T.Scale(40))
-				    T.SetTemplate(castbar.button)
-				    T.CreateShadow(castbar.button)
+				    castbar.button:SetPoint("LEFT", -34, T.Scale(0))
+				    castbar.button:SetHeight(T.Scale(29))
+				    castbar.button:SetWidth(T.Scale(29))
+				    castbar.button:SetTemplate("Transparent")
+				elseif unit == "target" then
+				    castbar.button:SetPoint("CENTER", 0, T.Scale(28))
+				    castbar.button:SetHeight(T.Scale(26))
+				    castbar.button:SetWidth(T.Scale(26))
+				    castbar.button:SetTemplate("Transparent")
+				    castbar.button:CreateShadow("Hydra")
               end	
 		else		
 			if unit == "player" then
 				castbar.button:SetPoint("LEFT", -52, T.Scale(11.2))
 				castbar.button:SetHeight(T.Scale(46))
 				castbar.button:SetWidth(T.Scale(46))
-				T.SetTemplate(castbar.button)
-				T.CreateShadow(castbar.button)
+				castbar.button:SetTemplate("Transparent")
+				castbar.button:CreateShadow("Hydra")
 			elseif unit == "target" then
 				castbar.button:SetPoint("CENTER", 0, T.Scale(28))
 				castbar.button:SetHeight(T.Scale(26))
 				castbar.button:SetWidth(T.Scale(26))
-				T.SetTemplate(castbar.button)
-				T.CreateShadow(castbar.button)
+				castbar.button:SetTemplate("Transparent")
+				castbar.button:CreateShadow("Hydra")
 			end	
 		end	
 				castbar.icon = castbar.button:CreateTexture(nil, "ARTWORK")

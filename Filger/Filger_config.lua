@@ -463,7 +463,7 @@ ns.Filger_Spells = {
 		},
 		{
 			Name = "Shaman Procs",
-			Direction = "DOWN",
+			Direction = "RIGHT",
 			Interval = 4,
 			Mode = "ICON",
 			setPoint = { "CENTER", "UIParent", -0, -145 },
