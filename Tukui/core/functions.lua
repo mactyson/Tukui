@@ -447,9 +447,6 @@ T.PostUpdateHealth = function(health, unit, min, max)
 	end
 end
 -- highlight on raidframes
-local validFrames = {}
-for i = 1, 40 do validFrames[i] = _G["TukuiGridUnitButton"..i] end
-
 T.PostUpdateHealthRaid = function(health, unit, min, max)
 	if not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit) then
 		if not UnitIsConnected(unit) then
@@ -467,20 +464,15 @@ T.PostUpdateHealthRaid = function(health, unit, min, max)
 			health:SetStatusBarColor(r, g, b)
 			health.bg:SetTexture(.1, .1, .1)
 		end
-
+		
 		if C.raidlayout.gradienthealth and C.unitframes.unicolor then
-			for frame, _ in pairs(validFrames) do
-				if frame and GetMouseFocus() == frame then
-					print('accessed, should be raid color')
-					local hover = RAID_CLASS_COLORS[select(2, UnitClass(unit))]
-					health:SetStatusBarColor(hover.r, hover.g, hover.b)
-				else
-					local red, green, blue = oUF.ColorGradient(min/max, unpack(C["raidlayout"].gradient))
-					health:SetStatusBarColor(red, green, blue)
-				end
+			if not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit) then return end
+			if not health.classcolored then
+				local r, g, b = oUF.ColorGradient(min/max, unpack(C["raidlayout"].gradient))
+				health:SetStatusBarColor(r, g, b)
 			end
 		end
-
+		
 		if min ~= max then
 			health.value:SetText("|cff559655-"..ShortValueNegative(max-min).."|r")
 		else
