@@ -1,5 +1,6 @@
 local T, C, L = unpack(Tukui) 
 
+if not C["Tukui_InterruptIcons"].enable == true then return end;
 -------------------------------------------------------------
 -- Tukui_InterruptIcons
 -- the interrupt spellIDs to track on screen in arena.
@@ -11,7 +12,7 @@ T.interrupt = {
 	[2139] = 24, -- counterspell
 	[19647] = 24, -- spell lock
 	[34322] = 27, -- fear priest
-	[47476] = 120, -- strangulate
+	--[47476] = 120, -- strangulate turning this off cause i dont want to see 2 min cd
 	[47528] = 10, -- mindfreeze
 	[57994] = 6, -- wind shear
 	[72] = 12, -- shield bash

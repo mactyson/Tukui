@@ -16,7 +16,7 @@ end
 if T.myname== "Jàsje" then
    C.datatext.classcolor = true
    C.datatext.crit = 0
-   C.datatext.haste = 9
+   C.datatext.manaregen = 9
    C.unitframeJ.playerX = -127
    C.unitframeJ.playerY = 55
    C.unitframeJ.targetX =  127

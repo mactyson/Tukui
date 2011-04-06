@@ -171,6 +171,8 @@ local a = CreateFrame ("Frame")
 -----------------------------------------
 -- fDispelAnnounce made by Foof
 -----------------------------------------
+if not C["fDispelAnnounce"].enable == true then return end;
+
 local fDispelAnnounce = CreateFrame("Frame", fDispelAnnounce)
 local band = bit.band
 local font = C.media.pixelfont -- HOOG0555.ttf 

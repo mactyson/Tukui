@@ -113,6 +113,14 @@ C["saftExperienceBar"] = {
     ["enable"] = true,                       -- enable Safturento's XP/REP bar
 }	
 
+C["Tukui_InterruptIcons"] = {
+    ["enable"] = true,       -- enable/disable interrupt icons(pvp)
+}
+
+C["fDispelAnnounce"] = {
+    ["enable"] = true,       -- enable/disable DispelAnnounce by Foof
+}
+
 C["Interrupted"] = {
     ["enable"] = true,                     -- enable Interrupt announce by Sideshow
 }	
@@ -153,6 +161,7 @@ C["datatext"] = {
 	["avd"] = 0,                                        -- show your current avoidance against the level of the mob your targeting
 	["armor"] = 0,                                      -- show your armor value against the level mob you are currently targeting
 	["currency"] = 0,                                   -- show your tracked currency on panels
+	["manaregen"] = 0,                                   -- shows your mp5 in and out of combat
 	["hit"] = 0,
 	["mastery"] = 0,
 	["micromenu"] = 0,
