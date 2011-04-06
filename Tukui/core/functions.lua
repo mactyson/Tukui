@@ -446,6 +446,9 @@ T.PostUpdateHealth = function(health, unit, min, max)
 		end
 	end
 end
+-- highlight on raidframes
+local validFrames = {}
+for i = 1, 40 do validFrames[i] = _G["TukuiGridUnitButton"..i] end
 
 T.PostUpdateHealthRaid = function(health, unit, min, max)
 	if not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit) then
@@ -456,7 +459,7 @@ T.PostUpdateHealthRaid = function(health, unit, min, max)
 		elseif UnitIsGhost(unit) then
 			health.value:SetText("|cffD7BEA5"..L.unitframes_ouf_ghost.."|r")
 		end
-		health:SetStatusBarColor(.8, .3, .3) -- Make health red if offline/dead/dc
+		health:SetStatusBarColor(.8, .3, .3) -- Red health if offline/dead/dc'd
 	else
 		if not UnitIsPlayer(unit) and UnitIsFriend(unit, "player") and C["unitframes"].unicolor ~= true then
 			local c = T.oUF_colors.reaction[5]
@@ -464,18 +467,27 @@ T.PostUpdateHealthRaid = function(health, unit, min, max)
 			health:SetStatusBarColor(r, g, b)
 			health.bg:SetTexture(.1, .1, .1)
 		end
-		
-		if C["raidlayout"].gradienthealth then
-			if C.unitframes.unicolor then
-				if UnitName("mouseover") == UnitName(unit) then -- hack method to check mouseover w/o "OnEnter" :D
+
+		if C.raidlayout.gradienthealth and C.unitframes.unicolor then
+			for frame, _ in pairs(validFrames) do
+				if frame and GetMouseFocus() == frame then
+					print('accessed, should be raid color')
 					local hover = RAID_CLASS_COLORS[select(2, UnitClass(unit))]
 					health:SetStatusBarColor(hover.r, hover.g, hover.b)
 				else
-					local r2, g2, b2 = oUF.ColorGradient(min/max, unpack(C["raidlayout"].gradient))
-					health:SetStatusBarColor(r2, g2, b2)
+					local red, green, blue = oUF.ColorGradient(min/max, unpack(C["raidlayout"].gradient))
+					health:SetStatusBarColor(red, green, blue)
 				end
 			end
 		end
+
+		if min ~= max then
+			health.value:SetText("|cff559655-"..ShortValueNegative(max-min).."|r")
+		else
+			health.value:SetText(" ")
+		end
+	end
+end
 		
 		if min ~= max then
 			health.value:SetText("|cff559655-"..ShortValueNegative(max-min).."|r")

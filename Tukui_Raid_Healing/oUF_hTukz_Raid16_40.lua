@@ -65,24 +65,20 @@ local function Shared(self, unit)
 	-- end border	
 	
 	-- hydra glow
-	self:HookScript("OnEnter", function(self) -- Mouseover coloring
-		if not UnitIsConnected(self.unit) or UnitIsDead(self.unit) or UnitIsGhost(self.unit) then
-			health:SetStatusBarColor(.8, .3, .3)
-		else
-			if self.unit == "pet" then return end
+	if C.raidlayout.gradienthealth and C.unitframes.unicolor then
+		self:HookScript("OnEnter", function(self) -- Mouseover coloring
+			if not UnitIsConnected(self.unit) or UnitIsDead(self.unit) or UnitIsGhost(self.unit) then return end
 			local hover = RAID_CLASS_COLORS[select(2, UnitClass(self.unit))]
+			if not hover then return end
 			health:SetStatusBarColor(hover.r, hover.g, hover.b)
-		end
-	end)
-	
-	self:HookScript("OnLeave", function(self)
-		if not UnitIsConnected(self.unit) or UnitIsDead(self.unit) or UnitIsGhost(self.unit) then
-			health:SetStatusBarColor(.8, .3, .3)
-		else
+		end)
+		
+		self:HookScript("OnLeave", function(self)
+			if not UnitIsConnected(self.unit) or UnitIsDead(self.unit) or UnitIsGhost(self.unit) then return end
 			local r, g, b = oUF.ColorGradient(UnitHealth(self.unit)/UnitHealthMax(self.unit), unpack(C["raidlayout"].gradient))
 			health:SetStatusBarColor(r, g, b)
-		end
-	end)
+		end)
+	end
 	-- end hydra glow
 		
 	local power = CreateFrame("StatusBar", nil, self)
