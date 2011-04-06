@@ -488,14 +488,6 @@ T.PostUpdateHealthRaid = function(health, unit, min, max)
 		end
 	end
 end
-		
-		if min ~= max then
-			health.value:SetText("|cff559655-"..ShortValueNegative(max-min).."|r")
-		else
-			health.value:SetText(" ")
-		end
-	end
-end
 
 T.PostUpdatePetColor = function(health, unit, min, max)
 	-- doing this here to force friendly unit (vehicle or pet) very far away from you to update color correcly
