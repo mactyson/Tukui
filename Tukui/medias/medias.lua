@@ -7,6 +7,7 @@ C["media"] = {
 	["dmgfont"] = [[Fonts\skurri.TTF]], -- general font of dmg / sct 
 		["pixelfont"] = [[Interface\AddOns\Tukui\medias\fonts\HOOG0555.ttf]], -- extra pixelfont
 		["CBpixelfont"] = [[Interface\AddOns\Tukui\medias\fonts\HOOG0555.ttf]], -- CASTBAR FONT
+		
 		["pixelfont2"] = [[Interface\AddOns\Tukui\medias\fonts\visitor2.ttf]], -- another pixelfont
 		["pixelfont3"] = [[Interface\AddOns\Tukui\medias\fonts\visitor1.ttf]], -- another pixelfont
 		["pixelfont4"] =  [[Interface\AddOns\Tukui\medias\fonts\Pixelway_Baseline.TTF]], -- another pixelfont
