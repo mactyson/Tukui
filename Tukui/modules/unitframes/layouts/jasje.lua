@@ -15,8 +15,8 @@ ns._Headers = {}
 
 local font1 = C["media"].uffont
 local font2 = C["media"].font
-local font
-local pixelfont = C["media"].pixelfont
+local pixelfont = C["media"].pixelfont -- other font
+local CBpixelfont = C["media"].pixelfont -- castbar font
 local normTex = C["media"].normTex
 local glowTex = C["media"].glowTex
 local bubbleTex = C["media"].bubbleTex
@@ -608,12 +608,12 @@ end
             castbar.PostCastStart = T.PostCastStart
             castbar.PostChannelStart = T.PostCastStart
 			
-			castbar.time = T.SetFontString(castbar, pixelfont, 8, "MONOCHROMEOUTLINE")
+			castbar.time = T.SetFontString(castbar, CBpixelfont, 8, "MONOCHROMEOUTLINE")
 			castbar.time:SetPoint("RIGHT", castbar, "RIGHT", T.Scale(-4), T.Scale(1))
 			castbar.time:SetTextColor(0.84, 0.75, 0.65)
 			castbar.time:SetJustifyH("RIGHT")
 
-			castbar.Text = T.SetFontString(castbar, pixelfont, 8, "MONOCHROMEOUTLINE")
+			castbar.Text = T.SetFontString(castbar, CBpixelfont, 8, "MONOCHROMEOUTLINE")
 			castbar.Text:SetPoint("LEFT", castbar, "LEFT", 4, 1)
 			castbar.Text:SetTextColor(0.84, 0.75, 0.65)
 			
@@ -984,12 +984,12 @@ end
 				castbar.PostCastStart = T.CheckCast
 				castbar.PostChannelStart = T.CheckChannel
 
-				castbar.time = T.SetFontString(castbar, pixelfont, 8, "MONOCHROMEOUTLINE")
+				castbar.time = T.SetFontString(castbar, CBpixelfont, 8, "MONOCHROMEOUTLINE")
 				castbar.time:SetPoint("RIGHT", power, "RIGHT", T.Scale(-0), T.Scale(-0))
 				castbar.time:SetTextColor(0.84, 0.75, 0.65)
 				castbar.time:SetJustifyH("RIGHT")
 
-				castbar.Text = T.SetFontString(castbar, pixelfont, 8, "MONOCHROMEOUTLINE")
+				castbar.Text = T.SetFontString(castbar, CBpixelfont, 8, "MONOCHROMEOUTLINE")
 				castbar.Text:Point("LEFT", power, "LEFT", 4, 0)
 				castbar.Text:SetTextColor(0.84, 0.75, 0.65)
 				
@@ -1084,13 +1084,13 @@ end
 		castbar.bg:Point("BOTTOMRIGHT", 2, -2)
 		castbar.bg:SetFrameLevel(5)
 		
-		castbar.time = T.SetFontString(castbar, pixelfont, 8, "OUTLINEMONOCHROME")
+		castbar.time = T.SetFontString(castbar, CBpixelfont, 8, "OUTLINEMONOCHROME")
 		castbar.time:Point("RIGHT", castbar, "RIGHT", -4, 0)
 		castbar.time:SetTextColor(0.84, 0.75, 0.65)
 		castbar.time:SetJustifyH("RIGHT")
 		castbar.CustomTimeText = T.CustomCastTimeText
 
-		castbar.Text = T.SetFontString(castbar, pixelfont, 8, "OUTLINEMONOCHROME")
+		castbar.Text = T.SetFontString(castbar, CBpixelfont, 8, "OUTLINEMONOCHROME")
 		castbar.Text:SetPoint("LEFT", castbar, "LEFT", 4, 0)
 		castbar.Text:SetTextColor(0.84, 0.75, 0.65)
 		
@@ -1184,13 +1184,13 @@ end
 		castbar.bg:Point("BOTTOMRIGHT", 2, -2)
 		castbar.bg:SetFrameLevel(5)
 		
-		castbar.time = T.SetFontString(castbar, pixelfont, 8, "OUTLINEMONOCHROME")
+		castbar.time = T.SetFontString(castbar, CBpixelfont, 8, "OUTLINEMONOCHROME")
 		castbar.time:Point("RIGHT", castbar, "RIGHT", -4, 0)
 		castbar.time:SetTextColor(0.84, 0.75, 0.65)
 		castbar.time:SetJustifyH("RIGHT")
 		castbar.CustomTimeText = T.CustomCastTimeText
 
-		castbar.Text = T.SetFontString(castbar, pixelfont, 8, "OUTLINEMONOCHROME")
+		castbar.Text = T.SetFontString(castbar, CBpixelfont, 8, "OUTLINEMONOCHROME")
 		castbar.Text:SetPoint("LEFT", castbar, "LEFT", 4, 0)
 		castbar.Text:SetTextColor(0.84, 0.75, 0.65)
 		
@@ -1382,13 +1382,13 @@ end
 		castbar.bg:SetPoint("BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
 		castbar.bg:SetFrameLevel(5)
 		
-		castbar.time = T.SetFontString(castbar, pixelfont, 8, "OUTLINEMONOCHROME")
+		castbar.time = T.SetFontString(castbar, CBpixelfont, 8, "OUTLINEMONOCHROME")
 		castbar.time:SetPoint("RIGHT", castbar, "RIGHT", T.Scale(-4), 0)
 		castbar.time:SetTextColor(0.84, 0.75, 0.65)
 		castbar.time:SetJustifyH("RIGHT")
 		castbar.CustomTimeText = T.CustomCastTimeText
 
-		castbar.Text = T.SetFontString(castbar, pixelfont, 8, "OUTLINEMONOCHROME")
+		castbar.Text = T.SetFontString(castbar, CBpixelfont, 8, "OUTLINEMONOCHROME")
 		castbar.Text:Point("LEFT", castbar, "LEFT", 4, 0)
 		castbar.Text:SetTextColor(0.84, 0.75, 0.65)
 		
