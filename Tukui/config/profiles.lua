@@ -21,8 +21,8 @@ if T.myname== "Jàsje" then
    C.unitframeJ.playerY = 55
    C.unitframeJ.targetX =  127
    C.unitframeJ.targetY =  55
-   C.unitframeJ.totX =  0
-   C.unitframeJ.totY =  -25
+   C.unitframeJ.totX =  -100
+   C.unitframeJ.totY =  -45
    C.raidlayout.gridH = 40
    C.raidlayout.gridW = 68
    C.raidlayout.powergridH = 2

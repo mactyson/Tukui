@@ -79,8 +79,8 @@ C["unitframeJ"] = {
 	["playerY"] = 61,                           
  	["targetX"] = -2,                           
 	["targetY"] = 61,
- 	["totX"] = -0,                           
-	["totY"] = 61, 
+ 	["totX"] = 10,                           
+	["totY"] = 0, 
 	["petX"] = -0,                           
 	["petY"] = 105,
 }
