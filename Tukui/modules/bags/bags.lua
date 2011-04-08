@@ -568,7 +568,7 @@ function Stuffing:Layout(lb)
 
 	if lb then
 		bs = bags_BANK
-		if T.InfoLeftRightWidth >= 400 then
+		if T.InfoLeftRightWidth >= 405 then
 			cols = 11
 		elseif T.InfoLeftRightWidth >= 370 and T.InfoLeftRightWidth < 405 then
 			cols = 10
@@ -580,7 +580,7 @@ function Stuffing:Layout(lb)
 		f = self.bankFrame
 	else
 		bs = bags_BACKPACK
-		if T.InfoLeftRightWidth >= 400 then
+		if T.InfoLeftRightWidth >= 405 then
 			cols = 11
 		elseif T.InfoLeftRightWidth >= 370 and T.InfoLeftRightWidth < 405 then
 			cols = 10
@@ -681,8 +681,8 @@ function Stuffing:Layout(lb)
 		rows = rows + 1
 	end
 
-	f:Width(cols * 31 + (cols - 1) * 4 + 9.5 * 2)
-	f:Height(rows * 31 + (rows - 1) * 4 + off + 12 * 2)
+	f:Width(cols * 31 + (cols - 1) * 4 + 12.2 * 2) -- resize bag width
+	f:Height(rows * 31 + (rows - 1) * 4 + off + 12 * 2) -- resize bag height
 
 
 	local idx = 0
