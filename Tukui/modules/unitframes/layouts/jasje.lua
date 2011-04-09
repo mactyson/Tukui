@@ -961,7 +961,7 @@ end
 		Name:SetFont(pixelfont, 8, "OUTLINEMONOCHROME")
 		Name:SetJustifyH("CENTER")
 
-		self:Tag(Name, '[Tukui:getnamecolor][Tukui:namemedium] [Tukui:diffcolor][level]')
+		self:Tag(Name, '[Tukui:getnamecolor][Tukui:targetname] [Tukui:diffcolor][level]')
 		self.Name = Name
 		
 		if (C["unitframes"].unitcastbar == true) then
