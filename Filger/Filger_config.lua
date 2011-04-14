@@ -452,39 +452,43 @@ ns.Filger_Spells = {
 	["SHAMAN"] = { -------------------------------------------------------------------------------------------------------- Shaman
 		{
 			Name = "Buffs and Debuffs",
-			Direction = "LEFT",
-			Interval = 2,
+			Direction = "RIGHT",
+			Interval = 11,
 			Mode = "ICON",
-			setPoint = { "LEFT", TukuiPlayer, -42, -3 },
+			setPoint = { "TOPLEFT", TukuiPlayer, 13, 50 },
 			-- Earth Shield
-			{ spellID = 974, size = 36, unitId = "player", caster = "player", filter = "BUFF" },
+			{ spellID = 974, size = 40, unitId = "player", caster = "player", filter = "BUFF" },
 			-- Riptide
-			{ spellID = 61295, size = 36, unitId = "player", caster = "player", filter = "BUFF" },
+			{ spellID = 61295, size = 40, unitId = "player", caster = "player", filter = "BUFF" },
+			-- Heroism
+			{ spellID = 32182, size = 40, unitId = "player", caster = "player", filter = "BUFF" },
+			-- Bloodlust
+			{ spellID = 2825, size = 40, unitId = "player", caster = "player", filter = "BUFF" },
 		},
 		{
 			Name = "Shaman Procs",
 			Direction = "RIGHT",
-			Interval = 4,
+			Interval = 3,
 			Mode = "ICON",
-			setPoint = { "CENTER", "UIParent", -0, -145 },
+			setPoint = { "CENTER", UIParent, 106, -85 },
 
 			-- Maelstorm Weapon
-			{ spellID = 53817, size = 37, unitId = "player", caster = "player", filter = "BUFF" },
+			{ spellID = 53817, size = 36, unitId = "player", caster = "player", filter = "BUFF" },
 			-- Shamanistic Rage
-			{ spellID = 30823, size = 37, unitId = "player", caster = "player", filter = "BUFF" },
+			{ spellID = 30823, size = 36, unitId = "player", caster = "player", filter = "BUFF" },
 			-- Clearcasting
-			{ spellID = 16246, size = 37, unitId = "player", caster = "player", filter = "BUFF" },
+			{ spellID = 16246, size = 36, unitId = "player", caster = "player", filter = "BUFF" },
 			-- Tidal Waves
-			{ spellID = 51562, size = 37, unitId = "player", caster = "player", filter = "BUFF" },
+			{ spellID = 51562, size = 36, unitId = "player", caster = "player", filter = "BUFF" },
 			-- Ancestral Fortitude
-			{ spellID = 16236, size = 37, unitId = "target", caster = "player", filter = "BUFF" },
+			{ spellID = 16236, size = 36, unitId = "target", caster = "player", filter = "BUFF" },
 		},
 		{
 			Name = "Buffs and Debuffs",
 			Direction = "RIGHT",
-			Interval = 2,
+			Interval = 3,
 			Mode = "ICON",
-			setPoint = { "RIGHT", TukuiTarget, 42, -3 },
+			setPoint = { "CENTER", UIParent, 106, -43 },
 
 			-- Hex
 			{ spellID = 51514, size = 36, unitId = "target", caster = "all", filter = "DEBUFF" },
