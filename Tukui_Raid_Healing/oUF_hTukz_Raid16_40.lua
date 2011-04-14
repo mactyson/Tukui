@@ -6,7 +6,9 @@ ns._Objects = {}
 ns._Headers = {}
 
 local T, C, L = unpack(Tukui) 
-if not C.unitframes.enable or C.interface.style ~= "Tukui" == true then return end  
+if not C.unitframes.enable or C.interface.style ~= "Tukui" == true then return end 
+
+print("Tukui layout enabled")
 
 local font2 = C["media"].uffont
 local font1 = C["media"].font

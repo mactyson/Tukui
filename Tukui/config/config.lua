@@ -67,22 +67,7 @@ C["raidlayout"] = {
 		0.3, 0.3, 0.3, -- R, G, B (high HP)
 	},
     -- only works for Jasje style
-	["gridH"] = 27,                           -- Height of raidframes
-	["gridW"] = 50,                           -- Width of raidframes 
-	["powergridH"] = 2,                            -- Height of power 
-	["powergridW"] = 40,                            -- Width of power -- always need to be 10 less then gridW
-}
-    -- below config only works for Jasje style
-    -- unitframe posistioning, X = horizontal  Y = vertical  - = left/down + = right/up
-C["unitframeJ"] = {
- 	["playerX"] = 2,                      
-	["playerY"] = 61,                           
- 	["targetX"] = -2,                           
-	["targetY"] = 61,
- 	["totX"] = 10,                           
-	["totY"] = 0, 
-	["petX"] = -0,                           
-	["petY"] = 105,
+	["healer"] = true,                                  -- set the raidlayout between unitframes
 }
 
 C["arena"] = {

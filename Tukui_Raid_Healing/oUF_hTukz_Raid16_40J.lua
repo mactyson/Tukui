@@ -27,7 +27,11 @@ local function Shared(self, unit)
 	local health = CreateFrame('StatusBar', nil, self)
 	health:SetPoint("TOPLEFT")
 	health:SetPoint("TOPRIGHT")
-	health:Height(C.raidlayout.gridH*C.raidlayout.gridscale*T.raidscale)
+	if C["raidlayout"].healer == true then
+	health:Height(40.3*C.raidlayout.gridscale*T.raidscale)
+	else
+	health:Height(27.3*C.raidlayout.gridscale*T.raidscale)
+	end
 	health:SetStatusBarTexture(normTex)
 	self.Health = health
 	
@@ -91,7 +95,11 @@ local function Shared(self, unit)
 	-- end hydra glow
 	
 	local power = CreateFrame("StatusBar", nil, self)
-	power:Size(C.raidlayout.powergridW, C.raidlayout.powergridH)
+	if C["raidlayout"].healer == true then
+	power:Size(58, 2)
+	else
+	power:Size(40, 2)
+	end
 	power:Point("LEFT", health, "BOTTOMLEFT", 5, -2)
 	power:SetFrameLevel(4)
 	power:SetStatusBarTexture(normTex)
@@ -268,19 +276,21 @@ end
 	return self
 end
 
-oUF:RegisterStyle('TukuiHealR25R40J', Shared)
+oUF:RegisterStyle('TukuiHealRaid', Shared)
 oUF:Factory(function(self)
-	oUF:SetActiveStyle("TukuiHealR25R40J")	
-	if C["raidlayout"].gridonly ~= true then
-		local raid = self:SpawnHeader("TukuiGrid", nil, "custom [@raid16,exists] show;hide",
+	oUF:SetActiveStyle("TukuiHealRaid")	
+	if C["raidlayout"].healer == true then	
+        local raid = self:SpawnHeader("TukuiHealGrid", nil, "raid,party",
 			'oUF-initialConfigFunction', [[
 				local header = self:GetParent()
 				self:SetWidth(header:GetAttribute('initial-width'))
 				self:SetHeight(header:GetAttribute('initial-height'))
 			]],
-			'initial-width', T.Scale(C.raidlayout.gridW*C["raidlayout"].gridscale*T.raidscale),
-			'initial-height', T.Scale(C.raidlayout.gridH+.3*C["raidlayout"].gridscale*T.raidscale),	
+			'initial-width', T.Scale(68),
+			'initial-height', T.Scale(40.3),
 			"showRaid", true,
+			"showParty", true,
+			"showPlayer", C["raidlayout"].showplayerinparty,
 			"xoffset", T.Scale(7),
 			"yOffset", T.Scale(-7),
 			"point", "LEFT",
@@ -291,20 +301,20 @@ oUF:Factory(function(self)
 			"unitsPerColumn", 5,
 			"columnSpacing", T.Scale(10),
 			"columnAnchorPoint", "TOP"		
-		)                                                                                                                 -- default SetPoint
-		raid:SetPoint("BOTTOM", InvTukuiActionBarBackground, 0, 107*T.raidscale) -- raid:SetPoint("TOPLEFT", UIParent, 15, -10*T.raidscale)
-	else
-		local raid = self:SpawnHeader("TukuiGrid", nil, "raid,party",
+		) 
+		raid:SetPoint("BOTTOM", InvTukuiActionBarBackground, 0, 107) 
+    else	
+        local raid = self:SpawnHeader("TukuiHealGrid", nil, "raid,party",
 			'oUF-initialConfigFunction', [[
 				local header = self:GetParent()
 				self:SetWidth(header:GetAttribute('initial-width'))
 				self:SetHeight(header:GetAttribute('initial-height'))
 			]],
-			'initial-width', T.Scale(C.raidlayout.gridW*C["raidlayout"].gridscale*T.raidscale),
-			'initial-height', T.Scale(C.raidlayout.gridH+.3*C["raidlayout"].gridscale*T.raidscale),
+			'initial-width', T.Scale(50),
+			'initial-height', T.Scale(27.3),
+			"showRaid", true,
 			"showParty", true,
-			"showPlayer", C["raidlayout"].showplayerinparty, 
-			"showRaid", true, 
+			"showPlayer", C["raidlayout"].showplayerinparty,
 			"xoffset", T.Scale(7),
 			"yOffset", T.Scale(-7),
 			"point", "LEFT",
@@ -315,10 +325,12 @@ oUF:Factory(function(self)
 			"unitsPerColumn", 5,
 			"columnSpacing", T.Scale(10),
 			"columnAnchorPoint", "TOP"		
-		)                                                                                                                 -- default SetPoint
-		raid:SetPoint("BOTTOM", InvTukuiActionBarBackground, 0, 107*T.raidscale) -- raid:SetPoint("TOPLEFT", UIParent, 15, -10*T.raidscale)
-    end
+		) 
+		raid:SetPoint("TOPLEFT", UIParent, 15, -10)		
+	end
 end)
+
+--[[
 -- only show 5 groups in raid (25 mans raid)
 local MaxGroup = CreateFrame("Frame")
 MaxGroup:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -332,3 +344,4 @@ MaxGroup:SetScript("OnEvent", function(self)
 		TukuiGrid:SetAttribute("groupFilter", "1,2,3,4,5,6,7,8")
 	end
 end)
+]]--

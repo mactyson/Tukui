@@ -2,6 +2,8 @@ local T, C, L = unpack(select(2, ...))
 
 if not C.unitframes.enable or C.interface.style ~= "Jasje" then return end
 
+print("Jasje layout enabled")
+
 local ADDON_NAME, ns = ...
 local oUF = ns.oUF or oUF
 assert(oUF, "Tukui was unable to locate oUF install.")
@@ -801,7 +803,6 @@ end
 		power:Size(90, 5)
         power:Point("LEFT", health, "BOTTOMLEFT", 5, -2)
 		power:SetFrameLevel(4)
-		--power:SetFrameStrata("MEDIUM")
 		power:SetStatusBarTexture(normTex)
 		
 		-- power border
@@ -841,7 +842,7 @@ end
 		local Name = health:CreateFontString(nil, "OVERLAY")
 		Name:SetPoint("CENTER", health, "CENTER", 0, 0)
 		Name:SetFont(pixelfont, 8, "OUTLINEMONOCHROME")
-		Name:SetJustifyH("LEFT")
+		Name:SetJustifyH("CENTER")
 
 		self:Tag(Name, '[Tukui:getnamecolor][Tukui:namemedium]')
 		self.Name = Name
@@ -868,42 +869,31 @@ end
 	------------------------------------------------------------------------
 	
 	if (unit == "pet") then
-		-- create panel if higher version
-		local panel = CreateFrame("Frame", nil, self)
-		if not T.lowversion then
-			panel:CreatePanel("Default", 129, 17, "BOTTOM", self, "BOTTOM", 0, 0)
-			panel:SetFrameLevel(2)
-			panel:SetFrameStrata("MEDIUM")
-			panel:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
-			self.panel = panel
-			self.panel:Hide()
-		end
-		
+		-- health bar
+		local health = CreateFrame('StatusBar', nil, self)
+		health:Height(32)
+		health:SetPoint("TOPLEFT")
+		health:SetPoint("TOPRIGHT")
+		health:SetStatusBarTexture(normTex)
+
 		-- border 
 	    local Healthbg = CreateFrame("Frame", nil, self)
 	    Healthbg:SetPoint("TOPLEFT", self, "TOPLEFT", T.Scale(-2), T.Scale(2))
-	    Healthbg:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", T.Scale(2), T.Scale(-4))
+	    Healthbg:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", T.Scale(2), T.Scale(-8))
 	    Healthbg:SetTemplate("Hydra")
 		Healthbg:CreateShadow("Hydra")
 	    Healthbg:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
 	    Healthbg:SetFrameLevel(2)
 	    self.Healthbg = Healthbg
 		
-		-- health bar
-		local health = CreateFrame('StatusBar', nil, self)
-		health:Height(T.Scale(22))
-		health:SetPoint("TOPLEFT")
-		health:SetPoint("TOPRIGHT")
-		health:SetStatusBarTexture(normTex)
-		
 		health.PostUpdate = T.PostUpdatePetColor
-				
-		self.Health = health
-		self.Health.bg = healthBG
 		
 		local healthBG = health:CreateTexture(nil, 'BORDER')
 		healthBG:SetAllPoints()
 		healthBG:SetTexture(.1, .1, .1)
+		
+		self.Health = health
+		self.Health.bg = healthBG
 		
 		health.frequentUpdates = true
 		if C["unitframes"].showsmooth == true then
@@ -1009,7 +999,7 @@ end
 	if (unit == "focus") then
 		-- health 
 		local health = CreateFrame('StatusBar', nil, self)
-		health:Height(12)
+		health:Height(15)
 		health:SetPoint("TOPLEFT")
 		health:SetPoint("TOPRIGHT")
 		health:SetStatusBarTexture(normTex)
@@ -1490,29 +1480,33 @@ oUF:RegisterStyle('Tukui', Shared)
 
 -- player
 local player = oUF:Spawn('player', "TukuiPlayer")
-player:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", C.unitframeJ.playerX, C.unitframeJ.playerY)
+player:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", -127, 55)
 	player:Size(220, 26)
 
 
 -- focus
 local focus = oUF:Spawn('focus', "TukuiFocus")
-focus:SetPoint("BOTTOMLEFT", TukuiPlayer, "TOPLEFT", 10, -55)
-    focus:Size(200, 12)
-
+if (T.myclass == "SHAMAN" or T.myclass == "DEATHKNIGHT" or T.myclass == "PALADIN" or T.myclass == "WARLOCK" or T.myclass == "DRUID") then
+focus:SetPoint("BOTTOMLEFT", TukuiPlayer, "TOPLEFT", 10, 12)
+    focus:Size(200, 15)
+else
+focus:SetPoint("BOTTOMLEFT", TukuiPlayer, "TOPLEFT", 0, 5)
+    focus:Size(220, 15)
+end	
 -- target
 local target = oUF:Spawn('target', "TukuiTarget")
-target:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", C.unitframeJ.targetX, C.unitframeJ.targetY)
+target:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", 127, 55)
 	target:Size(220, 26)
 
 -- tot
 local tot = oUF:Spawn('targettarget', "TukuiTargetTarget")
-tot:SetPoint("LEFT", TukuiTarget, "RIGHT", C.unitframeJ.totX, C.unitframeJ.totY)
+tot:SetPoint("LEFT", TukuiTarget, "RIGHT", -100, -45)
 	tot:Size(100, 26)
 
 -- pet
 local pet = oUF:Spawn('pet', "oUF_Tukz_pet")
-pet:SetPoint("BOTTOM", InvTukuiActionBarBackground, "TOP", C.unitframeJ.petX, C.unitframeJ.petY)
-	pet:SetSize(T.Scale(100), T.Scale(20))
+pet:SetPoint("RIGHT", TukuiPlayer, "LEFT", 100, -45)
+	pet:SetSize(100, 26)
 
 -- focus target
 if C.unitframes.showfocustarget then	
