@@ -1202,7 +1202,7 @@ end
 		
 		-- health 
 		local health = CreateFrame('StatusBar', nil, self)
-		health:Height(32)
+		health:Height(35)
 		health:SetPoint("TOPLEFT")
 		health:SetPoint("TOPRIGHT")
 		health:SetStatusBarTexture(normTex)
@@ -1284,11 +1284,9 @@ end
 		
 		-- names
 		local Name = health:CreateFontString(nil, "OVERLAY")
-		Name:SetPoint("LEFT", health, "LEFT", 4, 2)
+		Name:SetPoint("LEFT", health, "LEFT", 4, 0)
 		Name:SetJustifyH("LEFT")
 		Name:SetFont(pixelfont, 8, "OUTLINEMONOCHROME")
-		Name:SetShadowColor(0, 0, 0)
-		Name:SetShadowOffset(1.25, -1.25)
 		Name.frequentUpdates = 0.2
 		
 		self:Tag(Name, '[Tukui:getnamecolor][Tukui:namemedium]')
@@ -1320,7 +1318,7 @@ end
 			-- because it appear that sometime elements are not correct.
 			self:HookScript("OnShow", T.updateAllElements)
 		end
-
+        --[[
 		-- create debuff for arena units
 		local debuffs = CreateFrame("Frame", nil, self)
 		debuffs:SetHeight(36)
@@ -1334,24 +1332,51 @@ end
 		debuffs.PostCreateIcon = T.PostCreateAura
 		debuffs.PostUpdateIcon = T.PostUpdateAura
 		self.Debuffs = debuffs
-				
-		-- trinket feature via trinket plugin
+		--]]		
 		if (C.arena.unitframes) and (unit and unit:find('arena%d')) then
-			local Trinketbg = CreateFrame("Frame", nil, self)
-			Trinketbg:SetHeight(26)
-			Trinketbg:SetWidth(26)
-			Trinketbg:SetPoint("RIGHT", self, "LEFT", -6, 0)				
-			Trinketbg:SetTemplate("Default")
-			Trinketbg:SetFrameLevel(0)
-			self.Trinketbg = Trinketbg
-			
-			local Trinket = CreateFrame("Frame", nil, Trinketbg)
-			Trinket:SetAllPoints(Trinketbg)
-			Trinket:SetPoint("TOPLEFT", Trinketbg, T.Scale(2), T.Scale(-2))
-			Trinket:SetPoint("BOTTOMRIGHT", Trinketbg, T.Scale(-2), T.Scale(2))
-			Trinket:SetFrameLevel(1)
-			Trinket.trinketUseAnnounce = true
-			self.Trinket = Trinket
+		-- trinket feature via trinket plugin
+		local Trinketbg = CreateFrame("Frame", nil, self)
+		Trinketbg:Size(39)
+		Trinketbg:SetPoint("LEFT", self, "RIGHT", 4, 0)				
+		Trinketbg:SetTemplate("Hydra")
+		Trinketbg:SetFrameLevel(0)
+		self.Trinketbg = Trinketbg
+
+		local Trinket = CreateFrame("Frame", nil, Trinketbg)
+		Trinket:SetAllPoints(Trinketbg)
+		Trinket:SetPoint("TOPLEFT", Trinketbg, T.Scale(2), T.Scale(-2))
+		Trinket:SetPoint("BOTTOMRIGHT", Trinketbg, T.Scale(-2), T.Scale(2))
+		Trinket:SetFrameLevel(1)
+		Trinket.trinketUseAnnounce = true
+		self.Trinket = Trinket
+		
+		-- Auratracker Frame
+		local AuraTracker = CreateFrame("Frame", nil, self)
+		AuraTracker:Size(39)
+		AuraTracker:Point("RIGHT", self, "LEFT", -4, 0)
+		AuraTracker:SetTemplate("Hydra")
+		self.AuraTracker = AuraTracker
+
+		AuraTracker.icon = AuraTracker:CreateTexture(nil, "OVERLAY")
+		AuraTracker.icon:SetAllPoints(AuraTracker)
+		AuraTracker.icon:Point("TOPLEFT", AuraTracker, 2, -2)
+		AuraTracker.icon:Point("BOTTOMRIGHT", AuraTracker, -2, 2)
+		AuraTracker.icon:SetTexCoord(0.07,0.93,0.07,0.93)
+
+		AuraTracker.text = T.SetFontString(AuraTracker, pixelfont, 8, "OUTLINEMONOCHROME")
+		AuraTracker.text:SetPoint("CENTER", AuraTracker, 0, 0)
+		AuraTracker:SetScript("OnUpdate", updateAuraTrackerTime)
+
+		-- ClassIcon			
+		local class = AuraTracker:CreateTexture(nil, "ARTWORK")
+		class:SetAllPoints(AuraTracker.icon)
+		self.ClassIcon = class
+
+		-- Spec info
+		Talents = T.SetFontString(health, pixelfont, 8, "OUTLINEMONOCHROME")
+		Talents:Point("CENTER", health, 0, 0)
+		Talents:SetTextColor(1,1,1,.6)
+		self.Talents = Talents
 		end
 		
 		-- boss & arena frames cast bar!
@@ -1520,11 +1545,11 @@ if C.arena.unitframes then
 	for i = 1, 5 do
 		arena[i] = oUF:Spawn("arena"..i, "TukuiArena"..i)
 		if i == 1 then
-			arena[i]:SetPoint("RIGHT", UIParent, "RIGHT", -220, -209)
+			arena[i]:SetPoint("RIGHT", UIParent, "RIGHT", -220, -201)
 		else
 			arena[i]:SetPoint("BOTTOM", arena[i-1], "TOP", 0, 40)
 		end
-		arena[i]:SetSize(T.Scale(200), T.Scale(32))
+		arena[i]:SetSize(T.Scale(200), T.Scale(35))
 	end
 end
 
@@ -1542,11 +1567,11 @@ if C["unitframes"].showboss then
 	for i = 1, MAX_BOSS_FRAMES do
 		boss[i] = oUF:Spawn("boss"..i, "TukuiBoss"..i)
 		if i == 1 then
-			boss[i]:SetPoint("RIGHT", UIParent, "RIGHT", -220, -209)
+			boss[i]:SetPoint("RIGHT", UIParent, "RIGHT", -220, -201)
 		else
 			boss[i]:SetPoint('BOTTOM', boss[i-1], 'TOP', 0, 40)             
 		end
-		boss[i]:SetSize(T.Scale(200), T.Scale(32))
+		boss[i]:SetSize(T.Scale(200), T.Scale(35))
 	end
 end
 
