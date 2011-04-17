@@ -455,7 +455,7 @@ ns.Filger_Spells = {
 			Direction = "RIGHT",
 			Interval = 11,
 			Mode = "ICON",
-			setPoint = { "TOPLEFT", TukuiPlayer, 13, 50 },
+			setPoint = { "TOPLEFT", TukuiPlayer, 13, 75 },
 			-- Earth Shield
 			{ spellID = 974, size = 40, unitId = "player", caster = "player", filter = "BUFF" },
 			-- Riptide
@@ -482,6 +482,8 @@ ns.Filger_Spells = {
 			{ spellID = 51562, size = 36, unitId = "player", caster = "player", filter = "BUFF" },
 			-- Ancestral Fortitude
 			{ spellID = 16236, size = 36, unitId = "target", caster = "player", filter = "BUFF" },
+			-- Focused Insight
+			{ spellID = 77796, size = 36, unitId = "player", caster = "player", filter = "BUFF" },
 		},
 		{
 			Name = "Buffs and Debuffs",
