@@ -30,7 +30,7 @@ local function style(self)
  
 	Count:ClearAllPoints()
 	Count:Point("BOTTOMRIGHT", 0, 2)
-	Count:SetFont(C["media"].font, 12, "OUTLINE")
+	Count:SetFont(C["media"].pixelfont, 8, "OUTLINEMONOCHROME")
  
 	Btname:SetText("")
 	Btname:Kill()
@@ -55,7 +55,7 @@ local function style(self)
 
 	HotKey:ClearAllPoints()
 	HotKey:Point("TOPRIGHT", 0, -3)
-	HotKey:SetFont(C["media"].font, 12, "OUTLINE")
+	HotKey:SetFont(C["media"].pixelfont, 8, "OUTLINEMONOCHROME")
 	HotKey.ClearAllPoints = T.dummy
 	HotKey.SetPoint = T.dummy
  

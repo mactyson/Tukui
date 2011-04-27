@@ -13,6 +13,7 @@ if T.myclass == "SHAMAN" then
 		MultiCastActionBarFrame:SetParent(TukuiShiftBar)
 		MultiCastActionBarFrame:ClearAllPoints()
 		MultiCastActionBarFrame:Point("BOTTOMLEFT", TukuiShiftBar, -3, 23)
+		MultiCastActionBarFrame:SetAlpha(.5) -- totembar alpha
  
 		hooksecurefunc("MultiCastActionButton_Update",function(actionbutton) if not InCombatLockdown() then actionbutton:SetAllPoints(actionbutton.slotButton) end end)
  

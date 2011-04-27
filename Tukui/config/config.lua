@@ -25,8 +25,6 @@ C["unitframes"] = {
 	["targetpowerpvponly"] = true,                      -- enable power text on pvp target only
 	["totdebuffs"] = false,                             -- enable tot debuffs (high reso only)
 	["showtotalhpmp"] = false,                          -- change the display of info text on player and target with XXXX/Total.
-	["shosmooth"] = true,                              -- enable smooth bar
-	["showsmooth"] = true,                              -- enable smooth bar
 	["showsmooth"] = true,                              -- enable smooth bar
 	["charportrait"] = false,                           -- do i really need to explain this?
 	["maintank"] = false,                               -- enable maintank
@@ -45,6 +43,7 @@ C["unitframes"] = {
 	["showsymbols"] = true,	                            -- show symbol.
 	["aggro"] = true,                                   -- show aggro on all raids layouts
 	["raidunitdebuffwatch"] = true,                     -- track important spell to watch in pve for grid mode.
+	["raiddebufftime"] = false,                     -- enable time on center debuff icons
 	["gridhealthvertical"] = true,                      -- enable vertical grow on health bar for grid mode.
 	["showplayerinparty"] = true,                      -- show my player frame in party
 	["gridscale"] = 1,                                  -- set the healing grid scaling
@@ -106,7 +105,7 @@ C["loot"] = {
 
 C["cooldown"] = {
 	["enable"] = true,                                  -- do i really need to explain this?
-	["treshold"] = 8,                                   -- show decimal under X seconds and text turn red
+	["treshold"] = 2,                                   -- show decimal under X seconds and text turn red
 }
                           -- 8 and 9 are only usable in Jasje layout, not in Tukui
 C["datatext"] = {
