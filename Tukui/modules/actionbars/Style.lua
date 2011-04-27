@@ -10,7 +10,7 @@ local function style(self)
 	local name = self:GetName()
 	
 	--> fixing a taint issue while changing totem flyout button in combat.
-	if name:match("MultiCast") then return end
+	if name:match("MultiCast") then return end 
 	
 	local action = self.action
 	local Button = self
@@ -30,7 +30,7 @@ local function style(self)
  
 	Count:ClearAllPoints()
 	Count:Point("BOTTOMRIGHT", 0, 2)
-	Count:SetFont(C["media"].pixelfont, 8, "OUTLINEMONOCHROME")
+	Count:SetFont(C["media"].font, 12, "OUTLINE")
  
 	Btname:SetText("")
 	Btname:Kill()
@@ -55,7 +55,7 @@ local function style(self)
 
 	HotKey:ClearAllPoints()
 	HotKey:Point("TOPRIGHT", 0, -3)
-	HotKey:SetFont(C["media"].pixelfont, 8, "OUTLINEMONOCHROME")
+	HotKey:SetFont(C["media"].font, 12, "OUTLINE")
 	HotKey.ClearAllPoints = T.dummy
 	HotKey.SetPoint = T.dummy
  
@@ -101,8 +101,8 @@ local function stylesmallbutton(normal, button, icon, name, pet)
 			shine:Size(T.petbuttonsize, T.petbuttonsize)
 			shine:ClearAllPoints()
 			shine:SetPoint("CENTER", button, 0, 0)
-			icon:Point("TOPLEFT", button, T.Scale(2), T.Scale(-2))
-			icon:Point("BOTTOMRIGHT", button, T.Scale(-2), T.Scale(2))
+			icon:Point("TOPLEFT", button, 2, -2)
+			icon:Point("BOTTOMRIGHT", button, -2, 2)
 		else
 			icon:Point("TOPLEFT", button, 2, -2)
 			icon:Point("BOTTOMRIGHT", button, -2, 2)
@@ -145,8 +145,8 @@ local function updatehotkey(self, actionButtonType)
 	text = replace(text, '(c%-)', 'C')
 	text = replace(text, '(Mouse Button )', 'M')
 	text = replace(text, '(Middle Mouse)', 'M3')
-	text = replace(text, '(Mouse Wheel Down)', 'MD')
 	text = replace(text, '(Mouse Wheel Up)', 'MU')
+	text = replace(text, '(Mouse Wheel Down)', 'MD')
 	text = replace(text, '(Num Pad )', 'N')
 	text = replace(text, '(Page Up)', 'PU')
 	text = replace(text, '(Page Down)', 'PD')
@@ -192,6 +192,7 @@ local function SetupFlyoutButton()
 end
 SpellFlyout:HookScript("OnShow", SetupFlyoutButton)
 
+ 
 --Hide the Mouseover texture and attempt to find the ammount of buttons to be skinned
 local function styleflyout(self)
 	self.FlyoutBorder:SetAlpha(0)
@@ -219,10 +220,10 @@ local function styleflyout(self)
 	end
 	
 	if self:GetParent():GetParent():GetName() == "SpellBookSpellIconsFrame" then return end
-
-    if self:GetAttribute("flyoutDirection") ~= nil then
-
-        local point, _, _, _, _ = self:GetParent():GetParent():GetPoint()
+	
+	if self:GetAttribute("flyoutDirection") ~= nil then
+		local point, _, _, _, _ = self:GetParent():GetParent():GetPoint()
+		
 		if strfind(point, "BOTTOM") then
 			self.FlyoutArrow:ClearAllPoints()
 			self.FlyoutArrow:SetPoint("TOP", self, "TOP", 0, arrowDistance)
@@ -266,12 +267,6 @@ hooksecurefunc("ActionButton_UpdateFlyout", styleflyout)
 -- don't continue executing code in this file is not playing a shaman.
 if not T.myclass == "SHAMAN" then return end
 
-local TotemBar = CreateFrame("Frame")
-TotemBar:RegisterEvent("PLAYER_LOGIN")
-TotemBar:SetScript("OnEvent", function(self)
-	T.TotemOrientationDown = T.TotemBarOrientation()
-end)
-
 -- Tex Coords for empty buttons
 SLOT_EMPTY_TCOORDS = {
 	[EARTH_TOTEM_SLOT] = {
@@ -304,10 +299,10 @@ local function StyleTotemFlyout(flyout)
 	-- remove blizzard flyout texture
 	flyout.top:SetTexture(nil)
 	flyout.middle:SetTexture(nil)
-
+	
 	-- Skin buttons
 	local last = nil
-
+	
 	for _,button in ipairs(flyout.buttons) do
 		button:SetTemplate("Default")
 		local icon = select(1,button:GetRegions())
@@ -324,14 +319,14 @@ local function StyleTotemFlyout(flyout)
 		button:SetBackdropBorderColor(flyout.parent:GetBackdropBorderColor())
 		button:StyleButton()
 	end
-
+	
 	flyout.buttons[1]:SetPoint("BOTTOM",flyout,"BOTTOM")
-
+	
 	if flyout.type == "slot" then
 		local tcoords = SLOT_EMPTY_TCOORDS[flyout.parent:GetID()]
 		flyout.buttons[1].icon:SetTexCoord(tcoords.left,tcoords.right,tcoords.top,tcoords.bottom)
 	end
-
+	
 	-- Skin Close button
 	local close = MultiCastFlyoutFrameCloseButton
 	close:SetTemplate("Default")	
@@ -343,13 +338,13 @@ local function StyleTotemFlyout(flyout)
 	close:Point("BOTTOMLEFT",last,"TOPLEFT",0,4)
 	close:Point("BOTTOMRIGHT",last,"TOPRIGHT",0,4)	
 	close:Height(8)
-
+	
 	close:SetBackdropBorderColor(last:GetBackdropBorderColor())
 	flyout:ClearAllPoints()
 	flyout:Point("BOTTOM",flyout.parent,"TOP",0,4)
 end
 hooksecurefunc("MultiCastFlyoutFrame_ToggleFlyout",function(self) StyleTotemFlyout(self) end)
-
+	
 local function StyleTotemOpenButton(button, parent)
 	button:GetHighlightTexture():SetTexture(nil)
 	button:GetNormalTexture():SetTexture(nil)
@@ -368,7 +363,7 @@ local function StyleTotemOpenButton(button, parent)
 		button.visibleBut.highlight:Point("BOTTOMRIGHT",button.visibleBut,"BOTTOMRIGHT",-1,1)
 		button.visibleBut:SetTemplate("Default")
 	end
-
+	
 	button.visibleBut:SetBackdropBorderColor(parent:GetBackdropBorderColor())
 end
 hooksecurefunc("MultiCastFlyoutFrameOpenButton_Show",function(button,_, parent) StyleTotemOpenButton(button, parent) end)
@@ -386,8 +381,8 @@ local function StyleTotemSlotButton(button, index)
 	button.overlayTex:SetTexture(nil)
 	button.background:SetDrawLayer("ARTWORK")
 	button.background:ClearAllPoints()
-	button.background:SetPoint("TOPLEFT",button,"TOPLEFT",T.Scale(2),T.Scale(-2))
-	button.background:SetPoint("BOTTOMRIGHT",button,"BOTTOMRIGHT",T.Scale(-2),T.Scale(2))
+	button.background:Point("TOPLEFT",button,"TOPLEFT",2,-2)
+	button.background:Point("BOTTOMRIGHT",button,"BOTTOMRIGHT",-2,2)
 	if not InCombatLockdown() then button:Size(30) end
 	button:SetBackdropBorderColor(unpack(bordercolors[((index-1) % 4) + 1]))
 	button:StyleButton()

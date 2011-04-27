@@ -117,46 +117,8 @@ local function CreatePanel(f, t, w, h, a1, p, a2, x, y)
 	f:SetBackdropColor(backdropr, backdropg, backdropb, backdropa)
 	f:SetBackdropBorderColor(borderr, borderg, borderb)
 end
--- hydra slide in/out
-local function Animate(self, x, y, duration)
-	self.anim = self:CreateAnimationGroup("Move_In")
-	self.anim.in1 = self.anim:CreateAnimation("Translation")
-	self.anim.in1:SetDuration(0)
-	self.anim.in1:SetOrder(1)
-	self.anim.in2 = self.anim:CreateAnimation("Translation")
-	self.anim.in2:SetDuration(duration)
-	self.anim.in2:SetOrder(2)
-	self.anim.in2:SetSmoothing("OUT")
-	self.anim.out1 = self:CreateAnimationGroup("Move_Out")
-	self.anim.out2 = self.anim.out1:CreateAnimation("Translation")
-	self.anim.out2:SetDuration(duration)
-	self.anim.out2:SetOrder(1)
-	self.anim.out2:SetSmoothing("IN")
-	self.anim.in1:SetOffset(Scale(x), Scale(y))
-	self.anim.in2:SetOffset(Scale(-x), Scale(-y))
-	self.anim.out2:SetOffset(Scale(x), Scale(y))
-	self.anim.out1:SetScript("OnFinished", function() self:Hide() end)
-end
 
-local function SlideIn(self)
-	if not self.anim then
-		Animate(self)
-	end
-
-	self.anim.out1:Stop()
-	self:Show()
-	self.anim:Play()
-end
-
-local function SlideOut(self)
-	if self.anim then
-		self.anim:Finish()
-	end
-
-	self.anim:Stop()
-	self.anim.out1:Play()
-end
-
+-- Hydra Border Function 
 local function SetBorder(f)
 	f:SetBackdropColor(.075, .075, .075, 0.7)
 	f:SetBackdropBorderColor(unpack(C["media"].bordercolor))
@@ -165,7 +127,7 @@ local function SetBorder(f)
 	border:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", T.Scale(1), T.Scale(-1))
 	border:SetFrameStrata("BACKGROUND")
 	border:SetFrameLevel(1)
-	border:SetBackdrop { edgeFile = TukuiCF["media"].blank, edgeSize = T.Scale(3), insets = {left = 0, right = 0, top = 0, bottom = 0} }
+	border:SetBackdrop { edgeFile = C["media"].blank, edgeSize = T.Scale(3), insets = {left = 0, right = 0, top = 0, bottom = 0} }
 	border:SetBackdropColor(unpack(C["media"].backdropcolor))
 	border:SetBackdropBorderColor(unpack(C["media"].backdropcolor))
 end
@@ -266,20 +228,42 @@ local function FontString(parent, name, fontName, fontHeight, fontStyle)
 	return fs
 end
 
+local function HighlightTarget(self, event, unit)
+	if self.unit == "target" then return end
+	if UnitIsUnit('target', self.unit) then
+		self.HighlightTarget:Show()
+	else
+		self.HighlightTarget:Hide()
+	end
+end
+
+local function HighlightUnit(f, r, g, b)
+	if f.HighlightTarget then return end
+	local glowBorder = {edgeFile = C["media"].blank, edgeSize = 1}
+	f.HighlightTarget = CreateFrame("Frame", nil, f)
+	f.HighlightTarget:Point("TOPLEFT", f, "TOPLEFT", -2, 2)
+	f.HighlightTarget:Point("BOTTOMRIGHT", f, "BOTTOMRIGHT", 2, -2)
+	f.HighlightTarget:SetBackdrop(glowBorder)
+	f.HighlightTarget:SetFrameLevel(f:GetFrameLevel() + 1)
+	f.HighlightTarget:SetBackdropBorderColor(r,g,b,1)
+	f.HighlightTarget:Hide()
+	f:RegisterEvent("PLAYER_TARGET_CHANGED", HighlightTarget)
+end
+
 local function addapi(object)
 	local mt = getmetatable(object).__index
-	mt.Size = Size
-	mt.Point = Point
-	mt.SetTemplate = SetTemplate
-	mt.CreatePanel = CreatePanel
-	mt.SetBorder = SetBorder -- hydra border
-	mt.CreateShadow = CreateShadow
-	mt.Kill = Kill
-	mt.CreateTransparentPanel = CreateTransparentPanel
-	mt.StyleButton = StyleButton
-	mt.Width = Width
-	mt.Height = Height
-	mt.FontString = FontString
+	if not object.Size then mt.Size = Size end
+	if not object.Point then mt.Point = Point end
+	if not object.SetTemplate then mt.SetTemplate = SetTemplate end
+	if not object.CreatePanel then mt.CreatePanel = CreatePanel end
+	if not object.SetBorder then mt.SetBorder = SetBorder end
+	if not object.CreateShadow then mt.CreateShadow = CreateShadow end
+	if not object.Kill then mt.Kill = Kill end
+	if not object.StyleButton then mt.StyleButton = StyleButton end
+	if not object.Width then mt.Width = Width end
+	if not object.Height then mt.Height = Height end
+	if not object.FontString then mt.FontString = FontString end
+	if not object.HighlightUnit then mt.HighlightUnit = HighlightUnit end
 end
 
 local handled = {["Frame"] = true}

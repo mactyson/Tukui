@@ -1,6 +1,6 @@
 local T, C, L = unpack(select(2, ...)) 
 
-if not C.actionbar.enable or C.interface.style ~= "Jasje" then return end
+if not C.actionbar.enable then return end
 ---------------------------------------------------------------------------
 -- setup MultiBarLeft as bar #3 
 ---------------------------------------------------------------------------

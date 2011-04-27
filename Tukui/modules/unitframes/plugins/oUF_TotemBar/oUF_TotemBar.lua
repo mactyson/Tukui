@@ -1,9 +1,5 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 if C.unitframes.enable ~= true or T.myclass ~= "SHAMAN" then return end
-
-local _, ns = ...
-local oUF = ns.oUF or oUF
-
 --[[
 	Documentation:
 	
@@ -25,6 +21,8 @@ local oUF = ns.oUF or oUF
 			.multiplier : Sets the multiplier for the text or the background (can be two differents multipliers)
 
 --]]
+local _, ns = ...
+local oUF = ns.oUF or oUF
 
 if not oUF then return end
 

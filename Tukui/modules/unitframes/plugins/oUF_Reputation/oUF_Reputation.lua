@@ -1,9 +1,5 @@
 local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 if C.unitframes.enable ~= true then return end
-
-local _, ns = ...
-local oUF = ns.oUF or oUF
-
 --[[
 
 	Elements handled:
@@ -18,6 +14,8 @@ local oUF = ns.oUF or oUF
 	 - OverrideText(bar, min, max, value, name, id)
 
 --]]
+local _, ns = ...
+local oUF = ns.oUF or oUF
 
 if not oUF then return end
 

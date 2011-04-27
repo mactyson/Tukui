@@ -11,16 +11,16 @@ C["media"] = {
 		["pixelfont2"] = [[Interface\AddOns\Tukui\medias\fonts\visitor2.ttf]], -- another pixelfont
 		["pixelfont3"] = [[Interface\AddOns\Tukui\medias\fonts\visitor1.ttf]], -- another pixelfont
 		["pixelfont4"] =  [[Interface\AddOns\Tukui\medias\fonts\Pixelway_Baseline.TTF]], -- another pixelfont
-
+	
 	-- fonts (DEUTSCH)
 	["de_font"] = [=[Interface\Addons\Tukui\medias\fonts\normal_font.ttf]=], -- general font of tukui
 	["de_uffont"] = [[Interface\AddOns\Tukui\medias\fonts\uf_font.ttf]], -- general font of unitframes
-	["de_dmgfont"] = [[Interface\AddOns\Tukui\medias\fonts\normal_font.ttf]], -- general font of dmg / sct
+	["de_dmgfont"] = [[Interface\AddOns\Tukui\medias\fonts\combat_font.ttf]], -- general font of dmg / sct
 	
 	-- fonts (FRENCH)
 	["fr_font"] = [=[Interface\Addons\Tukui\medias\fonts\normal_font.ttf]=], -- general font of tukui
 	["fr_uffont"] = [[Interface\AddOns\Tukui\medias\fonts\uf_font.ttf]], -- general font of unitframes
-	["fr_dmgfont"] = [=[Interface\Addons\Tukui\medias\fonts\normal_font.ttf]=], -- general font of dmg / sct
+	["fr_dmgfont"] = [=[Interface\AddOns\Tukui\medias\fonts\combat_font.ttf]=], -- general font of dmg / sct
 	
 	-- fonts (RUSSIAN)
 	["ru_font"] = [=[Interface\Addons\Tukui\medias\fonts\normal_font.ttf]=], -- general font of tukui
@@ -41,7 +41,6 @@ C["media"] = {
 	["normTex"] = [[Interface\AddOns\Tukui\medias\textures\normTex]], -- texture used for tukui healthbar/powerbar/etc
 	["glowTex"] = [[Interface\AddOns\Tukui\medias\textures\glowTex]], -- the glow text around some frame.
 	["bubbleTex"] = [[Interface\AddOns\Tukui\medias\textures\bubbleTex]], -- unitframes combo points
-	["flat"] = [[Interface\AddOns\Tukui\medias\textures\Flat]], -- unitframes combo points
 	["copyicon"] = [[Interface\AddOns\Tukui\medias\textures\copy]], -- copy icon
 	["blank"] = [[Interface\AddOns\Tukui\medias\textures\blank]], -- the main texture for all borders/panels
 	["bordercolor"] = { .2,.2,.2,1 }, -- border color of tukui panels

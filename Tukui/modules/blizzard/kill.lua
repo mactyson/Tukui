@@ -11,7 +11,6 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 			InterfaceOptionsFrameCategoriesButton10:SetAlpha(0)		
 			InterfaceOptionsFrameCategoriesButton11:SetScale(0.00001)
 			InterfaceOptionsFrameCategoriesButton11:SetAlpha(0)
-			CompactPartyFrame:Kill()
 			CompactRaidFrameManager:Kill()
 			CompactRaidFrameContainer:Kill()
 		end	
@@ -29,10 +28,13 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 		Advanced_UIScaleSlider:Kill()
 		PartyMemberBackground:Kill()
 		TutorialFrameAlertButton:Kill()
-		BuffFrame:Kill()
-		TemporaryEnchantFrame:Kill()
-		ConsolidatedBuffs:Kill()
-		InterfaceOptionsBuffsPanelConsolidateBuffs:Kill()
+		
+		if C.auras.player or C.unitframes.playerauras then
+			BuffFrame:Kill()
+			TemporaryEnchantFrame:Kill()
+			ConsolidatedBuffs:Kill()
+			InterfaceOptionsBuffsPanelConsolidateBuffs:Kill()
+		end
 		
 		InterfaceOptionsUnitFramePanelPartyBackground:Kill()
 
@@ -67,5 +69,9 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 			InterfaceOptionsActionBarsPanelRightTwo:Kill()
 			InterfaceOptionsActionBarsPanelAlwaysShowActionBars:Kill()
 		end
+		
+		if C["nameplate"].enable == true and C["nameplate"].enhancethreat == true then
+			InterfaceOptionsDisplayPanelAggroWarningDisplay:Kill()
+		end		
 	end
 end)

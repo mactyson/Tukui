@@ -14,5 +14,4 @@ T.incombat = UnitAffectingCombat("player")
 T.patch = GetBuildInfo()
 T.level = UnitLevel("player")
 T.myrealm = GetRealmName()
-T.TotemOrientationDown = false
-T.InfoLeftRightWidth = 370 
+T.InfoLeftRightWidth = 370

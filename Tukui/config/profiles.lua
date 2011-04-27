@@ -1,21 +1,21 @@
-﻿local T, C, L = unpack(select(2, ...)) 
--- different config then most of you
--- tank class
-if T.myclass == "PALADIN" then
-	C.chat.classcolortab = false
-	C.datatext.mastery = 8
-	C.datatext.avd = 9
-	C.datatext.power = 0
-	C.datatext.crit = 0
+﻿----------------------------------------------------------------------------
+-- Per Class Config (overwrite general)
+-- Class need to be UPPERCASE
+----------------------------------------------------------------------------
+local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
+
+if T.myclass == "PRIEST" then
+	-- do some config!
 end
 
-if T.myname== "Noshi" then
-   C.actionbar.hideshapeshift = true
-end   
+----------------------------------------------------------------------------
+-- Per Character Name Config (overwrite general and class)
+-- Name need to be case sensitive
+----------------------------------------------------------------------------
 
-if T.myname== "Jàsje" then
-   C.datatext.classcolor = true
-   C.datatext.crit = 0
-   C.datatext.manaregen = 9
-   C.unitframes.trikz = true
-end   
+if T.myname == "Tukz" then
+	-- yeah my default config is not really like default tukui.
+	C.actionbar.hotkey = false
+	C.actionbar.hideshapeshift = true
+	C.unitframes.enemyhcolor = true
+end

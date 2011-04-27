@@ -21,7 +21,7 @@ ssmover:SetTemplate("Default")
 ssmover:SetFrameStrata("HIGH")
 ssmover:SetBackdropBorderColor(1,0,0)
 ssmover:SetAlpha(0)
-ssmover.text = T.SetFontString(ssmover, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+ssmover.text = T.SetFontString(ssmover, C.media.uffont, 12)
 ssmover.text:SetPoint("CENTER")
 ssmover.text:SetText(L.move_shapeshift)
 
@@ -58,6 +58,7 @@ bar:SetScript("OnEvent", function(self, event, ...)
 			button = _G["ShapeshiftButton"..i]
 			button:ClearAllPoints()
 			button:SetParent(self)
+			button:SetFrameStrata("LOW")
 			if i == 1 then
 				button:Point("BOTTOMLEFT", TukuiShift, 0, 24)
 			else

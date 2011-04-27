@@ -28,10 +28,7 @@
 	<Script file="modules\unitframes\plugins\oUF_TotemBar\oUF_TotemBar.lua"/>
 	<Script file="modules\unitframes\plugins\oUF_Trinkets\oUF_Trinkets.lua"/>
 	<Script file="modules\unitframes\plugins\oUF_RaidDebuffs\oUF_RaidDebuffs.lua"/>	
-	<Script file="modules\unitframes\plugins\oUF_WeakenedSoul\oUF_WeakenedSoul.lua"/>
-    <Script file="modules\unitframes\plugins\oUF_ClassIcons\oUF_ClassIcons.lua"/>
-    <Script file="modules\unitframes\plugins\oUF_AuraTracker\oUF_AuraTracker.lua"/>
-	<Script file="modules\unitframes\plugins\oUF_Talents\oUF_Talents.lua"/>	
+	<Script file="modules\unitframes\plugins\oUF_WeakenedSoul\oUF_WeakenedSoul.lua"/>	
 	<Script file="modules\unitframes\templates\colors.lua"/>
 	
 	<Script file="core\uiscale.lua"/>
@@ -64,10 +61,9 @@
 	<Include file="modules\buffs\template.xml"/>
 	<Script file="modules\buffs\buffs.lua"/>
 	<Script file="modules\maps\minimap.lua"/>
-	<Script file="modules\panels\panelsT.lua"/>
-	<Script file="modules\panels\panelsJ.lua"/>
-	
-	<Script file="modules\datatext\colors.lua"/>
+	<Script file="modules\panels\panels.lua"/>
+
+	<Script file="modules\datatext\colors.lua"/>	
 	<Script file="modules\datatext\armor.lua"/>
 	<Script file="modules\datatext\avoidance.lua"/>
 	<Script file="modules\datatext\bags.lua"/>
@@ -87,16 +83,14 @@
 	<Script file="modules\datatext\currency.lua"/>
 	<Script file="modules\datatext\hit.lua"/>
 	<Script file="modules\datatext\micromenu.lua"/>
-	<Script file="modules\datatext\manaregen.lua"/>
 	<Script file="modules\datatext\mastery.lua"/>
+	<Script file="modules\datatext\regen.lua"/>
 	
 	<Script file="modules\actionbars\Bind.lua"/>
 	<Script file="modules\actionbars\Hide.lua"/>
 	<Script file="modules\actionbars\Bar1.lua"/>
-	<Script file="modules\actionbars\Bar2T.lua"/>
-	<Script file="modules\actionbars\Bar2J.lua"/>
-	<Script file="modules\actionbars\Bar3T.lua"/>
-	<Script file="modules\actionbars\Bar3J.lua"/>
+	<Script file="modules\actionbars\Bar2.lua"/>
+	<Script file="modules\actionbars\Bar3.lua"/>
 	<Script file="modules\actionbars\Bar4.lua"/>
 	<Script file="modules\actionbars\Bar5.lua"/>
 	<Script file="modules\actionbars\Bar6.lua"/>
@@ -131,14 +125,12 @@
 	<Include file="modules\unitframes\templates\tankassist.xml"/>
 	<Script file="modules\unitframes\tags\tags.lua"/>
 	<Script file="modules\unitframes\layouts\tukui.lua"/>
-	<Script file="modules\unitframes\layouts\jasje.lua"/>
 	
-	<Script file="modules\notifications\hunterpethappiness.lua"/>	
 	<Script file="modules\misc\altpowerbar.lua"/>
 	<Script file="modules\misc\threatbar.lua"/>
 	<Script file="modules\blizzard\achievements.lua"/>
-	<Script file="modules\extra\extra.lua"/>
-	<Script file="modules\extra\interrupticons.lua"/>
 	<Script file="core\movers.lua"/>
 	<Script file="developer\test.lua"/>
+	
+	<Script file="modules\chat\blizzfixrealidlink.lua"/>	
 </Ui>

@@ -1,22 +1,20 @@
-﻿local T, C, L = unpack(select(2, ...)) 
-
-C["interface"] = {                               -- Layouts
-    ["style"]  = "Jasje",                        --  You can choose between 2 layouts #1 Tukui #2 Jasje
-}	
+﻿local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, variables; C - config; L - locales
 
 C["general"] = {
 	["autoscale"] = true,                               -- mainly enabled for users that don't want to mess with the config file
 	["uiscale"] = 0.71,                                 -- set your value (between 0.64 and 1) of your uiscale if autoscale is off
 	["overridelowtohigh"] = false,                      -- EXPERIMENTAL ONLY! override lower version to higher version on a lower reso.
 	["multisampleprotect"] = true,                      -- i don't recommend this because of shitty border but, voila!
+	["backdropcolor"] = { .1,.1,.1 },                   -- default backdrop color of panels
+	["bordercolor"] = { .6,.6,.6 },                     -- default border color of panels
 }
 
 C["unitframes"] = {
 	-- general options
 	["enable"] = true,                                  -- do i really need to explain this?
-	["enemyhcolor"] = true,                            -- enemy target (players) color by hostility, very useful for healer.
+	["enemyhcolor"] = false,                            -- enemy target (players) color by hostility, very useful for healer.
 	["unitcastbar"] = true,                             -- enable tukui castbar
-		["trikz"] = false,                             -- replace castbar on top of actionbars made for a friend hence the name 
+		["trikz"] = true,                             -- replace castbar on top of actionbars made for a friend hence the name
 	["cblatency"] = true,                              -- enable castbar latency
 	["cbicons"] = true,                                 -- enable icons on castbar
 	["auratimer"] = true,                               -- enable timers on buffs/debuffs
@@ -24,32 +22,23 @@ C["unitframes"] = {
 	["playerauras"] = false,                            -- enable auras
 	["targetauras"] = true,                             -- enable auras on target unit frame
 	["lowThreshold"] = 20,                              -- global low threshold, for low mana warning.
-	["targetpowerpvponly"] = false,                      -- enable power text on pvp target only
+	["targetpowerpvponly"] = true,                      -- enable power text on pvp target only
 	["totdebuffs"] = false,                             -- enable tot debuffs (high reso only)
 	["showtotalhpmp"] = false,                          -- change the display of info text on player and target with XXXX/Total.
+	["shosmooth"] = true,                              -- enable smooth bar
+	["showsmooth"] = true,                              -- enable smooth bar
 	["showsmooth"] = true,                              -- enable smooth bar
 	["charportrait"] = false,                           -- do i really need to explain this?
 	["maintank"] = false,                               -- enable maintank
 	["mainassist"] = false,                             -- enable mainassist
 	["unicolor"] = true,                               -- enable unicolor theme
-	["combatfeedback"] = false,                          -- enable combattext on player and target.
+	["combatfeedback"] = true,                          -- enable combattext on player and target.
 	["playeraggro"] = true,                             -- color player border to red if you have aggro on current target.
 	["healcomm"] = false,                               -- enable healprediction support.
 	["onlyselfdebuffs"] = false,                        -- display only our own debuffs applied on target
-	["showfocustarget"] = false,                         -- show focus target
-	
-	-- boss frames
-	["showboss"] = true,                                -- enable boss unit frames for PVELOL encounters.
-
-	-- priest only plugin
-	["weakenedsoulbar"] = true,                         -- show weakened soul bar
-	
-	-- class bar
-	["classbar"] = true,                                -- enable tukui classbar over player unit
-}
+	["bordercolor"] = { .4,.4,.4 },                     -- unit frames panel border color
 
 	-- raid layout (if one of them is enabled)
-C["raidlayout"] = {
 	["showrange"] = true,                               -- show range opacity on raidframes
 	["raidalphaoor"] = 0.3,                             -- alpha of unitframes when unit is out of range
 	["gridonly"] = true,                               -- enable grid only mode for all healer mode raid layout.
@@ -66,12 +55,23 @@ C["raidlayout"] = {
 		0.6, 0.3, 0.3, -- R, G, B (medium HP)
 		0.3, 0.3, 0.3, -- R, G, B (high HP)
 	},
-    -- only works for Jasje style
-	["healer"] = true,                                  -- set the raidlayout between unitframes
+	
+	-- boss frames
+	["showboss"] = true,                                -- enable boss unit frames for PVELOL encounters.
+
+	-- priest only plugin
+	["weakenedsoulbar"] = true,                         -- show weakened soul bar
+	
+	-- class bar
+	["classbar"] = true,                                -- enable tukui classbar over player unit
 }
 
 C["arena"] = {
 	["unitframes"] = true,                              -- enable tukz arena unitframes (requirement : tukui unitframes enabled)
+}
+
+C["auras"] = {
+	["player"] = true,                                  -- enable tukui buffs/debuffs
 }
 
 C["actionbar"] = {
@@ -90,26 +90,6 @@ C["castbar"] = { --Thank you elv
 	["nointerruptcolor"] = { 1, 0.1, 0.1, 0.5 }, -- Color of target castbar
 }
 
-C["combopointbar"] = {
-    ["enable"] = true,       -- enable/disable combopoint bar (credit jasje)
-}
-
-C["saftExperienceBar"] = {
-    ["enable"] = true,                       -- enable Safturento's XP/REP bar
-}	
-
-C["Tukui_InterruptIcons"] = {
-    ["enable"] = true,       -- enable/disable interrupt icons(pvp)
-}
-
-C["fDispelAnnounce"] = {
-    ["enable"] = true,       -- enable/disable DispelAnnounce by Foof
-}
-
-C["Interrupted"] = {
-    ["enable"] = true,                     -- enable Interrupt announce by Sideshow
-}	
-
 C["bags"] = {
 	["enable"] = true,                                  -- enable an all in one bag mod that fit tukui perfectly
 }
@@ -126,10 +106,10 @@ C["loot"] = {
 
 C["cooldown"] = {
 	["enable"] = true,                                  -- do i really need to explain this?
-	["treshold"] = 2,                                   -- show decimal under X seconds and text turn red
+	["treshold"] = 8,                                   -- show decimal under X seconds and text turn red
 }
                           -- 8 and 9 are only usable in Jasje layout, not in Tukui
-C["datatext"] = { 
+C["datatext"] = {
 	["fps_ms"] = 5,                                     -- show fps and ms on panels
 	["system"] = 0,                                     -- show total memory and others systems infos on panels
 	["bags"] = 0,                                       -- show space used in bags on panels
@@ -142,21 +122,22 @@ C["datatext"] = {
 	["hps_text"] = 0,                                   -- show a heal meter on panels
 	["power"] = 8,                                      -- show your attackpower/spellpower/healpower/rangedattackpower whatever stat is higher gets displayed
 	["haste"] = 0,                                      -- show your haste rating on panels.
-	["crit"] = 9,                                       -- show your crit rating on panels.
+	["crit"] = 0,                                       -- show your crit rating on panels.
 	["avd"] = 0,                                        -- show your current avoidance against the level of the mob your targeting
 	["armor"] = 0,                                      -- show your armor value against the level mob you are currently targeting
 	["currency"] = 0,                                   -- show your tracked currency on panels
-	["manaregen"] = 0,                                   -- shows your mp5 in and out of combat
-	["hit"] = 0,
-	["mastery"] = 0,
-	["micromenu"] = 0,
+	["hit"] = 0,                                        -- show hit rating
+	["mastery"] = 0,                                    -- show mastery rating
+	["micromenu"] = 0,                                  -- add a micro menu thought datatext
+	["regen"] = 9,                                      -- show mana regeneration
 
 	["battleground"] = true,                            -- enable 3 stats in battleground only that replace stat1,stat2,stat3.
 	["time24"] = true,                                  -- set time to 24h format.
 	["localtime"] = false,                              -- set time to local time instead of server time.
-	
+	["fontsize"] = 12,                                  -- font size for panels.
+
 	-- Color Datatext
-	["classcolor"] = false,                -- classcolored datatexts 
+	["classcolor"] = true,                -- classcolored datatexts 
 	["color"] = "|cff808080",              -- datatext color if classcolor = false
 
 	["fontsize"] = 14,                     -- font size for panels.
@@ -169,14 +150,13 @@ C["chat"] = {
 	["background"] = false,                             -- chat backdrop
 	["tabcolor"] = {150/255, 150/255, 150/255},              -- color of chat tabs, disabled if classcolor is true
 	["tabmouseover"] = {1,1,1,1},          -- color of tabs on mouse-over
-	["classcolortab"] = false,             -- color chat tabs based on class
+	["classcolortab"] = true,             -- color chat tabs based on class
 }
 
 C["nameplate"] = {
 	["enable"] = true,                                  -- enable nice skinned nameplates that fit into tukui
 	["showhealth"] = false,				                -- show health text on nameplate
-	["enhancethreat"] = true,			                -- threat features based on if your a tank or not
-	["overlap"] = false,				                -- allow nameplates to overlap
+	["enhancethreat"] = false,			                -- threat features based on if your a tank or not
 	["combat"] = false,					                -- only show enemy nameplates in-combat.
 	["goodcolor"] = {75/255,  175/255, 76/255},	        -- good threat color (tank shows this with threat, everyone else without)
 	["badcolor"] = {0.78, 0.25, 0.25},			        -- bad threat color (opposite of above)
@@ -193,7 +173,7 @@ C["tooltip"] = {
 
 C["merchant"] = {
 	["sellgrays"] = true,                               -- automaticly sell grays?
-	["autorepair"] = false,                              -- automaticly repair?
+	["autorepair"] = true,                              -- automaticly repair?
 	["sellmisc"] = true,                                -- sell defined items automatically
 }
 

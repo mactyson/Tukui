@@ -10,7 +10,7 @@ local SetFont = function(obj, font, size, style, r, g, b, sr, sg, sb, sox, soy)
 end
 
 local FixTitleFont = function()
-	for _,butt in pairs(PlayerTitlePickerScrollFrame.buttons) do
+	for _,butt in pairs(PaperDollTitlesPane.buttons) do
 		butt.text:SetFontObject(GameFontHighlightSmallLeft)
 	end
 end
@@ -79,7 +79,7 @@ TukuiFonts:SetScript("OnEvent", function(self, event, addon)
 	SetFont(PVPInfoTextString,                  NORMALPIXEL, 10, "MONOCHROMETHINOUTLINE")
 	SetFont(PVPArenaTextString,                NORMALPIXEL, 10, "MONOCHROMEOUTLINE")
 
-	hooksecurefunc("PlayerTitleFrame_UpdateTitles", FixTitleFont)
+	hooksecurefunc("PaperDollTitlesPane_Update", FixTitleFont)
 	FixTitleFont()
 
 	SetFont = nil

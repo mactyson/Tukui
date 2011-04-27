@@ -13,7 +13,7 @@ if not C["bags"].enable == true then return end
 
 local bags_BACKPACK = {0, 1, 2, 3, 4}
 local bags_BANK = {-1, 5, 6, 7, 8, 9, 10, 11}
-local BAGSFONT = C["media"].pixelfont
+local BAGSFONT = C["media"].font
 local ST_NORMAL = 1
 local ST_FISHBAG = 2
 local ST_SPECIAL = 3
@@ -395,9 +395,9 @@ function Stuffing:CreateBagFrame(w)
 	f:SetFrameLevel(20)
 
 	if w == "Bank" then
-		f:Point("BOTTOMLEFT", TukuiInfoLeft, "TOPLEFT", 0, 2)
+		f:Point("BOTTOMLEFT", TukuiInfoLeft, "TOPLEFT", 0, 5)
 	else
-		f:Point("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", 0, 2)
+		f:Point("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", 0, 5)
 	end
 	
 	-- close button
@@ -592,9 +592,9 @@ function Stuffing:Layout(lb)
 		f = self.frame
 
 		f.gold:SetText(GetMoneyString(GetMoney(), 12))
-		f.editbox:SetFont(BAGSFONT, 8)
-		f.detail:SetFont(BAGSFONT, 8)
-		f.gold:SetFont(BAGSFONT, 8)
+		f.editbox:SetFont(BAGSFONT, 12)
+		f.detail:SetFont(BAGSFONT, 12)
+		f.gold:SetFont(BAGSFONT, 12)
 
 		f.detail:ClearAllPoints()
 		f.detail:Point("TOPLEFT", f, 12, -10)
@@ -681,8 +681,8 @@ function Stuffing:Layout(lb)
 		rows = rows + 1
 	end
 
-	f:Width(cols * 31 + (cols - 1) * 4 + 12.2 * 2) -- resize bag width
-	f:Height(rows * 31 + (rows - 1) * 4 + off + 12 * 2) -- resize bag height
+	f:Width(cols * 31 + (cols - 1) * 4 + 12 * 2)
+	f:Height(rows * 31 + (rows - 1) * 4 + off + 12 * 2)
 
 
 	local idx = 0
@@ -866,7 +866,8 @@ function Stuffing:ADDON_LOADED(addon)
 
 	ToggleBackpack = Stuffing_Toggle
 	ToggleBag = Stuffing_ToggleBag
-	OpenAllBags = Stuffing_Toggle
+	ToggleAllBags = Stuffing_Toggle
+	OpenAllBags = Stuffing_Open
 	OpenBackpack = Stuffing_Open
 	CloseAllBags = Stuffing_Close
 	CloseBackpack = Stuffing_Close

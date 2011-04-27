@@ -1,7 +1,5 @@
 local T, C, L = unpack(select(2, ...)) 
 
-if C.interface.style ~= "Jasje" then return end
-
 local TukuiBar1 = CreateFrame("Frame", "TukuiBar1", UIParent, "SecureHandlerStateTemplate")
 TukuiBar1:CreatePanel("Transparent", 1, 1, "BOTTOM", UIParent, "BOTTOM", 0, 7)
 TukuiBar1:SetWidth((T.buttonsize * 12) + (T.buttonspacing * 13))
@@ -120,7 +118,7 @@ end
 
 -- BOTTOM BAR
 local tbottombar = CreateFrame("Frame", "TukuiBottomBar", UIParent)
-T.CreatePanel(tbottombar, 1, 22, "TOP", UIParent, "TOP", 0, 0)
+tbottombar:CreatePanel("Hydra", 1, 22, "TOP", UIParent, "TOP", 0, 0)
 tbottombar:ClearAllPoints()
 tbottombar:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", T.Scale(-6), T.Scale(-6))
 tbottombar:SetPoint("BOTTOMRIGHT", UIParent, "BOTTOMRIGHT", T.Scale(6), T.Scale(-6))

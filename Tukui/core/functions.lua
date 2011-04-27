@@ -5,8 +5,8 @@ T.SetFontString = function(parent, fontName, fontHeight, fontStyle)
 	local fs = parent:CreateFontString(nil, "OVERLAY")
 	fs:SetFont(fontName, fontHeight, fontStyle)
 	fs:SetJustifyH("LEFT")
-	fs:SetShadowColor(0, 0, 0)
-	-- fs:SetShadowOffset(1.25, -1.25) -- dont need shadow
+	--fs:SetShadowColor(0, 0, 0)
+	--fs:SetShadowOffset(1.25, -1.25)
 	return fs
 end
 
@@ -55,7 +55,6 @@ T.PP = function(p, obj)
 		obj:SetPoint('TOP', right, 0, 2)
 		obj:SetPoint('BOTTOM', right)
 	end
-if C.interface.style == "Jasje" then 	
 	if p == 8 then
 		obj:SetParent(pvedl)
 		obj:SetHeight(pvedl:GetHeight())
@@ -65,37 +64,21 @@ if C.interface.style == "Jasje" then
 		obj:SetHeight(pvedr:GetHeight())
 		obj:SetPoint("CENTER", pvedr, 0, 2)
 	end
-end	
-	--[[
-	if TukuiMinimap then
-		if p == 7 then
-			obj:SetParent(mapleft)
-			obj:SetHeight(mapleft:GetHeight())
-			obj:SetPoint('TOP', mapleft)
-			obj:SetPoint('BOTTOM', mapleft)
-		elseif p == 8 then
-			obj:SetParent(mapright)
-			obj:SetHeight(mapright:GetHeight())
-			obj:SetPoint('TOP', mapright)
-			obj:SetPoint('BOTTOM', mapright)
-		end
-	end ]]
 end
+
 
 T.DataTextTooltipAnchor = function(self)
 	local panel = self:GetParent()
 	local anchor = "ANCHOR_TOP"
 	local xoff = 0
-	local yoff = T.Scale(3)
+	local yoff = T.Scale(5)
 	
 	if panel == TukuiInfoLeft then
 		anchor = "ANCHOR_TOPLEFT"
-	elseif panel == TukuiTabsRightBackground then
-	    anchor = "ANCHOR_TOPRIGHT"
 	elseif panel == TukuiInfoRight then
 		anchor = "ANCHOR_TOPRIGHT"
 	elseif panel == TukuiMinimapStatsLeft or panel == TukuiMinimapStatsRight then
-	local position = TukuiMinimap:GetPoint()
+		local position = TukuiMinimap:GetPoint()
 		if position:match("LEFT") then
 			anchor = "ANCHOR_BOTTOMRIGHT"
 			yoff = T.Scale(-6)
@@ -235,17 +218,6 @@ T.buttonspacing = T.Scale(C.actionbar.buttonspacing)
 T.petbuttonsize = T.Scale(C.actionbar.petbuttonsize)
 T.petbuttonspacing = T.Scale(C.actionbar.buttonspacing)
 
-T.TotemBarOrientation = function(revert)
-	local position = TukuiShiftBar:GetPoint()
-	if position:match("TOP") then
-		revert = true
-	else
-		revert = false
-	end
-	
-	return revert
-end
-
 T.Round = function(number, decimals)
 	if not decimals then decimals = 0 end
     return (("%%.%df"):format(decimals)):format(number)
@@ -310,8 +282,9 @@ end
 ------------------------------------------------------------------------
 --	unitframes Functions
 ------------------------------------------------------------------------
+
 local ADDON_NAME, ns = ...
-local oUF = ns.oUF or oUF	
+local oUF = ns.oUF or oUF
 assert(oUF, "Tukui was unable to locate oUF install.")
 
 T.updateAllElements = function(frame)
@@ -446,6 +419,7 @@ T.PostUpdateHealth = function(health, unit, min, max)
 		end
 	end
 end
+
 -- highlight on raidframes
 T.PostUpdateHealthRaid = function(health, unit, min, max)
 	if not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit) then
@@ -465,10 +439,10 @@ T.PostUpdateHealthRaid = function(health, unit, min, max)
 			health.bg:SetTexture(.1, .1, .1)
 		end
 		
-		if C.raidlayout.gradienthealth and C.unitframes.unicolor then
+		if C.unitframes.gradienthealth and C.unitframes.unicolor then
 			if not UnitIsConnected(unit) or UnitIsDead(unit) or UnitIsGhost(unit) then return end
 			if not health.classcolored then
-				local r, g, b = oUF.ColorGradient(min/max, unpack(C["raidlayout"].gradient))
+				local r, g, b = oUF.ColorGradient(min/max, unpack(C["unitframes"].gradient))
 				health:SetStatusBarColor(r, g, b)
 			end
 		end
@@ -496,10 +470,10 @@ end
 T.PostNamePosition = function(self)
 	self.Name:ClearAllPoints()
 	if (self.Power.value:GetText() and UnitIsEnemy("player", "target") and C["unitframes"].targetpowerpvponly == true) or (self.Power.value:GetText() and C["unitframes"].targetpowerpvponly == false) then
-		self.Name:SetPoint("CENTER", self.panel, "CENTER", 0, 2)
+		self.Name:SetPoint("CENTER", self.panel, "CENTER", 0, 0)
 	else
 		self.Power.value:SetAlpha(0)
-		self.Name:SetPoint("LEFT", self.panel, "LEFT", 20, 2)
+		self.Name:SetPoint("LEFT", self.panel, "LEFT", 20, -0)
 	end
 end
 
@@ -615,7 +589,7 @@ local CreateAuraTimer = function(self, elapsed)
 end
 
 T.PostCreateAura = function(element, button)
-	T.SetTemplate(button)
+	button:SetTemplate("Default")
 	
 	button.remaining = T.SetFontString(button, C.media.pixelfont, C.unitframes.auratextscale, "OUTLINEMONOCHROME")
 	button.remaining:Point("CENTER", 1, 0)
@@ -665,6 +639,12 @@ T.PostUpdateAura = function(icons, unit, icon, index, offset, filter, isDebuff, 
 			icon:SetBackdropBorderColor(color.r * 0.6, color.g * 0.6, color.b * 0.6)
 			icon.icon:SetDesaturated(false)
 		end
+	else
+		if (isStealable or ((T.myclass == "MAGE" or T.myclass == "PRIEST" or T.myclass == "SHAMAN") and dtype == "Magic")) and not UnitIsFriend("player", unit) then
+			icon:SetBackdropBorderColor(1, 0.85, 0, 1)
+		else
+			icon:SetBackdropBorderColor(unpack(C.media.bordercolor))
+		end
 	end
 	
 	if duration and duration > 0 then
@@ -693,6 +673,13 @@ T.HidePortrait = function(self, unit)
 	end
 end
 
+T.PortraitUpdate = function(self, unit)
+	--Fucking Furries
+	if self:GetModel() and self:GetModel().find and self:GetModel():find("worgenmale") then
+		self:SetCamera(1)
+	end
+end
+
 T.PostCastStart = function(self, unit, name, rank, castid)
 	if unit == "vehicle" then unit = "player" end
 	--Fix blank castbar with opening text
@@ -714,7 +701,6 @@ T.PostCastStart = function(self, unit, name, rank, castid)
 		end	
 	end
 end
-
 
 T.UpdateShards = function(self, event, unit, powerType)
 	if(self.unit ~= unit or (powerType and powerType ~= 'SOUL_SHARDS')) then return end
@@ -889,12 +875,12 @@ T.UpdateThreat = function(self, event, unit)
 --------------------------------------------------------------------------------------------
 
 T.countOffsets = {
-	TOPLEFT = {6*C["raidlayout"].gridscale, 1},
-	TOPRIGHT = {-6*C["raidlayout"].gridscale, 1},
-	BOTTOMLEFT = {6*C["raidlayout"].gridscale, 1},
-	BOTTOMRIGHT = {-6*C["raidlayout"].gridscale, 1},
-	LEFT = {5*C["raidlayout"].gridscale, 1},
-	RIGHT = {-5*C["raidlayout"].gridscale, 1},
+	TOPLEFT = {6*C["unitframes"].gridscale, 1},
+	TOPRIGHT = {-6*C["unitframes"].gridscale, 1},
+	BOTTOMLEFT = {6*C["unitframes"].gridscale, 1},
+	BOTTOMRIGHT = {-6*C["unitframes"].gridscale, 1},
+	LEFT = {6*C["unitframes"].gridscale, 1},
+	RIGHT = {-6*C["unitframes"].gridscale, 1},
 	TOP = {0, 0},
 	BOTTOM = {0, 0},
 }
@@ -913,13 +899,8 @@ end
 
 T.createAuraWatch = function(self, unit)
 	local auras = CreateFrame("Frame", nil, self)
-if C.interface.style == "Jasje" then 	
-	auras:SetPoint("TOPLEFT", self.Health, 2, -2)
-	auras:SetPoint("BOTTOMRIGHT", self.Health, -2, 4)
-else	
 	auras:SetPoint("TOPLEFT", self.Health, 2, -2)
 	auras:SetPoint("BOTTOMRIGHT", self.Health, -2, 2)
-end	
 	auras.presentAlpha = 1
 	auras.missingAlpha = 0
 	auras.icons = {}
@@ -949,9 +930,8 @@ end
 			local icon = CreateFrame("Frame", nil, auras)
 			icon.spellID = spell[1]
 			icon.anyUnit = spell[4]
-			icon:SetWidth(T.Scale(5*C["raidlayout"].gridscale))
-			icon:SetHeight(T.Scale(5*C["raidlayout"].gridscale))
-			icon:SetBackdropColor(0,0,0)
+			icon:Width(5*C["unitframes"].gridscale)
+			icon:Height(5*C["unitframes"].gridscale)
 			icon:SetPoint(spell[2], 0, 0)
 
 			local tex = icon:CreateTexture(nil, "OVERLAY")
@@ -965,17 +945,17 @@ end
 
 			local count = icon:CreateFontString(nil, "OVERLAY")
 			count:SetFont(C.media.pixelfont, 8, "OUTLINEMONOCHROME")
-			count:SetPoint("CENTER", unpack(T.countOffsets[spell[2]])-0,-0)
+			count:SetPoint("CENTER", unpack(T.countOffsets[spell[2]]))
 			icon.count = count
 
 			auras.icons[spell[1]] = icon
 		end
 	end
-
+	
 	self.AuraWatch = auras
 end
 
-if C["raidlayout"].raidunitdebuffwatch == true then
+if C["unitframes"].raidunitdebuffwatch == true then
 	-- Classbuffs { spell ID, position [, {r,g,b,a}][, anyUnit] }
 	-- For oUF_AuraWatch
 	do
@@ -1013,81 +993,93 @@ if C["raidlayout"].raidunitdebuffwatch == true then
 		local ORD = ns.oUF_RaidDebuffs or oUF_RaidDebuffs
 
 		if not ORD then return end
-
+		
 		ORD.ShowDispelableDebuff = true
 		ORD.FilterDispellableDebuff = true
-		ORD.MatchBySpellName = false
+		ORD.MatchBySpellName = true
+		
+		local function SpellName(id)
+			local name, _, _, _, _, _, _, _, _ = GetSpellInfo(id) 	
+			return name	
+		end
 
 		T.debuffids = {
-			-- Other debuff
-			67479, -- Impale
+		-- Other debuff
+			SpellName(67479), -- Impale
 
-			--CATA DEBUFFS
+		--CATA DEBUFFS
 		--Baradin Hold
-			95173, -- Consuming Darkness
+			SpellName(95173), -- Consuming Darkness
 
 		--Blackwing Descent
 			--Magmaw
-			91911, -- Constricting Chains
-			94679, -- Parasitic Infection
-			94617, -- Mangle
+			SpellName(91911), -- Constricting Chains
+			SpellName(94679), -- Parasitic Infection
+			SpellName(94617), -- Mangle
 
 			--Omintron Defense System
-			79835, --Poison Soaked Shell	
-			91433, --Lightning Conductor
-			91521, --Incineration Security Measure
+			SpellName(79835), --Poison Soaked Shell
+			SpellName(91433), --Lightning Conductor
+			SpellName(91521), --Incineration Security Measure
 
 			--Maloriak
-			77699, -- Flash Freeze
-			77760, -- Biting Chill
+			SpellName(77699), -- Flash Freeze
+			SpellName(77760), -- Biting Chill
 
 			--Atramedes
-			92423, -- Searing Flame
-			92485, -- Roaring Flame
-			92407, -- Sonic Breath
+			SpellName(92423), -- Searing Flame
+			SpellName(92485), -- Roaring Flame
+			SpellName(92407), -- Sonic Breath
 
 			--Chimaeron
-			82881, -- Break
-			89084, -- Low Health
+			SpellName(82881), -- Break
+			SpellName(89084), -- Low Health
 
 			--Nefarian
 
+			--Sinestra
+			SpellName(92956), --Wrack
+
 		--The Bastion of Twilight
 			--Valiona & Theralion
-			92878, -- Blackout
-			86840, -- Devouring Flames
-			95639, -- Engulfing Magic
+			SpellName(92878), -- Blackout
+			SpellName(86840), -- Devouring Flames
+			SpellName(95639), -- Engulfing Magic
 
 			--Halfus Wyrmbreaker
-			39171, -- Malevolent Strikes
+			SpellName(39171), -- Malevolent Strikes
 
 			--Twilight Ascendant Council
-			92511, -- Hydro Lance
-			82762, -- Waterlogged
-			92505, -- Frozen
-			92518, -- Flame Torrent
-			83099, -- Lightning Rod
-			92075, -- Gravity Core
-			92488, -- Gravity Crush
+			SpellName(92511), -- Hydro Lance
+			SpellName(82762), -- Waterlogged
+			SpellName(92505), -- Frozen
+			SpellName(92518), -- Flame Torrent
+			SpellName(83099), -- Lightning Rod
+			SpellName(92075), -- Gravity Core
+			SpellName(92488), -- Gravity Crush
 
 			--Cho'gall
-			86028, -- Cho's Blast
-			86029, -- Gall's Blast
+			SpellName(86028), -- Cho's Blast
+			SpellName(86029), -- Gall's Blast
 
 		--Throne of the Four Winds
 			--Conclave of Wind
 				--Nezir <Lord of the North Wind>
-				93131, --Ice Patch
+				SpellName(93131), --Ice Patch
 				--Anshal <Lord of the West Wind>
-				86206, --Soothing Breeze
-				93122, --Toxic Spores
+				SpellName(86206), --Soothing Breeze
+				SpellName(93122), --Toxic Spores
 				--Rohash <Lord of the East Wind>
-				93058, --Slicing Gale 
+				SpellName(93058), --Slicing Gale
 			--Al'Akir
-			93260, -- Ice Storm
-			93295, -- Lightning Rod
+			SpellName(93260), -- Ice Storm
+			SpellName(93295), -- Lightning Rod
 		}
 
+		T.ReverseTimer = {
+			[92956] = true, -- Sinestra (Wrack)
+		},
+		
 		ORD:RegisterDebuffs(T.debuffids)
 	end
 end

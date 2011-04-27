@@ -42,7 +42,7 @@ do
 		local pos = settings.position[self.type]
 		local p1, frame, p2, x, y = strsplit("#", pos)
 
-		return self:SetPoint(p1, frame, p2, T.Scale(x), T.Scale(y))
+		return self:Point(p1, frame, p2, x, y)
 	end
 
 	local OnUpdate = function(self, elapsed)
@@ -86,7 +86,7 @@ do
 		border:SetFrameLevel(0)
 
 		local text = frame:CreateFontString(nil, 'OVERLAY')
-		text:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+		text:SetFont(C["media"].uffont, 12, "THINOUTLINE")
 		text:SetShadowOffset(.8, -.8)
 		text:SetShadowColor(0, 0, 0, 1)
 
