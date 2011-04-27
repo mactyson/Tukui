@@ -62,7 +62,7 @@ function Update(self)
 			bar:SetWidth(value.data.size);
 			bar:SetHeight(value.data.size);
 			bar:SetScale(1);
-			TukuiDB.SetTemplate(bar)
+			bar:SetTemplate("Hydra")
 
 			if (index == 1) then
 				bar:SetPoint(unpack(self.setPoint));
@@ -125,7 +125,7 @@ function Update(self)
 					bar.bg:SetPoint("TOPLEFT", T.Scale(-2), T.Scale(2))
 					bar.bg:SetPoint("BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
 					bar.bg:SetFrameStrata("BACKGROUND")
-					TukuiDB.SetTemplate(bar.bg)
+					bar.bg:SetTemplate("Hydra")
 				end
 				
 				if (bar.background)then
