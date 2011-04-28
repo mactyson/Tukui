@@ -593,10 +593,10 @@ local function Shared(self, unit)
 			else
 				if unit == "player" then
 					castbar:SetPoint("BOTTOM", InvTukuiActionBarBackground, "CENTER", 0,240)
-					castbar:Size(20, 230)
+					castbar:Size(230, 20)
 				elseif unit == "target" then
 					castbar:SetPoint("BOTTOM", TukuiTarget, "TOP", 0, 70)
-					castbar:Size(18, 220)
+					castbar:Size(220, 18)
 				end
 			end	
 			
@@ -679,12 +679,12 @@ local function Shared(self, unit)
 		-- add combat feedback support
 		if C["unitframes"].combatfeedback == true then
 			local CombatFeedbackText 
-			if T.lowversion then
-				CombatFeedbackText = T.SetFontString(health, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+			CombatFeedbackText = T.SetFontString(health, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+			if (C["unitframes"].charportrait == true) then
+			CombatFeedbackText:SetPoint("CENTER", self.Portrait, "CENTER", 0, 0)
 			else
-				CombatFeedbackText = T.SetFontString(health, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
+			CombatFeedbackText:SetPoint("CENTER", 0, 10)
 			end
-			CombatFeedbackText:SetPoint("CENTER", 0, 1)
 			CombatFeedbackText.colors = {
 				DAMAGE = {0.69, 0.31, 0.31},
 				CRUSHING = {0.69, 0.31, 0.31},
