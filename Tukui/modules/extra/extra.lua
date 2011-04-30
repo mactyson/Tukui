@@ -1061,7 +1061,62 @@ announce:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 announce:SetScript("OnEvent", function(self, _, _, event, _, _, sourceName, _, _, destName, _, _, _, _, spellID, spellName)
 	if not (event == "SPELL_INTERRUPT" and sourceName == T.myname) then return end
 	
-		if GetRealNumRaidMembers() > 0 then
+		--if GetRealNumRaidMembers() > 0 then
 			SendChatMessage(INTERRUPTED.." "..destName.."'s \124cff71d5ff\124Hspell:"..spellID.."\124h["..spellName.."]\124h\124r!", "YELL", nil, nil)		
-		end		
+		--end		
 	end)
+
+----------------------------------------------------------------------------------------------------	
+-- Spirit Link - Information by Rixxon
+-- http://www.wowinterface.com/downloads/info19688-SpiritLink-Information.html
+----------------------------------------------------------------------------------------------------
+
+local messages = {
+          { time = 0, channels = "Yell", message = "Spirit Link! Go into the Green!" },
+		  { time = 4, channels = "SAY", message = "Spirit Link 3" },
+          { time = 5, channels = "SAY", message = "Spirit Link 2" },
+          { time = 6, channels = "SAY", message = "Spirit Link 1" },
+          { time = 7, channels = "SAY", message = "Spirit Link Finished!" },
+		  { time = 180, channels = "SAY", message = "Spirit Link Ready !" },
+		 }
+       
+      local counter, nextMessage = 0, 1
+       
+      local addon = CreateFrame( "Frame" )
+      addon:RegisterEvent( "UNIT_SPELLCAST_SUCCEEDED" )
+      addon:SetScript( "OnEvent", function( self, event, unit, _, _, _, spell )
+         
+		  if unit == "player" and spell == 98008 then
+              -- You cast Mana Tide!
+              -- Start running the messages.
+              counter, nextMessage = 0, 1
+              self:Show()
+          end
+      end )
+       
+      addon:Hide()
+      addon:SetScript( "OnUpdate", function( self, elapsed )
+          -- Add up how much time has passed
+          -- since you cast Mana Tide.
+          counter = counter + elapsed
+       
+          local m = messages[ nextMessage ]
+          if counter < m.time then
+              -- It's not time for a message yet.
+              return
+          end
+       
+          -- Send the message!
+          for channel in m.channels:gmatch("%S+") do
+              SendChatMessage( m.message, channel )
+          end
+       
+          -- Queue up the next message.
+          nextMessage = nextMessage + 1
+       
+          -- Find out if it's done.
+          if not messages[ nextMessage ] then
+              self:Hide()
+              counter, nextMessage = 0, 1
+          end
+      end )
