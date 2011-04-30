@@ -2601,7 +2601,7 @@
 
 
 	local function ver()
-		echo(tdpsL.helpVersion .. ' ' .. GetAddOnMetadata('TinyDPS', 'Version') .. ' by Sideshow (Draenor EU)')
+		--echo(tdpsL.helpVersion .. ' ' .. GetAddOnMetadata('TinyDPS', 'Version') .. ' by Sideshow (Draenor EU)')
 	end
 	local function slashhelp()
 		echo(tdpsL.helpParameters1)

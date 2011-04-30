@@ -451,21 +451,6 @@ ns.Filger_Spells = {
     },		
 	["SHAMAN"] = { -------------------------------------------------------------------------------------------------------- Shaman
 		{
-			Name = "Buffs and Debuffs",
-			Direction = "RIGHT",
-			Interval = 11,
-			Mode = "ICON",
-			setPoint = { "TOPLEFT", TukuiPlayer, 13, 75 },
-			-- Earth Shield
-			{ spellID = 974, size = 40, unitId = "player", caster = "player", filter = "BUFF" },
-			-- Riptide
-			{ spellID = 61295, size = 40, unitId = "player", caster = "player", filter = "BUFF" },
-			-- Heroism
-			{ spellID = 32182, size = 40, unitId = "player", caster = "player", filter = "BUFF" },
-			-- Bloodlust
-			{ spellID = 2825, size = 40, unitId = "player", caster = "player", filter = "BUFF" },
-		},
-		{
 			Name = "Shaman Procs",
 			Direction = "RIGHT",
 			Interval = 3,
