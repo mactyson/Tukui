@@ -233,7 +233,7 @@ local function Shared(self, unit)
 		local RaidDebuffs = CreateFrame('Frame', nil, self)
 		RaidDebuffs:Height(18*C["unitframes"].gridscale)
 		RaidDebuffs:Width(18*C["unitframes"].gridscale)
-		RaidDebuffs:Point('CENTER', health, 1,0)
+		RaidDebuffs:Point('CENTER', health, 1,-6)
 		RaidDebuffs:SetFrameStrata(health:GetFrameStrata())
 		RaidDebuffs:SetFrameLevel(health:GetFrameLevel() + 2)
 		
