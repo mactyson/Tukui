@@ -111,7 +111,7 @@ local function Shared(self, unit)
 		healthBG:SetTexture(.1, .1, .1)
 	
 		health.value = T.SetFontString(health, pixelfont, 8, "MONOCHROMEOUTLINE")
-		health.value:Point("RIGHT", health, "RIGHT", T.Scale(-2), T.Scale(0))
+		health.value:Point("RIGHT", -2, 0)
 		health.PostUpdate = T.PostUpdateHealth
 		
 		self.Health = health
@@ -603,8 +603,8 @@ local function Shared(self, unit)
 			castbar.bg = CreateFrame("Frame", nil, castbar)
 			castbar.bg:SetTemplate("Transparent")
 			castbar.bg:SetBorder()
-			castbar.bg:SetPoint("TOPLEFT", T.Scale(-2), T.Scale(2))
-			castbar.bg:SetPoint("BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
+			castbar.bg:SetPoint("TOPLEFT", -2, 2)
+			castbar.bg:SetPoint("BOTTOMRIGHT", 2, -2)
 			castbar.bg:SetFrameLevel(5)
 			
 			castbar.CustomTimeText = T.CustomCastTimeText
@@ -985,7 +985,7 @@ local function Shared(self, unit)
 	if (unit == "focus") then
 		-- health 
 		local health = CreateFrame('StatusBar', nil, self)
-		health:Height(15)
+		health:Height(32)
 		health:SetPoint("TOPLEFT")
 		health:SetPoint("TOPRIGHT")
 		health:SetStatusBarTexture(normTex)
@@ -993,7 +993,7 @@ local function Shared(self, unit)
 		-- border 
 	    local Healthbg = CreateFrame("Frame", nil, self)
 	    Healthbg:SetPoint("TOPLEFT", self, "TOPLEFT", T.Scale(-2), T.Scale(2))
-	    Healthbg:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", T.Scale(2), T.Scale(-2))
+	    Healthbg:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", T.Scale(2), T.Scale(-8))
 	    Healthbg:SetTemplate("Hydra")
 		Healthbg:CreateShadow("Hydra")
 	    Healthbg:SetBackdropBorderColor(unpack(C["media"].altbordercolor))
@@ -1034,28 +1034,90 @@ local function Shared(self, unit)
 			health.colorReaction = true	
 		end
 		
+		-- power
+		local power = CreateFrame('StatusBar', nil, self)
+		power:Size(200, 5)
+		power:Point("LEFT", health, "BOTTOMLEFT", 10, -2)
+		power:SetFrameLevel(4)
+		power:SetStatusBarTexture(normTex)
+		
+		-- power border
+		local powerborder = CreateFrame("Frame", nil, self)
+		powerborder:CreatePanel("Hydra", 1, 1, "CENTER", power, "CENTER", 0, 0)
+		powerborder:ClearAllPoints()
+		powerborder:SetPoint("TOPLEFT", power, T.Scale(-2), T.Scale(2))
+		powerborder:SetPoint("BOTTOMRIGHT", power, T.Scale(2), T.Scale(-2))
+		powerborder:SetFrameStrata("MEDIUM")
+		powerborder:SetFrameLevel(4)
+		powerborder:CreateShadow("Hydra")
+		self.powerborder = powerborder
+		
+		local powerBG = power:CreateTexture(nil, 'BORDER')
+		powerBG:SetAllPoints(power)
+		powerBG:SetTexture(normTex)
+		powerBG.multiplier = 0.3
+		
+		power.value = T.SetFontString(health, pixelfont, 8, "MONOCHROMEOUTLINE")
+		power.value:Point("LEFT", health, "LEFT", T.Scale(2), T.Scale(0))
+		power.PreUpdate = T.PreUpdatePower
+		power.PostUpdate = T.PostUpdatePower
+		
+		self.Power = power
+		self.Power.bg = powerBG
+		
+		power.frequentUpdates = true
+		power.colorDisconnected = true
+		
+		if C["unitframes"].unicolor == true then
+			power.colorTapping = true
+			power.colorClass = true
+			powerBG.multiplier = 0.1				
+		else
+			power.colorPower = true
+		end
+		
+		-- only showing debuffs on focus
+		local debuffs = CreateFrame("Frame", nil, self)
+		debuffs:SetPoint("TOPLEFT", self, "TOPLEFT", -2, 30)
+		
+		debuffs:SetHeight(26)
+		debuffs:SetWidth(220)
+		debuffs.size = 26
+		debuffs.num = 8
+		
+		debuffs.spacing = 2
+		debuffs.initialAnchor = 'TOPLEFT'
+		debuffs["growth-x"] = "RIGHT"
+		debuffs.PostCreateIcon = T.PostCreateAura
+		debuffs.PostUpdateIcon = T.PostUpdateAura
+		
+		self.Debuffs = debuffs
+		
 		-- names
 		local Name = health:CreateFontString(nil, "OVERLAY")
-		Name:SetPoint("LEFT", health, "LEFT", 0, 0)
+		Name:SetPoint("CENTER", health, 0, 0)
 		Name:SetJustifyH("LEFT")
 		Name:SetFont(pixelfont, 8, "OUTLINEMONOCHROME")
-		Name:SetShadowColor(0, 0, 0)
-		Name:SetShadowOffset(1.25, -1.25)
-		
-		self:Tag(Name, '[Tukui:getnamecolor][Tukui:namelong]')
+
+		self:Tag(Name, '[Tukui:getnamecolor][Tukui:targetname]')
 		self.Name = Name
 		
 		local castbar = CreateFrame("StatusBar", self:GetName().."CastBar", self)
 		castbar:ClearAllPoints()
-		castbar:SetPoint("TOPLEFT", health, T.Scale(0), T.Scale(0))
-		castbar:SetPoint("BOTTOMRIGHT", health, T.Scale(0), T.Scale(0))
-		
-		castbar:SetHeight(5)
+		castbar:SetPoint("BOTTOM", TukuiFocus, "TOP", 0, 35)
+		castbar:Size(220, 18)
+		-- spark
+		castbar.Spark = castbar:CreateTexture(nil, 'OVERLAY')
+		castbar.Spark:SetHeight(50)
+		castbar.Spark:SetWidth(15)
+		castbar.Spark:SetBlendMode('ADD')
+
 		castbar:SetStatusBarTexture(normTex)
 		castbar:SetFrameLevel(6)
 		
 		castbar.bg = CreateFrame("Frame", nil, castbar)
-		castbar.bg:SetTemplate("Hydra")
+		castbar.bg:SetTemplate("Transparent")
+		castbar.bg:SetBorder()
 		castbar.bg:Point("TOPLEFT", -2, 2)
 		castbar.bg:Point("BOTTOMRIGHT", 2, -2)
 		castbar.bg:SetFrameLevel(5)
@@ -1070,14 +1132,28 @@ local function Shared(self, unit)
 		castbar.Text:SetPoint("LEFT", castbar, "LEFT", 4, 0)
 		castbar.Text:SetTextColor(0.84, 0.75, 0.65)
 		
+		if C["unitframes"].cbicons == true then
+		castbar.button = CreateFrame("Frame", nil, castbar)
+
+		castbar.button:SetPoint("CENTER", 0, 28)
+		castbar.button:Size(26)
+		castbar.button:SetTemplate("Transparent")
+		castbar.button:SetBorder()
+		
+		castbar.icon = castbar.button:CreateTexture(nil, "ARTWORK")
+		castbar.icon:SetPoint("TOPLEFT", castbar.button, T.Scale(2), T.Scale(-2))
+		castbar.icon:SetPoint("BOTTOMRIGHT", castbar.button, T.Scale(-2), T.Scale(2))
+		castbar.icon:SetTexCoord(0.08, 0.92, 0.08, .92)
+		
 		castbar.CustomDelayText = T.CustomCastDelayText
 		castbar.PostCastStart = T.CheckCast
 		castbar.PostChannelStart = T.CheckChannel
 
 		self.Castbar = castbar
 		self.Castbar.Time = castbar.time
+		self.Castbar.Icon = castbar.icon
 	end
-
+end
 	------------------------------------------------------------------------
 	--	Arena or boss units layout (both mirror'd)
 	------------------------------------------------------------------------
@@ -1346,16 +1422,11 @@ local player = oUF:Spawn('player', "TukuiPlayer")
 player:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", -127, 55)
 	player:Size(220, 26)
 
-
 -- focus
 local focus = oUF:Spawn('focus', "TukuiFocus")
-if (T.myclass == "SHAMAN" or T.myclass == "DEATHKNIGHT" or T.myclass == "PALADIN" or T.myclass == "WARLOCK" or T.myclass == "DRUID") then
-focus:SetPoint("BOTTOMLEFT", TukuiPlayer, "TOPLEFT", 10, 12)
-    focus:Size(200, 15)
-else
-focus:SetPoint("BOTTOMLEFT", TukuiPlayer, "TOPLEFT", 0, 5)
-    focus:Size(220, 15)
-end	
+focus:SetPoint("BOTTOMLEFT", TukuiPlayer, "TOPLEFT", 0, 25)
+    focus:Size(220, 26)
+	
 -- target
 local target = oUF:Spawn('target', "TukuiTarget")
 target:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", 127, 55)
