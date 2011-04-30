@@ -1058,7 +1058,7 @@ local function Shared(self, unit)
 		powerBG.multiplier = 0.3
 		
 		power.value = T.SetFontString(health, pixelfont, 8, "MONOCHROMEOUTLINE")
-		power.value:Point("LEFT", health, "LEFT", T.Scale(2), T.Scale(0))
+		power.value:Point("LEFT", 2, 0)
 		power.PreUpdate = T.PreUpdatePower
 		power.PostUpdate = T.PostUpdatePower
 		
