@@ -1311,6 +1311,12 @@ end
 		Trinket:SetFrameLevel(1)
 		Trinket.trinketUseAnnounce = true
 		self.Trinket = Trinket
+		
+		-- Spec info
+		Talents = T.SetFontString(health, pixelfont, 8, "OUTLINEMONOCHROME")
+		Talents:Point("CENTER", health, 0, 0)
+		Talents:SetTextColor(1,1,1,.6)
+		self.Talents = Talents
 		end
 		
         -- boss & arena frames cast bar!
@@ -1343,7 +1349,7 @@ end
 		castbar.CustomDelayText = T.CustomCastDelayText
 		castbar.PostCastStart = T.CheckCast
 		castbar.PostChannelStart = T.CheckChannel
-								
+		
 		castbar.button = CreateFrame("Frame", nil, castbar)
 		castbar.button:Height(castbar:GetHeight()+4)
 		castbar.button:Width(castbar:GetHeight()+4)
