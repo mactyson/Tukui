@@ -1072,12 +1072,12 @@ announce:SetScript("OnEvent", function(self, _, _, event, _, _, sourceName, _, _
 ----------------------------------------------------------------------------------------------------
 
 local messages = {
-          { time = 0, channels = "Yell", message = "Spirit Link! Go into the Green!" },
-		  { time = 4, channels = "SAY", message = "Spirit Link 3" },
-          { time = 5, channels = "SAY", message = "Spirit Link 2" },
-          { time = 6, channels = "SAY", message = "Spirit Link 1" },
-          { time = 7, channels = "SAY", message = "Spirit Link Finished!" },
-		  { time = 180, channels = "SAY", message = "Spirit Link Ready !" },
+          { time = 0, channels = "YELL", message = "Spirit Link! Go into the Green!" },
+		  { time = 4, channels = "YELL", message = "Spirit Link 3" },
+          { time = 5, channels = "YELL", message = "Spirit Link 2" },
+          { time = 6, channels = "YELL", message = "Spirit Link 1" },
+          { time = 7, channels = "YELL", message = "Spirit Link Finished!" },
+		  { time = 180, channels = "YELL", message = "Spirit Link Ready !" },
 		 }
        
       local counter, nextMessage = 0, 1
