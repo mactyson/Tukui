@@ -42,18 +42,18 @@ ns.Filger_Spells = {
 			setPoint = { "CENTER", "UIParent", 220, -75 },
 			
 			--Brain Freeze
-			{ spellID = 44549, size = 47, unitId = "player", caster = "player", filter = "BUFF" },
+			{ spellID = 57761, size = 47, unitId = "player", caster = "player", filter = "BUFF" },
 			-- Impact
-			{ spellID = 12357, size = 47, unitId = "player", caster = "player", filter = "BUFF" },
-			--Missle Barrage
-			{ spellID = 5143, size = 47, unitId = "player", caster = "player", filter = "BUFF" },
+			{ spellID = 64343, size = 47, unitId = "player", caster = "player", filter = "BUFF" },
+			--Missile Barrage
+			{ spellID = 54486, size = 47, unitId = "player", caster = "player", filter = "BUFF" },
 			--Hot Streak(improved)
 			{ spellID = 44448, size = 47, unitId = "player", caster = "player", filter = "BUFF" },
 			--Hot Streak
 			{ spellID = 44445, size = 47, unitId = "player", caster = "player", filter = "BUFF" },
 			-- Deep Freeze
 			{ spellID = 44572, size = 47, unitId = "player", caster = "player", filter = "BUFF" },
-			--Scorch aka Critcal  Mass
+			--Scorch aka Critical Mass
 			{ spellID = 12873, size = 47, unitId = "target", caster = "all", filter = "DEBUFF" },
 			--Arcane Blast
 			{ spellID = 30451, size = 47, unitId = "player", caster = "player", filter = "DEBUFF" },
@@ -67,14 +67,16 @@ ns.Filger_Spells = {
 			Mode = "ICON",
 			setPoint = { "LEFT", TukuiPlayer, -42, -3 },
 			
-			-- Power Conversion - Arcanotron
-            { spellID = 79729, size = 36, unitId = "focus", caster = "all", filter = "BUFF" },
 			-- Sheep mage
-            { spellID = 28271, size = 36, unitId = "focus", caster = "player", filter = "DEBUFF" },
-			-- remedy -- for spellsteal 
-			{ spellID = 77912, size = 36, unitId = "focus", caster = "all", filter = "BUFF" },
-			-- test mage ward
-			--{ spellID = 543, size = 36, unitId = "focus", caster = "player", filter = "BUFF" },			
+            { spellID = 118, size = 36, unitId = "focus", caster = "player", filter = "DEBUFF" },
+			-- Pig mage
+            { spellID = 28272, size = 36, unitId = "focus", caster = "player", filter = "DEBUFF" },
+			-- Turtle mage
+            { spellID = 28271, size = 36, unitId = "focus", caster = "player", filter = "DEBUFF" },	
+			-- Remedy - Maloriak 
+			{ spellID = 92967, size = 36, unitId = "focus", caster = "all", filter = "BUFF" },	
+			-- Converted Power - Arcanotron
+            { spellID = 79735, size = 36, unitId = "focus", caster = "all", filter = "BUFF" },
 		},
 	},
 	["PRIEST"] = { -------------------------------------------------------------------------------------------------------- Priest
@@ -87,7 +89,7 @@ ns.Filger_Spells = {
 
 
 			-- Prayer of Mending
-			{ spellID = 41637, size = 27, unitId = "player", caster = "player", filter = "BUFF" },
+			{ spellID = 41635, size = 27, unitId = "player", caster = "player", filter = "BUFF" },
 			-- Guardian Spirit
 			{ spellID = 47788, size = 27, unitId = "player", caster = "player", filter = "BUFF" },
 			-- Pain Suppression
@@ -112,15 +114,15 @@ ns.Filger_Spells = {
 			setPoint = { "CENTER", UIParent, -84, -315 },
 
 			-- Surge of Light
-			{ spellID = 33151, size = 27, unitId = "player", caster = "all", filter = "BUFF" },
+			{ spellID = 88688, size = 27, unitId = "player", caster = "all", filter = "BUFF" },
 			-- Serendipity
-			{ spellID = 63730, size = 27, unitId = "player", caster = "player", filter = "BUFF" },
+			{ spellID = 63735, size = 27, unitId = "player", caster = "player", filter = "BUFF" },
 			-- Shadow Orb
 			{ spellID = 77487, size = 27, unitId = "player", caster = "player", filter = "BUFF" },
 			-- Archangel
 			{ spellID = 81700, size = 27, unitId = "player", caster = "player", filter = "BUFF" },
 			-- Evangelism
-			{ spellID = 81661, size = 27, unitId = "player", caster = "player", filter = "BUFF" },
+			{ spellID = 81662, size = 27, unitId = "player", caster = "player", filter = "BUFF" },
 			-- Dispersion
 			{ spellID = 47585, size = 27, unitId = "player", caster = "player", filter = "BUFF" },
 		},	
@@ -132,7 +134,7 @@ ns.Filger_Spells = {
 			setPoint = { "RIGHT", TukuiTarget, 42, -3 },
 
 			-- Prayer of Mending
-			{ spellID = 41637, size = 36, unitId = "target", caster = "player", filter = "BUFF" },
+			{ spellID = 41635, size = 36, unitId = "target", caster = "player", filter = "BUFF" },
 			-- Guardian Spirit
 			{ spellID = 47788, size = 36, unitId = "target", caster = "player", filter = "BUFF" },
 			-- Pain Suppression
@@ -172,13 +174,13 @@ ns.Filger_Spells = {
 			--Devious Minds
 			{ spellID = 70840, size = 37, unitId = "player", caster = "player", filter = "BUFF" },
 			-- Improved Soul Fire
-			{ spellID = 85114, size = 37, unitId = "player", caster = "player", filter = "BUFF" },
+			{ spellID = 18120, size = 37, unitId = "player", caster = "player", filter = "BUFF" },
 			-- Molten Core
-			{ spellID = 47383, size = 37, unitId = "player", caster = "player", filter = "BUFF" },
+			{ spellID = 47247, size = 37, unitId = "player", caster = "player", filter = "BUFF" },
 			-- Decimation
 			{ spellID = 63158, size = 37, unitId = "player", caster = "player", filter = "BUFF" },
 			-- Backdraft
-			{ spellID = 54277, size = 37, unitId = "player", caster = "player", filter = "BUFF" },
+			{ spellID = 47260, size = 37, unitId = "player", caster = "player", filter = "BUFF" },
 			-- Backlash
 			{ spellID = 34939, size = 37, unitId = "player", caster = "player", filter = "BUFF" },
 			-- Nether Protection
@@ -186,7 +188,7 @@ ns.Filger_Spells = {
 			-- Nightfall
 			{ spellID = 18095, size = 37, unitId = "player", caster = "player", filter = "BUFF" },
 			-- Burning Soul
-			{ spellID = 74434, size = 37, unitId = "player", caster = "player", filter = "BUFF" },
+			{ spellID = 84254, size = 37, unitId = "player", caster = "player", filter = "BUFF" },
 		},
 		{
 			Name = "Buffs and Debuffs",
@@ -205,14 +207,14 @@ ns.Filger_Spells = {
 			{ spellID = 1714, size = 37, unitId = "target", caster = "all", filter = "DEBUFF" },
 			-- Curse of Exhaustion
 			{ spellID = 18223, size = 37, unitId = "target", caster = "all", filter = "DEBUFF" },
-			-- Curse of Agony
+			-- Bane of Agony
 			{ spellID = 980, size = 37, unitId = "target", caster = "player", filter = "DEBUFF" },
 			-- Bane of Doom
 			{ spellID = 603, size = 37, unitId = "target", caster = "player", filter = "DEBUFF" },
 			-- Unstable Affliction
 			{ spellID = 30108, size = 37, unitId = "target", caster = "player", filter = "DEBUFF" },
 			-- Shadow Embrace
-			{ spellID = 32385, size = 37, unitId = "target", caster = "player", filter = "BUFF" },
+			{ spellID = 32395, size = 37, unitId = "target", caster = "player", filter = "BUFF" },
 			-- Corruption
 			{ spellID = 172, size = 37, unitId = "target", caster = "player", filter = "DEBUFF" },
 			-- Immolate
@@ -357,8 +359,6 @@ ns.Filger_Spells = {
 			{ spellID = 56453, size = 47, unitId = "player", caster = "player", filter = "BUFF" },
 			-- Quick Shots
 			{ spellID = 6150, size = 47, unitId = "player", caster = "player", filter = "BUFF" },
-			-- Master Tactician
-			{ spellID = 34837, size = 47, unitId = "player", caster = "player", filter = "BUFF" },
 			-- Improved Steady Shot
 			{ spellID = 53224, size = 47, unitId = "player", caster = "player", filter = "BUFF" },
 			-- Rapid Fire
@@ -718,6 +718,7 @@ ns.Filger_Spells = {
 			{ spellID = 93295, size = 47, unitId = "player", caster = "all", filter = "DEBUFF" },
     	},	
 		{
+		    -- Here we track pvp buffs on our target
 			Name = "PVPYO",
 			Direction = "RIGHT",
 			Interval = 6,
@@ -728,31 +729,10 @@ ns.Filger_Spells = {
 			{ spellID = 29166, size = 72, unitId = "target", caster = "all", filter = "BUFF"},
 			--Spell Reflection
 			{ spellID = 23920, size = 72, unitId = "target", caster = "all", filter = "BUFF" },
-			--Sheep
-			{ spellID = 118, size = 70, barWidth = 248, unitId = "player", caster = "all", filter = "BUFF" },
-			--Hammer of Justice
-		    { spellID = 853, size = 70, barWidth = 248, unitId = "player", caster = "all", filter = "DEBUFF" },
-			--Kidney Shot
-            { spellID = 408, size = 70, barWidth = 248, unitId = "player", caster = "all", filter = "DEBUFF" },
-			--Silenced - Improved Counterspell
-            { spellID = 12598, size = 70, barWidth = 248, unitId = "player", caster = "all", filter = "DEBUFF" },
-			--Aura Mastery
-			{ spellID = 31821, size = 70, barWidth = 248, unitId = "target", caster = "all", filter = "BUFF" },
-			--Ice Block
-			{ spellID = 45438, size = 72, unitId = "target", caster = "all", filter = "BUFF" },
-			--Cloak of Shadows
-			{ spellID = 31224, size = 72, unitId = "target", caster = "all", filter = "BUFF" },
-		},
-		{
-			Name = "PVPYO",
-			Direction = "LEFT",
-			Interval = 6,
-			Mode = "ICON",
-			setPoint = {  "CENTER", UIParent ,-140,150 },			
 			--Divine Shield
 			{ spellID = 642, size = 72, unitId = "target", caster = "all", filter = "BUFF" },
 			--Deterrence
-            { spellID = 19263, size = 70, barWidth = 248, unitId = "target", caster = "all", filter = "BUFF" },
+            { spellID = 19263, size = 70, unitId = "target", caster = "all", filter = "BUFF" },
 			-- Anti-Magic Shell
 			{ spellID = 48707, size = 72, unitId = "target", caster = "all", filter = "BUFF" },
 			-- Lichborne
@@ -763,8 +743,53 @@ ns.Filger_Spells = {
 			{ spellID = 6940, size = 72, unitId = "target", caster = "all", filter = "BUFF" },
 			-- Grounding Totem Effect
 			{ spellID = 8178, size = 72, unitId = "target", caster = "all", filter = "BUFF" },
+			--Aura Mastery
+			{ spellID = 31821, size = 70, unitId = "target", caster = "all", filter = "BUFF" },
+			--Ice Block
+			{ spellID = 45438, size = 72, unitId = "target", caster = "all", filter = "BUFF" },
+			--Cloak of Shadows
+			{ spellID = 31224, size = 72, unitId = "target", caster = "all", filter = "BUFF" },
+		},
+		{
+		    -- Here we track pvp debuffs on ourself
+			Name = "PVPYO",
+			Direction = "LEFT",
+			Interval = 6,
+			Mode = "ICON",
+			setPoint = {  "CENTER", UIParent ,-140,150 },			
+			
+			--Hammer of Justice
+		    { spellID = 853, size = 70, unitId = "player", caster = "all", filter = "DEBUFF" },
+			--Kidney Shot
+            { spellID = 408, size = 70, unitId = "player", caster = "all", filter = "DEBUFF" },
+			--Counterspell
+            { spellID = 2139, size = 70, unitId = "player", caster = "all", filter = "DEBUFF" },
+			--Silenced - Improved Counterspell r1
+            { spellID = 11255, size = 70, unitId = "player", caster = "all", filter = "DEBUFF" },
+			--Silenced - Improved Counterspell r2
+            { spellID = 12598, size = 70, unitId = "player", caster = "all", filter = "DEBUFF" },
+			--Gnaw
+            { spellID = 47481, size = 70, unitId = "player", caster = "all", filter = "DEBUFF" },
+			--Monstrous Blow (Super ghoul)
+            { spellID = 91797, size = 70, unitId = "player", caster = "all", filter = "DEBUFF" },
+			--Desecration
+            { spellID = 55666, size = 70, unitId = "player", caster = "all", filter = "DEBUFF" },
+			--Blind
+            { spellID = 2094, size = 70, unitId = "player", caster = "all", filter = "DEBUFF" },
+			--Seal of Justice
+            { spellID = 20170, size = 70, unitId = "player", caster = "all", filter = "DEBUFF" },
+			--Blind
+            { spellID = 2094, size = 70, unitId = "player", caster = "all", filter = "DEBUFF" },
 			--Hamstring
-	        { spellID = 1715, size = 70, barWidth = 248, unitId = "player", caster = "all", filter = "DEBUFF" },
+	        { spellID = 1715, size = 70, unitId = "player", caster = "all", filter = "DEBUFF" },
+			--Chains of Ice
+	        { spellID = 45524, size = 70, unitId = "player", caster = "all", filter = "DEBUFF" },
+			--Strangulate
+	        { spellID = 47476, size = 70, unitId = "player", caster = "all", filter = "DEBUFF" },
+			--Repentance
+	        { spellID = 20066, size = 70, unitId = "player", caster = "all", filter = "DEBUFF" },
+			--Sheep
+	        { spellID = 118, size = 70, unitId = "player", caster = "all", filter = "DEBUFF" },
 		},
 	},
 }	
