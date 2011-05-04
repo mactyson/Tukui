@@ -83,9 +83,9 @@ C["actionbar"] = {
 	["buttonspacing"] = 4,                              -- buttons spacing
 }
 
-C["castbar"] = { --Thank you elv
+C["castbar"] = { 
 	["classcolor"] = true, -- classcolor
-	["castbarcolor"] = { 0.3, 0.3, 0.3, 1 }, -- Color of player castbar
+	["castbarcolor"] = { 1, 1, 0, 1 }, -- Color of player castbar
 	["nointerruptcolor"] = { 1, 0.1, 0.1, 0.5 }, -- Color of target castbar
 }
 
@@ -107,7 +107,7 @@ C["cooldown"] = {
 	["enable"] = true,                                  -- do i really need to explain this?
 	["treshold"] = 2,                                   -- show decimal under X seconds and text turn red
 }
-                          -- 8 and 9 are only usable in Jasje layout, not in Tukui
+  -- 8 and 9 are only visable in raid/party/pvp
 C["datatext"] = {
 	["fps_ms"] = 5,                                     -- show fps and ms on panels
 	["system"] = 0,                                     -- show total memory and others systems infos on panels
@@ -163,6 +163,7 @@ C["nameplate"] = {
 }
 
 C["tooltip"] = {
+    ["showspellid"] = true,
 	["enable"] = true,                                  -- true to enable this mod, false to disable
 	["hidecombat"] = false,                             -- hide bottom-right tooltip when in combat
 	["hidebuttons"] = false,                            -- always hide action bar buttons tooltip.

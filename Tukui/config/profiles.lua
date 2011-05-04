@@ -13,9 +13,9 @@ end
 -- Name need to be case sensitive
 ----------------------------------------------------------------------------
 
-if T.myname == "Tukz" then
+if T.myname == "Jasjè" then
 	-- yeah my default config is not really like default tukui.
-	C.actionbar.hotkey = false
-	C.actionbar.hideshapeshift = true
-	C.unitframes.enemyhcolor = true
+    C.castbar.classcolor = false
+	C.datatext.classcolor = false
+	C.chat.classcolortab = false
 end
