@@ -1,8 +1,8 @@
 local T, C, L = unpack(select(2, ...))
 
-local FONT = C["media"].font
-local FONTSIZE = 18
-local FONTFLAG = "THINOUTLINE"
+local FONT = C["media"].pixelfont
+local FONTSIZE = 8
+local FONTFLAG = "MONOCHROMEOUTLINE"
 
 local function SetModifiedBackdrop(self)
 	local color = RAID_CLASS_COLORS[T.myclass]
@@ -164,7 +164,7 @@ local function SkinCloseButton(f, point)
 	f:Size(18,18)
 
 	local text = f:FontString(nil, FONT, FONTSIZE, FONTFLAG)
-	text:SetPoint("CENTER", 1, 1)
+	text:SetPoint("CENTER", 2, 0)
 	text:SetText("x")
 	
 	if point then
@@ -320,9 +320,9 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			end
 			
 			if button.Rank then
-				button.Rank:SetFont(FONT, 12, FONTFLAG)
+				button.Rank:SetFont(FONT, 8, FONTFLAG)
 				button.Rank:ClearAllPoints()
-				button.Rank:SetPoint("BOTTOMRIGHT")
+				button.Rank:SetPoint("BOTTOMRIGHT", 4, 0)
 			end
 			
 			if icon then
@@ -411,15 +411,16 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 				button:StripTextures()
 			end
 			
-			_G["PlayerTalentFramePanel"..i.."HeaderIconPointsSpent"]:SetFont(FONT, 12, FONTFLAG)
+			_G["PlayerTalentFramePanel"..i.."HeaderIconPointsSpent"]:SetFont(FONT, 8, FONTFLAG)
 
 			if icon then
 				icon:SetTexCoord(.08, .92, .08, .92)
 				button:SetFrameLevel(button:GetFrameLevel() +1)
 				button:ClearAllPoints()
 				button:Point("TOPLEFT",panel,"TOPLEFT", 4, -4)
-				text:SetFont(FONT, 12, FONTFLAG)
-				text:Point("BOTTOMRIGHT",button, "BOTTOMRIGHT", -1, 2)
+				text:SetFont(FONT, 8, FONTFLAG)
+				text:Point("BOTTOMRIGHT",button, "BOTTOMRIGHT", 15, 2)
+				text:SetJustifyH("LEFT")
 				local frame = CreateFrame("Frame",nil, button)
 				frame:CreateBackdrop("Default", true)
 				frame:SetFrameLevel(button:GetFrameLevel() +1)
@@ -477,7 +478,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 				button:SetFrameLevel(button:GetFrameLevel() +1)
 				button:ClearAllPoints()
 				button:Point("TOPLEFT",panel,"TOPLEFT", 5, -5)
-				local text = button:FontString(nil, FONT, 12, FONTFLAG)
+				local text = button:FontString(nil, FONT, 8, FONTFLAG)
 				text:Point("BOTTOMRIGHT",button, "BOTTOMRIGHT", -1, 2)
 				text:SetText(pointsSpent)
 				local frame = CreateFrame("Frame",nil, button)
@@ -512,7 +513,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 				button:SetFrameLevel(button:GetFrameLevel() +1)
 				button:ClearAllPoints()
 				button:Point("BOTTOMLEFT",panel,"TOPLEFT", 0, 10)
-				local text = button:FontString(nil, FONT, 12, FONTFLAG)
+				local text = button:FontString(nil, FONT, 8, FONTFLAG)
 				text:Point("TOPRIGHT",button, "TOPRIGHT", 0, -10)
 				text:SetText(diet)
 				local frame = CreateFrame("Frame",nil, button)
@@ -533,7 +534,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			end
 			
 			if button.Rank then
-				button.Rank:SetFont(FONT, 12, FONTFLAG)
+				button.Rank:SetFont(FONT, 8, FONTFLAG)
 				button.Rank:ClearAllPoints()
 				button.Rank:SetPoint("BOTTOMRIGHT")
 			end
@@ -1515,7 +1516,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 						button:StripTextures()
 						button:SetHighlightTexture("Interface\\PaperDollInfoFrame\\UI-Character-Tab-Highlight")
 						
-						_G["ChannelButton"..i.."Text"]:SetFont(FONT, 12)
+						_G["ChannelButton"..i.."Text"]:SetFont(FONT, 8)
 					end
 				end
 			end
@@ -1805,7 +1806,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 					object.BgMiddle:SetTexture(nil)
 
 					object.Check:SetTexture(nil)
-					object.text:SetFont(C["media"].font,12)
+					object.text:SetFont(C["media"].font,8)
 					object.text.SetFont = T.dummy
 				end
 			end)
