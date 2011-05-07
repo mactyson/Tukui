@@ -1141,6 +1141,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			"AuctionsNumStacksMaxButton",
 			-- Auctionator buttons skinned here
 			"Atr_Search_Button",
+			"Atr_Back_Button",
 			"Atr_Buy1_Button",
 			"Atr_Adv_Search_Button",
 			"Atr_FullScanButton",
