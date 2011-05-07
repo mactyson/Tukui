@@ -1436,6 +1436,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 				"WhoFrameGroupInviteButton",
 				"ChannelFrameNewButton",
 				"FriendsFrameIgnorePlayerButton",
+				"FriendsFrameUnsquelchButton",
 				"FriendsFramePendingButton1AcceptButton",
 				"FriendsFramePendingButton1DeclineButton",
 				"FriendsFramePendingButton2AcceptButton",
