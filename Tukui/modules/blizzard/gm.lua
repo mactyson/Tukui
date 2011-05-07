@@ -24,6 +24,10 @@ TukuiGMFrameAnchor:Hide()
 TicketStatusFrame:ClearAllPoints()
 TicketStatusFrame:SetPoint("TOP", TukuiGMFrameAnchor, "TOP")
 
+HelpOpenTicketButton:SetParent(Minimap)
+HelpOpenTicketButton:ClearAllPoints()
+HelpOpenTicketButton:SetPoint("TOPLEFT", 250, -5)
+
 ------------------------------------------------------------------------
 --	GM toggle command
 ------------------------------------------------------------------------
