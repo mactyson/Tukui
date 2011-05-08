@@ -188,6 +188,84 @@ TukuiSkin:RegisterEvent("ADDON_LOADED")
 TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 	if IsAddOnLoaded("Skinner") or IsAddOnLoaded("Aurora") then return end
 
+    --Archaeology
+	if addon == "Blizzard_ArchaeologyUI" then
+		ArchaeologyFrame:StripTextures(true)
+		ArchaeologyFrameInset:StripTextures(true)
+		ArchaeologyFrame:SetTemplate("Transparent")
+		ArchaeologyFrame:CreateShadow("Default")
+
+		SkinButton(ArchaeologyFrameArtifactPageSolveFrameSolveButton, true)
+		SkinDropDownBox(ArchaeologyFrameRaceFilter, 125)
+
+		ArchaeologyFrameRankBar:StripTextures()
+		ArchaeologyFrameRankBar:SetStatusBarTexture(C["media"].normTex)
+		ArchaeologyFrameRankBar:CreateBackdrop("Default")
+
+		ArchaeologyFrameArtifactPageSolveFrameStatusBar:StripTextures()
+		ArchaeologyFrameArtifactPageSolveFrameStatusBar:SetStatusBarTexture(C["media"].normTex)
+		ArchaeologyFrameArtifactPageSolveFrameStatusBar:SetStatusBarColor(0.7, 0.2, 0)
+		ArchaeologyFrameArtifactPageSolveFrameStatusBar:CreateBackdrop("Default")
+
+		for i=1, ARCHAEOLOGY_MAX_COMPLETED_SHOWN do
+			local artifact = _G["ArchaeologyFrameCompletedPageArtifact"..i]
+
+			if artifact then
+				_G["ArchaeologyFrameCompletedPageArtifact"..i.."Border"]:Kill()
+				_G["ArchaeologyFrameCompletedPageArtifact"..i.."Bg"]:Kill()
+				_G["ArchaeologyFrameCompletedPageArtifact"..i.."Icon"]:SetTexCoord(.08, .92, .08, .92)
+				_G["ArchaeologyFrameCompletedPageArtifact"..i.."Icon"].backdrop = CreateFrame("Frame", nil, artifact)
+				_G["ArchaeologyFrameCompletedPageArtifact"..i.."Icon"].backdrop:SetTemplate("Default")
+				_G["ArchaeologyFrameCompletedPageArtifact"..i.."Icon"].backdrop:Point("TOPLEFT", _G["ArchaeologyFrameCompletedPageArtifact"..i.."Icon"], "TOPLEFT", -2, 2)
+				_G["ArchaeologyFrameCompletedPageArtifact"..i.."Icon"].backdrop:Point("BOTTOMRIGHT", _G["ArchaeologyFrameCompletedPageArtifact"..i.."Icon"], "BOTTOMRIGHT", 2, -2)
+				_G["ArchaeologyFrameCompletedPageArtifact"..i.."Icon"].backdrop:SetFrameLevel(artifact:GetFrameLevel() - 2)
+				_G["ArchaeologyFrameCompletedPageArtifact"..i.."Icon"]:SetDrawLayer("OVERLAY")
+				_G["ArchaeologyFrameCompletedPageArtifact"..i.."ArtifactName"]:SetTextColor(1, 1, 0)
+				_G["ArchaeologyFrameCompletedPageArtifact"..i.."ArtifactSubText"]:SetTextColor(0.6, 0.6, 0.6)
+			end
+		end
+
+		for i=1, ARCHAEOLOGY_MAX_RACES do
+			local frame = _G["ArchaeologyFrameSummaryPageRace"..i]
+
+			if frame then
+				frame.raceName:SetTextColor(1, 1, 1)
+			end
+		end
+
+		for i=1, ArchaeologyFrameCompletedPage:GetNumRegions() do
+			local region = select(i, ArchaeologyFrameCompletedPage:GetRegions())
+			if region:GetObjectType() == "FontString" then
+				region:SetTextColor(1, 1, 0)
+			end
+		end
+
+		for i=1, ArchaeologyFrameSummaryPage:GetNumRegions() do
+			local region = select(i, ArchaeologyFrameSummaryPage:GetRegions())
+			if region:GetObjectType() == "FontString" then
+				region:SetTextColor(1, 1, 0)
+			end
+		end
+
+		ArchaeologyFrameCompletedPage.infoText:SetTextColor(1, 1, 1)
+		ArchaeologyFrameHelpPageTitle:SetTextColor(1, 1, 0)
+		ArchaeologyFrameHelpPageDigTitle:SetTextColor(1, 1, 0)
+		ArchaeologyFrameHelpPageHelpScrollHelpText:SetTextColor(1, 1, 1)
+
+		ArchaeologyFrameArtifactPageHistoryTitle:SetTextColor(1, 1, 0)
+		ArchaeologyFrameArtifactPageIcon:SetTexCoord(.08, .92, .08, .92)
+		ArchaeologyFrameArtifactPageIcon.backdrop = CreateFrame("Frame", nil, ArchaeologyFrameArtifactPage)
+		ArchaeologyFrameArtifactPageIcon.backdrop:SetTemplate("Default")
+	    ArchaeologyFrameArtifactPageIcon.backdrop:Point("TOPLEFT", ArchaeologyFrameArtifactPageIcon, "TOPLEFT", -2, 2)
+		ArchaeologyFrameArtifactPageIcon.backdrop:Point("BOTTOMRIGHT", ArchaeologyFrameArtifactPageIcon, "BOTTOMRIGHT", 2, -2)
+		ArchaeologyFrameArtifactPageIcon.backdrop:SetFrameLevel(ArchaeologyFrameArtifactPage:GetFrameLevel())
+		ArchaeologyFrameArtifactPageIcon:SetParent(ArchaeologyFrameArtifactPageIcon.backdrop)
+		ArchaeologyFrameArtifactPageIcon:SetDrawLayer("OVERLAY")	
+
+		ArchaeologyFrameArtifactPageHistoryScrollChildText:SetTextColor(1, 1, 1)
+		SkinCloseButton(ArchaeologyFrameCloseButton)
+	end	
+	
 	--Guild Control
 	if addon == "Blizzard_GuildControlUI" then
 		GuildControlUI:StripTextures()
@@ -363,11 +441,16 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		GuildFactionBar.backdrop:Point("TOPLEFT", GuildFactionBar.progress, "TOPLEFT", -2, 2)
 		GuildFactionBar.backdrop:Point("BOTTOMRIGHT", GuildFactionBar, "BOTTOMRIGHT", -2, 0)
 
-		GuildXPBar:StripTextures()
+        GuildXPBarLeft:Kill()
+        GuildXPBarRight:Kill()
+        GuildXPBarMiddle:Kill()
+        GuildXPBarBG:Kill()
+        GuildXPBarShadow:Kill()
+        GuildXPBarCap:Kill()
 		GuildXPBar.progress:SetTexture(C["media"].normTex)
 		GuildXPBar:CreateBackdrop("Default")
 		GuildXPBar.backdrop:Point("TOPLEFT", GuildXPBar.progress, "TOPLEFT", -2, 2)
-		GuildXPBar.backdrop:Point("BOTTOMRIGHT", GuildXPBar, "BOTTOMRIGHT", -2, 2)
+		GuildXPBar.backdrop:Point("BOTTOMRIGHT", GuildXPBar, "BOTTOMRIGHT", -2, 4)
 
 		GuildLatestPerkButton:StripTextures()
 		GuildLatestPerkButtonIconTexture:SetTexCoord(.08, .92, .08, .92)
@@ -645,7 +728,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		for i=1,8 do
 			for j=1,5 do
 				_G["RaidGroup"..i.."Slot"..j]:StripTextures()
-				_G["RaidGroup"..i.."Slot"..j]:SetTemplate("Default")
+				_G["RaidGroup"..i.."Slot"..j]:SetTemplate("Transparent")
 			end
 		end
 	end	
@@ -842,7 +925,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 				button:ClearAllPoints()
 				button:Point("TOPLEFT",panel,"TOPLEFT", 4, -4)
 				text:SetFont(FONT, 8, FONTFLAG)
-				text:Point("BOTTOMRIGHT",button, "BOTTOMRIGHT", -1, 2)
+				text:Point("BOTTOMRIGHT",button, "BOTTOMRIGHT", 15, 2)
 				local frame = CreateFrame("Frame",nil, button)
 				frame:CreateBackdrop("Default", true)
 				frame:SetFrameLevel(button:GetFrameLevel() +1)
@@ -1164,6 +1247,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 
 	--Auction House
 	if addon == "Blizzard_AuctionUI" then
+	    SkinCloseButton(AuctionFrameCloseButton)
 		AuctionFrame:StripTextures(true)
 		AuctionFrame:SetTemplate("Transparent")
 		AuctionFrame:CreateShadow("Default")
@@ -1606,6 +1690,86 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 
 	-- stuff not in Blizzard load-on-demand
 	if addon == "Tukui" then
+	--Trade Frame
+		do
+			TradeFrame:StripTextures(true)
+			TradeFrame:CreateBackdrop("Transparent")
+			TradeFrame.backdrop:Point("TOPLEFT", 10, -4)
+			TradeFrame.backdrop:Point("BOTTOMRIGHT", -16, 35)
+			SkinButton(TradeFrameTradeButton, true)
+			SkinButton(TradeFrameCancelButton, true)
+			SkinCloseButton(TradeFrameCloseButton, TradeFrame.backdrop)
+
+			SkinEditBox(TradePlayerInputMoneyFrameGold)
+			SkinEditBox(TradePlayerInputMoneyFrameSilver)
+			SkinEditBox(TradePlayerInputMoneyFrameCopper)
+			TradePlayerInputMoneyFrameSilver.backdrop:Point("BOTTOMRIGHT", -12, -2)
+			TradePlayerInputMoneyFrameCopper.backdrop:Point("BOTTOMRIGHT", -12, -2)
+
+			for i=1, 7 do
+				local player = _G["TradePlayerItem"..i]
+				local recipient = _G["TradeRecipientItem"..i]
+				local player_button = _G["TradePlayerItem"..i.."ItemButton"]
+				local recipient_button = _G["TradeRecipientItem"..i.."ItemButton"]
+				local player_button_icon = _G["TradePlayerItem"..i.."ItemButtonIconTexture"]
+				local recipient_button_icon = _G["TradeRecipientItem"..i.."ItemButtonIconTexture"]
+
+				if player_button and recipient_button then
+					player:StripTextures()
+					recipient:StripTextures()
+					player_button:StripTextures()
+					recipient_button:StripTextures()
+
+					player_button_icon:ClearAllPoints()
+					player_button_icon:Point("TOPLEFT", player_button, "TOPLEFT", 2, -2)
+					player_button_icon:Point("BOTTOMRIGHT", player_button, "BOTTOMRIGHT", -2, 2)
+					player_button_icon:SetTexCoord(.08, .92, .08, .92)
+					player_button:SetTemplate("Default", true)
+					player_button:StyleButton()
+					player_button.bg = CreateFrame("Frame", nil, player_button)
+					player_button.bg:SetTemplate("Default")
+					player_button.bg:SetPoint("TOPLEFT", player_button, "TOPRIGHT", 4, 0)
+					player_button.bg:SetPoint("BOTTOMRIGHT", _G["TradePlayerItem"..i.."NameFrame"], "BOTTOMRIGHT", 0, 14)
+					player_button.bg:SetFrameLevel(player_button:GetFrameLevel() - 3)
+
+					recipient_button_icon:ClearAllPoints()
+					recipient_button_icon:Point("TOPLEFT", recipient_button, "TOPLEFT", 2, -2)
+					recipient_button_icon:Point("BOTTOMRIGHT", recipient_button, "BOTTOMRIGHT", -2, 2)
+					recipient_button_icon:SetTexCoord(.08, .92, .08, .92)
+					recipient_button:SetTemplate("Default", true)
+					recipient_button:StyleButton()
+					recipient_button.bg = CreateFrame("Frame", nil, recipient_button)
+					recipient_button.bg:SetTemplate("Default")
+					recipient_button.bg:SetPoint("TOPLEFT", recipient_button, "TOPRIGHT", 4, 0)
+					recipient_button.bg:SetPoint("BOTTOMRIGHT", _G["TradeRecipientItem"..i.."NameFrame"], "BOTTOMRIGHT", 0, 14)
+					recipient_button.bg:SetFrameLevel(recipient_button:GetFrameLevel() - 3)					
+
+				end
+			end
+
+			TradeHighlightPlayerTop:SetTexture(0, 1, 0, 0.2)
+			TradeHighlightPlayerBottom:SetTexture(0, 1, 0, 0.2)
+			TradeHighlightPlayerMiddle:SetTexture(0, 1, 0, 0.2)
+			TradeHighlightPlayer:SetFrameStrata("HIGH")
+			TradeHighlightPlayer:Point("TOPLEFT", TradeFrame, "TOPLEFT", 23, -100)
+
+			TradeHighlightPlayerEnchantTop:SetTexture(0, 1, 0, 0.2)
+			TradeHighlightPlayerEnchantBottom:SetTexture(0, 1, 0, 0.2)
+			TradeHighlightPlayerEnchantMiddle:SetTexture(0, 1, 0, 0.2)
+			TradeHighlightPlayerEnchant:SetFrameStrata("HIGH")
+
+			TradeHighlightRecipientTop:SetTexture(0, 1, 0, 0.2)
+			TradeHighlightRecipientBottom:SetTexture(0, 1, 0, 0.2)
+			TradeHighlightRecipientMiddle:SetTexture(0, 1, 0, 0.2)
+			TradeHighlightRecipient:SetFrameStrata("HIGH")
+			TradeHighlightRecipient:Point("TOPLEFT", TradeFrame, "TOPLEFT", 192, -100)
+
+			TradeHighlightRecipientEnchantTop:SetTexture(0, 1, 0, 0.2)
+			TradeHighlightRecipientEnchantBottom:SetTexture(0, 1, 0, 0.2)
+			TradeHighlightRecipientEnchantMiddle:SetTexture(0, 1, 0, 0.2)
+			TradeHighlightRecipientEnchant:SetFrameStrata("HIGH")			
+
+		end
 		--Gossip Frame
 		do
 
@@ -2622,7 +2786,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 					object.icon:SetTexCoord(.08, .92, .08, .92)
 
 					if not object.backdrop then
-						object:CreateBackdrop("Transparent")
+						object:CreateBackdrop("Default")
 					end
 
 					object.backdrop:Point("TOPLEFT", object.icon, "TOPLEFT", -2, 2)
@@ -2758,7 +2922,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			end)
 
 			--Pet
-			PetModelFrame:CreateBackdrop("Transparent")
+			PetModelFrame:CreateBackdrop("Default")
 			PetPaperDollFrameExpBar:StripTextures()
 			PetPaperDollFrameExpBar:SetStatusBarTexture(C["media"].normTex)
 			PetPaperDollFrameExpBar:CreateBackdrop("Default")
