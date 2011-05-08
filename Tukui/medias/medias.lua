@@ -54,3 +54,11 @@ C["media"] = {
 	["whisper"] = [[Interface\AddOns\Tukui\medias\sounds\whisper.mp3]],
 	["warning"] = [[Interface\AddOns\Tukui\medias\sounds\warning.mp3]],
 }
+    -- pet action icons
+    PET_DEFENSIVE_TEXTURE = [[Interface\AddOns\Tukui\medias\textures\icon_defensive]]
+    PET_AGGRESSIVE_TEXTURE = [[Interface\AddOns\Tukui\medias\textures\icon_aggressive]]
+    PET_PASSIVE_TEXTURE = [[Interface\AddOns\Tukui\medias\textures\icon_passive]]
+    PET_ATTACK_TEXTURE = [[Interface\AddOns\Tukui\medias\textures\icon_attack]]
+    PET_FOLLOW_TEXTURE = [[Interface\AddOns\Tukui\medias\textures\icon_follow]]
+    PET_WAIT_TEXTURE = [[Interface\AddOns\Tukui\medias\textures\icon_wait]]
+    PET_MOVE_TO_TEXTURE = [[Interface\AddOns\Tukui\medias\textures\icon_moveto]]
