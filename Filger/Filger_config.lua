@@ -82,10 +82,10 @@ ns.Filger_Spells = {
 	["PRIEST"] = { -------------------------------------------------------------------------------------------------------- Priest
 		{
 			Name = "Buffs and Debuffs",
-			Direction = "LEFT",
-			Interval = 4,
+			Direction = "UP",
+			Interval = 3,
 			Mode = "ICON",
-			setPoint = { "TOPRIGHT", TukuiPlayer, 2, 35},
+			setPoint = { "LEFT", TukuiPlayer, -43, 28},
 
 
 			-- Prayer of Mending
@@ -108,10 +108,10 @@ ns.Filger_Spells = {
 		},
 	    {
 			Name = "Priest Procs",
-			Direction = "LEFT",
-			Interval = 4,
+			Direction = "UP",
+			Interval = 3,
 			Mode = "ICON",
-			setPoint = { "TOPRIGHT", TukuiPlayer, 2, 65},
+			setPoint = { "LEFT", TukuiPlayer, -82, 28},
 
 			-- Surge of Light
 			{ spellID = 88688, size = 27, unitId = "player", caster = "all", filter = "BUFF" },
@@ -131,36 +131,36 @@ ns.Filger_Spells = {
 			Direction = "UP",
 			Interval = 3,
 			Mode = "ICON",
-			setPoint = { "RIGHT", TukuiTarget, 42, -3 },
+			setPoint = { "RIGHT", TukuiTarget, 42, 28},
 
 			-- Prayer of Mending
-			{ spellID = 41635, size = 36, unitId = "target", caster = "player", filter = "BUFF" },
+			{ spellID = 41635, size = 27, unitId = "target", caster = "player", filter = "BUFF" },
 			-- Guardian Spirit
-			{ spellID = 47788, size = 36, unitId = "target", caster = "player", filter = "BUFF" },
+			{ spellID = 47788, size = 27, unitId = "target", caster = "player", filter = "BUFF" },
 			-- Pain Suppression
-			{ spellID = 33206, size = 36, unitId = "target", caster = "player", filter = "BUFF" },
+			{ spellID = 33206, size = 27, unitId = "target", caster = "player", filter = "BUFF" },
 			-- Power Word: Shield
-			{ spellID = 17, size = 36, unitId = "target", caster = "player", filter = "BUFF" },
+			{ spellID = 17, size = 27, unitId = "target", caster = "player", filter = "BUFF" },
 			-- Renew
-			{ spellID = 139, size = 36, unitId = "target", caster = "player", filter = "BUFF" },
+			{ spellID = 139, size = 27, unitId = "target", caster = "player", filter = "BUFF" },
 		},
 		{
 			Name = "Buffs and Debuffs",
 			Direction = "UP",
 			Interval = 3,
 			Mode = "ICON",
-			setPoint = { "RIGHT", TukuiTarget, 82, -3 },
+			setPoint = { "RIGHT", TukuiTarget, 82, 28},
 
 			-- Shackle undead
-			{ spellID = 9484, size = 36, unitId = "target", caster = "all", filter = "DEBUFF" },
+			{ spellID = 9484, size = 27, unitId = "target", caster = "all", filter = "DEBUFF" },
 			-- Psychic Scream
-			{ spellID = 8122, size = 36, unitId = "target", caster = "all", filter = "DEBUFF" },
+			{ spellID = 8122, size = 27, unitId = "target", caster = "all", filter = "DEBUFF" },
 			-- Shadow Word: Pain
-			{ spellID = 589, size = 36, unitId = "target", caster = "player", filter = "DEBUFF" },
+			{ spellID = 589, size = 27, unitId = "target", caster = "player", filter = "DEBUFF" },
 			-- Devouring Plague
-			{ spellID = 2944, size = 36, unitId = "target", caster = "player", filter = "DEBUFF" },
+			{ spellID = 2944, size = 27, unitId = "target", caster = "player", filter = "DEBUFF" },
 			-- Vampiric Touch
-			{ spellID = 34914, size = 36, unitId = "target", caster = "player", filter = "DEBUFF" },
+			{ spellID = 34914, size = 27, unitId = "target", caster = "player", filter = "DEBUFF" },
 		},
 	},
 	["WARLOCK"] = { -------------------------------------------------------------------------------------------------------- Warlock
