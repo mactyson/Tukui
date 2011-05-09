@@ -1321,7 +1321,7 @@ end
 		-- class icons
 		local Classbg = CreateFrame("Frame", nil, self)
 		Classbg:Size(39)
-		Classbg:SetPoint("LEFT", self, "RIGHT", 45, 0)				
+		Classbg:SetPoint("RIGHT", self, "LEFT", -4, 0)				
 		Classbg:SetTemplate("Hydra")
 		Classbg:SetFrameLevel(0)
 		self.Classbg = Classbg
