@@ -1317,6 +1317,20 @@ end
 		Talents:Point("CENTER", health, 0, 0)
 		Talents:SetTextColor(1,1,1,.6)
 		self.Talents = Talents
+		
+		-- class icons
+		local Classbg = CreateFrame("Frame", nil, self)
+		Classbg:Size(39)
+		Classbg:SetPoint("LEFT", self, "RIGHT", 45, 0)				
+		Classbg:SetTemplate("Hydra")
+		Classbg:SetFrameLevel(0)
+		self.Classbg = Classbg
+		
+	    local class = self:CreateTexture("Frame", nil, Classbg)
+		class:SetAllPoints(Classbg)
+		class:SetPoint("TOPLEFT", Classbg, T.Scale(2), T.Scale(-2))
+		class:SetPoint("BOTTOMRIGHT", Classbg, T.Scale(-2), T.Scale(2))
+        self.ClassIcon = class
 		end
 		
         -- boss & arena frames cast bar!
