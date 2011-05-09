@@ -1840,6 +1840,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 				"LFDQueueFrameRandomScrollFrame",
 				"LFDQueueFrameCapBar",
 				"LFDDungeonReadyDialog",
+				"LFDDungeonReadyPopup",
 			}
 
 			local KillTextures = {
@@ -1854,6 +1855,8 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			local buttons = {
 				"LFDQueueFrameFindGroupButton",
 				"LFDQueueFrameCancelButton",
+				"LFDDungeonReadyDialogEnterDungeonButton",
+				"LFDDungeonReadyDialogLeaveQueueButton",
 			}
 
 			local checkButtons = {
@@ -1863,6 +1866,8 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 				"LFDQueueFrameRoleButtonLeader",
 			}
 
+			LFDDungeonReadyDialog:CreateBackdrop("Transparent") -- dirty fix for the momment
+			
 			for _, object in pairs(checkButtons) do
 				_G[object]:GetChildren():SetFrameLevel(_G[object]:GetChildren():GetFrameLevel() + 2)
 				SkinCheckBox(_G[object]:GetChildren())
