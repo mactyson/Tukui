@@ -1066,57 +1066,21 @@ announce:SetScript("OnEvent", function(self, _, _, event, _, _, sourceName, _, _
 		--end		
 	end)
 
-----------------------------------------------------------------------------------------------------	
--- Spirit Link - Information by Rixxon
--- http://www.wowinterface.com/downloads/info19688-SpiritLink-Information.html
-----------------------------------------------------------------------------------------------------
+-----------------------------------
+-- Drink announce by Duffed
+-----------------------------------
 
-local messages = {
-          { time = 0, channels = "YELL", message = "Spirit Link! Go into the Green!" },
-		  { time = 4, channels = "YELL", message = "Spirit Link 3" },
-          { time = 5, channels = "YELL", message = "Spirit Link 2" },
-          { time = 6, channels = "YELL", message = "Spirit Link 1" },
-          { time = 7, channels = "YELL", message = "Spirit Link Finished!" },
-		  { time = 180, channels = "YELL", message = "Spirit Link Ready !" },
-		 }
-       
-      local counter, nextMessage = 0, 1
-       
-      local addon = CreateFrame( "Frame" )
-      addon:RegisterEvent( "UNIT_SPELLCAST_SUCCEEDED" )
-      addon:SetScript( "OnEvent", function( self, event, unit, _, _, _, spell )
-         
-		  if unit == "player" and spell == 98008 then
-              -- You cast Mana Tide!
-              -- Start running the messages.
-              counter, nextMessage = 0, 1
-              self:Show()
-          end
-      end )
-       
-      addon:Hide()
-      addon:SetScript( "OnUpdate", function( self, elapsed )
-          -- Add up how much time has passed
-          -- since you cast Mana Tide.
-          counter = counter + elapsed
-       
-          local m = messages[ nextMessage ]
-          if counter < m.time then
-              -- It's not time for a message yet.
-              return
-          end
-       
-          -- Send the message!
-          for channel in m.channels:gmatch("%S+") do
-              SendChatMessage( m.message, channel )
-          end
-       
-          -- Queue up the next message.
-          nextMessage = nextMessage + 1
-       
-          -- Find out if it's done.
-          if not messages[ nextMessage ] then
-              self:Hide()
-              counter, nextMessage = 0, 1
-          end
-      end )
+local function Update(self, event, ...)
+	if event == "UNIT_SPELLCAST_SUCCEEDED" then
+		local unit, spellName, spellrank, spelline, spellID = ...
+		if GetZonePVPInfo() == "arena" then
+			if UnitIsEnemy("player", unit) and (spellID == 80167 or spellID == 94468 or spellID == 43183 or spellID == 57073 or spellName == "Trinken") then
+				SendChatMessage(UnitName(unit).." is drinking.", "PARTY")
+			end
+		end
+	end
+end
+
+local f = CreateFrame("Frame")
+f:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
+f:SetScript("OnEvent", Update)
