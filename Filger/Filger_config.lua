@@ -85,7 +85,7 @@ ns.Filger_Spells = {
 			Direction = "LEFT",
 			Interval = 4,
 			Mode = "ICON",
-			setPoint = { "CENTER", UIParent, -84, -345 },
+			setPoint = { "TOPRIGHT", TukuiPlayer, 2, 35},
 
 
 			-- Prayer of Mending
@@ -111,7 +111,7 @@ ns.Filger_Spells = {
 			Direction = "LEFT",
 			Interval = 4,
 			Mode = "ICON",
-			setPoint = { "CENTER", UIParent, -84, -315 },
+			setPoint = { "TOPRIGHT", TukuiPlayer, 2, 65},
 
 			-- Surge of Light
 			{ spellID = 88688, size = 27, unitId = "player", caster = "all", filter = "BUFF" },
