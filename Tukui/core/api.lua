@@ -137,14 +137,15 @@ end
 
 -- Hydra Border Function 
 local function SetBorder(f)
+	if f:GetFrameStrata() == "BACKGROUND" then f:SetFrameStrata("LOW") end
 	f:SetBackdropColor(.075, .075, .075, 0.7)
 	f:SetBackdropBorderColor(unpack(C["media"].bordercolor))
-	border = CreateFrame("Frame", nil, f)
-	border:SetPoint("TOPLEFT", f, "TOPLEFT", T.Scale(-1), T.Scale(1))
-	border:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", T.Scale(1), T.Scale(-1))
+	local border = CreateFrame("Frame", nil, f)
+	border:SetPoint("TOPLEFT", f, "TOPLEFT", Scale(-1), Scale(1))
+	border:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", Scale(1), Scale(-1))
 	border:SetFrameStrata("BACKGROUND")
 	border:SetFrameLevel(1)
-	border:SetBackdrop { edgeFile = C["media"].blank, edgeSize = T.Scale(3), insets = {left = 0, right = 0, top = 0, bottom = 0} }
+	border:SetBackdrop { edgeFile = C["media"].blank, edgeSize = Scale(3), insets = {left = 0, right = 0, top = 0, bottom = 0} }
 	border:SetBackdropColor(unpack(C["media"].backdropcolor))
 	border:SetBackdropBorderColor(unpack(C["media"].backdropcolor))
 end

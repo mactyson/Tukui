@@ -171,7 +171,11 @@ local function SetChatStyle(frame)
 	
 	-- hide edit box every time we click on a tab
 	_G[chat.."Tab"]:HookScript("OnClick", function() _G[chat.."EditBox"]:Hide() end)
-			
+	
+	for i = 1, 4 do
+	_G[format("ChatFrame%sTab", i)]:SetFrameStrata("MEDIUM")
+    end
+	
 	-- create our own texture for edit box
 	local EditBoxBackground = CreateFrame("frame", "TukuiChatchatEditBoxBackground", _G[chat.."EditBox"])
 	EditBoxBackground:CreatePanel("Default", 1, 1, "LEFT", _G[chat.."EditBox"], "LEFT", 0, 0)
@@ -229,39 +233,30 @@ local function SetupChatPosAndFont(self)
 		local name = FCF_GetChatWindowInfo(id)
 		local point = GetChatWindowSavedPosition(id)
 		local _, fontSize = FCF_GetChatWindowInfo(id)
+
+		chat:SetFrameStrata("MEDIUM")
 		
-		-- well... tukui font under fontsize 12 is unreadable.
 		if fontSize < 12 then		
 			FCF_SetChatWindowFontSize(nil, chat, 12)
 		else
 			FCF_SetChatWindowFontSize(nil, chat, fontSize)
 		end
-		-- force chat position on #1 and #4, needed if we change ui scale or resolution
-		-- also set original width and height of chatframes 1 and 4 if first time we run tukui.
-		-- doing resize of chat also here for users that hit "cancel" when default installation is show.
+
 		if i == 1 then
 			chat:ClearAllPoints()
-			chat:SetFrameStrata("MEDIUM")
 			chat:Point("BOTTOMLEFT", TukuiInfoLeft, "TOPLEFT", 4, 5)
 			chat:Point("BOTTOMRIGHT", TukuiInfoLeft, "TOPRIGHT", -4, 5)
 			FCF_SavePositionAndDimensions(chat)
 		elseif i == 4 then
 			if not chat.isDocked then
 				chat:ClearAllPoints()
-				chat:SetFrameStrata("MEDIUM")
 				chat:Point("BOTTOMRIGHT", TukuiInfoRight, "TOPRIGHT", -4, 5)
 				chat:Point("BOTTOMLEFT", TukuiInfoRight, "TOPLEFT", 4, 5)
 				FCF_SavePositionAndDimensions(chat)
 			end
 		end
-
-		--Check if chat exists in the bottomright corner
-		if C.chat.background == true and point == "BOTTOMRIGHT" and chat:IsShown() then
-			TukuiChatBackgroundRight:Show()
-			TukuiTabsRightBackground:Show()			
-		end
-	end
-			
+    end
+end
 	-- reposition battle.net popup over chat #1
 	BNToastFrame:HookScript("OnShow", function(self)
 		self:ClearAllPoints()
@@ -271,7 +266,6 @@ local function SetupChatPosAndFont(self)
 			self:Point("BOTTOMLEFT", ChatFrame1, "TOPLEFT", 0, 6)
 		end
 	end)
-end
 
 TukuiChat:RegisterEvent("ADDON_LOADED")
 TukuiChat:RegisterEvent("PLAYER_ENTERING_WORLD")
