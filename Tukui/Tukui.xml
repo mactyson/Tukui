@@ -131,7 +131,9 @@
 	<Script file="modules\misc\threatbar.lua"/>
 	<Script file="modules\blizzard\achievements.lua"/>
 	<Script file="modules\extra\extra.lua"/>
+	<Script file="modules\extra\Pull.lua"/>
 	<Script file="core\movers.lua"/>
+	<Script file="modules\misc\raidutilities.lua"/>
 	<Script file="developer\test.lua"/>
 	
 	<Script file="modules\chat\blizzfixrealidlink.lua"/>	

@@ -516,6 +516,34 @@ StaticPopupDialogs["TUKUIDISABLE_RAID"] = {
 	whileDead = 1,
 }
 
+aticPopupDialogs["TUKUIDISBAND_RAID"] = {
+	text = L.disband,
+	button1 = ACCEPT,
+	button2 = CANCEL,
+	OnAccept = function()
+		if InCombatLockdown() then return end -- Prevent user error in combat
+
+		SendChatMessage(ERR_GROUP_DISBANDED, "RAID" or "PARTY")
+		if UnitInRaid("player") then
+			for i = 1, GetNumRaidMembers() do
+				local name, _, _, _, _, _, _, online = GetRaidRosterInfo(i)
+				if online and name ~= T.myname then
+					UninviteUnit(name)
+				end
+			end
+		else
+			for i = MAX_PARTY_MEMBERS, 1, -1 do
+				if GetPartyMember(i) then
+					UninviteUnit(UnitName("party"..i))
+				end
+			end
+		end
+		LeaveParty()	
+	end,
+	timeout = 0,
+	whileDead = 1,
+}
+
 ------------------------------------------------------------------------
 --	On login function, look for some infos!
 ------------------------------------------------------------------------
