@@ -1,4 +1,4 @@
-\--[[ 
+--[[ 
 		Raid utilities are loaded only if you are using Tukui raid frames 
 		All others raid frames mods or default Blizzard should have already this feature
 --]]
@@ -115,7 +115,7 @@ local function CreateUtilities(self, event, addon)
 		--Reposition/Resize and Reuse the World Marker Button
 		CompactRaidFrameManagerDisplayFrameLeaderOptionsRaidWorldMarkerButton:ClearAllPoints()
 		CompactRaidFrameManagerDisplayFrameLeaderOptionsRaidWorldMarkerButton:SetPoint("TOPRIGHT", TukuiRaidUtilityMainAssistButton, "BOTTOMRIGHT", 0, T.Scale(-5))
-		CompactRaidFrameManagerDisplayFrameLeaderOptionsRaidWorldMarkerButton:SetParent("TukuiRaidUtility")
+		CompactRaidFrameManagerDisplayFrameLeaderOptionsRaidWorldMarkerButton:SetParent(TukuiRaidUtility)
 		CompactRaidFrameManagerDisplayFrameLeaderOptionsRaidWorldMarkerButton:SetHeight(T.Scale(21))
 		CompactRaidFrameManagerDisplayFrameLeaderOptionsRaidWorldMarkerButton:SetWidth(TukuiRaidUtilityRoleCheckButton:GetWidth() * 0.22)
 
