@@ -203,9 +203,9 @@ end
 local v = CreateFrame("Button", "TukuiVersionFrame", UIParent)
 v:SetSize(160, 36)
 v:SetPoint("CENTER")
-v:SetTemplate("Default")
+v:SetTemplate("Transparent")
 v:CreateShadow("Default")
-v:FontString("Text", C.media.font, 12)
+v:FontString("Text", C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 v.Text:SetPoint("CENTER")
 v.Text:SetText("Tukui ".. T.version ..", www.tukui.org")
 v:SetScript("OnClick", function()
@@ -216,7 +216,7 @@ v:Hide()
 local f = CreateFrame("Frame", "TukuiInstallFrame", UIParent)
 f:SetSize(400, 400)
 f:SetPoint("CENTER")
-f:SetTemplate("Default")
+f:SetTemplate("Transparent")
 f:CreateShadow("Default")
 f:Hide()
 
@@ -237,54 +237,54 @@ sbd:SetFrameStrata("HIGH")
 sbd:SetFrameLevel(5)
 
 local header = f:CreateFontString(nil, "OVERLAY")
-header:SetFont(C.media.font, 16, "THINOUTLINE")
+header:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 header:SetPoint("TOP", f, "TOP", 0, -20)
 
 local text1 = f:CreateFontString(nil, "OVERLAY")
 text1:SetJustifyH("LEFT")
-text1:SetFont(C.media.font, 12)
+text1:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 text1:SetWidth(f:GetWidth()-40)
 text1:SetPoint("TOPLEFT", f, "TOPLEFT", 20, -60)
 
 local text2 = f:CreateFontString(nil, "OVERLAY")
 text2:SetJustifyH("LEFT")
-text2:SetFont(C.media.font, 12)
+text2:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 text2:SetWidth(f:GetWidth()-40)
 text2:SetPoint("TOPLEFT", text1, "BOTTOMLEFT", 0, -20)
 
 local text3 = f:CreateFontString(nil, "OVERLAY")
 text3:SetJustifyH("LEFT")
-text3:SetFont(C.media.font, 12)
+text3:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 text3:SetWidth(f:GetWidth()-40)
 text3:SetPoint("TOPLEFT", text2, "BOTTOMLEFT", 0, -20)
 
 local text4 = f:CreateFontString(nil, "OVERLAY")
 text4:SetJustifyH("LEFT")
-text4:SetFont(C.media.font, 12)
+text4:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 text4:SetWidth(f:GetWidth()-40)
 text4:SetPoint("TOPLEFT", text3, "BOTTOMLEFT", 0, -20)
 
 local credits = f:CreateFontString(nil, "OVERLAY")
-credits:SetFont(C.media.font, 12, "THINOUTLINE")
+credits:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 credits:SetText("")
 credits:SetPoint("BOTTOM", f, "BOTTOM", 0, 4)
 
 local sbt = sb:CreateFontString(nil, "OVERLAY")
-sbt:SetFont(C.media.font, 13, "THINOUTLINE")
+sbt:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 sbt:SetPoint("CENTER", sb)
 
 local option1 = CreateFrame("Button", "TukuiInstallOption1", f)
 option1:SetPoint("BOTTOMLEFT", f, "BOTTOMLEFT", 20, 20)
 option1:SetSize(128, 25)
-option1:SetTemplate("Default")
-option1:FontString("Text", C.media.font, 12)
+option1:SetTemplate("Transparent")
+option1:FontString("Text", C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 option1.Text:SetPoint("CENTER")
 
 local option2 = CreateFrame("Button", "TukuiInstallOption2", f)
 option2:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", -20, 20)
 option2:SetSize(128, 25)
-option2:SetTemplate("Default")
-option2:FontString("Text", C.media.font, 12)
+option2:SetTemplate("Transparent")
+option2:FontString("Text", C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 option2.Text:SetPoint("CENTER")
 
 local close = CreateFrame("Button", "TukuiInstallCloseButton", f, "UIPanelCloseButton")
@@ -516,7 +516,7 @@ StaticPopupDialogs["TUKUIDISABLE_RAID"] = {
 	whileDead = 1,
 }
 
-aticPopupDialogs["TUKUIDISBAND_RAID"] = {
+StaticPopupDialogs["TUKUIDISBAND_RAID"] = {
 	text = L.disband,
 	button1 = ACCEPT,
 	button2 = CANCEL,
