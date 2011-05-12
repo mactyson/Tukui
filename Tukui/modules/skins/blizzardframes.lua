@@ -74,7 +74,13 @@ local function SkinTab(tab)
 	tab.backdrop:SetTemplate("Default")
 	tab.backdrop:SetFrameLevel(tab:GetFrameLevel() - 1)
 	tab.backdrop:Point("TOPLEFT", 10, -3)
-	tab.backdrop:Point("BOTTOMRIGHT", -10, 3)				
+	tab.backdrop:Point("BOTTOMRIGHT", -10, 3)		
+
+	-- always set tab text centered
+	local name = tab:GetName()
+	_G[name.."Text"]:ClearAllPoints()
+	_G[name.."Text"]:SetPoint("CENTER")
+	_G[name.."Text"].SetPoint = T.dummy	
 end
 
 local function SkinNextPrevButton(btn, horizonal)
@@ -1205,6 +1211,47 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		ClassTrainerStatusBar:CreateBackdrop("Default")
 	end
 
+	-- Socketing UI
+	if addon == "Blizzard_ItemSocketingUI" then	
+		local frames = {
+			"ItemSocketingFrame",
+			"ItemSocketingScrollFrame",
+		}
+		
+		for _, v in pairs(frames) do
+			_G[v]:StripTextures()
+			_G[v]:SetTemplate("Transparent")
+		end
+		
+		for i = 1, MAX_NUM_SOCKETS  do
+			local button = _G["ItemSocketingSocket"..i]
+			local button_bracket = _G["ItemSocketingSocket"..i.."BracketFrame"]
+			local button_bg = _G["ItemSocketingSocket"..i.."Background"]
+			local button_icon = _G["ItemSocketingSocket"..i.."IconTexture"]
+			button:StripTextures()
+			button:StyleButton(false)
+			button:SetTemplate("Default", true)
+			button_bracket:Kill()
+			button_bg:Kill()
+			button_icon:SetTexCoord(.08, .92, .08, .92)
+			button_icon:ClearAllPoints()
+			button_icon:Point("TOPLEFT", 2, -2)
+			button_icon:Point("BOTTOMRIGHT", -2, 2)
+			ItemSocketingFrame:HookScript("OnUpdate", function(self)
+				gemColor = GetSocketTypes(i)
+				local color = GEM_TYPE_INFO[gemColor]
+				button:SetBackdropColor(color.r, color.g, color.b, 0.15)
+				button:SetBackdropBorderColor(color.r, color.g, color.b)
+			end)
+		end
+		
+		ItemSocketingFramePortrait:Kill()
+		ItemSocketingSocketButton:ClearAllPoints()
+		ItemSocketingSocketButton:Point("BOTTOMRIGHT", ItemSocketingFrame, "BOTTOMRIGHT", -5, 5)
+		SkinButton(ItemSocketingSocketButton)
+		SkinCloseButton(ItemSocketingCloseButton)
+	end
+	
 	if addon == "Blizzard_GlyphUI" then
 
 		--GLYPHS TAB
@@ -1715,6 +1762,135 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 
 	-- stuff not in Blizzard load-on-demand
 	if addon == "Tukui" then
+	-- mail frame
+		do
+			MailFrame:StripTextures(true)
+			MailFrame:SetTemplate("Transparent")
+			MailFrame:CreateShadow("Default")
+			MailFrame:SetWidth(360)
+
+			for i = 1, 7 do
+				local bg = _G["MailItem"..i]
+				bg:StripTextures()
+
+				local b = _G["MailItem"..i.."Button"]
+				b:StripTextures()
+				b:SetTemplate("Default")
+
+				local t = _G["MailItem"..i.."ButtonIcon"]
+				t:SetTexCoord(.08, .92, .08, .92)
+				t:ClearAllPoints()
+				t:Point("TOPLEFT", 2, -2)
+				t:Point("BOTTOMRIGHT", -2, 2)
+			end
+
+			SkinCloseButton(InboxCloseButton)
+			SkinNextPrevButton(InboxPrevPageButton)
+			SkinNextPrevButton(InboxNextPageButton)
+
+			MailFrameTab1:StripTextures()
+			MailFrameTab2:StripTextures()
+			SkinTab(MailFrameTab1)
+			SkinTab(MailFrameTab2)
+
+			--Reposition tabs
+			MailFrameTab1:ClearAllPoints()
+			MailFrameTab1:SetPoint("TOPLEFT", MailFrame, "BOTTOMLEFT", 0, 0)
+			MailFrameTab1.SetPoint = T.dummy
+
+			-- send mail
+			SendMailScrollFrame:StripTextures(true)
+			SendMailScrollFrame:SetTemplate("Default")
+
+			SkinScrollBar(SendMailScrollFrameScrollBar)
+			SkinEditBox(SendMailNameEditBox)
+			SkinEditBox(SendMailSubjectEditBox)
+			SkinEditBox(SendMailMoneyGold)
+			SkinEditBox(SendMailMoneySilver)
+			SkinEditBox(SendMailMoneyCopper)
+
+			for i = 1, 12 do				
+				local b = _G["SendMailAttachment"..i]
+				b:StripTextures()
+				b:SetTemplate("Default")
+			end
+
+			SkinButton(SendMailMailButton)
+			SkinButton(SendMailCancelButton)
+			--SkinButton(xanAutoMail_OpenAllBTN)
+		
+			-- open mail (cod)
+			OpenMailFrame:StripTextures(true)
+			OpenMailFrame:SetTemplate("Transparent")
+			OpenMailFrame:CreateShadow("Default")
+			OpenMailFrame:SetWidth(360)
+
+			SkinCloseButton(OpenMailCloseButton)
+			SkinButton(OpenMailReportSpamButton)
+			SkinButton(OpenMailReplyButton)
+			SkinButton(OpenMailDeleteButton)
+			SkinButton(OpenMailCancelButton)
+
+			OpenMailScrollFrame:StripTextures(true)
+			OpenMailScrollFrame:SetTemplate("Default")
+
+			SkinScrollBar(OpenMailScrollFrameScrollBar)
+
+			for i = 1, 12 do				
+				local b = _G["OpenMailAttachmentButton"..i]
+				b:StripTextures()
+				b:SetTemplate("Default")
+			end
+		end
+	
+	-- merchant frame
+		do
+			MerchantFrame:StripTextures(true)
+			MerchantFrame:SetTemplate("Transparent")
+			MerchantFrame:CreateShadow("Default")
+			MerchantFrame:SetWidth(360)
+
+			MerchantBuyBackItem:StripTextures()
+
+			MerchantFrameTab1:StripTextures()
+			MerchantFrameTab2:StripTextures()
+			SkinTab(MerchantFrameTab1)
+			SkinTab(MerchantFrameTab2)
+
+			SkinCloseButton(MerchantFrameCloseButton)
+
+			--MerchantPrevPageButton:StripTextures()
+			SkinNextPrevButton(MerchantPrevPageButton)
+			SkinNextPrevButton(MerchantNextPageButton)
+
+			for i=1,12 do
+				local bg = _G["MerchantItem"..i]
+				bg:StripTextures() 
+
+				local b = _G["MerchantItem"..i.."ItemButton"]
+				b:StripTextures()
+				b:SetTemplate("Default")
+
+				local t = _G["MerchantItem"..i.."ItemButtonIconTexture"]
+				t:SetTexCoord(.08, .92, .08, .92)
+				t:ClearAllPoints()
+				t:Point("TOPLEFT", 2, -2)
+				t:Point("BOTTOMRIGHT", -2, 2)
+			end
+
+			MerchantBuyBackItemItemButton:StripTextures()
+			MerchantBuyBackItemItemButton:SetTemplate("Default")
+			MerchantBuyBackItemItemButtonIconTexture:SetTexCoord(.08, .92, .08, .92)
+			MerchantBuyBackItemItemButtonIconTexture:ClearAllPoints()
+			MerchantBuyBackItemItemButtonIconTexture:Point("TOPLEFT", 2, -2)
+			MerchantBuyBackItemItemButtonIconTexture:Point("BOTTOMRIGHT", -2, 2)
+
+			--Reposition tabs
+			MerchantFrameTab1:ClearAllPoints()
+			MerchantFrameTab1:SetPoint("TOPLEFT", MerchantFrame, "BOTTOMLEFT", 0, 0)
+			MerchantFrameTab1.SetPoint = T.dummy
+		end	
+
      --Help Frame
 		do
 			local frames = {
@@ -2494,6 +2670,27 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 
 		end
 
+		-- bg score frame
+		do 
+			WorldStateScoreScrollFrame:StripTextures()
+			WorldStateScoreFrame:StripTextures()
+			WorldStateScoreFrame:SetTemplate("Transparent")
+			SkinCloseButton(WorldStateScoreFrameCloseButton)
+			SkinButton(WorldStateScoreFrameLeaveButton)
+			WorldStateScoreFrameInset:Kill()
+			
+			for i = 1, WorldStateScoreScrollFrameScrollChildFrame:GetNumChildren() do
+				local b = _G["WorldStateScoreButton"..i]
+				b:StripTextures()
+				b:StyleButton(false)
+				b:SetTemplate("Default", true)
+			end
+			
+			for i = 1, 3 do 
+				SkinTab(_G["WorldStateScoreFrameTab"..i])
+			end
+		end
+		
 		--Social Frame
 		local function SkinSocialHeaderTab(tab)
 			if not tab then return end
