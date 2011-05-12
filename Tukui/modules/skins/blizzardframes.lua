@@ -1817,8 +1817,10 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 
 			SkinButton(SendMailMailButton)
 			SkinButton(SendMailCancelButton)
-			--SkinButton(xanAutoMail_OpenAllBTN)
-		
+			-- Skinning OpenAll addon buttons
+			SkinButton(OpenAllButton)
+			SkinButton(OpenAllButton2)
+			
 			-- open mail (cod)
 			OpenMailFrame:StripTextures(true)
 			OpenMailFrame:SetTemplate("Transparent")
@@ -1833,7 +1835,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 
 			OpenMailScrollFrame:StripTextures(true)
 			OpenMailScrollFrame:SetTemplate("Default")
-
+			
 			SkinScrollBar(OpenMailScrollFrameScrollBar)
 
 			for i = 1, 12 do				
