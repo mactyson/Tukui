@@ -285,15 +285,15 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 				button:StripTextures()
 				button:StyleButton()
 				button:SetTemplate("Default")
-				button.SetHighlightTexture = E.dummy
-				button.SetPushedTexture = E.dummy
+				button.SetHighlightTexture = T.dummy
+				button.SetPushedTexture = T.dummy
 				button:GetNormalTexture():SetTexCoord(.08, .92, .08, .92)
 				button:GetPushedTexture():SetTexCoord(.08, .92, .08, .92)
 				button:GetHighlightTexture():SetAllPoints(icon)
 				button:GetPushedTexture():SetAllPoints(icon)
 
 				if button.Rank then
-					button.Rank:SetFont(FONT, 12, FONTFLAG)
+					button.Rank:SetFont(FONT, 8, FONTFLAG)
 					button.Rank:ClearAllPoints()
 					button.Rank:SetPoint("BOTTOMRIGHT")
 				end		
