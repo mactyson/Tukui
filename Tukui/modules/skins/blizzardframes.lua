@@ -129,6 +129,10 @@ local function SkinEditBox(frame)
 	if _G[frame:GetName().."Middle"] then _G[frame:GetName().."Middle"]:Kill() end
 	if _G[frame:GetName().."Right"] then _G[frame:GetName().."Right"]:Kill() end
 	frame:CreateBackdrop("Default")
+	
+	if frame:GetName() and frame:GetName():find("Silver") or frame:GetName():find("Copper") then
+	    frame.backdrop:Point("BOTTOMRIGHT", -12, -2)
+	end
 end
 
 local function SkinDropDownBox(frame, width)
@@ -194,6 +198,72 @@ TukuiSkin:RegisterEvent("ADDON_LOADED")
 TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 	if IsAddOnLoaded("Skinner") or IsAddOnLoaded("Aurora") then return end
 
+    --GBANK
+	if addon == "Blizzard_GuildBankUI" then
+		GuildBankFrame:StripTextures()
+		GuildBankFrame:SetTemplate("Transparent")
+		GuildBankEmblemFrame:StripTextures(true)
+
+		--Close button doesn't have a fucking name, extreme hackage
+		for i=1, GuildBankFrame:GetNumChildren() do
+			local child = select(i, GuildBankFrame:GetChildren())
+			if child.GetPushedTexture and child:GetPushedTexture() and not child:GetName() then
+				SkinCloseButton(child)
+			end
+		end
+
+		SkinButton(GuildBankFrameDepositButton, true)
+		SkinButton(GuildBankFrameWithdrawButton, true)
+		SkinButton(GuildBankInfoSaveButton, true)
+		SkinButton(GuildBankFramePurchaseButton, true)
+
+		GuildBankFrameWithdrawButton:Point("RIGHT", GuildBankFrameDepositButton, "LEFT", -2, 0)
+
+		GuildBankInfoScrollFrame:StripTextures()
+		GuildBankTransactionsScrollFrame:StripTextures()
+
+		GuildBankFrame.inset = CreateFrame("Frame", nil, GuildBankFrame)
+		GuildBankFrame.inset:SetTemplate("Default")
+		GuildBankFrame.inset:Point("TOPLEFT", 30, -65)
+		GuildBankFrame.inset:Point("BOTTOMRIGHT", -20, 63)
+
+		for i=1, NUM_GUILDBANK_COLUMNS do
+			_G["GuildBankColumn"..i]:StripTextures()
+
+			for x=1, NUM_SLOTS_PER_GUILDBANK_GROUP do
+				local button = _G["GuildBankColumn"..i.."Button"..x]
+				local icon = _G["GuildBankColumn"..i.."Button"..x.."IconTexture"]
+				button:StripTextures()
+				button:StyleButton()
+				button:SetTemplate("Default", true)
+
+				icon:ClearAllPoints()
+				icon:Point("TOPLEFT", 2, -2)
+				icon:Point("BOTTOMRIGHT", -2, 2)
+				icon:SetTexCoord(.08, .92, .08, .92)
+			end
+		end
+
+		for i=1, 8 do
+			local button = _G["GuildBankTab"..i.."Button"]
+			local texture = _G["GuildBankTab"..i.."ButtonIconTexture"]
+			_G["GuildBankTab"..i]:StripTextures(true)
+
+			button:StripTextures()
+			button:StyleButton(true)
+			button:SetTemplate("Default", true)
+
+			texture:ClearAllPoints()
+			texture:Point("TOPLEFT", 2, -2)
+			texture:Point("BOTTOMRIGHT", -2, 2)
+			texture:SetTexCoord(.08, .92, .08, .92)
+		end
+
+		for i=1, 4 do
+			SkinTab(_G["GuildBankFrameTab"..i])
+		end
+	end
+	
     --Archaeology
 	if addon == "Blizzard_ArchaeologyUI" then
 		ArchaeologyFrame:StripTextures(true)
@@ -1213,16 +1283,11 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 
 	-- Socketing UI
 	if addon == "Blizzard_ItemSocketingUI" then	
-		local frames = {
-			"ItemSocketingFrame",
-			"ItemSocketingScrollFrame",
-		}
-		
-		for _, v in pairs(frames) do
-			_G[v]:StripTextures()
-			_G[v]:SetTemplate("Transparent")
-		end
-		
+		ItemSocketingFrame:StripTextures()
+		ItemSocketingFrame:SetTemplate("Transparent")
+		ItemSocketingScrollFrame:StripTextures()
+		ItemSocketingScrollFrame:CreateBackdrop("Transparent")
+
 		for i = 1, MAX_NUM_SOCKETS  do
 			local button = _G["ItemSocketingSocket"..i]
 			local button_bracket = _G["ItemSocketingSocket"..i.."BracketFrame"]
@@ -1244,12 +1309,44 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 				button:SetBackdropBorderColor(color.r, color.g, color.b)
 			end)
 		end
-		
+
 		ItemSocketingFramePortrait:Kill()
 		ItemSocketingSocketButton:ClearAllPoints()
 		ItemSocketingSocketButton:Point("BOTTOMRIGHT", ItemSocketingFrame, "BOTTOMRIGHT", -5, 5)
 		SkinButton(ItemSocketingSocketButton)
 		SkinCloseButton(ItemSocketingCloseButton)
+	end
+	
+	-- Keybinding frame
+	if addon == "Blizzard_BindingUI" then
+		local buttons = {
+			"KeyBindingFrameDefaultButton",
+			"KeyBindingFrameUnbindButton",
+			"KeyBindingFrameOkayButton",
+			"KeyBindingFrameCancelButton",
+		}
+		
+		for _, v in pairs(buttons) do
+			_G[v]:StripTextures()
+			_G[v]:SetTemplate("Default")
+		end
+		
+		SkinCheckBox(KeyBindingFrameCharacterButton)
+		KeyBindingFrameHeaderText:ClearAllPoints()
+		KeyBindingFrameHeaderText:Point("TOP", KeyBindingFrame, "TOP", 0, -4)
+		KeyBindingFrame:StripTextures()
+		KeyBindingFrame:SetTemplate("Transparent")
+		
+		for i = 1, KEY_BINDINGS_DISPLAYED  do
+			local button1 = _G["KeyBindingFrameBinding"..i.."Key1Button"]
+			local button2 = _G["KeyBindingFrameBinding"..i.."Key2Button"]
+			button1:StripTextures(true)
+			button1:StyleButton(false)
+			button1:SetTemplate("Default", true)
+			button2:StripTextures(true)
+			button2:StyleButton(false)
+			button2:SetTemplate("Default", true)
+		end
 	end
 	
 	if addon == "Blizzard_GlyphUI" then
@@ -1330,10 +1427,6 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		SkinDropDownBox(BrowseDropDown)
 		SkinDropDownBox(PriceDropDown)
 		SkinDropDownBox(DurationDropDown)
-		-- Auctionator dropdown boxes skinned
-		SkinDropDownBox(Atr_DropDown1)
-		SkinDropDownBox(Atr_Duration)
-		SkinDropDownBox(Atr_DropDownSL)
 
 		SkinCheckBox(IsUsableCheckButton)
 		SkinCheckBox(ShowOnPlayerCheckButton)
@@ -1399,26 +1492,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			"AuctionsCloseButton",
 			"BrowseResetButton",
 			"AuctionsStackSizeMaxButton",
-			"AuctionsNumStacksMaxButton",
-			-- Auctionator buttons skinned here
-			"Atr_Search_Button",
-			"Atr_Back_Button",
-			"Atr_Buy1_Button",
-			"Atr_Adv_Search_Button",
-			"Atr_FullScanButton",
-			"Auctionator1Button",
-			"Atr_CancelSelectionButton",
-			"AuctionatorCloseButton",
-			"Atr_ListTabsTab1",			
-			"Atr_ListTabsTab2",
-			"Atr_ListTabsTab3",
-			"Atr_CreateAuctionButton",
-            "Atr_RemFromSListButton",
-			"Atr_AddToSListButton",
-			"Atr_SrchSListButton",
-			"Atr_DelSListButton",
-			"Atr_NewSListButton",
-			"Atr_CheckActiveButton",		
+			"AuctionsNumStacksMaxButton",	
 		}
 
 		for _, button in pairs(buttons) do
@@ -1497,25 +1571,12 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			"StartPriceCopper",
 			"BuyoutPriceGold",
 			"BuyoutPriceSilver",
-			"BuyoutPriceCopper",
-			-- Auctionator editboxes skinned
-			"Atr_StackPriceGold",			
-			"Atr_StackPriceSilver",	
-			"Atr_StackPriceCopper",	
-			"Atr_ItemPriceGold",
-			"Atr_ItemPriceSilver",
-			"Atr_ItemPriceCopper",
-			"Atr_Batch_NumAuctions",				
-			"Atr_Batch_Stacksize",
-			"Atr_Search_Box",					
+			"BuyoutPriceCopper",			
 		}
 
 		for _, editbox in pairs(editboxs) do
 			SkinEditBox(_G[editbox])
 			_G[editbox]:SetTextInsets(1, 1, -1, 1)
-			if editbox:find("Silver") or editbox:find("Copper") then
-				_G[editbox].backdrop:Point("BOTTOMRIGHT", -12, -2)
-			end
 		end
 		BrowseMaxLevel:Point("LEFT", BrowseMinLevel, "RIGHT", 8, 0)
 		AuctionsStackSizeEntry.backdrop:SetAllPoints()
@@ -1596,8 +1657,42 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			button:GetPushedTexture():SetAllPoints(button:GetHighlightTexture())			
 		end
 
-
-	end
+	if IsAddOnLoaded("Auctionator") then
+	
+		SkinDropDownBox(Atr_DropDown1)
+		SkinDropDownBox(Atr_Duration)
+		SkinDropDownBox(Atr_DropDownSL)
+		
+		SkinButton(Atr_Search_Button, true)
+		SkinButton(Atr_Back_Button, true)
+		SkinButton(Atr_Buy1_Button, true)
+		SkinButton(Atr_Adv_Search_Button, true)
+		SkinButton(Atr_FullScanButton, true)
+		SkinButton(Auctionator1Button, true)
+		SkinButton(Atr_ListTabsTab1, true)
+		SkinButton(Atr_ListTabsTab2, true)
+		SkinButton(Atr_ListTabsTab3, true)
+		SkinButton(Atr_CreateAuctionButton, true)
+		SkinButton(Atr_RemFromSListButton, true)
+		SkinButton(Atr_AddToSListButton, true)
+		SkinButton(Atr_SrchSListButton, true)
+		SkinButton(Atr_DelSListButton, true)
+		SkinButton(Atr_NewSListButton, true)
+		SkinButton(Atr_CheckActiveButton, true)
+		SkinButton(AuctionatorCloseButton)
+		SkinButton(Atr_CancelSelectionButton)
+		
+        SkinEditBox(Atr_StackPriceGold)
+        SkinEditBox(Atr_StackPriceSilver)
+        SkinEditBox(Atr_StackPriceCopper)
+        SkinEditBox(Atr_ItemPriceGold)
+        SkinEditBox(Atr_ItemPriceSilver)
+        SkinEditBox(Atr_ItemPriceCopper)
+        SkinEditBox(Atr_Batch_NumAuctions)
+        SkinEditBox(Atr_Batch_Stacksize)
+        SkinEditBox(Atr_Search_Box)
+   end
+end
 
 	--BarberShop
 	if addon == "Blizzard_BarbershopUI" then
@@ -1762,20 +1857,26 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 
 	-- stuff not in Blizzard load-on-demand
 	if addon == "Tukui" then
-	-- mail frame
+		-- mail frame
 		do
 			MailFrame:StripTextures(true)
-			MailFrame:SetTemplate("Transparent")
-			MailFrame:CreateShadow("Default")
+			MailFrame:CreateBackdrop("Transparent")
+			MailFrame.backdrop:Point("TOPLEFT", 4, 0)
+			MailFrame.backdrop:Point("BOTTOMRIGHT", 2, 74)
+			MailFrame.backdrop:CreateShadow("Default")
 			MailFrame:SetWidth(360)
 
-			for i = 1, 7 do
+			for i = 1, INBOXITEMS_TO_DISPLAY do
 				local bg = _G["MailItem"..i]
 				bg:StripTextures()
+				bg:CreateBackdrop("Default")
+				bg.backdrop:Point("TOPLEFT", 2, 1)
+				bg.backdrop:Point("BOTTOMRIGHT", -2, 2)
 
 				local b = _G["MailItem"..i.."Button"]
 				b:StripTextures()
-				b:SetTemplate("Default")
+				b:SetTemplate("Default", true)
+				b:StyleButton()
 
 				local t = _G["MailItem"..i.."ButtonIcon"]
 				t:SetTexCoord(.08, .92, .08, .92)
@@ -1793,38 +1894,54 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			SkinTab(MailFrameTab1)
 			SkinTab(MailFrameTab2)
 
-			--Reposition tabs
-			MailFrameTab1:ClearAllPoints()
-			MailFrameTab1:SetPoint("TOPLEFT", MailFrame, "BOTTOMLEFT", 0, 0)
-			MailFrameTab1.SetPoint = T.dummy
-
 			-- send mail
 			SendMailScrollFrame:StripTextures(true)
 			SendMailScrollFrame:SetTemplate("Default")
 
 			SkinScrollBar(SendMailScrollFrameScrollBar)
+
 			SkinEditBox(SendMailNameEditBox)
 			SkinEditBox(SendMailSubjectEditBox)
 			SkinEditBox(SendMailMoneyGold)
 			SkinEditBox(SendMailMoneySilver)
 			SkinEditBox(SendMailMoneyCopper)
 
-			for i = 1, 12 do				
-				local b = _G["SendMailAttachment"..i]
-				b:StripTextures()
-				b:SetTemplate("Default")
+			SendMailNameEditBox.backdrop:Point("BOTTOMRIGHT", 2, 0)
+			SendMailSubjectEditBox.backdrop:Point("BOTTOMRIGHT", 2, 0)
+			SendMailFrame:StripTextures()
+
+			local function MailFrameSkin()
+				for i = 1, ATTACHMENTS_MAX_SEND do				
+					local b = _G["SendMailAttachment"..i]
+					if not b.skinned then
+						b:StripTextures()
+						b:SetTemplate("Default", true)
+						b:StyleButton()
+						b.skinned = true
+					end
+					local t = b:GetNormalTexture()
+					if t then
+						t:SetTexCoord(.08, .92, .08, .92)
+						t:ClearAllPoints()
+						t:Point("TOPLEFT", 2, -2)
+						t:Point("BOTTOMRIGHT", -2, 2)
+					end
+				end
 			end
+			hooksecurefunc("SendMailFrame_Update", MailFrameSkin)
 
 			SkinButton(SendMailMailButton)
 			SkinButton(SendMailCancelButton)
-			-- Skinning OpenAll addon buttons
 			SkinButton(OpenAllButton)
 			SkinButton(OpenAllButton2)
 			
+
 			-- open mail (cod)
 			OpenMailFrame:StripTextures(true)
-			OpenMailFrame:SetTemplate("Transparent")
-			OpenMailFrame:CreateShadow("Default")
+			OpenMailFrame:CreateBackdrop("Transparent")
+			OpenMailFrame.backdrop:Point("TOPLEFT", 4, 0)
+			OpenMailFrame.backdrop:Point("BOTTOMRIGHT", 2, 74)
+			OpenMailFrame.backdrop:CreateShadow("Default")
 			OpenMailFrame:SetWidth(360)
 
 			SkinCloseButton(OpenMailCloseButton)
@@ -1835,15 +1952,49 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 
 			OpenMailScrollFrame:StripTextures(true)
 			OpenMailScrollFrame:SetTemplate("Default")
-			
+
 			SkinScrollBar(OpenMailScrollFrameScrollBar)
 
-			for i = 1, 12 do				
+			SendMailBodyEditBox:SetTextColor(1, 1, 1)
+			OpenMailBodyText:SetTextColor(1, 1, 1)
+			InvoiceTextFontNormal:SetTextColor(1, 1, 1)
+			OpenMailArithmeticLine:Kill()
+
+			OpenMailLetterButton:StripTextures()
+			OpenMailLetterButton:SetTemplate("Default", true)
+			OpenMailLetterButton:StyleButton()
+			OpenMailLetterButtonIconTexture:SetTexCoord(.08, .92, .08, .92)						
+			OpenMailLetterButtonIconTexture:ClearAllPoints()
+			OpenMailLetterButtonIconTexture:Point("TOPLEFT", 2, -2)
+			OpenMailLetterButtonIconTexture:Point("BOTTOMRIGHT", -2, 2)
+
+			OpenMailMoneyButton:StripTextures()
+			OpenMailMoneyButton:SetTemplate("Default", true)
+			OpenMailMoneyButton:StyleButton()
+			OpenMailMoneyButtonIconTexture:SetTexCoord(.08, .92, .08, .92)						
+			OpenMailMoneyButtonIconTexture:ClearAllPoints()
+			OpenMailMoneyButtonIconTexture:Point("TOPLEFT", 2, -2)
+			OpenMailMoneyButtonIconTexture:Point("BOTTOMRIGHT", -2, 2)
+
+			for i = 1, ATTACHMENTS_MAX_SEND do				
 				local b = _G["OpenMailAttachmentButton"..i]
 				b:StripTextures()
-				b:SetTemplate("Default")
+				b:SetTemplate("Default", true)
+				b:StyleButton()
+
+				local t = _G["OpenMailAttachmentButton"..i.."IconTexture"]
+				if t then
+					t:SetTexCoord(.08, .92, .08, .92)
+					t:ClearAllPoints()
+					t:Point("TOPLEFT", 2, -2)
+					t:Point("BOTTOMRIGHT", -2, 2)
+				end				
 			end
-		end
+
+			OpenMailReplyButton:Point("RIGHT", OpenMailDeleteButton, "LEFT", -2, 0)
+			OpenMailDeleteButton:Point("RIGHT", OpenMailCancelButton, "LEFT", -2, 0)
+			SendMailMailButton:Point("RIGHT", SendMailCancelButton, "LEFT", -2, 0)
+    end
 	
 	-- Merchant Frame
 		do
@@ -2070,8 +2221,6 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			SkinEditBox(TradePlayerInputMoneyFrameGold)
 			SkinEditBox(TradePlayerInputMoneyFrameSilver)
 			SkinEditBox(TradePlayerInputMoneyFrameCopper)
-			TradePlayerInputMoneyFrameSilver.backdrop:Point("BOTTOMRIGHT", -12, -2)
-			TradePlayerInputMoneyFrameCopper.backdrop:Point("BOTTOMRIGHT", -12, -2)
 
 			for i=1, 7 do
 				local player = _G["TradePlayerItem"..i]
@@ -3400,6 +3549,10 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		for i = 1, 3 do
 			for j = 1, 3 do
 				SkinButton(_G["StaticPopup"..i.."Button"..j])
+				SkinEditBox(_G["StaticPopup"..i.."EditBox"])
+				SkinEditBox(_G["StaticPopup"..i.."MoneyInputFrameGold"])
+				SkinEditBox(_G["StaticPopup"..i.."MoneyInputFrameSilver"])
+				SkinEditBox(_G["StaticPopup"..i.."MoneyInputFrameCopper"])
 			end
 		end
 
@@ -3553,15 +3706,21 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		-- others
 		_G["ReadyCheckListenerFrame"]:SetAlpha(0)
 		_G["ReadyCheckFrame"]:HookScript("OnShow", function(self) if UnitIsUnit("player", self.initiator) then self:Hide() end end) -- bug fix, don't show it if initiator
-		_G["StackSplitFrame"]:GetRegions():Hide()
-		_G["StaticPopup1EditBox"]:SetTemplate("Default")
-		_G["StaticPopup1EditBoxLeft"]:SetTexture(nil)
-		_G["StaticPopup1EditBoxMid"]:SetTexture(nil)
-		_G["StaticPopup1EditBoxRight"]:SetTexture(nil)
-		_G["ChannelPulloutBackground"]:Kill()
-		_G["ChannelPulloutTabLeft"]:SetTexture(nil)
-		_G["ChannelPulloutTabMiddle"]:SetTexture(nil)
-		_G["ChannelPulloutTabRight"]:SetTexture(nil)
+ 		_G["StackSplitFrame"]:GetRegions():Hide()
+
+		--Create backdrop for static popup editbox	
+		local bg = CreateFrame("Frame", nil, StaticPopup1EditBox)
+		bg:Point("TOPLEFT", StaticPopup1EditBox, "TOPLEFT", -2, -2)
+		bg:Point("BOTTOMRIGHT", StaticPopup1EditBox, "BOTTOMRIGHT", 2, 2)
+		bg:SetFrameLevel(StaticPopup1EditBox:GetFrameLevel())
+		bg:SetTemplate("Default")
+
+		RolePollPopup:SetTemplate("Transparent")
+		RolePollPopup:CreateShadow("Default")
+		LFDDungeonReadyDialog:SetTemplate("Transparent")
+		LFDDungeonReadyDialog:CreateShadow("Default")
+		SkinButton(LFDDungeonReadyDialogEnterDungeonButton)
+		SkinButton(LFDDungeonReadyDialogLeaveQueueButton)
 	end
 
 	-- mac menu/option panel, made by affli.
