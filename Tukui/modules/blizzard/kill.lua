@@ -23,6 +23,8 @@ Kill:SetScript("OnEvent", function(self, event, addon)
 		
 		if addon ~= "Tukui" then return end
 		
+		GuildChallengeAlertFrame:Kill()
+		
 		StreamingIcon:Kill()
 		Advanced_UseUIScale:Kill()
 		Advanced_UIScaleSlider:Kill()

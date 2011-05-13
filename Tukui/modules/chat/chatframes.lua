@@ -108,7 +108,7 @@ local function SetChatStyle(frame)
 	
 	-- Removes crap from the bottom of the chatbox so it can go to the bottom of the screen.
 	_G[chat]:SetClampedToScreen(false)
-			
+	
 	-- Stop the chat chat from fading out
 	_G[chat]:SetFading(false)
 	

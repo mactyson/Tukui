@@ -108,7 +108,7 @@ local function chatsetup()
 	ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_GUILD_XP_GAIN")
 	ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_HONOR_GAIN")
 	ChatFrame_AddMessageGroup(ChatFrame4, "COMBAT_FACTION_CHANGE")
-	
+
 	-- enable classcolor automatically on login and on each character without doing /configure each time.
 	ToggleChatColorNamesByClassGroup(true, "SAY")
 	ToggleChatColorNamesByClassGroup(true, "EMOTE")
@@ -131,7 +131,7 @@ local function chatsetup()
 	ToggleChatColorNamesByClassGroup(true, "CHANNEL4")
 	ToggleChatColorNamesByClassGroup(true, "CHANNEL5")
 end
-
+	
 local function cvarsetup()
 	SetCVar("buffDurations", 1)
 	SetCVar("consolidateBuffs", 0)
