@@ -14,7 +14,7 @@ local function CreateUtilities(self, event, addon)
 
 		--Create main frame
 		local TukuiRaidUtility = CreateFrame("Frame", "TukuiRaidUtility", UIParent)
-		TukuiRaidUtility:CreatePanel("Default", TukuiMinimap:GetWidth(), panel_height, "TOPRIGHT", TukuiMinimapStatsRight, "BOTTOMRIGHT", 0, -2)
+		TukuiRaidUtility:CreatePanel("Default", TukuiMinimap:GetWidth(), panel_height, "TOPRIGHT", TukuiMinimap, "BOTTOMRIGHT", 0, -2)
 		TukuiRaidUtility:Hide()
 
 		--Check if We are Raid Leader or Raid Officer
@@ -64,7 +64,7 @@ local function CreateUtilities(self, event, addon)
 		end
 
 		--Show Button
-		CreateButton("TukuiRaidUtilityShowButton", UIParent, "UIMenuButtonStretchTemplate, SecureHandlerClickTemplate", TukuiMinimap:GetWidth(), 21, "TOPRIGHT", TukuiMinimapStatsRight, "BOTTOMRIGHT", 0, -2, RAID_ASSISTANT, nil)
+		CreateButton("TukuiRaidUtilityShowButton", UIParent, "UIMenuButtonStretchTemplate, SecureHandlerClickTemplate", TukuiMinimap:GetWidth(), 21, "TOPRIGHT", TukuiMinimap, "BOTTOMRIGHT", 0, -2, RAID_ASSISTANT, nil)
 		TukuiRaidUtilityShowButton:SetFrameRef("TukuiRaidUtility", TukuiRaidUtility)
 		TukuiRaidUtilityShowButton:SetAttribute("_onclick", [=[self:Hide(); self:GetFrameRef("TukuiRaidUtility"):Show();]=])
 		TukuiRaidUtilityShowButton:SetScript("OnMouseUp", function(self) TukuiRaidUtility.toggled = true end)
