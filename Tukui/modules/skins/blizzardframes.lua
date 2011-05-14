@@ -128,6 +128,7 @@ local function SkinEditBox(frame)
 	if _G[frame:GetName().."Left"] then _G[frame:GetName().."Left"]:Kill() end
 	if _G[frame:GetName().."Middle"] then _G[frame:GetName().."Middle"]:Kill() end
 	if _G[frame:GetName().."Right"] then _G[frame:GetName().."Right"]:Kill() end
+	if _G[frame:GetName().."Mid"] then _G[frame:GetName().."Mid"]:Kill() end
 	frame:CreateBackdrop("Default")
 	
 	if frame:GetName() and frame:GetName():find("Silver") or frame:GetName():find("Copper") then
@@ -170,27 +171,16 @@ local function SkinCheckBox(frame)
 end
 
 local function SkinCloseButton(f, point)
-	if f.SetNormalTexture then f:SetNormalTexture("") end
-
-	if f.SetHighlightTexture then f:SetHighlightTexture("") end
-
-	if f.SetPushedTexture then f:SetPushedTexture("") end
-
-	if f.SetDisabledTexture then f:SetDisabledTexture("") end
-	f:SetTemplate("Default", true)
-	f:Size(18,18)
-
-	local text = f:FontString(nil, FONT, FONTSIZE, FONTFLAG)
-	text:SetPoint("CENTER", 2, 0)
-	text:SetText("x")
+	for i=1, f:GetNumRegions() do
+		local region = select(i, f:GetRegions())
+		if region:GetObjectType() == "Texture" then
+			region:SetDesaturated(1)
+		end
+	end	
 
 	if point then
 		f:Point("TOPRIGHT", point, "TOPRIGHT", -4, -4)
-	else
-		f:Point("TOPRIGHT", -4, -4)
 	end
-	f:HookScript("OnEnter", SetModifiedBackdrop)
-	f:HookScript("OnLeave", SetOriginalBackdrop)
 end
 
 local TukuiSkin = CreateFrame("Frame")
@@ -198,6 +188,55 @@ TukuiSkin:RegisterEvent("ADDON_LOADED")
 TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 	if IsAddOnLoaded("Skinner") or IsAddOnLoaded("Aurora") then return end
 
+	-- LF guild UI
+	if addon == "Blizzard_LookingForGuildUI" then
+		local checkbox = {
+			"LookingForGuildPvPButton",
+			"LookingForGuildWeekendsButton",
+			"LookingForGuildWeekdaysButton",
+			"LookingForGuildRPButton",
+			"LookingForGuildRaidButton",
+			"LookingForGuildQuestButton",
+			"LookingForGuildDungeonButton",
+		}
+		-- skin checkboxes
+		for _, v in pairs(checkbox) do
+			SkinCheckBox(_G[v])
+		end
+
+		-- have to skin these checkboxes seperate for some reason o_O
+		SkinCheckBox(LookingForGuildTankButton.checkButton)
+		SkinCheckBox(LookingForGuildHealerButton.checkButton)
+		SkinCheckBox(LookingForGuildDamagerButton.checkButton)
+
+		-- skinning other frames
+		LookingForGuildFrameInset:StripTextures(false)
+		LookingForGuildFrame:StripTextures()
+		LookingForGuildFrame:SetTemplate("Transparent")
+		LookingForGuildBrowseButton_LeftSeparator:Kill()
+		LookingForGuildRequestButton_RightSeparator:Kill()
+		SkinScrollBar(LookingForGuildBrowseFrameContainerScrollBar)
+		SkinButton(LookingForGuildBrowseButton)
+		SkinButton(LookingForGuildRequestButton)
+		SkinCloseButton(LookingForGuildFrameCloseButton)
+		LookingForGuildCommentInputFrame:CreateBackdrop("Default")
+		LookingForGuildCommentInputFrame:StripTextures(false)
+
+		-- skin container buttons on browse and request page
+		for i = 1, 4 do
+			local b = _G["LookingForGuildBrowseFrameContainerButton"..i]
+			local t = _G["LookingForGuildAppsFrameContainerButton"..i]
+			SkinButton(b, true)
+			SkinButton(t, true)
+		end
+
+		-- skin tabs
+		for i= 1, 3 do
+			SkinTab(_G["LookingForGuildFrameTab"..i])
+		end
+
+	end	
+	
 	--Inspect Frame
 	if addon == "Blizzard_InspectUI" then
 		InspectFrame:StripTextures(true)
@@ -1027,7 +1066,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 		end
 		
 		for i=1, 3 do
-			_G["PlayerTalentFramePanel"..i.."Arrow"]:SetFrameStrata("HIGH")
+			_G["PlayerTalentFramePanel"..i.."Arrow"]:SetFrameLevel(_G["PlayerTalentFramePanel"..i.."Arrow"]:GetFrameLevel() + 2)
 		end
 		PlayerTalentFramePetPanelArrow:SetFrameStrata("HIGH")
 
@@ -1140,6 +1179,7 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 
 		local function TalentSummaryClean(i)
 			frame = _G["PlayerTalentFramePanel"..i.."Summary"]
+			frame:SetFrameLevel(frame:GetFrameLevel() + 2)
 			frame:CreateBackdrop("Default")
 			frame:SetFrameLevel(frame:GetFrameLevel() +1)
 			local a,b,_,d,_,_,_,_,_,_,_,_,m,_ = frame:GetRegions()
@@ -2485,6 +2525,248 @@ end
 			end)
 		end
 
+		--Greeting Frame
+		do
+			QuestFrameGreetingPanel:HookScript("OnShow", function()
+				QuestFrameGreetingPanel:StripTextures()
+				SkinButton(QuestFrameGreetingGoodbyeButton, true)
+				GreetingText:SetTextColor(1, 1, 1)
+				CurrentQuestsText:SetTextColor(1, 1, 0)
+				QuestGreetingFrameHorizontalBreak:Kill()
+				AvailableQuestsText:SetTextColor(1, 1, 0)
+
+				for i=1, MAX_NUM_QUESTS do
+					local button = _G["QuestTitleButton"..i]
+					if button:GetFontString() then
+						if button:GetFontString():GetText() and button:GetFontString():GetText():find("|cff000000") then
+							button:GetFontString():SetText(string.gsub(button:GetFontString():GetText(), "|cff000000", "|cffFFFF00"))
+						end
+					end
+				end
+			end)
+		end
+
+		--Minor watch frame skin
+		do
+			SkinCloseButton(WatchFrameCollapseExpandButton)
+		end
+
+		--Opacity Frame
+		do
+			OpacityFrame:StripTextures()
+			OpacityFrame:SetTemplate("Transparent")
+		end
+
+		--WorldMap
+		do
+			WorldMapFrame:CreateBackdrop("Transparent")
+			WorldMapDetailFrame:SetFrameLevel(WorldMapDetailFrame:GetFrameLevel() + 1)
+			WorldMapDetailFrame.backdrop = CreateFrame("Frame", nil, WorldMapFrame)
+			WorldMapDetailFrame.backdrop:SetTemplate("Default")
+			WorldMapDetailFrame.backdrop:Point("TOPLEFT", WorldMapDetailFrame, "TOPLEFT", -2, 2)
+			WorldMapDetailFrame.backdrop:Point("BOTTOMRIGHT", WorldMapDetailFrame, "BOTTOMRIGHT", 2, -2)
+			WorldMapDetailFrame.backdrop:SetFrameLevel(WorldMapDetailFrame:GetFrameLevel() - 2)
+
+			SkinCloseButton(WorldMapFrameCloseButton)
+			SkinCloseButton(WorldMapFrameSizeDownButton)
+			SkinCloseButton(WorldMapFrameSizeUpButton)
+
+			SkinDropDownBox(WorldMapLevelDropDown)
+			SkinDropDownBox(WorldMapZoneMinimapDropDown)
+			SkinDropDownBox(WorldMapContinentDropDown)
+			SkinDropDownBox(WorldMapZoneDropDown)
+			SkinButton(WorldMapZoomOutButton)
+			WorldMapZoomOutButton:Point("LEFT", WorldMapZoneDropDown, "RIGHT", 0, 4)
+
+			SkinCheckBox(WorldMapTrackQuest)
+			SkinCheckBox(WorldMapQuestShowObjectives)
+			SkinCheckBox(WorldMapShowDigSites)
+
+			--Mini
+			local function SmallSkin()
+				WorldMapLevelDropDown:ClearAllPoints()
+				WorldMapLevelDropDown:Point("TOPLEFT", WorldMapDetailFrame, "TOPLEFT", -10, -4)
+
+				WorldMapFrame.backdrop:ClearAllPoints()
+				WorldMapFrame.backdrop:Point("TOPLEFT", 2, 2)
+				WorldMapFrame.backdrop:Point("BOTTOMRIGHT", 2, -2)
+			end
+
+			--Large
+			local function LargeSkin()
+				if not InCombatLockdown() then
+					WorldMapFrame:SetParent(UIParent)
+					WorldMapFrame:EnableMouse(false)
+					WorldMapFrame:EnableKeyboard(false)
+					SetUIPanelAttribute(WorldMapFrame, "area", "center");
+					SetUIPanelAttribute(WorldMapFrame, "allowOtherPanels", true)
+				end
+
+				WorldMapFrame.backdrop:ClearAllPoints()
+				WorldMapFrame.backdrop:Point("TOPLEFT", WorldMapDetailFrame, "TOPLEFT", -25, 70)
+				WorldMapFrame.backdrop:Point("BOTTOMRIGHT", WorldMapDetailFrame, "BOTTOMRIGHT", 25, -30)    
+			end
+
+			local function QuestSkin()
+				if not InCombatLockdown() then
+					WorldMapFrame:SetParent(UIParent)
+					WorldMapFrame:EnableMouse(false)
+					WorldMapFrame:EnableKeyboard(false)
+					SetUIPanelAttribute(WorldMapFrame, "area", "center");
+					SetUIPanelAttribute(WorldMapFrame, "allowOtherPanels", true)
+				end
+
+				WorldMapFrame.backdrop:ClearAllPoints()
+				WorldMapFrame.backdrop:Point("TOPLEFT", WorldMapDetailFrame, "TOPLEFT", -25, 70)
+				WorldMapFrame.backdrop:Point("BOTTOMRIGHT", WorldMapDetailFrame, "BOTTOMRIGHT", 325, -235)  
+
+				if not WorldMapQuestDetailScrollFrame.backdrop then
+					WorldMapQuestDetailScrollFrame:CreateBackdrop("Default")
+					WorldMapQuestDetailScrollFrame.backdrop:Point("TOPLEFT", -22, 2)
+					WorldMapQuestDetailScrollFrame.backdrop:Point("BOTTOMRIGHT", 23, -4)
+				end
+
+				if not WorldMapQuestRewardScrollFrame.backdrop then
+					WorldMapQuestRewardScrollFrame:CreateBackdrop("Default")
+					WorldMapQuestRewardScrollFrame.backdrop:Point("BOTTOMRIGHT", 22, -4)				
+				end
+
+				if not WorldMapQuestScrollFrame.backdrop then
+					WorldMapQuestScrollFrame:CreateBackdrop("Default")
+					WorldMapQuestScrollFrame.backdrop:Point("TOPLEFT", 0, 2)
+					WorldMapQuestScrollFrame.backdrop:Point("BOTTOMRIGHT", 24, -3)				
+				end
+			end			
+
+			local function FixSkin()
+				WorldMapFrame:StripTextures()
+				if WORLDMAP_SETTINGS.size == WORLDMAP_FULLMAP_SIZE then
+					LargeSkin()
+				elseif WORLDMAP_SETTINGS.size == WORLDMAP_WINDOWED_SIZE then
+					SmallSkin()
+				elseif WORLDMAP_SETTINGS.size == WORLDMAP_QUESTLIST_SIZE then
+					QuestSkin()
+				end
+
+				if not InCombatLockdown() then
+					WorldMapFrame:SetScale(1)
+					WorldMapFrameSizeDownButton:Show()
+					WorldMapFrame:SetFrameStrata("DIALOG")
+				else
+					WorldMapFrameSizeDownButton:Hide()
+					WorldMapFrameSizeUpButton:Hide()
+				end	
+
+				WorldMapFrameAreaFrame:SetFrameStrata("FULLSCREEN")
+				WorldMapFrameAreaLabel:SetFont(C["media"].font, 50, "OUTLINE")
+				WorldMapFrameAreaLabel:SetShadowOffset(2, -2)
+				WorldMapFrameAreaLabel:SetTextColor(0.90, 0.8294, 0.6407)	
+
+				WorldMapFrameAreaDescription:SetFont(C["media"].font, 40, "OUTLINE")
+				WorldMapFrameAreaDescription:SetShadowOffset(2, -2)	
+
+				WorldMapZoneInfo:SetFont(C["media"].font, 27, "OUTLINE")
+				WorldMapZoneInfo:SetShadowOffset(2, -2)		
+			end
+
+			WorldMapFrame:HookScript("OnShow", FixSkin)
+			hooksecurefunc("WorldMapFrame_SetFullMapView", LargeSkin)
+			hooksecurefunc("WorldMapFrame_SetQuestMapView", QuestSkin)
+			hooksecurefunc("WorldMap_ToggleSizeUp", FixSkin)
+
+			if not GetCVarBool("miniWorldMap") then
+				ToggleFrame(WorldMapFrame)
+				ToggleFrame(WorldMapFrame)
+			end			
+
+			WorldMapFrameSizeDownButton:RegisterEvent("PLAYER_REGEN_DISABLED")
+			WorldMapFrameSizeDownButton:RegisterEvent("PLAYER_REGEN_ENABLED")
+			WorldMapFrameSizeDownButton:SetScript("OnEvent", function(self, event)
+				if InCombatLockdown() then
+					self:Hide()
+				else
+					self:Show()
+				end
+			end)
+
+			WorldMapFrameSizeUpButton:RegisterEvent("PLAYER_REGEN_DISABLED")
+			WorldMapFrameSizeUpButton:RegisterEvent("PLAYER_REGEN_ENABLED")
+			WorldMapFrameSizeUpButton:SetScript("OnEvent", function(self, event)
+				if InCombatLockdown() then
+					self:Hide()
+				else
+					self:Show()
+				end
+			end)
+
+			local coords = CreateFrame("Frame", "CoordsFrame", WorldMapFrame)
+			local fontheight = select(2, WorldMapQuestShowObjectivesText:GetFont())*1.1
+			coords:SetFrameLevel(90)
+			coords:FontString("PlayerText", C["media"].font, fontheight, "OUTLINE")
+			coords:FontString("MouseText", C["media"].font, fontheight, "OUTLINE")
+			coords.PlayerText:SetTextColor(WorldMapQuestShowObjectivesText:GetTextColor())
+			coords.MouseText:SetTextColor(WorldMapQuestShowObjectivesText:GetTextColor())
+			coords.PlayerText:SetPoint("BOTTOMLEFT", WorldMapDetailFrame, "BOTTOMLEFT", 5, 0)
+			coords.PlayerText:SetText("Player:   0, 0")
+			coords.MouseText:SetPoint("BOTTOMLEFT", coords.PlayerText, "BOTTOMLEFT", 0, 15)
+			coords.MouseText:SetText("Mouse:   0, 0")
+
+			local int = 0
+			coords:SetScript("OnUpdate", function(self, elapsed)
+				int = int + 1
+
+				if int >= 3 then
+					local inInstance, _ = IsInInstance()
+					local x,y = GetPlayerMapPosition("player")
+					x = math.floor(100 * x)
+					y = math.floor(100 * y)
+					if x ~= 0 and y ~= 0 then
+						self.PlayerText:SetText(PLAYER..":   "..x..", "..y)
+					else
+						self.PlayerText:SetText(" ")
+					end
+
+
+					local scale = WorldMapDetailFrame:GetEffectiveScale()
+					local width = WorldMapDetailFrame:GetWidth()
+					local height = WorldMapDetailFrame:GetHeight()
+					local centerX, centerY = WorldMapDetailFrame:GetCenter()
+					local x, y = GetCursorPosition()
+					local adjustedX = (x / scale - (centerX - (width/2))) / width
+					local adjustedY = (centerY + (height/2) - y / scale) / height	
+
+					if (adjustedX >= 0  and adjustedY >= 0 and adjustedX <= 1 and adjustedY <= 1) then
+						adjustedX = math.floor(100 * adjustedX)
+						adjustedY = math.floor(100 * adjustedY)
+						coords.MouseText:SetText(MOUSE_LABEL..":   "..adjustedX..", "..adjustedY)
+					else
+						coords.MouseText:SetText(" ")
+					end
+
+					int = 0
+				end
+			end)			
+		end
+
+		--Item Text Frame
+		do
+			ItemTextFrame:StripTextures(true)
+			ItemTextScrollFrame:StripTextures()
+			ItemTextFrame:SetTemplate("Transparent")
+			SkinCloseButton(ItemTextCloseButton)
+			SkinNextPrevButton(ItemTextPrevPageButton)
+			SkinNextPrevButton(ItemTextNextPageButton)
+		end
+
+		--Taxi Frame
+		do
+			TaxiFrame:StripTextures()
+			TaxiFrame:CreateBackdrop("Transparent")
+			TaxiRouteMap:CreateBackdrop("Default")
+			TaxiRouteMap.backdrop:SetAllPoints()
+			SkinCloseButton(TaxiFrameCloseButton)
+		end
+
 		--LFD frame
 		do
 			local StripAllTextures = {
@@ -3697,6 +3979,8 @@ end
 				SkinEditBox(_G["StaticPopup"..i.."MoneyInputFrameGold"])
 				SkinEditBox(_G["StaticPopup"..i.."MoneyInputFrameSilver"])
 				SkinEditBox(_G["StaticPopup"..i.."MoneyInputFrameCopper"])
+				_G["StaticPopup"..i.."EditBox"].backdrop:Point("TOPLEFT", -2, -4)
+				_G["StaticPopup"..i.."EditBox"].backdrop:Point("BOTTOMRIGHT", 2, 4)
 			end
 		end
 
@@ -3851,13 +4135,6 @@ end
 		_G["ReadyCheckListenerFrame"]:SetAlpha(0)
 		_G["ReadyCheckFrame"]:HookScript("OnShow", function(self) if UnitIsUnit("player", self.initiator) then self:Hide() end end) -- bug fix, don't show it if initiator
  		_G["StackSplitFrame"]:GetRegions():Hide()
-
-		--Create backdrop for static popup editbox	
-		local bg = CreateFrame("Frame", nil, StaticPopup1EditBox)
-		bg:Point("TOPLEFT", StaticPopup1EditBox, "TOPLEFT", -2, -2)
-		bg:Point("BOTTOMRIGHT", StaticPopup1EditBox, "BOTTOMRIGHT", 2, 2)
-		bg:SetFrameLevel(StaticPopup1EditBox:GetFrameLevel())
-		bg:SetTemplate("Default")
 
 		RolePollPopup:SetTemplate("Transparent")
 		RolePollPopup:CreateShadow("Default")
