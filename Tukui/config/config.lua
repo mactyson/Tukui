@@ -86,7 +86,6 @@ C["actionbar"] = {
 	["mainbarWidth"] = 12,								-- amount of buttons per row on main bar (set between 1-12)
 	["sidebarWidth"] = 3,								-- amount of buttons per row on side bars (set between 0-6, 0 = disabled)
 	["bgPanel"] = true,									-- enable background panels for actionbars NOTE: rightbar and pet bar are a bit buggy when set on false
-	["macrotext"] = true,								-- display macro text on buttons.
 }
 
 C["castbar"] = { 

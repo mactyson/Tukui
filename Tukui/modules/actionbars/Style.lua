@@ -31,14 +31,9 @@ local function style(self)
 	Count:ClearAllPoints()
 	Count:Point("BOTTOMRIGHT", 0, 2)
 	Count:SetFont(C["media"].pixelfont, 8, "OUTLINEMONOCHROME")
- 
-	if not C["actionbar"].macrotext == true then
-		Btname:SetText("")
-		Btname:Kill()
-	else
-		Btname:SetAlphaGradient(0,Button:GetWidth())
-		Btname:SetFont(C.media.pixelfont, C["datatext"].fontsize, "OUTLINEMONOCHROME")
-	end
+
+	Btname:SetText("")
+	Btname:Kill()
  
 	if not _G[name.."Panel"] then
 		-- resize all button not matching T.buttonsize
