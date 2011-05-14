@@ -138,6 +138,14 @@ local function Shared(self, unit)
 		self:RegisterEvent('UNIT_THREAT_SITUATION_UPDATE', T.UpdateThreat)
 	end
 	
+	--LFD role icon
+	local LFDRole = health:CreateTexture(nil, "OVERLAY")
+    LFDRole:Height(6*T.raidscale)
+    LFDRole:Width(6*T.raidscale)
+	LFDRole:Point("TOPLEFT", 2, -2)
+	LFDRole:SetTexture("Interface\\AddOns\\Tukui\\medias\\textures\\lfdicons.blp")
+	self.LFDRole = LFDRole
+	
 	if C["unitframes"].showsymbols == true then
 		local RaidIcon = health:CreateTexture(nil, 'OVERLAY')
 		RaidIcon:Height(10*T.raidscale)
