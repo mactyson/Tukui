@@ -1440,7 +1440,11 @@ oUF:RegisterStyle('Tukui', Shared)
 
 -- player
 local player = oUF:Spawn('player', "TukuiPlayer")
+if (C["actionbar"].sidebarWidth == 4) or (C["actionbar"].sidebarWidth == 5) or (C["actionbar"].sidebarWidth == 6) then
+player:SetPoint("BOTTOMRIGHT", TukuiBar1, "TOPLEFT", -8, 65)
+else
 player:SetPoint("BOTTOMLEFT", InvTukuiActionBarBackground, "TOPLEFT", -127, 55)
+end
 	player:Size(220, 26)
 
 -- focus
@@ -1450,7 +1454,11 @@ focus:SetPoint("BOTTOMLEFT", TukuiPlayer, "TOPLEFT", 0, 25)
 	
 -- target
 local target = oUF:Spawn('target', "TukuiTarget")
+if (C["actionbar"].sidebarWidth == 4) or (C["actionbar"].sidebarWidth == 5) or (C["actionbar"].sidebarWidth == 6) then
+target:SetPoint("BOTTOMLEFT", TukuiBar1, "TOPRIGHT", 8, 65)
+else
 target:SetPoint("BOTTOMRIGHT", InvTukuiActionBarBackground, "TOPRIGHT", 127, 55)
+end
 	target:Size(220, 26)
 
 -- tot

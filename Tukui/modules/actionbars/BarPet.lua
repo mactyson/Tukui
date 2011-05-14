@@ -8,8 +8,7 @@ if not C["actionbar"].enable == true then return end
 local bar = TukuiPetBar
 local link = TukuiLineToPetActionBarBackground
 bar:SetAlpha(1)
-link:SetAlpha(.8)
-	
+
 bar:RegisterEvent("PLAYER_LOGIN")
 bar:RegisterEvent("PLAYER_CONTROL_LOST")
 bar:RegisterEvent("PLAYER_CONTROL_GAINED")
@@ -26,7 +25,7 @@ bar:SetScript("OnEvent", function(self, event, arg1)
 	if event == "PLAYER_LOGIN" then	
 		-- bug reported by Affli on t12 BETA
 		PetActionBarFrame.showgrid = 1 -- hack to never hide pet button. :X
-		
+
 		local button		
 		for i = 1, 10 do
 			button = _G["PetActionButton"..i]
@@ -35,8 +34,12 @@ bar:SetScript("OnEvent", function(self, event, arg1)
 
 			button:SetSize(T.petbuttonsize, T.petbuttonsize)
 			if i == 1 then
-				button:SetPoint("TOPLEFT", T.buttonspacing,-T.buttonspacing)
-			else
+				if C.actionbar.bgPanel then
+					button:SetPoint("TOPLEFT", T.petbuttonspacing, -T.petbuttonspacing)
+				else
+					button:SetPoint("TOPLEFT")
+				end
+			else	
 				button:SetPoint("TOP", _G["PetActionButton"..(i - 1)], "BOTTOM", 0, -T.buttonspacing)
 			end
 			button:Show()

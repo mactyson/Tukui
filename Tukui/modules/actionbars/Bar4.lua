@@ -18,7 +18,9 @@ for i= 1, 12 do
 	b:SetFrameLevel(15)
 	
 	if i == 1 then
-		b:SetPoint("TOPLEFT", bar, T.buttonspacing, -T.buttonspacing)
+		b:SetPoint("TOPLEFT", bar, T.buttonoffset,-T.buttonoffset)
+	elseif i == (C.actionbar.mainbarWidth+1) then
+		b:SetPoint("TOP", UIParent, "BOTTOM", 0, -20)
 	else
 		b:SetPoint("LEFT", b2, "RIGHT", T.buttonspacing, 0)
 	end

@@ -14,9 +14,8 @@ for i= 1, 12 do
 	b:SetFrameLevel(15)
 	
 	if i == 1 then
-		b:SetPoint("TOP", bar, 0, -T.buttonspacing)
+		b:SetPoint("TOP", bar, 0, -T.buttonoffset)
 	else
 		b:SetPoint("TOP", b2, "BOTTOM", 0, -T.buttonspacing)
 	end
 end
-

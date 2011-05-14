@@ -6,6 +6,7 @@ if not C["actionbar"].enable == true then return end
 ---------------------------------------------------------------------------
 
 local bar = TukuiBar5
+bar:SetAlpha(1)
 MultiBarRight:SetParent(bar)
 
 for i= 1, 12 do
@@ -17,7 +18,7 @@ for i= 1, 12 do
 	b:SetFrameLevel(15)
 	
 	if i == 1 then
-		b:SetPoint("TOPRIGHT", bar, -T.buttonspacing, -T.buttonspacing)
+		b:SetPoint("TOPRIGHT", bar, -T.buttonoffset,-T.buttonoffset)
 	else
 		b:SetPoint("TOP", b2, "BOTTOM", 0, -T.buttonspacing)
 	end

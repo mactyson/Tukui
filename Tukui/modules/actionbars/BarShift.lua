@@ -7,12 +7,15 @@ if not C["actionbar"].enable == true then return end
 
 -- used for anchor totembar or shapeshiftbar
 local TukuiShift = CreateFrame("Frame","TukuiShiftBar",UIParent)
-TukuiShift:SetPoint("TOPLEFT", 4, -46)
+--TukuiShift:SetPoint("BOTTOMRIGHT", TukuiBar2, "TOPRIGHT", 4, 10)
+TukuiShift:SetPoint("TOPLEFT", TukuiChatBackgroundLeft, "BOTTOMRIGHT", 5, 0)
 TukuiShift:SetWidth((T.petbuttonsize * 5) + (T.petbuttonsize * 4))
-TukuiShift:SetHeight(10)
+TukuiShift:SetHeight(T.petbuttonsize/2)
 TukuiShift:SetFrameStrata("MEDIUM")
 TukuiShift:SetMovable(true)
 TukuiShift:SetClampedToScreen(true)
+--TukuiShift:SetTemplate("Default")
+TukuiShift:SetAlpha(1)
 
 -- shapeshift command to move totem or shapeshift in-game
 local ssmover = CreateFrame("Frame", "TukuiShapeShiftHolder", UIParent)
@@ -21,7 +24,7 @@ ssmover:SetTemplate("Default")
 ssmover:SetFrameStrata("HIGH")
 ssmover:SetBackdropBorderColor(1,0,0)
 ssmover:SetAlpha(0)
-ssmover.text = T.SetFontString(ssmover, C.media.uffont, 12)
+ssmover.text = T.SetFontString(ssmover, C.media.pixelfont, 10)
 ssmover.text:SetPoint("CENTER")
 ssmover.text:SetText(L.move_shapeshift)
 
@@ -60,10 +63,14 @@ bar:SetScript("OnEvent", function(self, event, ...)
 			button:SetParent(self)
 			button:SetFrameStrata("LOW")
 			if i == 1 then
-				button:Point("BOTTOMLEFT", TukuiShift, 0, 24)
+				button:Point("LEFT", TukuiShift, 0, 0)
 			else
 				local previous = _G["ShapeshiftButton"..i-1]
-				button:Point("LEFT", previous, "RIGHT", T.buttonspacing, 0)
+				if C.actionbar.verticalshapeshift then
+					button:Point("TOP", previous, "BOTTOM", 0, -T.buttonspacing)
+				else
+					button:Point("LEFT", previous, "RIGHT", T.buttonspacing, 0)
+				end
 			end
 			local _, name = GetShapeshiftFormInfo(i)
 			if name then

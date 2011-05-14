@@ -77,10 +77,15 @@ C["actionbar"] = {
 	["enable"] = true,                                  -- enable tukui action bars
 	["hotkey"] = true,                                 -- enable hotkey display because it was a lot requested
 	["hideshapeshift"] = false,                         -- hide shapeshift or totembar because it was a lot requested.
+	["verticalshapeshift"] = false,                        -- set shapeshift bar to show vertically
 	["showgrid"] = true,                                -- show grid on empty button
 	["buttonsize"] = 27,                                -- normal buttons size
-	["petbuttonsize"] = 29,                             -- pet & stance buttons size
+	["petbuttonsize"] = 27,                             -- pet & stance buttons size
 	["buttonspacing"] = 4,                              -- buttons spacing
+	-- taken from Asphyxia edit
+	["mainbarWidth"] = 12,								-- amount of buttons per row on main bar (set between 1-12)
+	["sidebarWidth"] = 3,								-- amount of buttons per row on side bars (set between 0-6, 0 = disabled)
+	["bgPanel"] = true,									-- enable background panels for actionbars NOTE: rightbar and pet bar are a bit buggy when set on false
 }
 
 C["castbar"] = { 
@@ -91,10 +96,6 @@ C["castbar"] = {
 
 C["bags"] = {
 	["enable"] = true,                                  -- enable an all in one bag mod that fit tukui perfectly
-}
-
-C["map"] = {
-	["enable"] = true,                                  -- reskin the map to fit tukui
 }
 
 C["loot"] = {

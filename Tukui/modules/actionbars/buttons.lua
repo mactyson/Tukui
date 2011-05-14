@@ -345,4 +345,4 @@ init:SetScript("OnEvent", function(self, event)
 	end
 end)
 
-TukuiExitVehicleButtonLeft:SetBackdropBorderColor(color.r,color.g,color.b) -- left exit button doesnt lite up properly that why we do it here
+TukuiExitVehicleButtonLeft:SetBackdropBorderColor(color.r,color.g,color.b) -- left exit button doesnt lite up properly that why we do it her

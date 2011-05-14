@@ -78,7 +78,9 @@ bar:SetScript("OnEvent", function(self, event, ...)
 			button:SetFrameStrata("BACKGROUND")
 			button:SetFrameLevel(15)
 			if i == 1 then
-				button:SetPoint("BOTTOMLEFT", T.buttonspacing, T.buttonspacing)
+				button:SetPoint("BOTTOMLEFT", T.buttonoffset, T.buttonoffset)
+			elseif i == (C.actionbar.mainbarWidth+1) then
+				button:SetPoint("TOP", UIParent, "BOTTOM", 0, -20)
 			else
 				local previous = _G["ActionButton"..i-1]
 				button:SetPoint("LEFT", previous, "RIGHT", T.buttonspacing, 0)

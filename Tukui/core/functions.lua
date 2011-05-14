@@ -217,7 +217,8 @@ T.buttonsize = T.Scale(C.actionbar.buttonsize)
 T.buttonspacing = T.Scale(C.actionbar.buttonspacing)
 T.petbuttonsize = T.Scale(C.actionbar.petbuttonsize)
 T.petbuttonspacing = T.Scale(C.actionbar.buttonspacing)
-
+T.buttonoffset = 0
+if C.actionbar.bgPanel then T.buttonoffset = C.actionbar.buttonspacing end
 T.Round = function(number, decimals)
 	if not decimals then decimals = 0 end
     return (("%%.%df"):format(decimals)):format(number)

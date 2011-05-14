@@ -44,6 +44,12 @@ local function GetTemplate(t)
 	elseif t == "Hydra" then
 		borderr, borderg, borderb = .2, .2, .2
 		backdropr, backdropg, backdropb = .075, .075, .075
+	elseif t == "ThickTransparent" then
+		borderr, borderg, borderb = unpack(C["media"].bordercolor)
+		backdropr, backdropg, backdropb = 0,0,0
+	elseif t == "Thin" then
+		borderr, borderg, borderb = 0,0,0
+		backdropr, backdropg, backdropb = unpack(C["media"].backdropcolor)
 	else
 		borderr, borderg, borderb = unpack(C["media"].bordercolor)
 		backdropr, backdropg, backdropb = unpack(C["media"].backdropcolor)
@@ -82,17 +88,43 @@ local function SetTemplate(f, t, tex)
 	
 	GetTemplate(t)
 		
-	f:SetBackdrop({
-	  bgFile = texture, 
-	  edgeFile = C.media.blank, 
-	  tile = false, tileSize = 0, edgeSize = mult, 
-	  insets = { left = -mult, right = -mult, top = -mult, bottom = -mult}
-	})
+	if t == "Thin" then
+		f:SetBackdrop({
+			bgFile = texture, 
+			edgeFile = C.media.blank, 
+			tile = false, tileSize = 0, edgeSize = mult, 
+			insets = { left = 0, right = 0, top = 0, bottom = 0 }
+		})
+	else
+		f:SetBackdrop({
+			bgFile = texture, 
+			edgeFile = C.media.blank, 
+			tile = false, tileSize = 0, edgeSize = mult, 
+			insets = { left = -mult, right = -mult, top = -mult, bottom = -mult }
+		})
+	end
 	
-	if t == "Transparent" then backdropa = 0.8 else backdropa = 1 end
+	if t == "ThickTransparent" then
+		outerBorder(f)
+		innerBorder(f)
+		backdropa = 0.8
+	elseif t == "Transparent" then
+		backdropa = 0.8
+	elseif t == "Invisible" then
+		backdropa = 0
+		bordera = 0
+	elseif t == "ThickBorder" then
+		outerBorder(f)
+		innerBorder(f)
+		bordera = 1
+		backdropa = 1
+	else
+		bordera = 1
+		backdropa = 1
+	end
 	
 	f:SetBackdropColor(backdropr, backdropg, backdropb, backdropa)
-	f:SetBackdropBorderColor(borderr, borderg, borderb)
+	f:SetBackdropBorderColor(borderr, borderg, borderb, bordera)
 end
 
 local function CreatePanel(f, t, w, h, a1, p, a2, x, y)
