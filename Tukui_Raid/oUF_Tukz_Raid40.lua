@@ -140,10 +140,8 @@ local function Shared(self, unit)
 	
 	--LFD role icon
 	local LFDRole = health:CreateTexture(nil, "OVERLAY")
-    LFDRole:Height(6*T.raidscale)
-    LFDRole:Width(6*T.raidscale)
+    LFDRole:SetSize(16, 16)
 	LFDRole:Point("TOPLEFT", 2, -2)
-	LFDRole:SetTexture("Interface\\AddOns\\Tukui\\medias\\textures\\lfdicons.blp")
 	self.LFDRole = LFDRole
 	
 	if C["unitframes"].showsymbols == true then
