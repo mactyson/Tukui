@@ -856,7 +856,7 @@ ns.Filger_Spells = {
 			--Entangling Roots
 	        { spellID = 339, size = 70, unitId = "player", caster = "all", filter = "DEBUFF" },
 			--Feral Charge Effect
-	        { spellID = 5334, size = 70, unitId = "player", caster = "all", filter = "DEBUFF" },
+	        { spellID = 45334, size = 70, unitId = "player", caster = "all", filter = "DEBUFF" },
 			--Infected Wounds
 	        { spellID = 58179, size = 70, unitId = "player", caster = "all", filter = "DEBUFF" },
 			--Typhoon
