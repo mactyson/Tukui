@@ -236,7 +236,7 @@ local function Shared(self, unit)
 			
 			self.WeakenedSoul = ws
 		end
-		
+
 		if (unit == "player") then
 			-- custom info (low mana warning)
 			FlashInfo = CreateFrame("Frame", "TukuiFlashInfo", self)

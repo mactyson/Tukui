@@ -19,3 +19,9 @@ if T.myname == "Jasjè" then
 	C.datatext.classcolor = false
 	C.chat.classcolortab = false
 end
+
+if T.myname == "Trokz" then
+	C.datatext.regen = 0
+	C.datatext.crit = 9
+	C.actionbar.sidebarWidth = 5
+end

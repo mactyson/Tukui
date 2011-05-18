@@ -169,7 +169,14 @@ local function SkinCheckBox(frame)
 	if frame.SetCheckedTexture then
 		frame:SetCheckedTexture("Interface\\Buttons\\UI-CheckBox-Check")
 	end
-	frame:SetDisabledTexture("Interface\\Buttons\\UI-CheckBox-Check-Disabled")
+
+	if frame.SetDisabledTexture then
+		frame:SetDisabledTexture("Interface\\Buttons\\UI-CheckBox-Check-Disabled")
+	end
+
+	frame.SetNormalTexture = T.dummy
+	frame.SetPushedTexture = T.dummy
+	frame.SetHighlightTexture = T.dummy
 end
 
 local function SkinCloseButton(f, point)
@@ -655,6 +662,8 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 					frame:SetStatusBarTexture(C["media"].normTex)
 					frame:SetStatusBarColor(4/255, 179/255, 30/255)
 					frame:SetFrameLevel(frame:GetFrameLevel() + 3)
+					
+					frame:Height(frame:GetHeight() - 2)
 
 					--Initiate fucked up method of creating a backdrop
 					frame.bg1 = frame:CreateTexture(nil, "BACKGROUND")
@@ -676,8 +685,16 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 					frame.bg3:Point("BOTTOMRIGHT", T.mult, -T.mult)		
 
 					frame.text:ClearAllPoints()
-					frame.text:SetPoint("CENTER", frame, "CENTER", 0, -2)
+					frame.text:SetPoint("CENTER", frame, "CENTER", 0, -1)
 					frame.text:SetJustifyH("CENTER")
+					
+					if index > 1 then
+					    frame:ClearAllPoints()
+						frame:Point("TOP", _G["AchievementFrameProgressBar"..index-1], "BOTTOM", 0, -5)
+						frame.SetPoint = E.dummy
+						frame.ClearAllPoints = E.dummy
+					end
+					
 					frame.skinned = true
 				end
 
@@ -1636,7 +1653,15 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 			local icon = _G["PlayerTalentFramePanel"..i.."Talent"..j.."IconTexture"]
 
 			if first then
-				button:StripTextures()
+				--button:StripTextures()
+					for i=1, button:GetNumRegions() do
+						local region = select(i, button:GetRegions())
+						if region:GetObjectType() == "Texture" then
+							if region:GetTexture() ~= "Interface\\Buttons\\ActionBarFlyoutButton" then
+								region:SetTexture(nil)
+							end
+						end
+					end
 			end
 
 			if button.Rank then
@@ -3285,6 +3310,13 @@ end
 
 			if not GetCVarBool("miniWorldMap") then
 				ToggleFrame(WorldMapFrame)
+			    WorldMapFrameSizeDownButton:Click()
+				WorldMapFrameSizeUpButton:Click()
+				ToggleFrame(WorldMapFrame)
+			else
+				ToggleFrame(WorldMapFrame)
+				WorldMapFrameSizeUpButton:Click()
+				WorldMapFrameSizeUpButton:Click()
 				ToggleFrame(WorldMapFrame)
 			end			
 
@@ -3376,6 +3408,72 @@ end
 			SkinCloseButton(TaxiFrameCloseButton)
 		end
 
+		--LFR frame
+			local buttons = {
+			  "LFRQueueFrameFindGroupButton",
+			  "LFRQueueFrameAcceptCommentButton",
+			  "LFRBrowseFrameSendMessageButton",
+			  "LFRBrowseFrameInviteButton",
+			  "LFRBrowseFrameRefreshButton",
+			}
+
+			LFRParentFrame:StripTextures()
+			LFRParentFrame:SetTemplate("Transparent")
+			LFRQueueFrame:StripTextures()
+			LFRBrowseFrame:StripTextures()
+
+
+			for i=1, #buttons do
+			  SkinButton(_G[buttons[i]])
+			end
+
+			--Close button doesn't have a fucking name, extreme hackage
+			for i=1, LFRParentFrame:GetNumChildren() do
+			  local child = select(i, LFRParentFrame:GetChildren())
+			  if child.GetPushedTexture and child:GetPushedTexture() and not child:GetName() then
+				SkinCloseButton(child)
+			  end
+			end
+
+			SkinTab(LFRParentFrameTab1)
+			SkinTab(LFRParentFrameTab2)
+
+			SkinDropDownBox(LFRBrowseFrameRaidDropDown)
+
+			for i=1, 20 do
+			  local button = _G["LFRQueueFrameSpecificListButton"..i.."ExpandOrCollapseButton"]
+
+			  if button then
+				button:HookScript("OnClick", function()
+				  SkinCloseButton(button)
+				end)
+				SkinCloseButton(button)
+			  end
+			end
+
+			LFRQueueFrameCommentTextButton:CreateBackdrop("Default")
+			LFRQueueFrameCommentTextButton:Height(35)
+
+			for i=1, 7 do
+				local button = "LFRBrowseFrameColumnHeader"..i
+				_G[button.."Left"]:Kill()
+				_G[button.."Middle"]:Kill()
+				_G[button.."Right"]:Kill()
+			end		
+
+			for i=1, NUM_LFR_CHOICE_BUTTONS do
+				local button = _G["LFRQueueFrameSpecificListButton"..i]
+				SkinCheckBox(button.enableButton)
+			end
+
+			--DPS, Healer, Tank check button's don't have a name, use it's parent as a referance.
+			SkinCheckBox(LFRQueueFrameRoleButtonTank:GetChildren())
+			SkinCheckBox(LFRQueueFrameRoleButtonHealer:GetChildren())
+			SkinCheckBox(LFRQueueFrameRoleButtonDPS:GetChildren())
+			LFRQueueFrameRoleButtonTank:GetChildren():SetFrameLevel(LFRQueueFrameRoleButtonTank:GetChildren():GetFrameLevel() + 2)
+			LFRQueueFrameRoleButtonHealer:GetChildren():SetFrameLevel(LFRQueueFrameRoleButtonHealer:GetChildren():GetFrameLevel() + 2)
+			LFRQueueFrameRoleButtonDPS:GetChildren():SetFrameLevel(LFRQueueFrameRoleButtonDPS:GetChildren():GetFrameLevel() + 2)
+		
 		--LFD frame
 		do
 			local StripAllTextures = {
