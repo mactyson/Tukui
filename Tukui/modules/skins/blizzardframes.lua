@@ -691,8 +691,8 @@ TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 					if index > 1 then
 					    frame:ClearAllPoints()
 						frame:Point("TOP", _G["AchievementFrameProgressBar"..index-1], "BOTTOM", 0, -5)
-						frame.SetPoint = E.dummy
-						frame.ClearAllPoints = E.dummy
+						frame.SetPoint = T.dummy
+						frame.ClearAllPoints = T.dummy
 					end
 					
 					frame.skinned = true
