@@ -9,12 +9,6 @@ local SetFont = function(obj, font, size, style, r, g, b, sr, sg, sb, sox, soy)
 	elseif r then obj:SetAlpha(r) end
 end
 
-local FixTitleFont = function()
-	for _,butt in pairs(PaperDollTitlesPane.buttons) do
-		butt.text:SetFontObject(GameFontHighlightSmallLeft)
-	end
-end
-
 TukuiFonts:RegisterEvent("ADDON_LOADED")
 TukuiFonts:SetScript("OnEvent", function(self, event, addon)
 	if addon ~= "Tukui" then return end
@@ -78,9 +72,6 @@ TukuiFonts:SetScript("OnEvent", function(self, event, addon)
 	SetFont(SubZoneTextString,                  NORMALPIXEL, 12, "MONOCHROMEOUTLINE")
 	SetFont(PVPInfoTextString,                  NORMALPIXEL, 10, "MONOCHROMETHINOUTLINE")
 	SetFont(PVPArenaTextString,                NORMALPIXEL, 10, "MONOCHROMEOUTLINE")
-
-	hooksecurefunc("PaperDollTitlesPane_Update", FixTitleFont)
-	FixTitleFont()
 
 	SetFont = nil
 	self:SetScript("OnEvent", nil)
