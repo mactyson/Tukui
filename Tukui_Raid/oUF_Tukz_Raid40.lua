@@ -141,7 +141,7 @@ local function Shared(self, unit)
 	--LFD role icon
 	local LFDRole = health:CreateTexture(nil, "OVERLAY")
     LFDRole:SetSize(16, 16)
-	LFDRole:Point("TOPLEFT", 2, -2)
+	LFDRole:Point("CENTER", 0, 17)
 	self.LFDRole = LFDRole
 	
 	if C["unitframes"].showsymbols == true then
