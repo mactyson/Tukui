@@ -4605,7 +4605,7 @@ end
 					object.BgMiddle:SetTexture(nil)
 
 					object.Check:SetTexture(nil)
-					object.text:SetFont(FONT, 12, FONTGLAG)
+					object.text:SetFont(FONT, 8, FONTFLAG)
 					object.text.SetFont = T.dummy
 				end
 			end)
