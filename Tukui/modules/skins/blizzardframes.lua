@@ -206,9 +206,9 @@ local function SkinCloseButton(f, point)
 	end
 end
 
-local ElvuiSkin = CreateFrame("Frame")
-ElvuiSkin:RegisterEvent("ADDON_LOADED")
-ElvuiSkin:SetScript("OnEvent", function(self, event, addon)
+local TukuiSkin = CreateFrame("Frame")
+TukuiSkin:RegisterEvent("ADDON_LOADED")
+TukuiSkin:SetScript("OnEvent", function(self, event, addon)
 	if IsAddOnLoaded("Skinner") or IsAddOnLoaded("Aurora") then return end
 
 	if addon == "Blizzard_ReforgingUI" then
