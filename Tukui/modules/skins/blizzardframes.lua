@@ -3792,7 +3792,6 @@ end
 			QuestLogFrame:SetTemplate("Transparent")
 			QuestLogFrame:CreateShadow("Default")
 			QuestLogCount:StripTextures()
-			QuestLogCount:SetTemplate("Default")
 
 			EmptyQuestLogFrame:StripTextures()
 
