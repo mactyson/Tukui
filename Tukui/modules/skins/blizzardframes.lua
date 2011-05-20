@@ -1,4 +1,4 @@
-local T, C, L, DB = unpack(select(2, ...)) -- Import Functions/Constants, Config, Locales
+local T, C, L = unpack(select(2, ...)) -- Import Functions/Constants, Config, Locales
 
 local FONT = C["media"].pixelfont
 local FONTSIZE = 8
@@ -4970,8 +4970,10 @@ end
 			_G["InterfaceOptionsFrameOkay"]:ClearAllPoints()
 			_G["InterfaceOptionsFrameOkay"]:SetPoint("RIGHT",_G["InterfaceOptionsFrameCancel"],"LEFT", -4,0)
 			_G["ReadyCheckFrameYesButton"]:SetParent(_G["ReadyCheckFrame"])
-			_G["ReadyCheckFrameNoButton"]:SetParent(_G["ReadyCheckFrame"]) 
-			_G["ReadyCheckFrameYesButton"]:SetPoint("RIGHT", _G["ReadyCheckFrame"], "CENTER", -1, 0)
+            _G["ReadyCheckFrameNoButton"]:SetParent(_G["ReadyCheckFrame"])
+			_G["ReadyCheckFrameYesButton"]:ClearAllPoints()
+			_G["ReadyCheckFrameNoButton"]:ClearAllPoints()
+			_G["ReadyCheckFrameYesButton"]:SetPoint("RIGHT", _G["ReadyCheckFrame"], "CENTER", -2, -20)
 			_G["ReadyCheckFrameNoButton"]:SetPoint("LEFT", _G["ReadyCheckFrameYesButton"], "RIGHT", 3, 0)
 			_G["ReadyCheckFrameText"]:SetParent(_G["ReadyCheckFrame"])	
 			_G["ReadyCheckFrameText"]:ClearAllPoints()
