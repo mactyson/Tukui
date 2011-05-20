@@ -12,7 +12,7 @@ TukuiMinimap:SetClampedToScreen(true)
 TukuiMinimap:SetMovable(true)
 TukuiMinimap.text = T.SetFontString(TukuiMinimap, C.media.pixelfont2, 14, "MONOCHROMEOUTLINE")
 TukuiMinimap.text:SetPoint("CENTER")
-TukuiMinimap.text:SetText(L.move_minimap)
+TukuiMinimap.text:SetText(hexa..L.move_minimap..hexb)
 
 -- kill the minimap cluster
 MinimapCluster:Kill()

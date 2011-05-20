@@ -336,6 +336,7 @@ do
 		local target = isHeader or obj
 		if(not target:GetCenter()) then return end
 		if(backdropPool[target]) then return backdropPool[target] end
+		local color = RAID_CLASS_COLORS[select(2, UnitClass("player"))]
 
 		local backdrop = CreateFrame"Frame"
 		backdrop:SetParent(UIParent)
@@ -356,8 +357,8 @@ do
 		local name = backdrop:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 		name:SetPoint"CENTER"
 		name:SetJustifyH"CENTER"
-		name:SetFont(C.media.uffont, 12)
-		name:SetTextColor(1, 1, 1)
+		name:SetFont(C.media.pixelfont, 8, "OUTLINEMONOCHROME")
+		name:SetTextColor(color.r,color.g,color.b)
 
 		backdrop.name = name
 		backdrop.obj = obj

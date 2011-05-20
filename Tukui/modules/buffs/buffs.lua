@@ -174,9 +174,9 @@ local function CreateAuraHeader(filter, ...)
 	header.text = T.SetFontString(header, C.media.pixelfont2, 14, "MONOCHROMEOUTLINE")
 	header.text:SetPoint("CENTER")
 	if filter == "HELPFUL" then
-		header.text:SetText(L.move_buffs)
+		header.text:SetText(hexa..L.move_buffs..hexb)
 	else
-		header.text:SetText(L.move_debuffs)
+		header.text:SetText(hexa..L.move_debuffs..hexb)
 	end	
 	header.text:Hide()
 

@@ -7,9 +7,9 @@ if not C["actionbar"].enable == true then return end
 
 -- used for anchor totembar or shapeshiftbar
 local TukuiShift = CreateFrame("Frame","TukuiShiftBar",UIParent)
-TukuiShift:SetPoint("TOPLEFT", 4, -46)
+TukuiShift:SetPoint("TOPLEFT", ChatFrame1, 4, 50)
 TukuiShift:SetWidth((T.petbuttonsize * 5) + (T.petbuttonsize * 4))
-TukuiShift:SetHeight(10)
+TukuiShift:SetHeight(20)
 TukuiShift:SetFrameStrata("MEDIUM")
 TukuiShift:SetMovable(true)
 TukuiShift:SetClampedToScreen(true)
@@ -21,9 +21,9 @@ ssmover:SetTemplate("Default")
 ssmover:SetFrameStrata("HIGH")
 ssmover:SetBackdropBorderColor(1,0,0)
 ssmover:SetAlpha(0)
-ssmover.text = T.SetFontString(ssmover, C.media.pixelfont, 10)
+ssmover.text = T.SetFontString(ssmover, C.media.pixelfont, 8)
 ssmover.text:SetPoint("CENTER")
-ssmover.text:SetText(L.move_shapeshift)
+ssmover.text:SetText(hexa..L.move_shapeshift..hexb)
 
 -- hide it if not needed and stop executing code
 if C.actionbar.hideshapeshift then TukuiShift:Hide() return end

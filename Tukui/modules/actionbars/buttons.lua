@@ -344,5 +344,3 @@ init:SetScript("OnEvent", function(self, event)
 		DrPepper(TukuiBar5ButtonTop, TukuiBar5)
 	end
 end)
-
-TukuiExitVehicleButtonLeft:SetBackdropBorderColor(color.r,color.g,color.b) -- left exit button doesnt lite up properly that why we do it her

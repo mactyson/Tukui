@@ -17,7 +17,7 @@ TukuiGMFrameAnchor:SetBackdropColor(unpack(C.media.backdropcolor))
 TukuiGMFrameAnchor:Point("TOPLEFT", 4, -4)
 TukuiGMFrameAnchor.text = T.SetFontString(TukuiGMFrameAnchor, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 TukuiGMFrameAnchor.text:SetPoint("CENTER")
-TukuiGMFrameAnchor.text:SetText(L.move_gmframe)
+TukuiGMFrameAnchor.text:SetText(hexa..L.move_gmframe..hexb)
 TukuiGMFrameAnchor.text:SetParent(TukuiGMFrameAnchor)
 TukuiGMFrameAnchor:Hide()
 

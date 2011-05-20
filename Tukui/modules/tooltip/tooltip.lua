@@ -41,7 +41,7 @@ anchor:SetBackdropBorderColor(C.media.backdropcolor)
 anchor:SetMovable(true)
 anchor.text = T.SetFontString(anchor, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 anchor.text:SetPoint("CENTER")
-anchor.text:SetText(L.move_tooltip)
+anchor.text:SetText(hexa..L.move_tooltip..hexb)
 
 -- Update Tukui Tooltip Position on some specifics Tooltip
 -- Also used because on Eyefinity, SetClampedToScreen doesn't work on left and right side of screen #1

@@ -4,7 +4,7 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 --------------------------------------------------------------------------
 
 local anchor = CreateFrame("Frame", "TukuiVehicleAnchor", UIParent)
-anchor:Point("BOTTOM", UIParent, "BOTTOM", 0, 208)
+anchor:Point("TOPLEFT", 45, -150)
 anchor:Size(120, 20)
 anchor:SetMovable(true)
 anchor:SetClampedToScreen(true)
@@ -13,7 +13,7 @@ anchor:SetBackdropBorderColor(1,0,0)
 anchor:SetAlpha(0)
 anchor.text = T.SetFontString(anchor, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 anchor.text:SetPoint("CENTER")
-anchor.text:SetText(L.move_vehicle)
+anchor.text:SetText(hexa..L.move_vehicle..hexb)
 
 hooksecurefunc(VehicleSeatIndicator,"SetPoint",function(_,_,parent) -- vehicle seat indicator
     if (parent == "MinimapCluster") or (parent == _G["MinimapCluster"]) then

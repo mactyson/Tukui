@@ -3,7 +3,7 @@ local T, C, L = unpack(select(2, ...)) -- Import: T - functions, constants, vari
 local AchievementHolder = CreateFrame("Frame", "TukuiAchievementHolder", UIParent)
 AchievementHolder:Width(180)
 AchievementHolder:Height(20)
-AchievementHolder:SetPoint("CENTER", UIParent, "CENTER", 0, 170)
+AchievementHolder:SetPoint("CENTER", UIParent, "CENTER", -400, 100)
 AchievementHolder:SetTemplate("Default")
 AchievementHolder:SetBackdropBorderColor(1, 0, 0)
 AchievementHolder:SetClampedToScreen(true)
@@ -11,7 +11,7 @@ AchievementHolder:SetMovable(true)
 AchievementHolder:SetAlpha(0)
 AchievementHolder.text = T.SetFontString(AchievementHolder, C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 AchievementHolder.text:SetPoint("CENTER")
-AchievementHolder.text:SetText(L.move_achievements)
+AchievementHolder.text:SetText(hexa..L.move_achievements..hexb)
 
 local pos = "TOP"
 
