@@ -7,15 +7,12 @@ if not C["actionbar"].enable == true then return end
 
 -- used for anchor totembar or shapeshiftbar
 local TukuiShift = CreateFrame("Frame","TukuiShiftBar",UIParent)
---TukuiShift:SetPoint("BOTTOMRIGHT", TukuiBar2, "TOPRIGHT", 4, 10)
-TukuiShift:SetPoint("TOPLEFT", TukuiChatBackgroundLeft, "BOTTOMRIGHT", 5, 0)
+TukuiShift:SetPoint("TOPLEFT", 4, -46)
 TukuiShift:SetWidth((T.petbuttonsize * 5) + (T.petbuttonsize * 4))
-TukuiShift:SetHeight(T.petbuttonsize/2)
+TukuiShift:SetHeight(10)
 TukuiShift:SetFrameStrata("MEDIUM")
 TukuiShift:SetMovable(true)
 TukuiShift:SetClampedToScreen(true)
---TukuiShift:SetTemplate("Default")
-TukuiShift:SetAlpha(1)
 
 -- shapeshift command to move totem or shapeshift in-game
 local ssmover = CreateFrame("Frame", "TukuiShapeShiftHolder", UIParent)
