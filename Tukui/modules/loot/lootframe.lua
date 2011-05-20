@@ -141,7 +141,7 @@ local anchorSlots = function(self)
 	self:Height(math.max(shownSlots * iconsize + 16, 20))
 end
 
-title:SetFont(C["media"].font, 13, "OUTLINE")
+title:SetFont(C.media.pixelfont2, 14, "MONOCHROMEOUTLINE")
 title:Point("BOTTOMLEFT", addon, "TOPLEFT", 4, 4)
 
 addon:SetScript("OnMouseDown", function(self) if(IsAltKeyDown()) then self:StartMoving() end end)

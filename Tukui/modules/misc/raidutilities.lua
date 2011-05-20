@@ -50,7 +50,7 @@ local function CreateUtilities(self, event, addon)
 			b:SetTemplate("Default")
 			if text then
 				local t = b:CreateFontString(nil,"OVERLAY",b)
-				t:SetFont(C["media"].font,12)
+				t:SetFont(C.media.pixelfont, 8, "MONOCHROMEOUTLINE")
 				t:SetPoint("CENTER")
 				t:SetJustifyH("CENTER")
 				t:SetText(text)

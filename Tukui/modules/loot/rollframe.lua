@@ -168,7 +168,7 @@ local function CreateRollFrame()
 
 	local bind = frame:CreateFontString()
 	bind:Point("LEFT", pass, "RIGHT", 3, 1)
-	bind:SetFont(C["media"].uffont, 12, "OUTLINE")
+	bind:SetFont(C.media.pixelfont2, 14, "MONOCHROMEOUTLINE")
 	frame.fsbind = bind
 
 	local loot = frame:CreateFontString(nil, "ARTWORK")
