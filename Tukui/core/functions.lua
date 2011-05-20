@@ -1027,11 +1027,12 @@ if C["unitframes"].raidunitdebuffwatch == true then
 			SpellName(91911), -- Constricting Chains
 			SpellName(94679), -- Parasitic Infection
 			SpellName(94617), -- Mangle
+			SpellName(78199), -- Sweltering Armor
 
 			--Omintron Defense System
-			SpellName(79835), --Poison Soaked Shell
-			SpellName(91433), --Lightning Conductor
+	        SpellName(91433), --Lightning Conductor
 			SpellName(91521), --Incineration Security Measure
+            SpellName(80094), --Fixate 
 
 			--Maloriak
 			SpellName(77699), -- Flash Freeze
@@ -1056,6 +1057,9 @@ if C["unitframes"].raidunitdebuffwatch == true then
 			SpellName(92878), -- Blackout
 			SpellName(86840), -- Devouring Flames
 			SpellName(95639), -- Engulfing Magic
+			SpellName(93051), -- Twilight Shift
+           	SpellName(92886), -- Twilight Zone
+	        SpellName(88518), -- Twilight Meteorite
 
 			--Halfus Wyrmbreaker
 			SpellName(39171), -- Malevolent Strikes
@@ -1089,6 +1093,10 @@ if C["unitframes"].raidunitdebuffwatch == true then
 
 		T.ReverseTimer = {
 			[92956] = true, -- Sinestra (Wrack)
+			[89435] = true, -- Sinestra (Wrack)
+	        [92955] = true, -- Sinestra (Wrack)
+	        [89421] = true, -- Sinestra (Wrack)
+
 		},
 		
 		ORD:RegisterDebuffs(T.debuffids)
