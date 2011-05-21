@@ -697,19 +697,19 @@ T.PostCastStart = function(self, unit, name, rank, castid)
 	if name == "Opening" then
 		self.Text:SetText("Opening")
 	end
-	
+
 	if self.interrupt and unit ~= "player" then
 		if UnitCanAttack("player", unit) then
 			self:SetStatusBarColor(unpack(C["castbar"].nointerruptcolor))
 		else
-			self:SetStatusBarColor(unpack(C["castbar"].castbarcolor))	
+			self:SetStatusBarColor(unpack(C["castbar"].nointerruptcolor))	
 		end
 	else
-		if C["castbar"].classcolor ~= true or unit ~= "player" then
-			self:SetStatusBarColor(unpack(C["castbar"].castbarcolor))
-		else
-			self:SetStatusBarColor(unpack(oUF.colors.class[select(2, UnitClass(unit))]))
-		end	
+        if C["castbar"].classcolor and (unit == "player" or unit == "target") then
+            self:SetStatusBarColor(unpack(oUF.colors.class[select(2, UnitClass(unit))]))
+        else
+            self:SetStatusBarColor(unpack(C["castbar"].castbarcolor))
+        end
 	end
 end
 

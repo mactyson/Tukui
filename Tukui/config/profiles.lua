@@ -15,7 +15,6 @@ end
 
 if T.myname == "Jasjè" then
 	-- yeah my default config is not really like default tukui.
-    C.castbar.classcolor = false
 	C.datatext.classcolor = false
 	C.chat.classcolortab = false
 end

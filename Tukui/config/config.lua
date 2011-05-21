@@ -90,8 +90,8 @@ C["actionbar"] = {
 
 C["castbar"] = { 
 	["classcolor"] = true, -- classcolor
-	["castbarcolor"] = { 1, 1, 0, 1 }, -- Color of player castbar
-	["nointerruptcolor"] = { 1, 0.1, 0.1, 0.5 }, -- Color of target castbar
+	["castbarcolor"] = { .2,.2,.2,1 }, -- color if classcolor = false
+	["nointerruptcolor"] = { 1,.2,.2,1 }, -- color of casts which can't be interrupted
 }
 
 C["bags"] = {
